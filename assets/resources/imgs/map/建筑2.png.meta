@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "4f22c92d-9720-4e65-919d-095205f5a708",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "建筑2": {
+      "ver": "1.0.4",
+      "uuid": "5699e47a-0e22-449c-9f0c-e71a46bcd3d7",
+      "rawTextureUuid": "4f22c92d-9720-4e65-919d-095205f5a708",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1386,
+      "height": 702,
+      "rawWidth": 1386,
+      "rawHeight": 702,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
