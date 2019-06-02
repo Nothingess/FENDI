@@ -14,15 +14,15 @@ export class mainExterior{
     }
 
     private mPlayerCtrl:playerCtrl = null;
-    private mBgCtrl:bgCtrl = null;
+    //private mBgCtrl:bgCtrl = null;
     private uiMgr:UISystem = null;
 
     private init():void{
         this.initComponent();
     }
     private initComponent():void{
-        this.mBgCtrl = new bgCtrl();
-        this.mBgCtrl.setState(new forwardState(this.mBgCtrl));
+        //this.mBgCtrl = new bgCtrl();
+        //this.mBgCtrl.setState(new forwardState(this.mBgCtrl));
         this.uiMgr = new UISystem();
     }
     public update():void{
@@ -37,7 +37,7 @@ export class mainExterior{
 
 //#region 其它
 
-    public getCurrBgMoveSpeed():number{return this.mBgCtrl.getCurrBgMoveSpeed();}
+    //public getCurrBgMoveSpeed():number{return this.mBgCtrl.getCurrBgMoveSpeed();}
 
 //#endregion
 }
