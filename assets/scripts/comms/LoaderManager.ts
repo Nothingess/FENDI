@@ -51,7 +51,7 @@ export class Loader {
 }
 
 const paths:Array<string> = [
-    "prefabs/grid"
+    "ui/FENDIUI"
 ]
 export enum Assets{
     /**脑力游戏格子预制 */

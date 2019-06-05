@@ -15,8 +15,8 @@ export class spineCtrl extends cc.Component {
     }
 
     start () {
-        this._setMix("nanren_pao", "nanren_tiao", 0.3);
-        this._setMix("nanren_pao", "nanren_xiatan");
+        this._setMix("nanren_pao", "nanren_tiao", 0.2);
+        this._setMix("nanren_pao", "nanren_xiatan", 0.1);
     }
 
 //#region action

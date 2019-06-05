@@ -31,29 +31,46 @@ export class playerCtrl extends cc.Component {
     private rightStepNode:cc.Node = null;                       //右台阶
     private spCtrl:spineCtrl = null;                            //spine动画控制器
 
-    private isUpCol:boolean = false;
-    private isLeftCol:boolean = false;
+    private isUpCol:boolean = false;            //在障碍物上边
+    private isLeftCol:boolean = false;          //在障碍物左边
+    private isSquating:boolean = false;         //下蹲过程中，比如：在障碍物下面下蹲时，不受玩家输入控制
+
+    
+    private squatBtn:cc.Node = null;                            //按钮
+    private jumpBtn:cc.Node = null;
 
     private isSquat:boolean = false;
     onLoad () {
         let manager=cc.director.getCollisionManager();  // 获取碰撞检测类
         manager.enabled = true;                         // 开启碰撞检测
-        manager.enabledDebugDraw = true                   //显示碰撞检测区域
+        //manager.enabledDebugDraw = true                   //显示碰撞检测区域
 
         // add key down and key up event
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
         this.spCtrl = this.getComponentInChildren(spineCtrl);
+
+        this.squatBtn = cc.find("Canvas/UILayer/uiElement/squat_btn");
+        this.jumpBtn = cc.find("Canvas/UILayer/uiElement/jump_btn");
     }
 
     start():void{
         this.posX = this.node.x;
         this.currJumpSpeed = this.jumpSpeed;
         this.collider = this.node.getComponent(cc.BoxCollider);
+
+        //注册按钮事件
+        this.squatBtn.on("touchstart", this.getSquatKeyDown, this);
+        this.squatBtn.on("touchend", this.getSquatKeyUp, this);
+        this.squatBtn.on("touchcancel", this.getSquatKeyUp, this);
+        this.jumpBtn.on("touchstart", this.getJumpKeyDown, this);
     }
 
     public changeState(playerState:PlayerState):void{
+        //squating 锁定状态切换，等待完全通过下面通道（障碍物下方通道）再切换
+        if(this.mPlayerState == PlayerState.squat && this.isSquating)return;
+
         if(playerState == PlayerState.idle)
             this.idleStart();
         else if(playerState == PlayerState.jump)
@@ -85,7 +102,8 @@ export class playerCtrl extends cc.Component {
 
     private moveBack(dt):void{
         if(this.node.x < this.posX){
-            if(this.obstacleCount <= 0){
+            //if(this.obstacleCount <= 0){
+            if(!this.isLeftCol){
                 this.node.x += dt * 100;
             }
         }
@@ -120,12 +138,6 @@ export class playerCtrl extends cc.Component {
     private squatStart():void{
         this.mPlayerState = PlayerState.squat;
 
-        console.log("squatStart");
-
-/*         this.node.height *= .5;
-        this.node.width *= .5;
-        this.node.y -= this.node.height * .5;
-        this.collider.size.width = this.node.width; */
         this.changeColSize(0);
         this.isSquat = true;
 
@@ -167,6 +179,7 @@ export class playerCtrl extends cc.Component {
     onCollisionEnter(other, self) {
         this.collCount++;
 
+        //待优化
         switch(other.tag){
             case 0://ground
                 if(this.mPlayerState != PlayerState.idle && this.mPlayerState != PlayerState.squat){
@@ -176,7 +189,8 @@ export class playerCtrl extends cc.Component {
             break;
             case 2://右台阶
                 this.rightStepNode = other.node;
-                this.changeState(PlayerState.idle);
+                if(this.mPlayerState != PlayerState.squat)
+                    this.changeState(PlayerState.idle);
             break;
             case 3://障碍物
                 this.obstacleCount++;
@@ -195,43 +209,10 @@ export class playerCtrl extends cc.Component {
                 }
             break;
             default://其他
-                this.changeState(PlayerState.idle);
+                if(this.mPlayerState != PlayerState.squat)
+                    this.changeState(PlayerState.idle);
             break;
         }
-/* 
-        if(this.mPlayerState != PlayerState.idle && this.mPlayerState != PlayerState.squat){
-            let localOtherPos:cc.Vec2 = GlobalVar.switchPosToNode(other.node, self.node.parent);
-            switch(other.tag){
-                case 0:
-                    this.changeState(PlayerState.idle);
-                    self.node.y = localOtherPos.y + other.node.height * .5 + self.node.height * .5;
-                    break;
-                case 3:
-                    this.obstacleCount++;
-                    if(this.isCollisionLeft(other, self)){//在障碍物左边发生碰撞
-                        this.isUpCol = false;
-                        this.isLeftCol = true;
-                        console.log(1111);
-                        //let localOtherPos:cc.Vec2 = GlobalVar.switchPosToNode(other.node, self.node.parent);
-                        self.node.x = localOtherPos.x - self.node.width * .5 - other.node.width * .5;
-                    }else if(this.isCollisionUp(other, self)){
-                        this.isUpCol = true;
-                        this.isLeftCol = false;
-
-                        self.node.y = localOtherPos.y + other.node.height * .5 + self.node.height * .5;
-                        this.changeState(PlayerState.idle);
-                    }else if(this.isCollisionBottom(other, self)){
-                        this.changeState(PlayerState.down);
-                    }
-                    break;
-                default:
-                    this.changeState(PlayerState.idle);
-                    break;
-            }
-        }
-
-        if(other.tag == 2)
-            this.rightStepNode = other.node; */
     }
     onCollisionStay(other, self) {
         if(other.tag == 1){//左台阶
@@ -239,18 +220,16 @@ export class playerCtrl extends cc.Component {
         }
 
         if(other.tag == 3){//障碍物
-            //if(this.isCollisionLeftStay(other, self)){//在障碍物左边发生碰撞
             if(this.isLeftCol){
-/*                 let localOtherPos:cc.Vec2 = GlobalVar.switchPosToNode(other.node, self.node.parent);
-                self.node.x = localOtherPos.x - self.node.width * .5 - other.node.width * .5; */
                 this.node.x = other.world.aabb.x -= this.node.width * .5;
             }
         }
+
+        if(other.tag == 4){
+            this.isSquating = true;
+        }
     }
     onCollisionExit(other, self) {
-        console.log("onCollisionExit")
-/*         if(this.mPlayerState == PlayerState.idle)
-            this.changeState(PlayerState.down); */
         this.collCount--;
         if(other.tag == 3){
             this.obstacleCount--;
@@ -261,15 +240,14 @@ export class playerCtrl extends cc.Component {
                         this.changeState(PlayerState.down);
 
                 }
-                //else if(this.isLeftCol)
 
                 this.isUpCol = false;
                 this.isLeftCol = false;
             }
         }
-
         if(other.tag == 4){
-            this.changeState(PlayerState.down);
+            this.isSquating = false;
+            this.changeState(PlayerState.idle);
         }
     }
 
@@ -336,29 +314,6 @@ export class playerCtrl extends cc.Component {
         return false;
     }
 
-    private isCollisionLeftStay(other, self):boolean{
-
-                // 1st step 
-        // get pre aabb, go back before collision
-        var otherAabb = other.world.aabb;
-        var otherPreAabb = other.world.preAabb.clone();
-
-        var selfAabb = self.world.aabb;
-        var selfPreAabb = self.world.preAabb.clone();
-
-        // 2nd step
-        // forward x-axis, check whether collision on x-axis
-        selfPreAabb.y = selfAabb.y;
-        otherPreAabb.y = otherAabb.y;
-
-
-        let otherWorld:number = other.world.aabb.x;
-        let selfWorld:number = self.world.aabb.x + self.node.width - 15;
-        if(selfWorld < otherWorld)//在障碍物左边发生碰撞
-            return true;
-        return false;
-    }
-
 
     /**计算上坡速度 */
     private ComputeUpSpeed(node:cc.Node):number{
@@ -388,6 +343,18 @@ export class playerCtrl extends cc.Component {
                 this.offSquat();
                 break;
         }
+    }
+
+    //按钮输入
+    private getSquatKeyDown():void{//按下蹲下键
+        this.onSquat();
+    }
+    private getSquatKeyUp():void{//抬起蹲下键
+        this.offSquat();
+    }
+    private getJumpKeyDown():void{
+        this.offSquat();
+        this.onJump();
     }
 
     private onJump():void{

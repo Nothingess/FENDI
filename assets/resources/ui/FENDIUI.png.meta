@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "47254f4d-d2c7-4d82-b3c0-561244df8590",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "FENDIUI": {
+      "ver": "1.0.4",
+      "uuid": "faeb3310-15bd-46f5-9701-49cbb526f228",
+      "rawTextureUuid": "47254f4d-d2c7-4d82-b3c0-561244df8590",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 3.5,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1020,
+      "height": 2037,
+      "rawWidth": 1024,
+      "rawHeight": 2048,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

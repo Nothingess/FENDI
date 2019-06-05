@@ -1,5 +1,3 @@
-import { bgCtrl } from "./bgCtrl";
-import { forwardState } from "./IBgState";
 import { UISystem } from "../../systems/UISystem";
 import { playerCtrl } from "./player/playerCtrl";
 
@@ -14,15 +12,12 @@ export class mainExterior{
     }
 
     private mPlayerCtrl:playerCtrl = null;
-    //private mBgCtrl:bgCtrl = null;
     private uiMgr:UISystem = null;
 
     private init():void{
         this.initComponent();
     }
     private initComponent():void{
-        //this.mBgCtrl = new bgCtrl();
-        //this.mBgCtrl.setState(new forwardState(this.mBgCtrl));
         this.uiMgr = new UISystem();
     }
     public update():void{
@@ -33,6 +28,9 @@ export class mainExterior{
     }
 
     //#region 监听事件
+
+
+
     //#endregion
 
 //#region 其它

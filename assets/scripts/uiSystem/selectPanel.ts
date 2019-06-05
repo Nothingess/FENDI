@@ -44,7 +44,7 @@ export class selectPanel extends IUIBase {
         this.manRole.runAction(
             cc.sequence(
                 cc.spawn(
-                    cc.moveTo(.2, cc.v2(-125, 0)),
+                    cc.moveTo(.2, cc.v2(-125, -35)),
                     cc.fadeTo(.2, 255)
                 ),
                 cc.delayTime(.3),
@@ -56,7 +56,7 @@ export class selectPanel extends IUIBase {
         )
         this.womanRole.runAction(
             cc.spawn(
-                cc.moveTo(.2, cc.v2(125, 0)),
+                cc.moveTo(.2, cc.v2(125, -35)),
                 cc.fadeTo(.2, 255)
             )
         )

@@ -19,15 +19,10 @@ export class startExterior {
     private startBtn:cc.Node = null;                    //开始按钮
     private friendsBtn:cc.Node = null;                  //好友按钮
     private setBtn:cc.Node = null;                      //设置按钮
-    
-    //选择面板
-    private left:cc.Node = null;
-    private center:cc.Node = null;
-    private right:cc.Node = null;
-    private currSelect:cc.Node = null;
+    private leftBtn:cc.Node = null;                     //左边按钮
+    private rightBtn:cc.Node = null;                    //右边按钮
 
-
-    private test:cc.Node = null;
+    private liuhai:number = 0;
 
     private init():void{
         this.initComponents();
@@ -39,14 +34,10 @@ export class startExterior {
         this.uiSys.sysInit();
 
         this.startBtn = cc.find("Canvas/UILayer/uiElement/combat_btn");
-        this.friendsBtn = cc.find("Canvas/UILayer/uiElement/bottom/friends");
-        this.setBtn = cc.find("Canvas/UILayer/uiElement/bottom/setting");
-
-        let selectNode:cc.Node = cc.find("Canvas/UILayer/uiElement/select");
-        this.left = cc.find("explore", selectNode);
-        this.center = cc.find("dream", selectNode);
-        this.right = cc.find("search", selectNode);
-        this.currSelect = this.center;
+        this.friendsBtn = cc.find("Canvas/UILayer/uiElement/up/friends");
+        this.setBtn = cc.find("Canvas/UILayer/uiElement/up/setting");
+        this.leftBtn = cc.find("Canvas/UILayer/uiElement/select_left");
+        this.rightBtn = cc.find("Canvas/UILayer/uiElement/select_right");
         
         this.onBtnEvent();
     }
@@ -58,6 +49,7 @@ export class startExterior {
         }
  
         let systemInfo = wx.getSystemInfoSync();
+        this.liuhai = systemInfo.statusBarHeight;           //后面可存为全局数据信息
         let width = systemInfo.windowWidth;
         let height = systemInfo.windowHeight;
         let button = wx.createUserInfoButton({
@@ -103,6 +95,9 @@ export class startExterior {
             button.destroy();
  
         });
+        if(this.liuhai > 20){//通过判断状态栏高度来判断是否刘海屏：大于20为刘海屏
+            this.leftBtn.runAction(cc.moveBy(0.2, cc.v2(80, 0)))
+        }
     }
 
     public setSceneState(mStartState:startSceneState):void{
@@ -124,10 +119,6 @@ export class startExterior {
         this.startBtn.on("touchend", this.onstartBtn, this);
         this.friendsBtn.on("touchend", this.onfriendsBtn, this);
         this.setBtn.on("touchend", this.onsetBtn, this);
-
-        this.left.on("touchend", this.onLeftPanel, this);
-        this.center.on("touchend", this.onCenterPanel, this);
-        this.right.on("touchend", this.onRightPanel, this);
     }
 
     private onstartBtn():void{
@@ -142,25 +133,6 @@ export class startExterior {
         console.log("onsetBtn");
 
         this.uiSys.openPanel(setPanel, "setPanel");
-    }
-
-    private onLeftPanel():void{
-        if(this.currSelect == this.left)return;
-        this.left.getChildByName("mask").active = false;
-        this.currSelect.getChildByName("mask").active = true;
-        this.currSelect = this.left;
-    }
-    private onCenterPanel():void{
-        if(this.currSelect == this.center)return;
-        this.center.getChildByName("mask").active = false;
-        this.currSelect.getChildByName("mask").active = true;
-        this.currSelect = this.center;
-    }
-    private onRightPanel():void{
-        if(this.currSelect == this.right)return;
-        this.right.getChildByName("mask").active = false;
-        this.currSelect.getChildByName("mask").active = true;
-        this.currSelect = this.right;
     }
     //#endregion
 
