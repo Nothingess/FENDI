@@ -15,12 +15,38 @@ export class spineCtrl extends cc.Component {
     }
 
     start () {
-        
+        this._setMix("nanren_pao", "nanren_tiao", 0.3);
+        this._setMix("nanren_pao", "nanren_xiatan");
     }
 
+//#region action
+
+    /**播放跳跃动作 */
+    public jump():void{
+        this.spine.setAnimation(0, "nanren_tiao", false);
+        this._setTimeScale(.3);
+    }
+    /**播放下蹲动作 */
+    public squat():void{
+        this.spine.setAnimation(0, "nanren_xiatan", true);
+        this._setTimeScale(.5);
+    }
+    /**播放奔跑动作 */
+    public run():void{
+        this.spine.setAnimation(0, "nanren_pao", true);
+        this._setTimeScale(1);
+    }
+
+//#endregion
+
+
     /**设置动画切换时的过渡时间 */
-    private _setMix(anim1:string, anim2:string):void{
-        this.spine.setMix(anim1, anim2, this.mixTime);
-        this.spine.setMix(anim2, anim1, this.mixTime);
+    private _setMix(anim1:string, anim2:string, val = this.mixTime):void{
+        this.spine.setMix(anim1, anim2, val);
+        this.spine.setMix(anim2, anim1, val);
+    }
+    /**设置时间大小 */
+    private _setTimeScale(val:number):void{
+        this.spine.timeScale = val;
     }
 }
