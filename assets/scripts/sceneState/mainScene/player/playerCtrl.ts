@@ -43,7 +43,7 @@ export class playerCtrl extends cc.Component {
     onLoad () {
         let manager=cc.director.getCollisionManager();  // 获取碰撞检测类
         manager.enabled = true;                         // 开启碰撞检测
-        //manager.enabledDebugDraw = true                   //显示碰撞检测区域
+        manager.enabledDebugDraw = true                   //显示碰撞检测区域
 
         // add key down and key up event
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -184,7 +184,7 @@ export class playerCtrl extends cc.Component {
             case 0://ground
                 if(this.mPlayerState != PlayerState.idle && this.mPlayerState != PlayerState.squat){
                     this.changeState(PlayerState.idle);
-                    this.node.y = other.world.aabb.yMax + this.node.height * .5;
+                    this.node.y = other.world.aabb.yMax + this.node.height * .5 - 0.5;
                 }
             break;
             case 2://右台阶
