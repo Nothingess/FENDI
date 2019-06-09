@@ -134,6 +134,12 @@ export class startExterior {
 
         this.uiSys.openPanel(setPanel, "setPanel");
     }
+    private onSelectLeft():void{
+        
+    }
+    private onSelectRight():void{
+
+    }
     //#endregion
 
 //#region 选择面板
