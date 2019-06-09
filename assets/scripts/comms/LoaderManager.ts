@@ -30,13 +30,22 @@ export class Loader {
 
     /**即时释放资源的加载方式 */
     public loadInstantFree(path:string, callback:(asset)=>void):void{
-        cc.loader.loadRes(path, cc.JsonAsset, (e, res)=>{
+        cc.loader.loadRes(path, (e, res)=>{
             if(e){
                 console.log(e);
                 return;
             }
             callback(res);
             cc.loader.release(res);
+        });
+    }
+    public loadInstance(path:string, callback:(asset)=>void):void{
+        cc.loader.loadRes(path, (e, res)=>{
+            if(e){
+                console.log(e);
+                return;
+            }
+            callback(res);
         });
     }
     /**释放资源 */

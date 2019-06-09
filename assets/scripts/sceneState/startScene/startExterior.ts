@@ -3,6 +3,8 @@ import { startSceneState } from "../ISceneState";
 import { rankPanel } from "../../uiSystem/rankPanel";
 import { setPanel } from "../../uiSystem/setPanel";
 import { selectPanel } from "../../uiSystem/selectPanel";
+import { Loader } from "../../comms/LoaderManager";
+import { GameLoop } from "../../GameLoop";
 
 export class startExterior {
     private constructor(){this.init();}
@@ -21,13 +23,26 @@ export class startExterior {
     private setBtn:cc.Node = null;                      //设置按钮
     private leftBtn:cc.Node = null;                     //左边按钮
     private rightBtn:cc.Node = null;                    //右边按钮
+    private bg:cc.Sprite = null;                        //背景
 
-    private liuhai:number = 0;
+    private liuhai:number = 0;                          //刘海高度
+
+    private currIndex:number = 0;                       //当前选择关卡的索引（0-2）
+    private currRoleIndex:number = 0;                   //当前选择的角色（0：男，1：nv）
 
     private init():void{
         this.initComponents();
-        this.initUserInfoButton();
+        this.autoView();
     }
+    /**适配部分UI */
+    private autoView():void{
+        if(GameLoop.getInstance().platform != null){
+            if(GameLoop.getInstance().platform.liuhai > 20){//全面屏
+                this.leftBtn.runAction(cc.moveBy(0.2, cc.v2(80, 0)));
+            }
+        }
+    }
+
     /**初始化组件 */
     private initComponents():void{
         this.uiSys = new UISystem();
@@ -38,66 +53,9 @@ export class startExterior {
         this.setBtn = cc.find("Canvas/UILayer/uiElement/up/setting");
         this.leftBtn = cc.find("Canvas/UILayer/uiElement/select_left");
         this.rightBtn = cc.find("Canvas/UILayer/uiElement/select_right");
+        this.bg = cc.find("Canvas/bg").getComponent(cc.Sprite);
         
         this.onBtnEvent();
-    }
-
-	
-    private initUserInfoButton () {
-        if (typeof wx === 'undefined') {
-            return;
-        }
- 
-        let systemInfo = wx.getSystemInfoSync();
-        this.liuhai = systemInfo.statusBarHeight;           //后面可存为全局数据信息
-        let width = systemInfo.windowWidth;
-        let height = systemInfo.windowHeight;
-        let button = wx.createUserInfoButton({
-            type: 'text',
-            text: '',
-            style: {
-                left: 0,
-                top: 0,
-                width: width,
-                height: height,
-                lineHeight: 40,
-                backgroundColor: '#00000000',
-                color: '#00000000',
-                textAlign: 'center',
-                fontSize: 10,
-                borderRadius: 4
-            }
-        });
- 
-        button.onTap((res) => {
-            let userInfo = res.userInfo;
-            if (!userInfo) {
-                //this.tips.string = res.errMsg;
-                return;
-            }
- 
-            cc.loader.load({url: userInfo.avatarUrl, type: 'png'}, (err, texture) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                //this.avatar.spriteFrame = new cc.SpriteFrame(texture);
-            });
- 
-/*             wx.getOpenDataContext().postMessage({
-                message: "User info get success."
-            }); */
- 
-/*             this.wxSubContextView.runAction(this._showAction);
-            this._isShow = true; */
- 
-            button.hide();
-            button.destroy();
- 
-        });
-        if(this.liuhai > 20){//通过判断状态栏高度来判断是否刘海屏：大于20为刘海屏
-            this.leftBtn.runAction(cc.moveBy(0.2, cc.v2(80, 0)))
-        }
     }
 
     public setSceneState(mStartState:startSceneState):void{
@@ -119,6 +77,9 @@ export class startExterior {
         this.startBtn.on("touchend", this.onstartBtn, this);
         this.friendsBtn.on("touchend", this.onfriendsBtn, this);
         this.setBtn.on("touchend", this.onsetBtn, this);
+
+        this.leftBtn.on("touchend", this.onSelectLeft, this);
+        this.rightBtn.on("touchend", this.onSelectRight, this);
     }
 
     private onstartBtn():void{
@@ -135,16 +96,23 @@ export class startExterior {
         this.uiSys.openPanel(setPanel, "setPanel");
     }
     private onSelectLeft():void{
-        
+        this.currIndex = this.currIndex - 1 < 0?2:this.currIndex - 1;
+        this.selectLevel();
     }
     private onSelectRight():void{
-
+        this.currIndex = this.currIndex + 1 > 2?0:this.currIndex + 1;
+        this.selectLevel();
     }
     //#endregion
 
 //#region 选择面板
 
-
+    private selectLevel():void{
+        let self = this;
+        Loader.getInstance().loadInstance(`ui/bg_${this.currIndex}`, (e)=>{
+            self.bg.spriteFrame = new cc.SpriteFrame(e);
+        })
+    }
 
 //#endregion
 }
