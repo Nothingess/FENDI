@@ -71,7 +71,7 @@ export class startExterior {
 
     }
     public end():void{
-        startExterior.endInstance();
+        
     }
 
     //#region 监听事件

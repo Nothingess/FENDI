@@ -5,6 +5,7 @@ import { mainExterior } from "../sceneState/01level/mainExterior";
 export class gameOverPanel extends IUIBase {
 
     private enterBtn:cc.Node = null;
+    private isChangeScene:boolean = false;
     
     public initStrategy():void{
         this.mOpenStrategy = new strateB(this.skin);
@@ -27,6 +28,9 @@ export class gameOverPanel extends IUIBase {
     }
 
     private onEnterBtn():void{
+        if(this.isChangeScene)return;
+        this.isChangeScene = true;
+        console.log("onEnterBtn+++++++++++++++++");
         mainExterior.getInstance().gotoStartState();
     }
 

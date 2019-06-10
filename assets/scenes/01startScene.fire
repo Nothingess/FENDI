@@ -17,7 +17,7 @@
         "__id__": 2
       },
       {
-        "__id__": 47
+        "__id__": 48
       }
     ],
     "_active": false,
@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6198175686493699,
-      "y": 0.6198175686493699,
+      "x": 0.5248276207737929,
+      "y": 0.5248276207737929,
       "z": 1
     },
     "_quat": {
@@ -85,6 +85,9 @@
       },
       {
         "__id__": 46
+      },
+      {
+        "__id__": 47
       }
     ],
     "_prefab": null,
@@ -2072,6 +2075,16 @@
     "_id": "dc6uf0ZhhN5Kksl3MtjMEf"
   },
   {
+    "__type__": "e2d8cQT/s1KKqi+7amosQW5",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_id": "ac/Y6srvRKM7b1BW/bURuD"
+  },
+  {
     "__type__": "cc.Node",
     "_name": "GameLoop",
     "_objFlags": 0,
@@ -2083,7 +2096,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 48
+        "__id__": 49
       }
     ],
     "_prefab": null,
@@ -2136,7 +2149,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 47
+      "__id__": 48
     },
     "_enabled": true,
     "_id": "e8ZUNA7ZZJXoRqqYXrlo9A"

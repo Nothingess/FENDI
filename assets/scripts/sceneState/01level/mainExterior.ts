@@ -51,7 +51,6 @@ export class mainExterior{
     }
     public end():void{
         this.uiMgr.sysRelease();
-        mainExterior.endInstance();
     }
 
     //#region 监听事件
