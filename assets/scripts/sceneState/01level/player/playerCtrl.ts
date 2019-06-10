@@ -43,7 +43,7 @@ export class playerCtrl extends cc.Component {
     onLoad () {
         let manager=cc.director.getCollisionManager();  // 获取碰撞检测类
         manager.enabled = true;                         // 开启碰撞检测
-        manager.enabledDebugDraw = true                   //显示碰撞检测区域
+        //manager.enabledDebugDraw = true                   //显示碰撞检测区域
 
         // add key down and key up event
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -317,7 +317,7 @@ export class playerCtrl extends cc.Component {
 
     /**计算上坡速度 */
     private ComputeUpSpeed(node:cc.Node):number{
-        let time:number = node.width / (200 * .016);
+        let time:number = node.width / (400 * .016);
         return node.height / time;
     }
 //#endregion

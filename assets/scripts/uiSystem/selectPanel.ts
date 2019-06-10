@@ -1,7 +1,6 @@
 import { IUIBase, PanelLayer } from "./IUIBase";
 import { startExterior } from "../sceneState/startScene/startExterior";
 import { strateB } from "./openAction/IOpenStrategy";
-import ShaderComponent from "../../plugs/shader/ShaderComponent";
 
 export class selectPanel extends IUIBase {
 

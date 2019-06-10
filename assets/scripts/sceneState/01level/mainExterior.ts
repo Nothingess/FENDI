@@ -11,14 +11,18 @@ export class mainExterior{
         return this._instance;
     }
 
-    private mPlayerCtrl:playerCtrl = null;
     private uiMgr:UISystem = null;
+
+    //UI Element
+    private hearts:cc.Node = null;
 
     private init():void{
         this.initComponent();
     }
     private initComponent():void{
         this.uiMgr = new UISystem();
+
+        this.hearts = cc.find("Canvas/UILayer/uiElement/heart");
     }
     public update():void{
         this.uiMgr.sysUpdate();

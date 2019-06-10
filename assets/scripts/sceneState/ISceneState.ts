@@ -1,6 +1,6 @@
 import { SceneController } from "./SceneController";
 import { startExterior } from "./startScene/startExterior";
-import { mainExterior } from "./mainScene/mainExterior";
+import { mainExterior } from "./01level/mainExterior";
 
 export class ISceneState {
 
