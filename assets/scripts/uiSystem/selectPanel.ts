@@ -12,6 +12,7 @@ export class selectPanel extends IUIBase {
     private closeBtn:cc.Node = null;
 
     private currSelect:cc.Node = null;
+    private isLoad:boolean = false;
 
     public initStrategy():void{
         this.mOpenStrategy = new strateB(this.skin);
@@ -80,6 +81,8 @@ export class selectPanel extends IUIBase {
         this.currSelect.runAction(cc.scaleTo(.2, 1.1));
     }
     private onYesBtn():void{
+        if(this.isLoad)return;
+        this.isLoad = true;
         startExterior.getInstance().enterMainState();
     }
 }

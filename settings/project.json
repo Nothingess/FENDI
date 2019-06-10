@@ -3,13 +3,13 @@
   "collision-matrix": [
     [
       true,
-      null,
+      true,
       null,
       null,
       true
     ],
     [
-      false,
+      true,
       false,
       true,
       true,

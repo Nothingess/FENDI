@@ -49,15 +49,20 @@ export class startSceneState extends ISceneState{
 }
 
 export class mainSceneState extends ISceneState{
-    constructor(sceneCtrl:SceneController, name = "02mainScene"){super(sceneCtrl, name);}
+    constructor(sceneCtrl:SceneController, name = "01level"){super(sceneCtrl, name);}
 
     public stateStart():void{
         mainExterior.getInstance();
+        mainExterior.getInstance().setMainState(this);
     }
     public stateUpdate():void{
         mainExterior.getInstance().update();
     }
     public stateEnd():void{
         mainExterior.getInstance().end();
+    }
+
+    public setStartState():void{
+        this.mSceneCtrl.setState(new startSceneState(this.mSceneCtrl));
     }
 }

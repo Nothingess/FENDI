@@ -15,6 +15,9 @@ export class startExterior {
             this._instance = new startExterior();
         return this._instance;
     }
+    public static endInstance(){
+        this._instance = null;
+    }
 
     private mStartState:startSceneState = null;         //开始状态
     public uiSys:UISystem = null;                       //UI系统
@@ -68,7 +71,7 @@ export class startExterior {
 
     }
     public end():void{
-
+        startExterior.endInstance();
     }
 
     //#region 监听事件

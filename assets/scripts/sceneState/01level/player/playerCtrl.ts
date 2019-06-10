@@ -39,6 +39,8 @@ export class playerCtrl extends cc.Component {
     private squatBtn:cc.Node = null;                            //按钮
     private jumpBtn:cc.Node = null;
 
+    private camera:cc.Node = null;
+
     private isSquat:boolean = false;
     onLoad () {
         let manager=cc.director.getCollisionManager();  // 获取碰撞检测类
@@ -197,7 +199,9 @@ export class playerCtrl extends cc.Component {
                 if(this.isCollisionLeft(other, self)){
                     this.isUpCol = false;
                     this.isLeftCol = true;
-                    this.node.x = other.world.aabb.x -= this.node.width * .5;
+                    //this.node.x = other.world.aabb.x -= this.node.width * .5;
+                    mainExterior.getInstance().minusHeart();
+                    other.node.destroy();
                 }else if(this.isCollisionUp(other, self)){
                     this.isUpCol = true;
                     this.isLeftCol = false;
@@ -207,6 +211,10 @@ export class playerCtrl extends cc.Component {
                 }else if(this.isCollisionBottom(other, self)){
                     this.changeState(PlayerState.down);
                 }
+            break;
+            case 6:
+                other.node.destroy();
+                mainExterior.getInstance().addScore(10);
             break;
             default://其他
                 if(this.mPlayerState != PlayerState.squat)
@@ -219,11 +227,11 @@ export class playerCtrl extends cc.Component {
             this.node.y += this.ComputeUpSpeed(other.node);
         }
 
-        if(other.tag == 3){//障碍物
+/*         if(other.tag == 3){//障碍物
             if(this.isLeftCol){
                 this.node.x = other.world.aabb.x -= this.node.width * .5;
             }
-        }
+        } */
 
         if(other.tag == 4){
             this.isSquating = true;
@@ -383,6 +391,10 @@ export class playerCtrl extends cc.Component {
             this.collider.offset.y = 0;
             this.collider.size.height = this.node.height;
         }
+    }
+
+    public stop():void{
+        this.spCtrl.stop();
     }
 
     onDestroy () {

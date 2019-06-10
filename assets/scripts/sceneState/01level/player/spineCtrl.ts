@@ -37,6 +37,10 @@ export class spineCtrl extends cc.Component {
         this._setTimeScale(1);
     }
 
+    public stop():void{
+        this.spine.paused = true;
+    }
+
 //#endregion
 
 

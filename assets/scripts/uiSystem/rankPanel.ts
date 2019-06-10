@@ -28,6 +28,7 @@ export class rankPanel extends IUIBase {
         this.wxSubContextView = cc.find("context", this.skin).getComponent(cc.WXSubContextView);
         this.closeBtn.on("touchend", this.onCloseBtn, this);
 
+        if (typeof wx === 'undefined') return;
         this.wxSubContextView.enabled = true;
     }
     private onCloseBtn():void{

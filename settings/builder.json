@@ -37,7 +37,7 @@
   },
   "startScene": "44606bf4-d0ff-4e10-9d23-5b7f95cb417d",
   "title": "FENDI",
-  "webOrientation": "auto",
+  "webOrientation": "landscape",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "wx4b0dc8d75a0857b7",
