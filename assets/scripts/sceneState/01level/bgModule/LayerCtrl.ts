@@ -1,18 +1,19 @@
+import { GameLoop } from "../../../GameLoop";
+
+enum LayerType{
+    build = 0,
+    ground
+}
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export class LayerCtrl extends cc.Component {
 
-    @property({type:cc.Prefab, tooltip:"forword"})
-    public forword:cc.Prefab = null;
-    @property({type:cc.Prefab, tooltip:"loop"})
-    public loop:cc.Prefab = null;
-    @property({type:cc.Prefab, tooltip:"end"})
-    public end:cc.Prefab = null;
+    @property({type:cc.Enum(LayerType)})
+    public layerType:LayerType = LayerType.build;
 
     private currWay:cc.Node = null;                 //当前运动的路段
-    private currIndex:number = 1;                   //当前路段的索引
     private oldWay:cc.Node = null;
     private nextPos:cc.Node = null;                 //下一个路段的位置
 
@@ -21,7 +22,7 @@ export class LayerCtrl extends cc.Component {
     private interval:number = 1;                    //检测时间间隔，检测是否需要加载下一个路段
     private timer:number = 0;                       //计时器
 
-    private time:number = 0;
+    private loadNodes:Array<cc.Node> = new Array<cc.Node>();
 
     // onLoad () {}
 
@@ -33,6 +34,14 @@ export class LayerCtrl extends cc.Component {
         this.timer = this.interval;
         this.currWay = this.node.children[0];
         this.nextPos = this.currWay.getChildByName("nextPos");
+
+        if(this.layerType == LayerType.build){
+            this.loadNodes = GameLoop.getInstance().buildNode;
+            GameLoop.getInstance().buildNode = [];
+        }else if(this.layerType == LayerType.ground){
+            this.loadNodes = GameLoop.getInstance().groundNode;
+            GameLoop.getInstance().groundNode = [];
+        }
     }
 
     update (dt) {
@@ -42,12 +51,10 @@ export class LayerCtrl extends cc.Component {
             this.timer = this.interval;
             this.check();
         }
-
-        this.time += dt;
     }
 
     private check():void{
-        if(this.currIndex == 5)return;
+        if(this.loadNodes.length == 0)return;
         let worldPosX:number = GlobalVar.switchPosToNode(this.nextPos, this.node).x;
         if(worldPosX + this.node.x < cc.view.getVisibleSize().width * 1.3){
             this.nextWay();
@@ -63,21 +70,18 @@ export class LayerCtrl extends cc.Component {
 
     /**加载下一个路段 */
     private nextWay():void{
-        this.currIndex++;
-        if(this.currIndex > 5){
+        if(this.loadNodes.length == 0){
             this.isComplete = true;
             return;
-        }else if(this.currIndex < 5){
-            this.setNextWay(this.loop);
         }else{
-            this.setNextWay(this.end);
+            this.setNextWay();
         }
     }
     /**设置下一个路段 */
-    private setNextWay(pre:cc.Prefab):void{
+    private setNextWay():void{
         this.oldWay = this.nextPos;             //保存oldWay，在适当的时间销毁
+        this.currWay = this.loadNodes.shift();
 
-        this.currWay = cc.instantiate(pre);
         this.node.addChild(this.currWay);
         this.currWay.setPosition(GlobalVar.switchPosToNode(this.nextPos, this.node));
         this.nextPos = this.currWay.getChildByName("nextPos");

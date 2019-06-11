@@ -1,5 +1,6 @@
 import { ISystem } from "./ISystem";
 import { IUIBase, PanelLayer } from "../uiSystem/IUIBase";
+import { startExterior } from "../sceneState/startScene/startExterior";
 
 export  class UISystem extends ISystem {
 
@@ -12,7 +13,7 @@ export  class UISystem extends ISystem {
     public sysInit():void{
         this.initLayer();
         this.dict = new Map<string, IUIBase>();
-        this.closeMask();
+        //this.closeMask();
     }
 
     /**初始化层级 */
@@ -68,12 +69,18 @@ export  class UISystem extends ISystem {
     }
     /**开启遮罩 */
     private openMask():void{
-        if(this.dict.size == 0)
+        if(this.dict.size == 0){
             this.mMaskLayer.active = true;
+            if(cc.director.getScene().name === "01startScene")
+                startExterior.getInstance().hideUI();
+        }
     }
     /**关闭遮罩 */
     private closeMask():void{
-        if(this.dict.size <= 1)
+        if(this.dict.size <= 1){
             this.mMaskLayer.active = false;
+            if(cc.director.getScene().name === "01startScene")
+                startExterior.getInstance().showUI();
+        }
     }
 }

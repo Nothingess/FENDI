@@ -36,9 +36,9 @@ export class startSceneState extends ISceneState{
         startExterior.getInstance();
         startExterior.getInstance().setSceneState(this);
 
-        cc.director.preloadScene("01level", function () {
+/*         cc.director.preloadScene("01level", function () {
             cc.log("Next scene preloaded - 01level");
-        });
+        }); */
         mainExterior.endInstance();
     }
     public stateUpdate():void{
@@ -60,9 +60,9 @@ export class mainSceneState extends ISceneState{
         mainExterior.getInstance();
         mainExterior.getInstance().setMainState(this);
 
-        cc.director.preloadScene("01startScene", function () {
+/*         cc.director.preloadScene("01startScene", function () {
             cc.log("Next scene preloaded - 01startScene");
-        });
+        }); */
         startExterior.endInstance();
     }
     public stateUpdate():void{

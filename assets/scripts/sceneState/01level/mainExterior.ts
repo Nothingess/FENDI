@@ -3,6 +3,8 @@ import { gameOverPanel } from "../../uiSystem/gameOverPanel";
 import { LayerRun } from "./bgModule/LayerRun";
 import { playerCtrl } from "./player/playerCtrl";
 import { mainSceneState } from "../ISceneState";
+import { winPanel } from "../../uiSystem/winPanel";
+import { GameLoop } from "../../GameLoop";
 
 export class mainExterior{
     private constructor(){this.init();}
@@ -18,8 +20,8 @@ export class mainExterior{
     }
 
     private mainState:mainSceneState = null;
-    private uiMgr:UISystem = null;
-    private pyCtrl:playerCtrl = null;
+    public uiMgr:UISystem = null;
+    public pyCtrl:playerCtrl = null;
 
     private heartNum:number = 3;
     private score:number = 0;
@@ -36,9 +38,27 @@ export class mainExterior{
         this.uiMgr = new UISystem();
         this.uiMgr.sysInit();
 
-        this.pyCtrl = cc.find("Canvas/run_layer/player_layer/role").getComponent(playerCtrl);
+        //this.pyCtrl = cc.find("Canvas/run_layer/player_layer/role").getComponent(playerCtrl);
+        this.createRole();
         this.heart = cc.find("Canvas/UILayer/uiElement/heart");
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
+    }
+    private createRole():void{
+        let self = this;
+        let node:cc.Node = null;
+        if(GameLoop.getInstance().isMan){
+            cc.loader.loadRes("prefabs/manRole", cc.Prefab, (err, res)=>{
+                node = cc.instantiate(res);
+                cc.find("Canvas/run_layer/player_layer").addChild(node);
+                self.pyCtrl = node.getComponent(playerCtrl);
+            })
+        }else{
+            cc.loader.loadRes("prefabs/womanRole", cc.Prefab, (err, res)=>{
+                node = cc.instantiate(res);
+                cc.find("Canvas/run_layer/player_layer").addChild(node);
+                self.pyCtrl = node.getComponent(playerCtrl);
+            })
+        }
     }
     public setMainState(main:mainSceneState):void{
         this.mainState = main;
@@ -79,8 +99,11 @@ export class mainExterior{
             this.pyCtrl.stop();
         }
     }
+    public win():void{
+        this.uiMgr.openPanel(winPanel, "winPanel");
+    }
 
-    private stop():void{
+    public stop():void{
         let childs:Array<cc.Node> = cc.find("Canvas/run_layer").children;
 
         childs.forEach(e => {

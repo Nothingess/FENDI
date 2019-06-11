@@ -1,5 +1,6 @@
 import { mainExterior } from "../mainExterior";
-import { spineCtrl } from "./spineCtrl";
+import { ISpineCtrl } from "./ISpineCtrl";
+import { CameraShake } from "../../../comms/CameraShake";
 
 const {ccclass, property} = cc._decorator;
 
@@ -29,7 +30,7 @@ export class playerCtrl extends cc.Component {
     private collCount:number = 0;                               //记录玩家碰撞其它collider的数量
     private obstacleCount:number = 0;                           //碰到的障碍物个数
     private rightStepNode:cc.Node = null;                       //右台阶
-    private spCtrl:spineCtrl = null;                            //spine动画控制器
+    private spCtrl:ISpineCtrl = null;                           //spine动画控制器
 
     private isUpCol:boolean = false;            //在障碍物上边
     private isLeftCol:boolean = false;          //在障碍物左边
@@ -39,9 +40,12 @@ export class playerCtrl extends cc.Component {
     private squatBtn:cc.Node = null;                            //按钮
     private jumpBtn:cc.Node = null;
 
-    private camera:cc.Node = null;
+    private cameraShake:CameraShake = null;
 
     private isSquat:boolean = false;
+    private isOver:boolean = false;
+
+    private isComplete:boolean = false;
     onLoad () {
         let manager=cc.director.getCollisionManager();  // 获取碰撞检测类
         manager.enabled = true;                         // 开启碰撞检测
@@ -51,10 +55,11 @@ export class playerCtrl extends cc.Component {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
-        this.spCtrl = this.getComponentInChildren(spineCtrl);
+        this.spCtrl = this.getComponentInChildren(ISpineCtrl);
 
         this.squatBtn = cc.find("Canvas/UILayer/uiElement/squat_btn");
         this.jumpBtn = cc.find("Canvas/UILayer/uiElement/jump_btn");
+        this.cameraShake = cc.find("Canvas/Main Camera").getComponent(CameraShake);
     }
 
     start():void{
@@ -100,6 +105,10 @@ export class playerCtrl extends cc.Component {
             this.downUpdate(dt);
         else
             this.squatUpdate();
+
+        if(this.isComplete){
+            this.node.x += dt * 400;
+        }
     }
 
     private moveBack(dt):void{
@@ -120,7 +129,7 @@ export class playerCtrl extends cc.Component {
         
         this.spCtrl.run();
 
-        console.log("idleStart");
+        //console.log("idleStart");
     }
     private jumpStart():void{
         this.mPlayerState = PlayerState.jump;
@@ -130,12 +139,12 @@ export class playerCtrl extends cc.Component {
 
         this.spCtrl.jump();
 
-        console.log("jumpStart");
+        //console.log("jumpStart");
     }
     private downStart():void{
         this.mPlayerState = PlayerState.down;
 
-        console.log("downStart");
+        //console.log("downStart");
     }
     private squatStart():void{
         this.mPlayerState = PlayerState.squat;
@@ -202,6 +211,7 @@ export class playerCtrl extends cc.Component {
                     //this.node.x = other.world.aabb.x -= this.node.width * .5;
                     mainExterior.getInstance().minusHeart();
                     other.node.destroy();
+                    this.cameraShake.shake();
                 }else if(this.isCollisionUp(other, self)){
                     this.isUpCol = true;
                     this.isLeftCol = false;
@@ -212,9 +222,14 @@ export class playerCtrl extends cc.Component {
                     this.changeState(PlayerState.down);
                 }
             break;
+            case 5:
+            break;
             case 6:
                 other.node.destroy();
                 mainExterior.getInstance().addScore(10);
+            break;
+            case 7:
+                mainExterior.getInstance().win();
             break;
             default://其他
                 if(this.mPlayerState != PlayerState.squat)
@@ -366,18 +381,24 @@ export class playerCtrl extends cc.Component {
     }
 
     private onJump():void{
+        if(this.isOver)return;
         if(this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
             this.changeState(PlayerState.jump);
     }
     private onSquat():void{
+        if(this.isOver)return;
         if(this.mPlayerState == PlayerState.idle)
             this.changeState(PlayerState.squat);
     }
     private offSquat():void{
+        if(this.isOver)return;
         if(this.mPlayerState == PlayerState.squat)
             this.changeState(PlayerState.idle);
     }
-
+    /**游戏完成 */
+    public complete():void{
+        this.isComplete = true;
+    }
 //#endregion
 
     /**蹲下时改变碰撞体形状
@@ -394,6 +415,7 @@ export class playerCtrl extends cc.Component {
     }
 
     public stop():void{
+        this.isOver = true;
         this.spCtrl.stop();
     }
 

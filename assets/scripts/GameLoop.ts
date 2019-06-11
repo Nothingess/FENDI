@@ -14,6 +14,10 @@ export class GameLoop extends cc.Component {
 
     private mSceneCtrl:SceneController = null;
     public platform:IPlatform = null;
+    public isMan:boolean = true;
+
+    public buildNode:Array<cc.Node> = new Array<cc.Node>();
+    public groundNode:Array<cc.Node> = new Array<cc.Node>();
 
     onLoad () {
         GameLoop._instance = this;

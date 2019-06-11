@@ -74,3 +74,23 @@ export class strateB extends IOpenStrategy{
         )
     }
 }
+
+export class strateC extends IOpenStrategy{
+    public open(callback:Function):void{
+        this.mObj.opacity = 0;
+        this.mObj.runAction(
+            cc.sequence(
+                cc.fadeIn(this.mSpeed),
+                cc.callFunc(()=>{callback();})
+            )
+        )
+    }
+    public close(callback:Function):void{
+        this.mObj.runAction(
+            cc.sequence(
+                cc.fadeOut(this.mSpeed),
+                cc.callFunc(()=>{callback();})
+            )
+        )
+    }
+}

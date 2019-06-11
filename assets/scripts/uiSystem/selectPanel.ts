@@ -1,6 +1,8 @@
 import { IUIBase, PanelLayer } from "./IUIBase";
 import { startExterior } from "../sceneState/startScene/startExterior";
 import { strateB } from "./openAction/IOpenStrategy";
+import { loadPanel } from "./loadPanel";
+import { GameLoop } from "../GameLoop";
 
 export class selectPanel extends IUIBase {
 
@@ -12,7 +14,9 @@ export class selectPanel extends IUIBase {
     private closeBtn:cc.Node = null;
 
     private currSelect:cc.Node = null;
-    private isLoad:boolean = false;
+    //private isLoad:boolean = false;
+
+    private isMan:boolean = false;           //当前选择的角色性别
 
     public initStrategy():void{
         this.mOpenStrategy = new strateB(this.skin);
@@ -44,10 +48,9 @@ export class selectPanel extends IUIBase {
         this.manRole.runAction(
             cc.sequence(
                 cc.spawn(
-                    cc.moveTo(.2, cc.v2(-125, -35)),
-                    cc.fadeTo(.2, 255)
+                    cc.moveTo(.1, cc.v2(-125, -35)),
+                    cc.fadeTo(.1, 255)
                 ),
-                cc.delayTime(.3),
                 cc.callFunc(()=>{
                     this.onSelectRole(this.manRole);
                 })
@@ -56,14 +59,14 @@ export class selectPanel extends IUIBase {
         )
         this.womanRole.runAction(
             cc.spawn(
-                cc.moveTo(.2, cc.v2(125, -35)),
-                cc.fadeTo(.2, 255)
+                cc.moveTo(.1, cc.v2(125, -35)),
+                cc.fadeTo(.1, 255)
             )
         )
         this.yes.runAction(
             cc.spawn(
-                cc.moveTo(.2, cc.v2(0, -260)),
-                cc.fadeTo(.2, 255)
+                cc.moveTo(.1, cc.v2(0, -260)),
+                cc.fadeTo(.1, 255)
             )
         )
     }
@@ -75,14 +78,18 @@ export class selectPanel extends IUIBase {
     private onSelectRole(select:cc.Node):void{
         if(select == this.currSelect)return;
         if(this.currSelect != null){
-            this.currSelect.runAction(cc.scaleTo(.2, 1));
+            this.currSelect.runAction(cc.scaleTo(.1, 1));
         }
         this.currSelect = select;
-        this.currSelect.runAction(cc.scaleTo(.2, 1.1));
+        this.currSelect.runAction(cc.scaleTo(.1, 1.1));
+        this.isMan = !this.isMan;
+        GameLoop.getInstance().isMan = this.isMan;
     }
     private onYesBtn():void{
-        if(this.isLoad)return;
-        this.isLoad = true;
-        startExterior.getInstance().enterMainState();
+/*         if(this.isLoad)return;
+        this.isLoad = true; */
+        //if(this.currSelect)
+        //startExterior.getInstance().enterMainState();
+        startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level"]);
     }
 }
