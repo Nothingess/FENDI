@@ -90,6 +90,11 @@ export class selectPanel extends IUIBase {
         this.isLoad = true; */
         //if(this.currSelect)
         //startExterior.getInstance().enterMainState();
-        startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level"]);
+        //startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level"]);
+        GameLoop.getInstance().currIndex = startExterior.getInstance().currIndex;
+        if(GameLoop.getInstance().currIndex == 0)
+            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level"]);
+        else if(GameLoop.getInstance().currIndex == 1)
+            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["03level"]);
     }
 }

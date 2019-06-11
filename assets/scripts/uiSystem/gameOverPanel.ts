@@ -2,6 +2,8 @@ import { IUIBase, PanelLayer } from "./IUIBase";
 import { strateB } from "./openAction/IOpenStrategy";
 import { mainExterior } from "../sceneState/01level/mainExterior";
 import { loadPanel } from "./loadPanel";
+import { GameLoop } from "../GameLoop";
+import { levelThreeExterior } from "../sceneState/03level/levelThreeExterior";
 
 export class gameOverPanel extends IUIBase {
 
@@ -32,7 +34,10 @@ export class gameOverPanel extends IUIBase {
 /*         if(this.isChangeScene)return;
         this.isChangeScene = true; */
         //mainExterior.getInstance().gotoStartState();
-        mainExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene"]);
+        if(GameLoop.getInstance().currIndex == 0)
+            mainExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene"]);
+        else if(GameLoop.getInstance().currIndex == 1)
+            levelThreeExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene"]);
     }
 
 }

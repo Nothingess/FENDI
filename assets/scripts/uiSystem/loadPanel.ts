@@ -10,8 +10,13 @@ let level_1:Array<string> = [
     "prefabs/bgModule/01level/ground_loop",
     "prefabs/bgModule/01level/ground_end"
 ]
-let level_2:Array<string> = [
-
+let level_3:Array<string> = [
+    "prefabs/bgModule/03level/screen_2",
+    "prefabs/bgModule/03level/screen_3",
+    "prefabs/bgModule/03level/screen_4",
+    "prefabs/bgModule/03level/screen_5",
+    "prefabs/bgModule/03level/screen_6",
+    "prefabs/bgModule/03level/screen_7",
 ]
 
 const {ccclass, property} = cc._decorator;
@@ -55,11 +60,13 @@ export class loadPanel extends IUIBase {
     private complete():void {
         this.pro.fillRange = 0;
         if(this.loadScene == "01level"){
-            cc.loader.loadResArray(level_1, this.loadResProgress.bind(this), this.loadResComplete)
-            //startExterior.getInstance().enterMainState();
+            cc.loader.loadResArray(level_1, this.loadResProgress.bind(this), this.loadResComplete);
         }else if(this.loadScene == "02level"){
 
-        }else if(this.loadScene == "01startScene"){
+        }else if(this.loadScene == "03level"){
+            cc.loader.loadResArray(level_3, this.loadResProgress.bind(this), this.loadLevel_3Complete.bind(this));
+        }
+        else if(this.loadScene == "01startScene"){
             GameLoop.getInstance().buildNode = [];
             GameLoop.getInstance().groundNode = [];
             mainExterior.getInstance().gotoStartState();
@@ -80,6 +87,12 @@ export class loadPanel extends IUIBase {
         GameLoop.getInstance().groundNode.push(cc.instantiate(res[3]));
 
         startExterior.getInstance().enterMainState();
+    }
+    private loadLevel_3Complete(err, res):void{
+        res.forEach(element => {
+            GameLoop.getInstance().buildNode.push(cc.instantiate(element));
+        });
+        startExterior.getInstance().enterLevel_3();
     }
 
 }

@@ -1,6 +1,8 @@
 import { IUIBase, PanelLayer } from "./IUIBase";
 import { strateB } from "./openAction/IOpenStrategy";
 import { mainExterior } from "../sceneState/01level/mainExterior";
+import { GameLoop } from "../GameLoop";
+import { levelThreeExterior } from "../sceneState/03level/levelThreeExterior";
 
 // Learn TypeScript:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -8,7 +10,6 @@ import { mainExterior } from "../sceneState/01level/mainExterior";
 export class winPanel extends IUIBase {
 
     private enterBtn:cc.Node = null;
-    private isChangeScene:boolean = false;
     
     public initStrategy():void{
         this.mOpenStrategy = new strateB(this.skin);
@@ -31,9 +32,9 @@ export class winPanel extends IUIBase {
     }
 
     private onEnterBtn():void{
-        if(this.isChangeScene)return;
-        this.isChangeScene = true;
-        console.log("onEnterBtn+++++++++++++++++");
-        mainExterior.getInstance().gotoStartState();
+        if(GameLoop.getInstance().currIndex == 0)
+            mainExterior.getInstance().gotoStartState();
+        else if(GameLoop.getInstance().currIndex == 1)
+            levelThreeExterior.getInstance().gotoStartState();
     }
 }

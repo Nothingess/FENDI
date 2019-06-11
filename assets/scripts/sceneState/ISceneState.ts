@@ -1,6 +1,7 @@
 import { SceneController } from "./SceneController";
 import { startExterior } from "./startScene/startExterior";
 import { mainExterior } from "./01level/mainExterior";
+import { levelThreeExterior } from "./03level/levelThreeExterior";
 
 export class ISceneState {
 
@@ -40,6 +41,7 @@ export class startSceneState extends ISceneState{
             cc.log("Next scene preloaded - 01level");
         }); */
         mainExterior.endInstance();
+        levelThreeExterior.endInstance();
     }
     public stateUpdate():void{
         startExterior.getInstance().update();
@@ -50,6 +52,9 @@ export class startSceneState extends ISceneState{
 
     public setMainState():void{
         this.mSceneCtrl.setState(new mainSceneState(this.mSceneCtrl));
+    }
+    public setLevel_3State():void{
+        this.mSceneCtrl.setState(new level_3State(this.mSceneCtrl));
     }
 }
 
@@ -70,6 +75,29 @@ export class mainSceneState extends ISceneState{
     }
     public stateEnd():void{
         mainExterior.getInstance().end();
+    }
+    public setStartState():void{
+        this.mSceneCtrl.setState(new startSceneState(this.mSceneCtrl));
+    }
+}
+
+export class level_3State extends ISceneState{
+    constructor(sceneCtrl:SceneController, name = "03level"){super(sceneCtrl, name);}
+
+    public stateStart():void{
+        levelThreeExterior.getInstance();
+        levelThreeExterior.getInstance().setLevelThreeState(this);
+
+/*         cc.director.preloadScene("01startScene", function () {
+            cc.log("Next scene preloaded - 01startScene");
+        }); */
+        startExterior.endInstance();
+    }
+    public stateUpdate():void{
+        levelThreeExterior.getInstance().update();
+    }
+    public stateEnd():void{
+        levelThreeExterior.getInstance().end();
     }
     public setStartState():void{
         this.mSceneCtrl.setState(new startSceneState(this.mSceneCtrl));

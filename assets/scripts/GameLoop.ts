@@ -14,7 +14,8 @@ export class GameLoop extends cc.Component {
 
     private mSceneCtrl:SceneController = null;
     public platform:IPlatform = null;
-    public isMan:boolean = true;
+    public isMan:boolean = true;                //当前选择的角色性别
+    public currIndex:number = 0;                //当前选择的关卡
 
     public buildNode:Array<cc.Node> = new Array<cc.Node>();
     public groundNode:Array<cc.Node> = new Array<cc.Node>();

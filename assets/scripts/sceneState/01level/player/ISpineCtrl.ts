@@ -35,6 +35,16 @@ export class ISpineCtrl extends cc.Component {
         this.spine.paused = true;
     }
 
+    public motuo_jump():void{
+        this._setTimeScale(.3);
+    }
+    public motuo_squat():void{
+        this._setTimeScale(.5);
+    }
+    public motuo_run():void{
+        this._setTimeScale(1);
+    }
+
 //#endregion
 
 

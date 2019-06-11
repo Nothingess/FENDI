@@ -1,6 +1,8 @@
 import { mainExterior } from "../mainExterior";
 import { ISpineCtrl } from "./ISpineCtrl";
 import { CameraShake } from "../../../comms/CameraShake";
+import { GameLoop } from "../../../GameLoop";
+import { levelThreeExterior } from "../../03level/levelThreeExterior";
 
 const {ccclass, property} = cc._decorator;
 
@@ -19,6 +21,8 @@ export class playerCtrl extends cc.Component {
     public mGravity:number = 0;
     @property({type:cc.Float, tooltip:"向上跳跃的初始速度"})
     public jumpSpeed:number = 0;
+
+    public state:number = 0;           //角色形态（0：奔跑，1：摩托，2：飞行）
 
     private posX:number = 0;                                    //玩家初始X坐标
     private downSpeed:number = 0;                               //下落速度
@@ -89,13 +93,16 @@ export class playerCtrl extends cc.Component {
         
         if(playerState != PlayerState.squat && this.isSquat){
             this.isSquat = false;
-            this.changeColSize(1);
+            if(this.state == 0)
+                this.changeColSize(1);
+            else if(this.state == 1)
+                this.changeColSizeMotuo(1);
         }
     }
 
     update(dt):void{
 
-        this.moveBack(dt);
+        //this.moveBack(dt);
 
         if(this.mPlayerState == PlayerState.idle)
             this.idleUpdate();
@@ -127,7 +134,10 @@ export class playerCtrl extends cc.Component {
 
         this.downSpeed = 0;
         
-        this.spCtrl.run();
+        if(this.state == 0)
+            this.spCtrl.run();
+        else if(this.state == 1)
+            this.spCtrl.motuo_run();
 
         //console.log("idleStart");
     }
@@ -137,7 +147,10 @@ export class playerCtrl extends cc.Component {
         this.downSpeed = 0;
         this.currJumpSpeed = this.jumpSpeed;
 
-        this.spCtrl.jump();
+        if(this.state == 0)
+            this.spCtrl.jump();
+        else if(this.state == 1)
+            this.spCtrl.motuo_jump();
 
         //console.log("jumpStart");
     }
@@ -149,10 +162,16 @@ export class playerCtrl extends cc.Component {
     private squatStart():void{
         this.mPlayerState = PlayerState.squat;
 
-        this.changeColSize(0);
+        if(this.state == 0)
+            this.changeColSize(0);
+        else if(this.state == 1)
+            this.changeColSizeMotuo(0);
         this.isSquat = true;
 
-        this.spCtrl.squat();
+        if(this.state == 0)
+            this.spCtrl.squat();
+        else if(this.state == 1)
+            this.spCtrl.motuo_squat();
     }
 
     private idleUpdate():void{
@@ -229,7 +248,10 @@ export class playerCtrl extends cc.Component {
                 mainExterior.getInstance().addScore(10);
             break;
             case 7:
-                mainExterior.getInstance().win();
+                if(GameLoop.getInstance().currIndex == 0)
+                    mainExterior.getInstance().win();
+                else if(GameLoop.getInstance().currIndex == 1)
+                    levelThreeExterior.getInstance().win();
             break;
             default://其他
                 if(this.mPlayerState != PlayerState.squat)
@@ -411,6 +433,16 @@ export class playerCtrl extends cc.Component {
         }else{
             this.collider.offset.y = 0;
             this.collider.size.height = this.node.height;
+        }
+    }
+    /**改变摩托的碰撞体外形 */
+    private changeColSizeMotuo(val:any):void{
+        if(val === 0){
+            this.collider.offset = cc.v2(-2, -15.9);
+            this.collider.size = cc.size(112.9, 96.2);
+        }else{
+            this.collider.offset = cc.v2(-2, -0.5);
+            this.collider.size = cc.size(112.9, 126.9);
         }
     }
 

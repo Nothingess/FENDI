@@ -37,7 +37,7 @@ export class startExterior {
 
     private liuhai:number = 0;                          //刘海高度
 
-    private currIndex:number = 0;                       //当前选择关卡的索引（0-2）
+    public currIndex:number = 0;                       //当前选择关卡的索引（0-1）
     private currRoleIndex:number = 0;                   //当前选择的角色（0：男，1：nv）
 
     private init():void{
@@ -84,6 +84,9 @@ export class startExterior {
     public enterMainState():void{
         this.mStartState.setMainState();
     }
+    public enterLevel_3():void{
+        this.mStartState.setLevel_3State();
+    }
     public update():void{
 
     }
@@ -116,11 +119,11 @@ export class startExterior {
         this.uiSys.openPanel(setPanel, "setPanel");
     }
     private onSelectLeft():void{
-        this.currIndex = this.currIndex - 1 < 0?2:this.currIndex - 1;
+        this.currIndex = this.currIndex - 1 < 0?1:this.currIndex - 1;
         this.selectLevel();
     }
     private onSelectRight():void{
-        this.currIndex = this.currIndex + 1 > 2?0:this.currIndex + 1;
+        this.currIndex = this.currIndex + 1 > 1?0:this.currIndex + 1;
         this.selectLevel();
     }
     //#endregion
