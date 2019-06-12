@@ -5,6 +5,8 @@ import { setPanel } from "../../uiSystem/setPanel";
 import { selectPanel } from "../../uiSystem/selectPanel";
 import { Loader } from "../../comms/LoaderManager";
 import { GameLoop } from "../../GameLoop";
+import { settingBtnSp } from "./settingBtnSp";
+import { AudioManager, AudioType } from "../../comms/AudioManager";
 
 export class startExterior {
     private constructor(){this.init();}
@@ -27,6 +29,7 @@ export class startExterior {
     private leftBtn:cc.Node = null;                     //左边按钮
     private rightBtn:cc.Node = null;                    //右边按钮
     private bg:cc.Sprite = null;                        //背景
+    private bgNew:cc.Sprite = null;                     //新背景（副本）
 
     //记录UI元素初始位置
     private leftUp:cc.Vec2 = cc.v2(0, 0);
@@ -37,8 +40,11 @@ export class startExterior {
 
     private liuhai:number = 0;                          //刘海高度
 
-    public currIndex:number = 0;                       //当前选择关卡的索引（0-1）
+    public currIndex:number = 0;                        //当前选择关卡的索引（0-2）
     private currRoleIndex:number = 0;                   //当前选择的角色（0：男，1：nv）
+
+    private setBtnSp:settingBtnSp = null;
+    private isChangeBging:boolean = false;              //是否正在切换背景（观卡）
 
     private init():void{
         this.initComponents();
@@ -64,6 +70,8 @@ export class startExterior {
         this.leftBtn = cc.find("Canvas/UILayer/uiElement/select_left");
         this.rightBtn = cc.find("Canvas/UILayer/uiElement/select_right");
         this.bg = cc.find("Canvas/bg").getComponent(cc.Sprite);
+        this.bgNew = cc.find("Canvas/bgNew").getComponent(cc.Sprite);
+        this.setBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
 
 
         this.initUIPos();
@@ -84,6 +92,9 @@ export class startExterior {
     public enterMainState():void{
         this.mStartState.setMainState();
     }
+    public enterLevel_2():void{
+        this.mStartState.setLevel_2State();
+    }
     public enterLevel_3():void{
         this.mStartState.setLevel_3State();
     }
@@ -91,7 +102,12 @@ export class startExterior {
 
     }
     public end():void{
-        
+        this.startBtn.off("touchend", this.onstartBtn, this);
+        this.friendsBtn.off("touchend", this.onfriendsBtn, this);
+        this.setBtn.off("touchend", this.onsetBtn, this);
+
+        this.leftBtn.off("touchend", this.onSelectLeft, this);
+        this.rightBtn.off("touchend", this.onSelectRight, this); 
     }
 
     //#region 监听事件
@@ -106,24 +122,29 @@ export class startExterior {
     }
 
     private onstartBtn():void{
-        //this.mStartState.setMainState();
         this.uiSys.openPanel(selectPanel, "selectPanel");
+        AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onfriendsBtn():void{
-        console.log("onfriendsBtn");
         this.uiSys.openPanel(rankPanel, "rankPanel");
+        AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onsetBtn():void{
-        console.log("onsetBtn");
-
         this.uiSys.openPanel(setPanel, "setPanel");
+        AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onSelectLeft():void{
-        this.currIndex = this.currIndex - 1 < 0?1:this.currIndex - 1;
+        AudioManager.getInstance().playSound(AudioType.CLICK);
+        if(this.isChangeBging)return;
+        this.isChangeBging = true;
+        this.currIndex = this.currIndex - 1 < 0?2:this.currIndex - 1;
         this.selectLevel();
     }
     private onSelectRight():void{
-        this.currIndex = this.currIndex + 1 > 1?0:this.currIndex + 1;
+        AudioManager.getInstance().playSound(AudioType.CLICK);
+        if(this.isChangeBging)return;
+        this.isChangeBging = true;
+        this.currIndex = this.currIndex + 1 > 2?0:this.currIndex + 1;
         this.selectLevel();
     }
     //#endregion
@@ -131,10 +152,8 @@ export class startExterior {
 //#region 选择面板
 
     private selectLevel():void{
-        let self = this;
-        Loader.getInstance().loadInstance(`ui/bg_${this.currIndex}`, (e)=>{
-            self.bg.spriteFrame = new cc.SpriteFrame(e);
-        })
+        this.bgNew.spriteFrame = this.setBtnSp.bgs[this.currIndex];
+        this.bg.node.runAction(cc.sequence(cc.fadeOut(.5), cc.callFunc(()=>{this.bg.spriteFrame = this.bgNew.spriteFrame;this.bg.node.opacity = 255; this.bgNew.spriteFrame = null, this.isChangeBging = false})))
     }
 
 //#endregion

@@ -1,6 +1,7 @@
 import { IUIBase, PanelLayer } from "./IUIBase";
 import { strateB } from "./openAction/IOpenStrategy";
 import { startExterior } from "../sceneState/startScene/startExterior";
+import { AudioManager, AudioType } from "../comms/AudioManager";
 
 export class rankPanel extends IUIBase {
 
@@ -33,6 +34,11 @@ export class rankPanel extends IUIBase {
     }
     private onCloseBtn():void{
         startExterior.getInstance().uiSys.closePanel(this.getSkinName());
+        AudioManager.getInstance().playSound(AudioType.CLICK);
+    }
+
+    onDestroy():void{        
+        this.closeBtn.off("touchend", this.onCloseBtn, this);
     }
 
 }

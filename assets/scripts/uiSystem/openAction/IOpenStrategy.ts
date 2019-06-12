@@ -29,7 +29,7 @@ export class strateA extends IOpenStrategy{
             cc.sequence(
                 cc.spawn(
                     cc.fadeTo(this.mSpeed, 255),
-                    cc.scaleTo(this.mSpeed, 1)
+                    cc.scaleTo(this.mSpeed, 1).easing(cc.easeBackOut())
                 ),
                 cc.callFunc(()=>{callback();})
             )
@@ -40,7 +40,7 @@ export class strateA extends IOpenStrategy{
             cc.sequence(
                 cc.spawn(
                     cc.fadeTo(this.mSpeed, 0),
-                    cc.scaleTo(this.mSpeed, 0)
+                    cc.scaleTo(this.mSpeed, 0).easing(cc.easeBackIn())
                 ),
                 cc.callFunc(()=>{callback();})
             )
@@ -56,7 +56,7 @@ export class strateB extends IOpenStrategy{
             cc.sequence(
                 cc.spawn(
                     cc.fadeTo(this.mSpeed, 255),
-                    cc.scaleTo(this.mSpeed, 1)
+                    cc.scaleTo(this.mSpeed, 1).easing(cc.easeBackOut())
                 ),
                 cc.callFunc(()=>{callback();})
             )
@@ -67,7 +67,7 @@ export class strateB extends IOpenStrategy{
             cc.sequence(
                 cc.spawn(
                     cc.fadeTo(this.mSpeed, 0),
-                    cc.scaleTo(this.mSpeed, 2)
+                    cc.scaleTo(this.mSpeed, 2).easing(cc.easeBackIn())
                 ),
                 cc.callFunc(()=>{callback();})
             )

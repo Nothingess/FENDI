@@ -62,14 +62,15 @@ export class loadPanel extends IUIBase {
         if(this.loadScene == "01level"){
             cc.loader.loadResArray(level_1, this.loadResProgress.bind(this), this.loadResComplete);
         }else if(this.loadScene == "02level"){
-
+            cc.loader.loadResArray(level_3, this.loadResProgress.bind(this), this.loadLevel_2Complete.bind(this));
         }else if(this.loadScene == "03level"){
             cc.loader.loadResArray(level_3, this.loadResProgress.bind(this), this.loadLevel_3Complete.bind(this));
         }
         else if(this.loadScene == "01startScene"){
             GameLoop.getInstance().buildNode = [];
             GameLoop.getInstance().groundNode = [];
-            mainExterior.getInstance().gotoStartState();
+            //GameLoop.getInstance().gotoStartScene();
+            this.args[1].gotoStartState();
         }
     }
     private loadResProgress(com:number, total:number, item:any):void{
@@ -87,6 +88,12 @@ export class loadPanel extends IUIBase {
         GameLoop.getInstance().groundNode.push(cc.instantiate(res[3]));
 
         startExterior.getInstance().enterMainState();
+    }
+    private loadLevel_2Complete(err, res):void{
+        res.forEach(element => {
+            GameLoop.getInstance().buildNode.push(cc.instantiate(element));
+        });
+        startExterior.getInstance().enterLevel_2();
     }
     private loadLevel_3Complete(err, res):void{
         res.forEach(element => {

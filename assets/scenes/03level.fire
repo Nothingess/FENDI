@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.37628966055611995,
-      "y": 0.37628966055611995,
+      "x": 0.32674664475714477,
+      "y": 0.32674664475714477,
       "z": 1
     },
     "_quat": {
@@ -3751,7 +3751,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "squat_btn",
+    "_name": "down_btn",
     "_objFlags": 0,
     "_parent": {
       "__id__": 99
@@ -3828,7 +3828,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "bf8e5c28-d776-43f8-a1c2-6e4b2bd0392c"
+      "__uuid__": "d7af4fc5-78f5-4c72-b98c-795c97ec484a"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -3953,7 +3953,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "jump_btn",
+    "_name": "up_btn",
     "_objFlags": 0,
     "_parent": {
       "__id__": 99
@@ -4030,7 +4030,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "05a90f85-ba20-4366-99f0-03a6d16df5e7"
+      "__uuid__": "ee06c419-b27e-40e6-89bc-0dd887840902"
     },
     "_type": 0,
     "_sizeMode": 0,

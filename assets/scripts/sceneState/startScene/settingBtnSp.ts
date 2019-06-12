@@ -7,4 +7,8 @@ export class settingBtnSp extends cc.Component {
     public close: cc.SpriteFrame = null;
     @property(cc.SpriteFrame)
     public open: cc.SpriteFrame = null;
+
+    @property(cc.SpriteFrame)
+    public bgs: Array<cc.SpriteFrame> = [];
+
 }

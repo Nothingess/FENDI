@@ -1,10 +1,10 @@
-import { mainExterior } from "../01level/mainExterior";
 import { level_3State } from "../ISceneState";
 import { UISystem } from "../../systems/UISystem";
 import { GameLoop } from "../../GameLoop";
-import { playerCtrl } from "../01level/player/playerCtrl";
-import { winPanel } from "../../uiSystem/winPanel";
 import { LayerRun } from "../01level/bgModule/LayerRun";
+import { accountsPanel } from "../../uiSystem/accountsPanel";
+import { AudioType, AudioManager } from "../../comms/AudioManager";
+import { FlyCtrl } from "./FlyCtrl";
 
 export class levelThreeExterior {
 
@@ -22,7 +22,7 @@ export class levelThreeExterior {
 
     private lvThreeState:level_3State = null;
     public uiMgr:UISystem = null;
-    public pyCtrl:playerCtrl = null;
+    public pyCtrl:FlyCtrl = null;
 
     private init():void{
         this.initComponent();
@@ -38,18 +38,18 @@ export class levelThreeExterior {
         let self = this;
         let node:cc.Node = null;
         if(GameLoop.getInstance().isMan){
-            cc.loader.loadRes("prefabs/manRole", cc.Prefab, (err, res)=>{
+            cc.loader.loadRes("prefabs/manFly", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
                 cc.find("Canvas/run_layer/player_layer").addChild(node);
-                self.pyCtrl = node.getComponent(playerCtrl);
-                self.pyCtrl.state = 1;
+                self.pyCtrl = node.getComponent(FlyCtrl);
+                //self.pyCtrl.state = 1;
             })
         }else{
-            cc.loader.loadRes("prefabs/womanRole", cc.Prefab, (err, res)=>{
+            cc.loader.loadRes("prefabs/womanFly", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
                 cc.find("Canvas/run_layer/player_layer").addChild(node);
-                self.pyCtrl = node.getComponent(playerCtrl);
-                self.pyCtrl.state = 1;
+                self.pyCtrl = node.getComponent(FlyCtrl);
+                //self.pyCtrl.state = 1;
             })
         }
     }
@@ -66,9 +66,9 @@ export class levelThreeExterior {
     public end():void{
         this.uiMgr.sysRelease();
     }
-
     public win():void{
-        this.uiMgr.openPanel(winPanel, "winPanel");
+        AudioManager.getInstance().playSound(AudioType.WIN);
+        this.uiMgr.openPanel(accountsPanel, "accountsPanel");
     }
 
     public stop():void{

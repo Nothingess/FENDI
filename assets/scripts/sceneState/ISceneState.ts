@@ -2,6 +2,7 @@ import { SceneController } from "./SceneController";
 import { startExterior } from "./startScene/startExterior";
 import { mainExterior } from "./01level/mainExterior";
 import { levelThreeExterior } from "./03level/levelThreeExterior";
+import { levelTwoExterior } from "./02level/levelTwoExterior";
 
 export class ISceneState {
 
@@ -53,6 +54,9 @@ export class startSceneState extends ISceneState{
     public setMainState():void{
         this.mSceneCtrl.setState(new mainSceneState(this.mSceneCtrl));
     }
+    public setLevel_2State():void{
+        this.mSceneCtrl.setState(new level_2State(this.mSceneCtrl));
+    }
     public setLevel_3State():void{
         this.mSceneCtrl.setState(new level_3State(this.mSceneCtrl));
     }
@@ -80,7 +84,26 @@ export class mainSceneState extends ISceneState{
         this.mSceneCtrl.setState(new startSceneState(this.mSceneCtrl));
     }
 }
+export class level_2State extends ISceneState{
+    constructor(sceneCtrl:SceneController, name = "02level"){super(sceneCtrl, name);}
 
+    public stateStart():void{
+        levelTwoExterior.getInstance();
+        levelTwoExterior.getInstance().setLevelTwoState(this);
+
+        startExterior.endInstance();
+    }
+    public stateUpdate():void{
+        levelTwoExterior.getInstance().update();
+    }
+    public stateEnd():void{
+        levelTwoExterior.getInstance().end();
+    }
+
+    public setStartState():void{
+        this.mSceneCtrl.setState(new startSceneState(this.mSceneCtrl));
+    }
+}
 export class level_3State extends ISceneState{
     constructor(sceneCtrl:SceneController, name = "03level"){super(sceneCtrl, name);}
 

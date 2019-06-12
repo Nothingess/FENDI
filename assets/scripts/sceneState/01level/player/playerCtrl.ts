@@ -3,6 +3,7 @@ import { ISpineCtrl } from "./ISpineCtrl";
 import { CameraShake } from "../../../comms/CameraShake";
 import { GameLoop } from "../../../GameLoop";
 import { levelThreeExterior } from "../../03level/levelThreeExterior";
+import { AudioManager, AudioType } from "../../../comms/AudioManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -76,6 +77,11 @@ export class playerCtrl extends cc.Component {
         this.squatBtn.on("touchend", this.getSquatKeyUp, this);
         this.squatBtn.on("touchcancel", this.getSquatKeyUp, this);
         this.jumpBtn.on("touchstart", this.getJumpKeyDown, this);
+
+        if(this.state == 0)
+            this.spCtrl.jump();
+        else if(this.state == 1)
+            this.spCtrl.motuo_run();
     }
 
     public changeState(playerState:PlayerState):void{
@@ -231,6 +237,7 @@ export class playerCtrl extends cc.Component {
                     mainExterior.getInstance().minusHeart();
                     other.node.destroy();
                     this.cameraShake.shake();
+                    AudioManager.getInstance().playSound(GameLoop.getInstance().isMan?AudioType.OBSMAN:AudioType.OBSWOMAN);
                 }else if(this.isCollisionUp(other, self)){
                     this.isUpCol = true;
                     this.isLeftCol = false;
@@ -243,15 +250,13 @@ export class playerCtrl extends cc.Component {
             break;
             case 5:
             break;
-            case 6:
+            case 6://金币
                 other.node.destroy();
                 mainExterior.getInstance().addScore(10);
+                AudioManager.getInstance().playSound(AudioType.GLOD);
             break;
             case 7:
-                if(GameLoop.getInstance().currIndex == 0)
-                    mainExterior.getInstance().win();
-                else if(GameLoop.getInstance().currIndex == 1)
-                    levelThreeExterior.getInstance().win();
+                GameLoop.getInstance().win();
             break;
             default://其他
                 if(this.mPlayerState != PlayerState.squat)
@@ -454,5 +459,10 @@ export class playerCtrl extends cc.Component {
     onDestroy () {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+
+        this.squatBtn.off("touchstart", this.getSquatKeyDown, this);
+        this.squatBtn.off("touchend", this.getSquatKeyUp, this);
+        this.squatBtn.off("touchcancel", this.getSquatKeyUp, this);
+        this.jumpBtn.off("touchstart", this.getJumpKeyDown, this);
     }
 }

@@ -3,6 +3,7 @@ import { startExterior } from "../sceneState/startScene/startExterior";
 import { strateB } from "./openAction/IOpenStrategy";
 import { loadPanel } from "./loadPanel";
 import { GameLoop } from "../GameLoop";
+import { AudioManager, AudioType } from "../comms/AudioManager";
 
 export class selectPanel extends IUIBase {
 
@@ -73,6 +74,7 @@ export class selectPanel extends IUIBase {
 
     private onCloseBtn():void{
         startExterior.getInstance().uiSys.closePanel(this.getSkinName());
+        AudioManager.getInstance().playSound(AudioType.CLICK);
     }
 
     private onSelectRole(select:cc.Node):void{
@@ -91,10 +93,21 @@ export class selectPanel extends IUIBase {
         //if(this.currSelect)
         //startExterior.getInstance().enterMainState();
         //startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level"]);
+        AudioManager.getInstance().playSound(AudioType.CLICK);
         GameLoop.getInstance().currIndex = startExterior.getInstance().currIndex;
         if(GameLoop.getInstance().currIndex == 0)
             startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level"]);
-        else if(GameLoop.getInstance().currIndex == 1)
+        else if(GameLoop.getInstance().currIndex == 1){
+            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["02level"]);
+        }
+        else if(GameLoop.getInstance().currIndex == 2)
             startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["03level"]);
+    }
+
+    onDestroy():void{
+        this.closeBtn.off("touchend", this.onCloseBtn, this);
+        this.yes.off("touchend", this.onYesBtn, this);
+        this.manRole.off("touchend", ()=>{this.onSelectRole(this.manRole)}, this);
+        this.womanRole.off("touchend", ()=>{this.onSelectRole(this.womanRole)}, this);
     }
 }

@@ -1,10 +1,10 @@
 import { UISystem } from "../../systems/UISystem";
-import { gameOverPanel } from "../../uiSystem/gameOverPanel";
 import { LayerRun } from "./bgModule/LayerRun";
 import { playerCtrl } from "./player/playerCtrl";
 import { mainSceneState } from "../ISceneState";
-import { winPanel } from "../../uiSystem/winPanel";
 import { GameLoop } from "../../GameLoop";
+import { accountsPanel } from "../../uiSystem/accountsPanel";
+import { AudioManager, AudioType } from "../../comms/AudioManager";
 
 export class mainExterior{
     private constructor(){this.init();}
@@ -38,7 +38,6 @@ export class mainExterior{
         this.uiMgr = new UISystem();
         this.uiMgr.sysInit();
 
-        //this.pyCtrl = cc.find("Canvas/run_layer/player_layer/role").getComponent(playerCtrl);
         this.createRole();
         this.heart = cc.find("Canvas/UILayer/uiElement/heart");
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
@@ -93,14 +92,16 @@ export class mainExterior{
             this.heart.children[this.heartNum].color = cc.Color.GRAY;
         }
         if(this.heartNum == 0){
-            this.uiMgr.openPanel(gameOverPanel, "gameOverPanel");
+            AudioManager.getInstance().playSound(AudioType.LOST);
+            this.uiMgr.openPanel(accountsPanel, "accountsPanel");
             this.isGameOver = true;
             this.stop();
             this.pyCtrl.stop();
         }
     }
     public win():void{
-        this.uiMgr.openPanel(winPanel, "winPanel");
+        AudioManager.getInstance().playSound(AudioType.WIN);
+        this.uiMgr.openPanel(accountsPanel, "accountsPanel");
     }
 
     public stop():void{

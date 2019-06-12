@@ -2,6 +2,7 @@ import { IUIBase, PanelLayer } from "./IUIBase";
 import { strateA } from "./openAction/IOpenStrategy";
 import { startExterior } from "../sceneState/startScene/startExterior";
 import { settingBtnSp } from "../sceneState/startScene/settingBtnSp";
+import { AudioManager, AudioType } from "../comms/AudioManager";
 
 export class setPanel extends IUIBase {
 
@@ -47,13 +48,22 @@ export class setPanel extends IUIBase {
 
     private onCloseBtn():void{
         startExterior.getInstance().uiSys.closePanel(this.getSkinName());
+        AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onMusicBtn():void{
         this.musicBtn.spriteFrame = this.isMusic?this.setBtnSp.close:this.setBtnSp.open;
         this.isMusic = !this.isMusic;
+        AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onAudioEffect():void{
         this.audioEffect.spriteFrame = this.isEffect?this.setBtnSp.close:this.setBtnSp.open;
         this.isEffect = !this.isEffect;
+        AudioManager.getInstance().playSound(AudioType.CLICK);
+    }
+
+    onDestroy():void{
+        this.closeBtn.off("touchend", this.onCloseBtn, this);
+/*         this.musicBtn.node.off("touchend", this.onMusicBtn, this);
+        this.audioEffect.node.off("touchend", this.onAudioEffect, this); */
     }
 }
