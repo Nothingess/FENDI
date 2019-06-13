@@ -10,6 +10,18 @@ let level_1:Array<string> = [
     "prefabs/bgModule/01level/ground_loop",
     "prefabs/bgModule/01level/ground_end"
 ]
+let level_2:Array<string> = [
+    "prefabs/bgModule/02level/02screen_2",
+    "prefabs/bgModule/02level/02screen_3",
+    "prefabs/bgModule/02level/02screen_4",
+    "prefabs/bgModule/02level/02screen_5",
+    "prefabs/bgModule/02level/02screen_6",
+    "prefabs/bgModule/02level/02screen_7",
+    "prefabs/bgModule/02level/02screen_8",
+    "prefabs/bgModule/02level/02screen_9",
+    "prefabs/bgModule/02level/02screen_10",
+    "prefabs/bgModule/02level/02screen_11",
+]
 let level_3:Array<string> = [
     "prefabs/bgModule/03level/screen_2",
     "prefabs/bgModule/03level/screen_3",
@@ -62,7 +74,7 @@ export class loadPanel extends IUIBase {
         if(this.loadScene == "01level"){
             cc.loader.loadResArray(level_1, this.loadResProgress.bind(this), this.loadResComplete);
         }else if(this.loadScene == "02level"){
-            cc.loader.loadResArray(level_3, this.loadResProgress.bind(this), this.loadLevel_2Complete.bind(this));
+            cc.loader.loadResArray(level_2, this.loadResProgress.bind(this), this.loadLevel_2Complete.bind(this));
         }else if(this.loadScene == "03level"){
             cc.loader.loadResArray(level_3, this.loadResProgress.bind(this), this.loadLevel_3Complete.bind(this));
         }

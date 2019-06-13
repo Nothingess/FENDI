@@ -220,7 +220,8 @@ export class playerCtrl extends cc.Component {
             case 0://ground
                 if(this.mPlayerState != PlayerState.idle && this.mPlayerState != PlayerState.squat){
                     this.changeState(PlayerState.idle);
-                    this.node.y = other.world.aabb.yMax + this.node.height * .5 - 0.5;
+                    //this.node.y = other.world.aabb.yMax + this.node.height * .5 - 0.5;
+                    this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 + this.node.height * .5 - .5;
                 }
             break;
             case 2://右台阶
@@ -242,7 +243,8 @@ export class playerCtrl extends cc.Component {
                     this.isUpCol = true;
                     this.isLeftCol = false;
 
-                    this.node.y = other.world.aabb.yMax + this.node.height * .5;
+                    //this.node.y = other.world.aabb.yMax + this.node.height * .5;
+                    this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 + this.node.height * .5 - .5;
                     this.changeState(PlayerState.idle);
                 }else if(this.isCollisionBottom(other, self)){
                     this.changeState(PlayerState.down);

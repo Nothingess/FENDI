@@ -37,6 +37,7 @@ export class levelTwoExterior {
     private createRole():void{
         let self = this;
         let node:cc.Node = null;
+        console.log("===============");
         if(GameLoop.getInstance().isMan){
             cc.loader.loadRes("prefabs/manRole", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);

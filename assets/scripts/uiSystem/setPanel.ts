@@ -3,6 +3,7 @@ import { strateA } from "./openAction/IOpenStrategy";
 import { startExterior } from "../sceneState/startScene/startExterior";
 import { settingBtnSp } from "../sceneState/startScene/settingBtnSp";
 import { AudioManager, AudioType } from "../comms/AudioManager";
+import { GameLoop } from "../GameLoop";
 
 export class setPanel extends IUIBase {
 
@@ -11,8 +12,6 @@ export class setPanel extends IUIBase {
     private closeBtn:cc.Node = null;
 
     private setBtnSp:settingBtnSp = null;
-    private isMusic:boolean = false;
-    private isEffect:boolean = true;
 
     public initStrategy():void{
         this.mOpenStrategy = new strateA(this.skin);
@@ -23,7 +22,8 @@ export class setPanel extends IUIBase {
         this.skinPath = "setPanel";
         this.layer = PanelLayer.funcPanel;
     }
-    public onShowed():void{
+    public onShowing():void{
+        super.onShowing();
         this.initComponent();
     }
 /*     public open():void{
@@ -36,6 +36,9 @@ export class setPanel extends IUIBase {
         this.audioEffect = cc.find("audio_eff", this.skin).getComponent(cc.Sprite);
         this.closeBtn = cc.find("close_btn", this.skin);
         this.setBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
+
+        this.musicBtn.spriteFrame = GameLoop.getInstance().isMuteAudio?this.setBtnSp.close:this.setBtnSp.open;
+        this.audioEffect.spriteFrame = GameLoop.getInstance().isMuteEff?this.setBtnSp.close:this.setBtnSp.open;
 
         this.onBtnEvent();
     }
@@ -51,13 +54,13 @@ export class setPanel extends IUIBase {
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onMusicBtn():void{
-        this.musicBtn.spriteFrame = this.isMusic?this.setBtnSp.close:this.setBtnSp.open;
-        this.isMusic = !this.isMusic;
+        this.musicBtn.spriteFrame = GameLoop.getInstance().isMuteAudio?this.setBtnSp.open:this.setBtnSp.close;
+        GameLoop.getInstance().isMuteAudio = !GameLoop.getInstance().isMuteAudio;
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onAudioEffect():void{
-        this.audioEffect.spriteFrame = this.isEffect?this.setBtnSp.close:this.setBtnSp.open;
-        this.isEffect = !this.isEffect;
+        this.audioEffect.spriteFrame = GameLoop.getInstance().isMuteEff?this.setBtnSp.open:this.setBtnSp.close;
+        GameLoop.getInstance().isMuteEff = !GameLoop.getInstance().isMuteEff;
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
 

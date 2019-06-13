@@ -113,7 +113,6 @@ export class FlyCtrl extends cc.Component {
     private getUpBtnUp():void{
         this.isUp = false;
     }
-
     //#endregion
 
     onCollisionEnter(other, self):void{
@@ -121,8 +120,6 @@ export class FlyCtrl extends cc.Component {
             GameLoop.getInstance().win();
         }
     }
-
-
     onDestroy():void{
         this.downBtn.off("touchstart", this.getDownBtnDown, this);
         this.downBtn.off("touchend", this.getDownBtnUp, this);

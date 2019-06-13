@@ -42,6 +42,7 @@ export class startSceneState extends ISceneState{
             cc.log("Next scene preloaded - 01level");
         }); */
         mainExterior.endInstance();
+        levelTwoExterior.endInstance();
         levelThreeExterior.endInstance();
     }
     public stateUpdate():void{

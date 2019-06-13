@@ -41,6 +41,8 @@ export class mainExterior{
         this.createRole();
         this.heart = cc.find("Canvas/UILayer/uiElement/heart");
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
+
+        this.zoom();
     }
     private createRole():void{
         let self = this;
@@ -103,7 +105,13 @@ export class mainExterior{
         AudioManager.getInstance().playSound(AudioType.WIN);
         this.uiMgr.openPanel(accountsPanel, "accountsPanel");
     }
-
+    public zoom():void{
+        cc.find("Canvas/run_layer").runAction(cc.sequence(
+            cc.scaleBy(10, .5, .5),
+            cc.delayTime(3),
+            cc.scaleTo(10, 1, 1)
+        ))
+    }
     public stop():void{
         let childs:Array<cc.Node> = cc.find("Canvas/run_layer").children;
 

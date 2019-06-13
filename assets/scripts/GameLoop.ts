@@ -21,8 +21,12 @@ export class GameLoop extends cc.Component {
 
     private mSceneCtrl:SceneController = null;
     public platform:IPlatform = null;
+    //全局数据
     public isMan:boolean = true;                //当前选择的角色性别
     public currIndex:number = 0;                //当前选择的关卡（0-2）
+    public isMuteAudio:boolean = false;              //是否关闭音乐
+    public isMuteEff:boolean = false;                //是否关闭音效
+    private isLoadSub:boolean = false;               //分包是否加载成功
 
     public buildNode:Array<cc.Node> = new Array<cc.Node>();
     public groundNode:Array<cc.Node> = new Array<cc.Node>();
@@ -46,6 +50,9 @@ export class GameLoop extends cc.Component {
         }
         if(this.platform != null)
             this.platform.init();
+
+        if(!this.isLoadSub)
+            this.DownLoadSubPack();
     }
     
     update (dt) {
@@ -71,6 +78,16 @@ export class GameLoop extends cc.Component {
             levelThreeExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelThreeExterior.getInstance()]);
     }
 
+    private DownLoadSubPack():void{
+        let self = this;
+        cc.loader.downloader.loadSubpackage('subpack', function (err) {
+            if (err) {
+                return console.error(err);
+            }
+            self.isLoadSub = true;
+            console.log('load subpack successfully.');
+        });
+    }
 
     onDestroy(){
         this.mSceneCtrl.stateEnd();

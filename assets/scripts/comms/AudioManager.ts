@@ -29,6 +29,7 @@ export class AudioManager {
 
     public playSound(type: AudioType, loop?: boolean, volume?: number)
     {
+        if(GameLoop.getInstance().isMuteEff)return;
 /*         if(GameDataManager.getInstance().getGameData().playerInfo.closeAudio)
         {
             return;
