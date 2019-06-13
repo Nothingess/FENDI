@@ -1,0 +1,76 @@
+
+pengquan.png
+size: 221,74
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: true
+  xy: 30, 6
+  size: 15, 26
+  orig: 15, 26
+  offset: 0, 0
+  index: -1
+A2
+  rotate: true
+  xy: 58, 6
+  size: 15, 26
+  orig: 15, 26
+  offset: 0, 0
+  index: -1
+A3
+  rotate: true
+  xy: 2, 5
+  size: 16, 26
+  orig: 16, 26
+  offset: 0, 0
+  index: -1
+A4
+  rotate: true
+  xy: 86, 6
+  size: 15, 26
+  orig: 15, 26
+  offset: 0, 0
+  index: -1
+PENGQUAN
+  rotate: true
+  xy: 136, 2
+  size: 70, 69
+  orig: 70, 69
+  offset: 0, 0
+  index: -1
+Q1
+  rotate: true
+  xy: 207, 56
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+Q2
+  rotate: true
+  xy: 207, 38
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+Q3
+  rotate: true
+  xy: 207, 20
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+Q4
+  rotate: true
+  xy: 207, 2
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+彩虹
+  rotate: false
+  xy: 2, 23
+  size: 132, 49
+  orig: 132, 49
+  offset: 0, 0
+  index: -1

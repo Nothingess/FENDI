@@ -1,0 +1,27 @@
+
+jingbi.png
+size: 32,89
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+imag/金币
+  rotate: true
+  xy: 2, 31
+  size: 27, 28
+  orig: 27, 28
+  offset: 0, 0
+  index: -1
+imag/铜币
+  rotate: true
+  xy: 2, 2
+  size: 27, 28
+  orig: 27, 28
+  offset: 0, 0
+  index: -1
+imag/银币
+  rotate: true
+  xy: 2, 60
+  size: 27, 28
+  orig: 27, 28
+  offset: 0, 0
+  index: -1

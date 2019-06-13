@@ -5,10 +5,16 @@ import { mainExterior } from "../sceneState/01level/mainExterior";
 import { GameLoop } from "../GameLoop";
 
 let level_1:Array<string> = [
-    "prefabs/bgModule/01level/build_loop",
-    "prefabs/bgModule/01level/build_end",
+    "prefabs/bgModule/01level/01screen_2",
+    "prefabs/bgModule/01level/01screen_3",
+    "prefabs/bgModule/01level/01screen_4",
+    "prefabs/bgModule/01level/01screen_5",
+    "prefabs/bgModule/01level/01screen_6",
+    "prefabs/bgModule/01level/01screen_7",
+    "prefabs/bgModule/01level/01screen_8",
     "prefabs/bgModule/01level/ground_loop",
-    "prefabs/bgModule/01level/ground_end"
+    "prefabs/bgModule/01level/ground_end",
+
 ]
 let level_2:Array<string> = [
     "prefabs/bgModule/02level/02screen_2",
@@ -89,15 +95,29 @@ export class loadPanel extends IUIBase {
         this.pro.fillRange = com / total;
     }
     private loadResComplete(err, res):void{
-        GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
-        GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
-        GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
-        GameLoop.getInstance().buildNode.push(cc.instantiate(res[1]));
 
-        GameLoop.getInstance().groundNode.push(cc.instantiate(res[2]));
-        GameLoop.getInstance().groundNode.push(cc.instantiate(res[2]));
-        GameLoop.getInstance().groundNode.push(cc.instantiate(res[2]));
-        GameLoop.getInstance().groundNode.push(cc.instantiate(res[3]));
+        let count:number = 0;
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
+
+        while(count < 3){
+            for(let i = 1; i < 5; i++){
+                GameLoop.getInstance().buildNode.push(cc.instantiate(res[i]));
+            }
+            count++;
+        }
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[5]));
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[6]));
+
+
+/*         GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[1])); */
+
+        GameLoop.getInstance().groundNode.push(cc.instantiate(res[7]));
+        GameLoop.getInstance().groundNode.push(cc.instantiate(res[7]));
+        GameLoop.getInstance().groundNode.push(cc.instantiate(res[7]));
+        GameLoop.getInstance().groundNode.push(cc.instantiate(res[8]));
 
         startExterior.getInstance().enterMainState();
     }

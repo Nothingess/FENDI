@@ -79,6 +79,7 @@ export class GameLoop extends cc.Component {
     }
 
     private DownLoadSubPack():void{
+        if (typeof wx === 'undefined') return;
         let self = this;
         cc.loader.downloader.loadSubpackage('subpack', function (err) {
             if (err) {
