@@ -25,7 +25,7 @@ export class Loads extends cc.Component {
 
     loadAllRes() {
         //加载all文件夹中资源
-        cc.loader.loadResDir("all", this.progressCallback.bind(this), this.completeCallback.bind(this));
+        cc.loader.loadResDir("imgs", this.progressCallback.bind(this), this.completeCallback.bind(this));
     }
 
     progressCallback(completedCount: any, totalCount: any, res: any) {

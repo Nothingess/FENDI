@@ -9,6 +9,7 @@ export class accountsPanel extends IUIBase {
     private buildNode:cc.Node = null;
 
     private socre:cc.Node = null;
+    private title:cc.Sprite = null;
     private backBtn:cc.Node = null;
     private continueBtn:cc.Node = null;
     private againBtn:cc.Node = null;
@@ -23,20 +24,34 @@ export class accountsPanel extends IUIBase {
         this.skinPath = "accountsPanel";
         this.layer = PanelLayer.funcPanel;
     }
-    public onShowed():void{
-        super.onShowed();
+    public onShowing():void{
+        super.onShowing();
         this.initComponent();
     }
     public initComponent():void{
         this.content = cc.find("content", this.skin);
         this.buildNode = cc.find("build", this.skin);
         this.socre = cc.find("right/score", this.skin);
+        this.title = this.socre.children[0].getComponent(cc.Sprite);
         this.backBtn = cc.find("btn_back", this.skin);
         this.continueBtn = cc.find("right/btn_continue", this.skin);
         this.againBtn = cc.find("right/btn_again", this.skin);
         this.shareBtn = cc.find("right/btn_share", this.skin);
 
+        cc.loader.loadRes(`imgs/lv${GameLoop.getInstance().currIndex + 1}`, cc.SpriteFrame, (err, res)=>{
+            this.buildNode.getComponent(cc.Sprite).spriteFrame = res;
+        })
+        cc.loader.loadRes(`imgs/title_${GameLoop.getInstance().currIndex + 1}`, cc.SpriteFrame, (err, res)=>{
+            this.title.spriteFrame = res;
+        })
+        cc.loader.loadRes(`imgs/content_${GameLoop.getInstance().currIndex + 1}`, cc.SpriteFrame, (err, res)=>{
+            this.content.getComponent(cc.Sprite).spriteFrame = res;
+        })
+
         this.onBtnEvent();
+    }
+    public onShowed():void{
+        super.onShowed();
         this.showAction();
     }
 

@@ -5,6 +5,7 @@ import { mainSceneState } from "../ISceneState";
 import { GameLoop } from "../../GameLoop";
 import { accountsPanel } from "../../uiSystem/accountsPanel";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
+import { EventManager, EventType } from "../../comms/EventManager";
 
 export class mainExterior{
     private constructor(){this.init();}
@@ -30,6 +31,9 @@ export class mainExterior{
     //UI Element
     private heart:cc.Node = null;
     private scoreLa:cc.Label = null;
+    private heartLess:cc.Node = null;
+
+    private zoomTimes:number = 0;               //循环的次数（循环三次就缩放场景）
 
     private init():void{
         this.initComponent();
@@ -41,8 +45,10 @@ export class mainExterior{
         this.createRole();
         this.heart = cc.find("Canvas/UILayer/uiElement/heart");
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
+        this.heartLess = cc.find("Canvas/run_layer/player_layer/heart_less");
 
-        this.zoom();
+        //this.zoom();
+        EventManager.getInstance().addEventListener(EventType.zoomTrigger, this.onZoomTrigger, "mainExterior");
     }
     private createRole():void{
         let self = this;
@@ -50,13 +56,13 @@ export class mainExterior{
         if(GameLoop.getInstance().isMan){
             cc.loader.loadRes("prefabs/manRole", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
-                cc.find("Canvas/run_layer/player_layer").addChild(node);
+                cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
                 self.pyCtrl = node.getComponent(playerCtrl);
             })
         }else{
             cc.loader.loadRes("prefabs/womanRole", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
-                cc.find("Canvas/run_layer/player_layer").addChild(node);
+                cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
                 self.pyCtrl = node.getComponent(playerCtrl);
             })
         }
@@ -76,6 +82,12 @@ export class mainExterior{
 
     //#region 监听事件
 
+    public onZoomTrigger(prams:any):void{//判断三次缩放场景
+        this.zoomTimes++;
+        if(this.zoomTimes > 2){
+            this.zoom();
+        }
+    }
 
     //#endregion
 
@@ -88,8 +100,9 @@ export class mainExterior{
         this.scoreLa.string = `Score : ${this.score}`;
     }
 
-    public minusHeart():void{
+    public minusHeart(vec:cc.Vec2):void{
         this.heartNum--;
+        this.floatHeartLess(vec);
         if(this.heartNum >= 0){
             this.heart.children[this.heartNum].color = cc.Color.GRAY;
         }
@@ -100,6 +113,20 @@ export class mainExterior{
             this.stop();
             this.pyCtrl.stop();
         }
+    }
+    /**飘动减血图标 */
+    public floatHeartLess(vec:cc.Vec2):void{
+        this.heartLess.setPosition(vec);
+        this.heartLess.opacity = 0;
+        this.heartLess.runAction(
+            cc.sequence(
+                cc.spawn(
+                    cc.moveBy(.5, cc.v2(0, 100)),
+                    cc.fadeIn(.5)
+                ),
+                cc.fadeOut(.5)
+            )
+        )
     }
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);

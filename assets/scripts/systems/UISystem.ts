@@ -1,6 +1,7 @@
 import { ISystem } from "./ISystem";
 import { IUIBase, PanelLayer } from "../uiSystem/IUIBase";
 import { startExterior } from "../sceneState/startScene/startExterior";
+import { GameLoop } from "../GameLoop";
 
 export  class UISystem extends ISystem {
 
@@ -71,7 +72,7 @@ export  class UISystem extends ISystem {
     private openMask():void{
         if(this.dict.size == 0){
             this.mMaskLayer.active = true;
-            if(cc.director.getScene().name === "01startScene")
+            if(GameLoop.getInstance().currIndex == -1)
                 startExterior.getInstance().hideUI();
         }
     }
@@ -79,7 +80,7 @@ export  class UISystem extends ISystem {
     private closeMask():void{
         if(this.dict.size <= 1){
             this.mMaskLayer.active = false;
-            if(cc.director.getScene().name === "01startScene")
+            if(GameLoop.getInstance().currIndex == -1)
                 startExterior.getInstance().showUI();
         }
     }

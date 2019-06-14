@@ -235,7 +235,7 @@ export class playerCtrl extends cc.Component {
                     this.isUpCol = false;
                     this.isLeftCol = true;
                     //this.node.x = other.world.aabb.x -= this.node.width * .5;
-                    mainExterior.getInstance().minusHeart();
+                    mainExterior.getInstance().minusHeart(this.node.position);
                     other.node.destroy();
                     this.cameraShake.shake();
                     AudioManager.getInstance().playSound(GameLoop.getInstance().isMan?AudioType.OBSMAN:AudioType.OBSWOMAN);

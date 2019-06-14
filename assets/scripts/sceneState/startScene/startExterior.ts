@@ -9,6 +9,7 @@ import { settingBtnSp } from "./settingBtnSp";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
 
 export class startExterior {
+
     private constructor(){this.init();}
 
     private static _instance:startExterior = null;
@@ -46,6 +47,12 @@ export class startExterior {
     private setBtnSp:settingBtnSp = null;
     private isChangeBging:boolean = false;              //是否正在切换背景（观卡）
 
+
+    private logo:cc.Node = null;                    //logo
+    private uiElement: cc.Node = null;
+    private bgAction:cc.Node = null;                //背景动画节点
+    private isDestroyBgAction:boolean = false;      //是否销毁开始动画
+
     private init():void{
         this.initComponents();
         this.autoView();
@@ -59,22 +66,72 @@ export class startExterior {
         }
     }
 
+    /**播放开场动画 */
+    private playBgAction():void{
+        if(GameLoop.getInstance().isPlayBgAction){
+            this.bgAction.destroy();
+            this.logo.runAction(cc.spawn(cc.moveTo(.2, cc.v2(0, 255)), cc.fadeIn(.2)));
+            this.bg.spriteFrame = this.setBtnSp.bgs[this.currIndex];
+
+            this.uiElement.active = true;
+            this.hideUI(false);
+            this.uiElement.opacity = 255;
+            this.showUI();
+            return;
+        }
+        this.logo.runAction(cc.spawn(cc.moveTo(10, cc.v2(0, 255)), cc.fadeIn(10)));
+        this.bgAction.runAction(cc.sequence(
+            cc.moveTo(8, cc.v2(0, 0)),
+            cc.callFunc(()=>{
+                this.bgAction.children[1].runAction(cc.sequence(
+                    cc.fadeIn(2),
+                    cc.callFunc(()=>{
+                        this.bgAction.children[0].runAction(cc.fadeIn(2))
+                        this.bgAction.children[3].runAction(
+                            cc.repeatForever(cc.sequence(cc.fadeIn(2).easing(cc.easeOut(1.5)), cc.fadeOut(2).easing(cc.easeIn(1.5))))
+                        )
+                        this.bgAction.on("touchend", this.onBgAction, this)
+                    })
+                ))
+            })
+        ))
+    }
+
+    private onBgAction():void{
+        console.log("this.bgAction.on touchend")
+        this.bgAction.children[3].stopAllActions();
+        this.bgAction.children[3].active = false;
+
+        this.uiElement.active = true;
+        this.hideUI(false);
+        this.uiElement.opacity = 255;
+        this.showUI();
+        GameLoop.getInstance().isPlayBgAction = true;
+        this.bgAction.off("touchend", this.onBgAction, this);
+    }
+
     /**初始化组件 */
     private initComponents():void{
+        GameLoop.getInstance().currIndex = -1;
         this.uiSys = new UISystem();
         this.uiSys.sysInit();
 
-        this.startBtn = cc.find("Canvas/UILayer/uiElement/combat_btn");
-        this.friendsBtn = cc.find("Canvas/UILayer/uiElement/up/friends");
-        this.setBtn = cc.find("Canvas/UILayer/uiElement/up/setting");
-        this.leftBtn = cc.find("Canvas/UILayer/uiElement/select_left");
-        this.rightBtn = cc.find("Canvas/UILayer/uiElement/select_right");
+        this.uiElement = cc.find("Canvas/UILayer/uiElement");
+        this.startBtn = cc.find("combat_btn", this.uiElement);
+        this.friendsBtn = cc.find("up/friends", this.uiElement);
+        this.setBtn = cc.find("up/setting", this.uiElement);
+        this.leftBtn = cc.find("select_left", this.uiElement);
+        this.rightBtn = cc.find("select_right", this.uiElement);
         this.bg = cc.find("Canvas/bg").getComponent(cc.Sprite);
         this.bgNew = cc.find("Canvas/bgNew").getComponent(cc.Sprite);
         this.setBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
-
+        this.logo = cc.find("Canvas/UILayer/logo");
+        this.bgAction = cc.find("Canvas/bg/bgAction");
 
         this.initUIPos();
+        this.uiElement.active = false;
+
+        this.playBgAction();
         this.onBtnEvent();
     }
     /**初始化UI元素位置 */
@@ -153,17 +210,42 @@ export class startExterior {
 
     private selectLevel():void{
         this.bgNew.spriteFrame = this.setBtnSp.bgs[this.currIndex];
-        this.bg.node.runAction(cc.sequence(cc.fadeOut(.5), cc.callFunc(()=>{this.bg.spriteFrame = this.bgNew.spriteFrame;this.bg.node.opacity = 255; this.bgNew.spriteFrame = null, this.isChangeBging = false})))
+        this.bg.node.runAction(cc.sequence(
+            cc.fadeOut(.5),
+            cc.callFunc(()=>{
+                this.bg.spriteFrame = this.bgNew.spriteFrame;
+                this.bg.node.opacity = 255;
+                this.bgNew.spriteFrame = null;
+                this.isChangeBging = false;
+                if(this.bgAction.isValid){
+                    this.bgAction.destroy();
+                }
+            })
+        ))
     }
 
 //#endregion
     /**隐藏界面UI */
-    public hideUI():void{
-        this.setBtn.runAction(this.actionBack(-100, 100));
-        this.friendsBtn.runAction(this.actionBack(100, 100));
-        this.leftBtn.runAction(this.actionBack(-100, 0));
-        this.rightBtn.runAction(this.actionBack(100, 0));
-        this.startBtn.runAction(this.actionBack(0, -100));
+    public hideUI(isAction:boolean = true):void{
+
+/*         if(!isAction){
+            this.setBtn.x -= 100;
+            this.setBtn.y += 100;
+            this.friendsBtn.x += 100;
+            this.friendsBtn.y += 100;
+            this.leftBtn.x -= 100;
+            this.rightBtn.x += 100;
+            this.startBtn.y -= 100;
+            return;
+        } */
+
+        let dur:number = isAction?.2:0.001;
+
+        this.setBtn.runAction(this.actionBack(-100, 100, dur));
+        this.friendsBtn.runAction(this.actionBack(100, 100, dur));
+        this.leftBtn.runAction(this.actionBack(-100, 0, dur));
+        this.rightBtn.runAction(this.actionBack(100, 0, dur));
+        this.startBtn.runAction(this.actionBack(0, -100, dur));
     }
     /**显示界面UI */
     public showUI():void{
@@ -174,16 +256,19 @@ export class startExterior {
         this.startBtn.runAction(this.actionTo(this.center));
     }
 
-    private actionBack(posX:number, posY:number):cc.FiniteTimeAction{
+    private actionBack(posX:number, posY:number, dur:number = .2):cc.FiniteTimeAction{
         return cc.spawn(
-            cc.moveBy(.2, cc.v2(posX, posY)).easing(cc.easeBackIn()),
-            cc.fadeOut(.2)
+            cc.moveBy(dur, cc.v2(posX, posY)),//.easing(cc.easeBackIn())
+            cc.fadeOut(dur)
         )
     }
     private actionTo(vec:cc.Vec2):cc.FiniteTimeAction{
-        return cc.spawn(
-            cc.moveTo(.2, vec).easing(cc.easeBackOut()),
-            cc.fadeIn(.2)
+        return cc.sequence(
+            cc.delayTime(0.02),
+            cc.spawn(
+                cc.moveTo(.2, vec).easing(cc.easeBackOut()),
+                cc.fadeIn(.2)
+            )
         )
     }
 }

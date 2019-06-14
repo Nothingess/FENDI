@@ -24,6 +24,7 @@ export class LayerRun extends cc.Component {
     update(dt):void{
         if(this.stop) return;
         this.node.x -= this.moveSpeed * dt;
+        
 
         if(this.layer === LayerType.loop){
             this.check();

@@ -21,6 +21,7 @@ export class ManSpineCtrl extends ISpineCtrl {
         super.squat();
     }
     public run():void{
+        if(this.spine.animation == "nanren_pao")return;
         this.spine.setAnimation(0, "nanren_pao", true);
         super.run();
     }

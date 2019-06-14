@@ -1,3 +1,7 @@
+export enum EventType{
+    zoomTrigger
+}
+
 interface IEvent {
     type: number,
     priority: number, 

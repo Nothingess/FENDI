@@ -22,8 +22,9 @@ export class GameLoop extends cc.Component {
     private mSceneCtrl:SceneController = null;
     public platform:IPlatform = null;
     //全局数据
+    public isPlayBgAction:boolean = false;      //
     public isMan:boolean = true;                //当前选择的角色性别
-    public currIndex:number = 0;                //当前选择的关卡（0-2）
+    public currIndex:number = -1;                //当前选择的关卡（0-2）
     public isMuteAudio:boolean = false;              //是否关闭音乐
     public isMuteEff:boolean = false;                //是否关闭音效
     private isLoadSub:boolean = false;               //分包是否加载成功

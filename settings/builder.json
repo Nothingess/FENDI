@@ -15,9 +15,7 @@
     "subContext": ""
   },
   "encryptJs": true,
-  "excludeScenes": [
-    "420453c8-1716-48b5-a8f7-e3bc96e59ca7"
-  ],
+  "excludeScenes": [],
   "fb-instant-games": {},
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
@@ -41,7 +39,7 @@
   "title": "FENDI",
   "webOrientation": "landscape",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "",
+    "REMOTE_SERVER_ROOT": "https://cdn.duligame.cn/minigame-fendi",
     "appid": "wx4b0dc8d75a0857b7",
     "orientation": "landscapeRight",
     "separate_engine": false,

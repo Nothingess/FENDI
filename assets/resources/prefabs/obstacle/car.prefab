@@ -12,12 +12,12 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "o5",
+    "_name": "car",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 3,
+    "_level": 1,
     "_components": [
       {
         "__id__": 2
@@ -112,12 +112,12 @@
     "tag": 3,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -36,
+      "x": -30.6,
       "y": 0.4
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 120.3,
+      "width": 131.2,
       "height": 126.1
     },
     "_id": ""
@@ -128,7 +128,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "84202716-f221-407e-9542-adf990e959e0"
     },
     "fileId": "d5chdH6DRMloDS8Vm5uLar",
     "sync": false

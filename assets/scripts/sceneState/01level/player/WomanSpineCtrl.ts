@@ -21,6 +21,7 @@ export class WomanSpineCtrl extends ISpineCtrl {
         super.squat();
     }
     public run():void{
+        if(this.spine.animation == "nvren_pao")return;
         this.spine.setAnimation(0, "nvren_pao", true);
         super.run();
     }
