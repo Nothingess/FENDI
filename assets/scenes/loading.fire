@@ -15,12 +15,9 @@
     "_children": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 33
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -75,7 +72,7 @@
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 31
@@ -1105,103 +1102,23 @@
     "_id": "27PwIFCf9K47J22LdZKA3E"
   },
   {
-    "__type__": "e2d8cQT/s1KKqi+7amosQW5",
+    "__type__": "34e4epV89FAl6ww7OGAkRCr",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "bc/trzxQJK3JGQCt9N+Ox1"
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "GameLoop",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
+    "bar": {
+      "__id__": 18
     },
-    "_children": [],
-    "_active": true,
-    "_level": 1,
-    "_components": [
-      {
-        "__id__": 34
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+    "mark": {
+      "__id__": 12
     },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+    "txt": {
+      "__id__": 14
     },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "groupIndex": 0,
-    "_id": "05fydvHG5LCJtrspcAx2DP"
-  },
-  {
-    "__type__": "276adx6aIxD24oAFa00rCo6",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 33
-    },
-    "_enabled": true,
-    "audios": [
-      {
-        "__uuid__": "b7290747-260b-4358-bc37-e893166a30f6"
-      },
-      {
-        "__uuid__": "77a42523-26d9-470a-876c-509e07d7f337"
-      },
-      {
-        "__uuid__": "2d62d712-665b-40b2-8d54-74e9c7527223"
-      },
-      {
-        "__uuid__": "8607b1e2-e952-4fa0-b62c-d6eb45d113bf"
-      },
-      {
-        "__uuid__": "60e36c8c-6fa6-4077-be31-2e6ab29319bf"
-      },
-      {
-        "__uuid__": "8d610bb1-8829-4d91-bd2f-d08a23398d9d"
-      }
-    ],
-    "_id": "42NlQt/z1El6rNZ3Imd57a"
+    "nextScene": "01startScene",
+    "_id": "dfEEVqHB5BULu0MC+MJmye"
   }
 ]

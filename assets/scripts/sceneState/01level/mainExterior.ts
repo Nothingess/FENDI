@@ -35,6 +35,8 @@ export class mainExterior{
 
     private zoomTimes:number = 0;               //循环的次数（循环三次就缩放场景）
 
+    private runLayer:cc.Node = null;              //摄像机
+
     private init():void{
         this.initComponent();
     }
@@ -46,9 +48,10 @@ export class mainExterior{
         this.heart = cc.find("Canvas/UILayer/uiElement/heart");
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
         this.heartLess = cc.find("Canvas/run_layer/player_layer/heart_less");
+        this.runLayer = cc.find("Canvas/run_layer");
 
         //this.zoom();
-        EventManager.getInstance().addEventListener(EventType.zoomTrigger, this.onZoomTrigger, "mainExterior");
+        EventManager.getInstance().addEventListener(EventType.zoomTrigger, this.onZoomTrigger.bind(this), "mainExterior");
     }
     private createRole():void{
         let self = this;
@@ -78,6 +81,7 @@ export class mainExterior{
     }
     public end():void{
         this.uiMgr.sysRelease();
+        EventManager.getInstance().removeEventListenerByTag(EventType.zoomTrigger, "mainExterior");
     }
 
     //#region 监听事件
@@ -85,7 +89,7 @@ export class mainExterior{
     public onZoomTrigger(prams:any):void{//判断三次缩放场景
         this.zoomTimes++;
         if(this.zoomTimes > 2){
-            this.zoom();
+            this.zoomIn();
         }
     }
 
@@ -102,6 +106,7 @@ export class mainExterior{
 
     public minusHeart(vec:cc.Vec2):void{
         this.heartNum--;
+/*         this.heartNum = 2; */
         this.floatHeartLess(vec);
         if(this.heartNum >= 0){
             this.heart.children[this.heartNum].color = cc.Color.GRAY;
@@ -131,14 +136,28 @@ export class mainExterior{
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
         this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+        this.uploadScore();
     }
-    public zoom():void{
+    public zoomIn():void{
+        cc.find("Canvas/run_layer").runAction(cc.scaleBy(3, .4, .4))
+    }
+    public zoomOut():void{
         cc.find("Canvas/run_layer").runAction(cc.sequence(
-            cc.scaleBy(10, .5, .5),
-            cc.delayTime(3),
-            cc.scaleTo(10, 1, 1)
+            cc.callFunc(()=>{
+                this.setMultiple(.4);
+            }),
+            cc.spawn(
+                cc.scaleTo(3, 2.3, 2.3),
+                cc.callFunc(()=>{
+                    this.runLayer.runAction(cc.moveBy(3, cc.v2(0, -300)))
+                })
+            ),
+            cc.callFunc(()=>{
+                this.setMultiple(2.5);
+            })
         ))
     }
+    /**停止背景循环 */
     public stop():void{
         let childs:Array<cc.Node> = cc.find("Canvas/run_layer").children;
 
@@ -149,5 +168,27 @@ export class mainExterior{
             }
         })
     }
+    public decelerate():void{
+        let layer:cc.Node = cc.find("Canvas/run_layer");
+        layer.children[3].getComponent(LayerRun).setSpeed();
+        layer.children[5].getComponent(LayerRun).setSpeed();
+    }
+    /**设置运动速度的倍率 */
+    public setMultiple(val:number):void{
+        this.pyCtrl.spCtrl._setTimeScale(val==.4?.4:1);
+        let childs:Array<cc.Node> = cc.find("Canvas/run_layer").children;
 
+        childs.forEach(e => {
+            let layerrun:LayerRun = e.getComponent(LayerRun);
+            if(layerrun != null){
+                layerrun.setMultiple(val);
+            }
+        })
+    }
+    public uploadScore(K:string = "rank_1", V:string = `${this.score}`):void{
+        if(GameLoop.getInstance().platform == null)return;
+        GameLoop.getInstance().platform.setUserCloudStorage(
+            [{key:K, value:V}]
+        )
+    }
 }

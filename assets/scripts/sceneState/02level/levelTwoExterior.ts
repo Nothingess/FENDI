@@ -24,6 +24,14 @@ export class levelTwoExterior {
     public uiMgr:UISystem = null;
     public pyCtrl:playerCtrl = null;
 
+    private heartNum:number = 3;
+    private score:number = 0;
+
+    //UI Element
+    private heart:cc.Node = null;
+    private scoreLa:cc.Label = null;
+    private heartLess:cc.Node = null;
+
     private init():void{
         this.initComponent();
     }
@@ -32,12 +40,14 @@ export class levelTwoExterior {
         this.uiMgr.sysInit();
 
         this.createRole();
+        this.heart = cc.find("Canvas/UILayer/uiElement/heart");
+        this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
+        this.heartLess = cc.find("Canvas/run_layer/player_layer/heart_less");
     }
 
     private createRole():void{
         let self = this;
         let node:cc.Node = null;
-        console.log("===============");
         if(GameLoop.getInstance().isMan){
             cc.loader.loadRes("prefabs/manRole", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
@@ -70,6 +80,7 @@ export class levelTwoExterior {
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
         this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+        this.uploadScore();
     }
 
     public stop():void{
@@ -81,5 +92,50 @@ export class levelTwoExterior {
                 layerrun.stop = true;
             }
         })
+    }
+
+
+    public addScore(val:number):void{
+        this.score += val;
+        this.updateScore();
+    }
+    private updateScore():void{
+        this.scoreLa.string = `Score : ${this.score}`;
+    }
+
+    public minusHeart(vec:cc.Vec2):void{
+        this.heartNum--;
+/*         this.heartNum = 2; */
+        this.floatHeartLess(vec);
+        if(this.heartNum >= 0){
+            this.heart.children[this.heartNum].color = cc.Color.GRAY;
+        }
+        if(this.heartNum == 0){
+            AudioManager.getInstance().playSound(AudioType.LOST);
+            this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+            this.stop();
+            this.pyCtrl.stop();
+        }
+    }
+    /**飘动减血图标 */
+    public floatHeartLess(vec:cc.Vec2):void{
+        this.heartLess.setPosition(vec);
+        this.heartLess.opacity = 0;
+        this.heartLess.runAction(
+            cc.sequence(
+                cc.spawn(
+                    cc.moveBy(.5, cc.v2(0, 100)),
+                    cc.fadeIn(.5)
+                ),
+                cc.fadeOut(.5)
+            )
+        )
+    }
+
+    public uploadScore(K:string = "rank_2", V:string = `${this.score}`):void{
+        if(GameLoop.getInstance().platform == null)return;
+        GameLoop.getInstance().platform.setUserCloudStorage(
+            [{key:K, value:V}]
+        )
     }
 }

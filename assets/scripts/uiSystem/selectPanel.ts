@@ -1,6 +1,6 @@
 import { IUIBase, PanelLayer } from "./IUIBase";
 import { startExterior } from "../sceneState/startScene/startExterior";
-import { strateB } from "./openAction/IOpenStrategy";
+import { strateA } from "./openAction/IOpenStrategy";
 import { loadPanel } from "./loadPanel";
 import { GameLoop } from "../GameLoop";
 import { AudioManager, AudioType } from "../comms/AudioManager";
@@ -20,7 +20,7 @@ export class selectPanel extends IUIBase {
     private isMan:boolean = false;           //当前选择的角色性别
 
     public initStrategy():void{
-        this.mOpenStrategy = new strateB(this.skin);
+        this.mOpenStrategy = new strateA(this.skin);
     }
 
     public init(Params?:any[]):void{

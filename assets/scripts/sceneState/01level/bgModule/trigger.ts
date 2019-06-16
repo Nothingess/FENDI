@@ -10,6 +10,10 @@ export class trigger extends cc.Component {
 
     @property(cc.Node)
     public mask: cc.Node = null;
+    @property(cc.Node)
+    public b1: cc.Node = null;
+    @property(cc.Node)
+    public b2: cc.Node = null;
 
     onCollisionEnter(other, self) {
         if(other.tag === 10){//玩家
@@ -32,6 +36,18 @@ export class trigger extends cc.Component {
 
     private clearMask():void{
         if(this.mask == null)return;
-        this.mask.runAction(cc.fadeOut(0.2));
+        this.mask.runAction(
+            cc.sequence(
+                cc.delayTime(.3),
+                cc.fadeOut(0.2)
+            )
+        );
+        if(this.b1 == null)return;
+        this.b1.runAction(cc.fadeIn(.2));
+        this.b2.runAction(cc.fadeIn(.2));
+        mainExterior.getInstance().pyCtrl.zoomOut();
+        mainExterior.getInstance().zoomOut();
+
+        mainExterior.getInstance().decelerate();
     }
 }

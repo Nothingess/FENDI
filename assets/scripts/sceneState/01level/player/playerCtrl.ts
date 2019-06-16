@@ -4,6 +4,7 @@ import { CameraShake } from "../../../comms/CameraShake";
 import { GameLoop } from "../../../GameLoop";
 import { levelThreeExterior } from "../../03level/levelThreeExterior";
 import { AudioManager, AudioType } from "../../../comms/AudioManager";
+import { levelTwoExterior } from "../../02level/levelTwoExterior";
 
 const {ccclass, property} = cc._decorator;
 
@@ -35,7 +36,7 @@ export class playerCtrl extends cc.Component {
     private collCount:number = 0;                               //记录玩家碰撞其它collider的数量
     private obstacleCount:number = 0;                           //碰到的障碍物个数
     private rightStepNode:cc.Node = null;                       //右台阶
-    private spCtrl:ISpineCtrl = null;                           //spine动画控制器
+    public spCtrl:ISpineCtrl = null;                           //spine动画控制器
 
     private isUpCol:boolean = false;            //在障碍物上边
     private isLeftCol:boolean = false;          //在障碍物左边
@@ -51,6 +52,9 @@ export class playerCtrl extends cc.Component {
     private isOver:boolean = false;
 
     private isComplete:boolean = false;
+
+
+    private isNeedCheck:boolean = false;                        //是否需要检测回复原来位置
     onLoad () {
         let manager=cc.director.getCollisionManager();  // 获取碰撞检测类
         manager.enabled = true;                         // 开启碰撞检测
@@ -120,16 +124,18 @@ export class playerCtrl extends cc.Component {
             this.squatUpdate();
 
         if(this.isComplete){
-            this.node.x += dt * 400;
+            this.node.x += dt * GameLoop.getInstance().currIndex == 0?3:3;
+        }
+        else{
+            if(this.isNeedCheck){
+                this.checkMoveBack(dt);
+            }
         }
     }
 
-    private moveBack(dt):void{
-        if(this.node.x < this.posX){
-            //if(this.obstacleCount <= 0){
-            if(!this.isLeftCol){
-                this.node.x += dt * 100;
-            }
+    private checkMoveBack(dt):void{
+        if(this.node.convertToWorldSpaceAR(cc.v2(0, 0)).x > 350){
+            this.node.x -= dt * 50;
         }
     }
 
@@ -221,7 +227,7 @@ export class playerCtrl extends cc.Component {
                 if(this.mPlayerState != PlayerState.idle && this.mPlayerState != PlayerState.squat){
                     this.changeState(PlayerState.idle);
                     //this.node.y = other.world.aabb.yMax + this.node.height * .5 - 0.5;
-                    this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 + this.node.height * .5 - .5;
+                    this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 - .1;
                 }
             break;
             case 2://右台阶
@@ -235,7 +241,10 @@ export class playerCtrl extends cc.Component {
                     this.isUpCol = false;
                     this.isLeftCol = true;
                     //this.node.x = other.world.aabb.x -= this.node.width * .5;
-                    mainExterior.getInstance().minusHeart(this.node.position);
+                    if(GameLoop.getInstance().currIndex == 0)
+                        mainExterior.getInstance().minusHeart(this.node.position);
+                    else if(GameLoop.getInstance().currIndex == 1)
+                        levelTwoExterior.getInstance().minusHeart(this.node.position);
                     other.node.destroy();
                     this.cameraShake.shake();
                     AudioManager.getInstance().playSound(GameLoop.getInstance().isMan?AudioType.OBSMAN:AudioType.OBSWOMAN);
@@ -244,7 +253,7 @@ export class playerCtrl extends cc.Component {
                     this.isLeftCol = false;
 
                     //this.node.y = other.world.aabb.yMax + this.node.height * .5;
-                    this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 + this.node.height * .5 - .5;
+                    this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 - .1;
                     this.changeState(PlayerState.idle);
                 }else if(this.isCollisionBottom(other, self)){
                     this.changeState(PlayerState.down);
@@ -254,11 +263,19 @@ export class playerCtrl extends cc.Component {
             break;
             case 6://金币
                 other.node.destroy();
-                mainExterior.getInstance().addScore(10);
+
+                if(GameLoop.getInstance().currIndex == 0)
+                    mainExterior.getInstance().addScore(10);
+                else if(GameLoop.getInstance().currIndex == 1)
+                    levelTwoExterior.getInstance().addScore(10);
+
+
                 AudioManager.getInstance().playSound(AudioType.GLOD);
             break;
             case 7:
                 GameLoop.getInstance().win();
+            break;
+            case 8:
             break;
             default://其他
                 if(this.mPlayerState != PlayerState.squat)
@@ -435,27 +452,35 @@ export class playerCtrl extends cc.Component {
      */
     private changeColSize(val:any):void{
         if(val === 0){
-            this.collider.offset.y = -19;
+            this.collider.offset.y = 42.4;
             this.collider.size.height = this.node.height * .7;
         }else{
-            this.collider.offset.y = 0;
+            this.collider.offset.y = 61.9;
             this.collider.size.height = this.node.height;
         }
     }
     /**改变摩托的碰撞体外形 */
     private changeColSizeMotuo(val:any):void{
         if(val === 0){
-            this.collider.offset = cc.v2(-2, -15.9);
-            this.collider.size = cc.size(112.9, 96.2);
+            this.collider.offset = cc.v2(-2.8, 48.3);
+            this.collider.size = cc.size(116.2, 96.6);
         }else{
-            this.collider.offset = cc.v2(-2, -0.5);
-            this.collider.size = cc.size(112.9, 126.9);
+            this.collider.offset = cc.v2(-2.8, 61.9);
+            this.collider.size = cc.size(116.2, 123.8);
         }
     }
 
     public stop():void{
         this.isOver = true;
         this.spCtrl.stop();
+    }
+
+    /**缩小一半 */
+    public zoomOut():void{
+        this.node.runAction(cc.scaleTo(.3, .5, .5));
+        this.jumpSpeed *= .55;
+        this.mGravity *= .55;
+        this.isNeedCheck = true;        //场景放大了，需要复原玩家位置
     }
 
     onDestroy () {

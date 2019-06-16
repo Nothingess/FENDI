@@ -5,7 +5,7 @@ export class IPlatform {
     public init () : void {
 
     }
-
+    public setUserCloudStorage(KVData:Array<{key:string, value:string}>):void{}
 }
 
 export class WeChatPlatform extends IPlatform {
@@ -59,6 +59,19 @@ export class WeChatPlatform extends IPlatform {
             button.hide();
             button.destroy();
         });
+    }
+
+    public setUserCloudStorage(KVData:Array<{key:string, value:string}>):void{
+        wx.setUserCloudStorage({
+            KVDataList:KVData,
+            success:()=>{
+                console.log("上传数据成功！")
+            },
+            fail:()=>{
+                console.log("上传数据失败！")
+            },
+            complete:()=>{}
+        })
     }
 }
 

@@ -31,6 +31,14 @@ export class LayerRun extends cc.Component {
         }
     }
 
+    public setSpeed(val:number = 200):void{
+        this.moveSpeed = val;
+    }
+    /**设置运动速度的倍率 */
+    public setMultiple(val:number):void{
+        this.moveSpeed *= val;
+    }
+
     /**检测是否需要换位 */
     private check():void{
         if(this.loops[0].convertToWorldSpaceAR(cc.v2(0, 0)).x < 0){

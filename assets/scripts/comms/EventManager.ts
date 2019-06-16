@@ -1,5 +1,5 @@
 export enum EventType{
-    zoomTrigger
+    zoomTrigger = 1
 }
 
 interface IEvent {

@@ -1,5 +1,5 @@
 import { IUIBase, PanelLayer } from "./IUIBase";
-import { strateB } from "./openAction/IOpenStrategy";
+import { strateA } from "./openAction/IOpenStrategy";
 import { startExterior } from "../sceneState/startScene/startExterior";
 import { AudioManager, AudioType } from "../comms/AudioManager";
 
@@ -9,7 +9,7 @@ export class rankPanel extends IUIBase {
     private wxSubContextView:cc.WXSubContextView = null;
     
     public initStrategy():void{
-        this.mOpenStrategy = new strateB(this.skin);
+        this.mOpenStrategy = new strateA(this.skin);
     }
 
     public init(Params?:any[]):void{

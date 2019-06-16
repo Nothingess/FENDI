@@ -10,7 +10,6 @@ let level_1:Array<string> = [
     "prefabs/bgModule/01level/01screen_5",
     "prefabs/bgModule/01level/01screen_6",
     "prefabs/bgModule/01level/01screen_7",
-    "prefabs/bgModule/01level/01screen_8",
     "prefabs/bgModule/01level/01screen_g2",
     "prefabs/bgModule/01level/01screen_g3",
     "prefabs/bgModule/01level/01screen_g4",
@@ -115,17 +114,16 @@ export class loadPanel extends IUIBase {
             count++;
         }
         GameLoop.getInstance().buildNode.push(cc.instantiate(res[5]));
-        GameLoop.getInstance().buildNode.push(cc.instantiate(res[6]));
 
         count = 0;
         while(count < 3){
-            for(let i = 7; i < 9; i++){
+            for(let i = 6; i < 8; i++){
                 GameLoop.getInstance().groundNode.push(cc.instantiate(res[i]))
             }
             count++;
         }
 
-        GameLoop.getInstance().groundNode.push(cc.instantiate(res[9]));
+        GameLoop.getInstance().groundNode.push(cc.instantiate(res[8]));
 
         startExterior.getInstance().enterMainState();
     }

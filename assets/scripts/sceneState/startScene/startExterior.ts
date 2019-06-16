@@ -7,6 +7,7 @@ import { Loader } from "../../comms/LoaderManager";
 import { GameLoop } from "../../GameLoop";
 import { settingBtnSp } from "./settingBtnSp";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
+import { desPanel } from "../../uiSystem/desPanel";
 
 export class startExterior {
 
@@ -25,16 +26,21 @@ export class startExterior {
     private mStartState:startSceneState = null;         //开始状态
     public uiSys:UISystem = null;                       //UI系统
     private startBtn:cc.Node = null;                    //开始按钮
+
+    private upArea:cc.Node = null;
     private friendsBtn:cc.Node = null;                  //好友按钮
     private setBtn:cc.Node = null;                      //设置按钮
+    private desBtn:cc.Node = null;                      //活动描述
+
     private leftBtn:cc.Node = null;                     //左边按钮
     private rightBtn:cc.Node = null;                    //右边按钮
     private bg:cc.Sprite = null;                        //背景
     private bgNew:cc.Sprite = null;                     //新背景（副本）
 
     //记录UI元素初始位置
-    private leftUp:cc.Vec2 = cc.v2(0, 0);
-    private rightUp:cc.Vec2 = cc.v2(0, 0);
+/*     private leftUp:cc.Vec2 = cc.v2(0, 0);
+    private rightUp:cc.Vec2 = cc.v2(0, 0); */
+    private up:cc.Vec2 = cc.v2(0, 0);
     private left:cc.Vec2 = cc.v2(0, 0);
     private right:cc.Vec2 = cc.v2(0, 0);
     private center:cc.Vec2 = cc.v2(0, 0);
@@ -79,9 +85,9 @@ export class startExterior {
             this.showUI();
             return;
         }
-        this.logo.runAction(cc.spawn(cc.moveTo(10, cc.v2(0, 255)), cc.fadeIn(10)));
+        this.logo.runAction(cc.spawn(cc.moveTo(5, cc.v2(0, 255)), cc.fadeIn(5)));
         this.bgAction.runAction(cc.sequence(
-            cc.moveTo(8, cc.v2(0, 0)),
+            cc.moveTo(5, cc.v2(0, 0)),
             cc.callFunc(()=>{
                 this.bgAction.children[1].runAction(cc.sequence(
                     cc.fadeIn(2),
@@ -118,8 +124,12 @@ export class startExterior {
 
         this.uiElement = cc.find("Canvas/UILayer/uiElement");
         this.startBtn = cc.find("combat_btn", this.uiElement);
-        this.friendsBtn = cc.find("up/friends", this.uiElement);
-        this.setBtn = cc.find("up/setting", this.uiElement);
+
+        this.upArea = cc.find("up", this.uiElement);
+        this.friendsBtn = cc.find("friends", this.upArea);
+        this.setBtn = cc.find("setting", this.upArea);
+        this.desBtn = cc.find("description", this.upArea);
+
         this.leftBtn = cc.find("select_left", this.uiElement);
         this.rightBtn = cc.find("select_right", this.uiElement);
         this.bg = cc.find("Canvas/bg").getComponent(cc.Sprite);
@@ -136,8 +146,9 @@ export class startExterior {
     }
     /**初始化UI元素位置 */
     private initUIPos():void{
-        this.leftUp = this.setBtn.position;
-        this.rightUp = this.friendsBtn.position;
+/*         this.leftUp = this.setBtn.position;
+        this.rightUp = this.friendsBtn.position; */
+        this.up = this.upArea.position;
         this.left = this.leftBtn.position;
         this.right = this.rightBtn.position;
         this.center = this.startBtn.position;
@@ -162,6 +173,7 @@ export class startExterior {
         this.startBtn.off("touchend", this.onstartBtn, this);
         this.friendsBtn.off("touchend", this.onfriendsBtn, this);
         this.setBtn.off("touchend", this.onsetBtn, this);
+        this.desBtn.off("touchend", this.ondesBtn, this);
 
         this.leftBtn.off("touchend", this.onSelectLeft, this);
         this.rightBtn.off("touchend", this.onSelectRight, this); 
@@ -173,6 +185,7 @@ export class startExterior {
         this.startBtn.on("touchend", this.onstartBtn, this);
         this.friendsBtn.on("touchend", this.onfriendsBtn, this);
         this.setBtn.on("touchend", this.onsetBtn, this);
+        this.desBtn.on("touchend", this.ondesBtn, this);
 
         this.leftBtn.on("touchend", this.onSelectLeft, this);
         this.rightBtn.on("touchend", this.onSelectRight, this);
@@ -188,6 +201,10 @@ export class startExterior {
     }
     private onsetBtn():void{
         this.uiSys.openPanel(setPanel, "setPanel");
+        AudioManager.getInstance().playSound(AudioType.CLICK);
+    }
+    private ondesBtn():void{
+        this.uiSys.openPanel(desPanel, "desPanel");
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onSelectLeft():void{
@@ -228,35 +245,26 @@ export class startExterior {
     /**隐藏界面UI */
     public hideUI(isAction:boolean = true):void{
 
-/*         if(!isAction){
-            this.setBtn.x -= 100;
-            this.setBtn.y += 100;
-            this.friendsBtn.x += 100;
-            this.friendsBtn.y += 100;
-            this.leftBtn.x -= 100;
-            this.rightBtn.x += 100;
-            this.startBtn.y -= 100;
-            return;
-        } */
-
         let dur:number = isAction?.2:0.001;
 
-        this.setBtn.runAction(this.actionBack(-100, 100, dur));
-        this.friendsBtn.runAction(this.actionBack(100, 100, dur));
+/*         this.setBtn.runAction(this.actionBack(-100, 100, dur));
+        this.friendsBtn.runAction(this.actionBack(100, 100, dur)); */
+        this.upArea.runAction(this.actionBack(0, 100, dur));
         this.leftBtn.runAction(this.actionBack(-100, 0, dur));
         this.rightBtn.runAction(this.actionBack(100, 0, dur));
         this.startBtn.runAction(this.actionBack(0, -100, dur));
     }
     /**显示界面UI */
     public showUI():void{
-        this.setBtn.runAction(this.actionTo(this.leftUp));
-        this.friendsBtn.runAction(this.actionTo(this.rightUp));
+/*         this.setBtn.runAction(this.actionTo(this.leftUp));
+        this.friendsBtn.runAction(this.actionTo(this.rightUp)); */
+        this.upArea.runAction(this.actionTo(this.up));
         this.leftBtn.runAction(this.actionTo(this.left));
         this.rightBtn.runAction(this.actionTo(this.right));
         this.startBtn.runAction(this.actionTo(this.center));
     }
 
-    private actionBack(posX:number, posY:number, dur:number = .2):cc.FiniteTimeAction{
+    private actionBack(posX:number, posY:number, dur:number = .3):cc.FiniteTimeAction{
         return cc.spawn(
             cc.moveBy(dur, cc.v2(posX, posY)),//.easing(cc.easeBackIn())
             cc.fadeOut(dur)
@@ -266,8 +274,8 @@ export class startExterior {
         return cc.sequence(
             cc.delayTime(0.02),
             cc.spawn(
-                cc.moveTo(.2, vec).easing(cc.easeBackOut()),
-                cc.fadeIn(.2)
+                cc.moveTo(.3, vec).easing(cc.easeBackOut()),
+                cc.fadeIn(.3)
             )
         )
     }

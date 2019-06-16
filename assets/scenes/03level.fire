@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.16471820345351443,
-      "y": 0.16471820345351443,
+      "x": 0.4557278132762742,
+      "y": 0.4557278132762742,
       "z": 1
     },
     "_quat": {
@@ -82,6 +82,9 @@
     "_components": [
       {
         "__id__": 151
+      },
+      {
+        "__id__": 152
       }
     ],
     "_prefab": null,
@@ -4298,7 +4301,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "1cd50170-30a0-4cf4-b08e-f07335162c02"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -4399,7 +4402,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "1cd50170-30a0-4cf4-b08e-f07335162c02"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -4500,7 +4503,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "1cd50170-30a0-4cf4-b08e-f07335162c02"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -4590,14 +4593,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 0,
+      "g": 177,
+      "b": 156,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 153.4,
+      "width": 160.08,
       "height": 40
     },
     "_anchorPoint": {
@@ -4640,8 +4643,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "score : 0",
-    "_N$string": "score : 0",
+    "_string": "Score : 0",
+    "_N$string": "Score : 0",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -4819,6 +4822,8 @@
     },
     "_enabled": true,
     "mask": null,
+    "b1": null,
+    "b2": null,
     "_id": "30Bwv17xFEMrHhhWwfR3VD"
   },
   {
@@ -5443,5 +5448,23 @@
     "_fitWidth": false,
     "_fitHeight": true,
     "_id": "a7pr2E83NG3qvy8kUY+WBE"
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_clip": {
+      "__uuid__": "1101c4a9-2a06-4366-a620-4e5e2be273a4"
+    },
+    "_volume": 1,
+    "_mute": false,
+    "_loop": true,
+    "playOnLoad": true,
+    "preload": false,
+    "_id": "0c4Sd0vE5HsKLdfdoCgaet"
   }
 ]

@@ -1,0 +1,62 @@
+
+yanwu.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+motuoche/1yan
+  rotate: false
+  xy: 2, 76
+  size: 120, 50
+  orig: 120, 50
+  offset: 0, 0
+  index: -1
+motuoche/2yan
+  rotate: false
+  xy: 2, 24
+  size: 120, 50
+  orig: 120, 50
+  offset: 0, 0
+  index: -1
+motuoche/3yan
+  rotate: false
+  xy: 124, 76
+  size: 120, 50
+  orig: 120, 50
+  offset: 0, 0
+  index: -1
+motuoche/4yan
+  rotate: false
+  xy: 124, 24
+  size: 120, 50
+  orig: 120, 50
+  offset: 0, 0
+  index: -1
+renyan/renyan010001
+  rotate: false
+  xy: 124, 2
+  size: 120, 20
+  orig: 120, 20
+  offset: 0, 0
+  index: -1
+renyan/renyan010002
+  rotate: false
+  xy: 246, 106
+  size: 120, 20
+  orig: 120, 20
+  offset: 0, 0
+  index: -1
+renyan/renyan010003
+  rotate: false
+  xy: 246, 84
+  size: 120, 20
+  orig: 120, 20
+  offset: 0, 0
+  index: -1
+renyan/renyan010004
+  rotate: false
+  xy: 2, 2
+  size: 120, 20
+  orig: 120, 20
+  offset: 0, 0
+  index: -1

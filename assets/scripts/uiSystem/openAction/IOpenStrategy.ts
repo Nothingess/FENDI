@@ -8,7 +8,7 @@ export class IOpenStrategy {
     protected mObj:cc.Node = null;                    //操作对象
     protected mOpenVec:cc.Vec2 = cc.v2(0, 0);         //动画开始位置
     protected mEndVec:cc.Vec2 = cc.v2(0, 0);          //动画结束位置
-    protected mSpeed:number = .2;                     //动画播放速度
+    protected mSpeed:number = .3;                     //动画播放速度
     /**设置动画速度 */
     public setActionSpeed(val:number):void{
         this.mSpeed = val;

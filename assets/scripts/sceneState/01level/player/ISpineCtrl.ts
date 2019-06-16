@@ -54,7 +54,7 @@ export class ISpineCtrl extends cc.Component {
         this.spine.setMix(anim2, anim1, val);
     }
     /**设置时间大小 */
-    protected _setTimeScale(val:number):void{
+    public _setTimeScale(val:number):void{
         this.spine.timeScale = val;
     }
 }
