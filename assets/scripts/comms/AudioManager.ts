@@ -93,7 +93,9 @@ export class AudioManager {
         cc.audioEngine.stopMusic();
         cc.audioEngine.playMusic(GameLoop.getInstance().audios[aty], true);
     }
-
+    public stopBgm():void{
+        cc.audioEngine.stopMusic();
+    }
     public resumeBGM()
     {
         cc.audioEngine.stopMusic();

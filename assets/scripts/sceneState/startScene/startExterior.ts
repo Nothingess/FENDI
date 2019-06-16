@@ -152,6 +152,7 @@ export class startExterior {
 
         this.playBgAction();
         this.onBtnEvent();
+        AudioManager.getInstance().stopBgm();
     }
     /**初始化UI元素位置 */
     private initUIPos():void{
