@@ -48,7 +48,10 @@ export class loadPanel extends IUIBase {
     private mark:cc.Node = null;
     private txt:cc.Label = null;
     private loadScene:string = "";
-    private proVal:number = 0;
+
+    private currPro:number  = 0;
+    private maxPro:number = 0;
+    private isComplete:boolean = false;
 
     public initStrategy():void{
         this.mOpenStrategy = new strateC(this.skin);
@@ -58,6 +61,29 @@ export class loadPanel extends IUIBase {
         this.skinPath = "loadPanel";
         this.layer = PanelLayer.funcPanel;
     }
+
+    update(dt):void{
+        if(this.isComplete && this.currPro >= 1){
+            if(this.loadScene == "01level"){
+                startExterior.getInstance().enterMainState();
+            }else if(this.loadScene == "02level"){
+                startExterior.getInstance().enterLevel_2();
+            }else if(this.loadScene == "03level"){
+                startExterior.getInstance().enterLevel_3();
+            }
+            else if(this.loadScene == "01startScene"){
+                this.args[1].gotoStartState();
+            }
+        }
+        if(this.currPro < this.maxPro){
+            this.currPro += dt * .5;
+
+            this.pro.fillRange = this.currPro;
+            this.mark.x = this.pro.node.width * this.pro.fillRange;
+            this.txt.string = `${(this.pro.fillRange * 100).toFixed(2)}%`;
+        }
+    }
+
     public onShowing():void{
         super.onShowing();
         this.initComponent();
@@ -78,14 +104,12 @@ export class loadPanel extends IUIBase {
     }
 
     private onProgress(com:number, total:number, item:any):void{
-        this.pro.fillRange = com / total;
-        this.mark.x = this.pro.node.width * this.pro.fillRange;
-        this.txt.string = `${(this.pro.fillRange * 100).toFixed(2)}%`;
+        if((com / total) > this.maxPro)
+            this.maxPro = com / total;
     }
     private complete():void {
-        this.pro.fillRange = 0;
         if(this.loadScene == "01level"){
-            cc.loader.loadResArray(level_1, this.loadResProgress.bind(this), this.loadResComplete);
+            cc.loader.loadResArray(level_1, this.loadResProgress.bind(this), this.loadResComplete.bind(this));
         }else if(this.loadScene == "02level"){
             cc.loader.loadResArray(level_2, this.loadResProgress.bind(this), this.loadLevel_2Complete.bind(this));
         }else if(this.loadScene == "03level"){
@@ -94,13 +118,13 @@ export class loadPanel extends IUIBase {
         else if(this.loadScene == "01startScene"){
             GameLoop.getInstance().buildNode = [];
             GameLoop.getInstance().groundNode = [];
-            this.args[1].gotoStartState();
+
+            this.isComplete = true;
         }
     }
     private loadResProgress(com:number, total:number, item:any):void{
-        this.pro.fillRange = com / total;
-        this.mark.x = this.pro.node.width * this.pro.fillRange;
-        this.txt.string = `${(this.pro.fillRange * 100).toFixed(2)}%`;
+        if((com / total) > this.maxPro)
+            this.maxPro = com / total;
     }
     private loadResComplete(err, res):void{
 
@@ -125,7 +149,8 @@ export class loadPanel extends IUIBase {
 
         GameLoop.getInstance().groundNode.push(cc.instantiate(res[8]));
 
-        startExterior.getInstance().enterMainState();
+        this.isComplete = true;
+
     }
     private loadLevel_2Complete(err, res):void{
         let count:number = 0;
@@ -136,13 +161,15 @@ export class loadPanel extends IUIBase {
                 GameLoop.getInstance().groundNode.push(cc.instantiate(element));
             count++;
         });
-        startExterior.getInstance().enterLevel_2();
+        this.isComplete = true;
+
     }
     private loadLevel_3Complete(err, res):void{
         res.forEach(element => {
             GameLoop.getInstance().buildNode.push(cc.instantiate(element));
         });
-        startExterior.getInstance().enterLevel_3();
+        this.isComplete = true;
+
     }
 
 }

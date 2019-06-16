@@ -60,6 +60,11 @@ export class GameLoop extends cc.Component {
         this.mSceneCtrl.stateUpdate();
     }
 
+    public onMusicBtn():boolean{
+        this.isMuteAudio = !this.isMuteAudio;
+        return this.isMuteAudio;
+    }
+
     public win():void{
         if(this.currIndex == 0)
             mainExterior.getInstance().win();

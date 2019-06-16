@@ -38,13 +38,16 @@ export class trigger extends cc.Component {
         if(this.mask == null)return;
         this.mask.runAction(
             cc.sequence(
-                cc.delayTime(.3),
-                cc.fadeOut(0.2)
+                cc.delayTime(1),
+                cc.fadeOut(0.2),
+                cc.callFunc(()=>{
+                    if(this.b1 == null)return;
+                    this.b1.runAction(cc.fadeIn(.2));
+                    this.b2.runAction(cc.fadeIn(.2));
+                })
             )
         );
-        if(this.b1 == null)return;
-        this.b1.runAction(cc.fadeIn(.2));
-        this.b2.runAction(cc.fadeIn(.2));
+
         mainExterior.getInstance().pyCtrl.zoomOut();
         mainExterior.getInstance().zoomOut();
 

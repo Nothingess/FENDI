@@ -277,6 +277,17 @@ export class playerCtrl extends cc.Component {
             break;
             case 8:
             break;
+            case 9:
+                other.node.destroy();
+
+                if(GameLoop.getInstance().currIndex == 0)
+                    mainExterior.getInstance().addScore(100);
+                else if(GameLoop.getInstance().currIndex == 1)
+                    levelTwoExterior.getInstance().addScore(100);
+
+
+                AudioManager.getInstance().playSound(AudioType.GLOD);
+            break;
             default://其他
                 if(this.mPlayerState != PlayerState.squat)
                     this.changeState(PlayerState.idle);
@@ -477,7 +488,7 @@ export class playerCtrl extends cc.Component {
 
     /**缩小一半 */
     public zoomOut():void{
-        this.node.runAction(cc.scaleTo(.3, .5, .5));
+        this.node.runAction(cc.scaleTo(.3, .8, .8));
         this.jumpSpeed *= .55;
         this.mGravity *= .55;
         this.isNeedCheck = true;        //场景放大了，需要复原玩家位置

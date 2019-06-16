@@ -13,7 +13,10 @@ export enum AudioType{
     /**障碍物-女 */
     OBSWOMAN,
     /**胜利 */
-    WIN
+    WIN,
+    BGM_1,
+    BGM_2,
+    BGM_3
 }
 
 export class AudioManager {
@@ -29,7 +32,7 @@ export class AudioManager {
 
     public playSound(type: AudioType, loop?: boolean, volume?: number)
     {
-        if(GameLoop.getInstance().isMuteEff)return;
+        if(GameLoop.getInstance().isMuteAudio)return;
 /*         if(GameDataManager.getInstance().getGameData().playerInfo.closeAudio)
         {
             return;
@@ -63,17 +66,17 @@ export class AudioManager {
         cc.audioEngine.resumeAll();
     }
 
-    public playBGM(soundName: string)
+    public playBGM(aty:AudioType)
     {
-        if(this.bgm == soundName)
+/*         if(this.bgm == soundName)
         {
             return;
         }
         this.bgm = soundName;
-/*         if(GameDataManager.getInstance().getGameData().playerInfo.closeAudio)
+        if(GameDataManager.getInstance().getGameData().playerInfo.closeAudio)
         {
             return;
-        } */
+        }
         cc.audioEngine.stopMusic();
         let path = GlobalVar.ConstVal.AUDIO_DIR + soundName;
         //cc.audioEngine.play(cc.url.raw(path), loop?loop:false, volume?volume:1);
@@ -84,7 +87,11 @@ export class AudioManager {
                 return;
             }
 		    cc.audioEngine.playMusic(clip, true);
-		});
+        }); */
+        
+        if(GameLoop.getInstance().isMuteAudio)return;
+        cc.audioEngine.stopMusic();
+        cc.audioEngine.playMusic(GameLoop.getInstance().audios[aty], true);
     }
 
     public resumeBGM()

@@ -30,6 +30,7 @@ export class startExterior {
     private upArea:cc.Node = null;
     private friendsBtn:cc.Node = null;                  //好友按钮
     private setBtn:cc.Node = null;                      //设置按钮
+    private musicBtn:cc.Node = null;                    //音乐
     private desBtn:cc.Node = null;                      //活动描述
 
     private leftBtn:cc.Node = null;                     //左边按钮
@@ -85,18 +86,29 @@ export class startExterior {
             this.showUI();
             return;
         }
-        this.logo.runAction(cc.spawn(cc.moveTo(5, cc.v2(0, 255)), cc.fadeIn(5)));
+        this.logo.runAction(cc.moveTo(3, cc.v2(0, 255)));
         this.bgAction.runAction(cc.sequence(
-            cc.moveTo(5, cc.v2(0, 0)),
+            cc.spawn(
+                cc.moveTo(2, cc.v2(0, 0)),
+                cc.fadeIn(2)
+            ),
             cc.callFunc(()=>{
                 this.bgAction.children[1].runAction(cc.sequence(
-                    cc.fadeIn(2),
+                    cc.spawn(
+                        cc.fadeIn(2),
+                        cc.moveTo(2, cc.v2(0, 0))
+                    ),
                     cc.callFunc(()=>{
-                        this.bgAction.children[0].runAction(cc.fadeIn(2))
-                        this.bgAction.children[3].runAction(
-                            cc.repeatForever(cc.sequence(cc.fadeIn(2).easing(cc.easeOut(1.5)), cc.fadeOut(2).easing(cc.easeIn(1.5))))
+                        this.bgAction.children[0].runAction(
+                            cc.sequence(
+                                cc.spawn(
+                                    cc.fadeIn(2),
+                                    cc.moveBy(2, cc.v2(0, 100))
+                                ),
+                                cc.callFunc(()=>{this.onBgAction();})
+                            )
                         )
-                        this.bgAction.on("touchend", this.onBgAction, this)
+
                     })
                 ))
             })
@@ -104,16 +116,12 @@ export class startExterior {
     }
 
     private onBgAction():void{
-        console.log("this.bgAction.on touchend")
-        this.bgAction.children[3].stopAllActions();
-        this.bgAction.children[3].active = false;
 
         this.uiElement.active = true;
         this.hideUI(false);
         this.uiElement.opacity = 255;
         this.showUI();
         GameLoop.getInstance().isPlayBgAction = true;
-        this.bgAction.off("touchend", this.onBgAction, this);
     }
 
     /**初始化组件 */
@@ -128,6 +136,7 @@ export class startExterior {
         this.upArea = cc.find("up", this.uiElement);
         this.friendsBtn = cc.find("friends", this.upArea);
         this.setBtn = cc.find("setting", this.upArea);
+        this.musicBtn = cc.find("musicBtn", this.upArea);
         this.desBtn = cc.find("description", this.upArea);
 
         this.leftBtn = cc.find("select_left", this.uiElement);
@@ -173,6 +182,7 @@ export class startExterior {
         this.startBtn.off("touchend", this.onstartBtn, this);
         this.friendsBtn.off("touchend", this.onfriendsBtn, this);
         this.setBtn.off("touchend", this.onsetBtn, this);
+        this.musicBtn.off("touchend", this.onMusicBtn, this);
         this.desBtn.off("touchend", this.ondesBtn, this);
 
         this.leftBtn.off("touchend", this.onSelectLeft, this);
@@ -185,6 +195,7 @@ export class startExterior {
         this.startBtn.on("touchend", this.onstartBtn, this);
         this.friendsBtn.on("touchend", this.onfriendsBtn, this);
         this.setBtn.on("touchend", this.onsetBtn, this);
+        this.musicBtn.on("touchend", this.onMusicBtn, this);
         this.desBtn.on("touchend", this.ondesBtn, this);
 
         this.leftBtn.on("touchend", this.onSelectLeft, this);
@@ -201,6 +212,12 @@ export class startExterior {
     }
     private onsetBtn():void{
         this.uiSys.openPanel(setPanel, "setPanel");
+        AudioManager.getInstance().playSound(AudioType.CLICK);
+    }
+    private onMusicBtn():void{
+        let isMute:boolean = GameLoop.getInstance().onMusicBtn();
+        let setBtnSp:settingBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
+        this.musicBtn.getComponent(cc.Sprite).spriteFrame = isMute?setBtnSp.bgs[4]:setBtnSp.bgs[3];
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private ondesBtn():void{

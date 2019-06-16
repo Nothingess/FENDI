@@ -32,6 +32,8 @@ export class levelThreeExterior {
         this.uiMgr.sysInit();
 
         this.createRole();
+
+        AudioManager.getInstance().playBGM(AudioType.BGM_3);
     }
 
     private createRole():void{

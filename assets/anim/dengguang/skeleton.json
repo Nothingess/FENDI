@@ -1,0 +1,1708 @@
+{
+"skeleton": { "hash": "XUacsyE91dNPIVoHijBWoXygqNQ", "spine": "3.6.53", "width": 1688, "height": 1734, "images": "./img/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "length": 472.91, "x": -3.85, "y": -811.77 },
+	{ "name": "bone28", "parent": "bone", "length": 666.24, "rotation": 180, "x": -519.55, "y": 1510.84 },
+	{ "name": "bone2", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -113.92, "y": 92.39 },
+	{ "name": "bone31", "parent": "bone", "length": 65.82, "x": 437.69, "y": 358.71 },
+	{ "name": "bone3", "parent": "bone31", "length": 42.91, "rotation": 90, "x": 9.33, "y": 1059.74 },
+	{ "name": "bone4", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -824.31, "y": 92.39 },
+	{ "name": "bone5", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -256.07, "y": 92.39 },
+	{ "name": "bone6", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -396.6, "y": 92.39 },
+	{ "name": "bone7", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -683.15, "y": 92.39 },
+	{ "name": "bone8", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -540.15, "y": 92.39, "scaleY": 1.031 },
+	{ "name": "bone9", "parent": "root", "length": 110.62, "rotation": 90, "x": 579.77, "y": -627.17 },
+	{ "name": "bone10", "parent": "bone28", "length": 110.62, "rotation": -90, "x": 25.36, "y": 1326.24, "scaleY": -1 },
+	{ "name": "bone11", "parent": "root", "length": 100.8, "rotation": 90, "x": 441.71, "y": -635.77 },
+	{ "name": "bone12", "parent": "bone28", "length": 100.8, "rotation": -90, "x": -112.97, "y": 1334.84, "scaleY": -1 },
+	{ "name": "bone13", "parent": "root", "length": 167.41, "rotation": 90, "x": 298.17, "y": -643.68 },
+	{ "name": "bone14", "parent": "bone28", "length": 167.41, "rotation": -90, "x": -256.71, "y": 1342.75, "scaleY": -1 },
+	{ "name": "bone15", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -113.92, "y": 331.88 },
+	{ "name": "bone16", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -113.92, "y": 570.34 },
+	{ "name": "bone17", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -113.92, "y": 812.81 },
+	{ "name": "bone18", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -113.92, "y": 1048.97 },
+	{ "name": "bone19", "parent": "bone31", "length": 42.91, "rotation": 90, "x": 9.33, "y": 821.03 },
+	{ "name": "bone20", "parent": "bone31", "length": 42.91, "rotation": 90, "x": 9.33, "y": 582.9 },
+	{ "name": "bone21", "parent": "bone31", "length": 42.91, "rotation": 90, "x": 9.33, "y": 339.9 },
+	{ "name": "bone22", "parent": "bone31", "length": 42.91, "rotation": 90, "x": 9.33, "y": 102.9 },
+	{ "name": "bone23", "parent": "root", "length": 42.91, "rotation": 90, "x": 302.05, "y": -113.16 },
+	{ "name": "bone24", "parent": "root", "length": 42.91, "rotation": 90, "x": 159.23, "y": -113.16 },
+	{ "name": "bone25", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -255.41, "y": 570.34 },
+	{ "name": "bone26", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -396.9, "y": 570.34 },
+	{ "name": "bone27", "parent": "bone28", "length": 152.28, "rotation": -90, "x": -398.19, "y": 1326.57 },
+	{ "name": "bone29", "parent": "root", "length": 152.28, "rotation": 90, "x": 18.89, "y": -627.5 },
+	{ "name": "bone30", "parent": "root", "length": 152.28, "rotation": 90, "x": 161.67, "y": -627.5 },
+	{ "name": "bone32", "parent": "bone28", "length": 42.91, "rotation": -90, "x": 28.08, "y": 92.39 },
+	{ "name": "bone33", "parent": "bone28", "length": 42.91, "rotation": -90, "x": 28.08, "y": 1048.97 },
+	{ "name": "bone34", "parent": "bone28", "length": 42.91, "rotation": -90, "x": 28.87, "y": 812.81 },
+	{ "name": "bone35", "parent": "bone28", "length": 42.91, "rotation": -90, "x": 28.87, "y": 812.81 },
+	{ "name": "bone36", "parent": "bone28", "length": 42.91, "rotation": -90, "x": 27.78, "y": 570.34 },
+	{ "name": "bone37", "parent": "bone28", "length": 42.91, "rotation": -90, "x": 26.69, "y": 331.88 },
+	{ "name": "bone38", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -256.07, "y": 331.74 },
+	{ "name": "bone39", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -396.79, "y": 331.74 },
+	{ "name": "bone40", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -540.15, "y": 331.1, "scaleY": 1.031 },
+	{ "name": "bone41", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -540.15, "y": 570.42, "scaleY": 1.031 },
+	{ "name": "bone42", "parent": "bone", "length": 65.82, "x": 577.5, "y": 358.71 },
+	{ "name": "bone43", "parent": "bone42", "length": 42.91, "rotation": 90, "x": 9.33, "y": 1059.74 },
+	{ "name": "bone44", "parent": "bone42", "length": 42.91, "rotation": 90, "x": 9.33, "y": 821.03 },
+	{ "name": "bone45", "parent": "bone42", "length": 42.91, "rotation": 90, "x": 9.33, "y": 582.9 },
+	{ "name": "bone46", "parent": "bone42", "length": 42.91, "rotation": 90, "x": 9.33, "y": 339.9 },
+	{ "name": "bone47", "parent": "bone42", "length": 42.91, "rotation": 90, "x": 9.33, "y": 102.9 },
+	{ "name": "bone48", "parent": "bone31", "length": 42.91, "rotation": 90, "x": -133.42, "y": 821.03 },
+	{ "name": "bone49", "parent": "bone31", "length": 42.91, "rotation": 90, "x": -273.32, "y": 821.03 },
+	{ "name": "bone50", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -682.76, "y": 570.42, "scaleY": 1.031 },
+	{ "name": "bone51", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -826.63, "y": 570.42, "scaleY": 1.031 },
+	{ "name": "bone52", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -255.81, "y": 1048.97 },
+	{ "name": "bone53", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -396.17, "y": 1048.97 },
+	{ "name": "bone54", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -539.08, "y": 1048.97, "scaleY": 1.054 },
+	{ "name": "bone55", "parent": "bone31", "length": 42.91, "rotation": 90, "x": -133.37, "y": 102.9 },
+	{ "name": "bone56", "parent": "bone31", "length": 42.91, "rotation": 90, "x": -274.34, "y": 102.9 },
+	{ "name": "bone57", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -540.15, "y": 812.37, "scaleY": 1.031 },
+	{ "name": "bone58", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -254.89, "y": 812.81 },
+	{ "name": "bone59", "parent": "bone28", "length": 42.91, "rotation": -90, "x": -396.94, "y": 812.81 }
+],
+"slots": [
+	{ "name": "beijing2", "bone": "bone", "attachment": "beijing" },
+	{ "name": "beijing", "bone": "root" },
+	{ "name": "pytong", "bone": "bone2", "attachment": "pytong" },
+	{ "name": "pytong28", "bone": "bone32", "attachment": "pytong" },
+	{ "name": "pytong16", "bone": "bone15", "attachment": "pytong" },
+	{ "name": "pytong33", "bone": "bone37", "attachment": "pytong" },
+	{ "name": "pytong17", "bone": "bone16", "attachment": "pytong" },
+	{ "name": "pytong32", "bone": "bone36", "attachment": "pytong" },
+	{ "name": "pytong26", "bone": "bone25", "attachment": "pytong" },
+	{ "name": "pytong27", "bone": "bone26", "attachment": "pytong" },
+	{ "name": "pytong18", "bone": "bone17", "attachment": "pytong" },
+	{ "name": "pytong53", "bone": "bone58", "attachment": "pytong" },
+	{ "name": "pytong54", "bone": "bone59", "attachment": "pytong" },
+	{ "name": "pytong30", "bone": "bone34", "attachment": "pytong" },
+	{ "name": "pytong31", "bone": "bone35", "attachment": "pytong" },
+	{ "name": "pytong19", "bone": "bone18", "attachment": "pytong" },
+	{ "name": "pytong47", "bone": "bone52", "attachment": "pytong" },
+	{ "name": "pytong48", "bone": "bone53", "attachment": "pytong" },
+	{ "name": "pytong49", "bone": "bone54", "attachment": "pytong" },
+	{ "name": "pytong29", "bone": "bone33", "attachment": "pytong" },
+	{ "name": "pytong4", "bone": "bone5", "attachment": "pytong" },
+	{ "name": "pytong34", "bone": "bone38", "attachment": "pytong" },
+	{ "name": "pytong35", "bone": "bone39", "attachment": "pytong" },
+	{ "name": "pytong5", "bone": "bone6", "attachment": "pytong" },
+	{ "name": "pytong7", "bone": "bone8", "attachment": "pytong" },
+	{ "name": "pytong36", "bone": "bone40", "attachment": "pytong" },
+	{ "name": "pytong37", "bone": "bone41", "attachment": "pytong" },
+	{ "name": "pytong52", "bone": "bone57", "attachment": "pytong" },
+	{ "name": "pytong45", "bone": "bone50", "attachment": "pytong" },
+	{ "name": "pytong46", "bone": "bone51", "attachment": "pytong" },
+	{ "name": "pytong2", "bone": "bone3", "attachment": "pytong" },
+	{ "name": "pytong38", "bone": "bone43", "attachment": "pytong" },
+	{ "name": "pytong20", "bone": "bone19", "attachment": "pytong" },
+	{ "name": "pytong43", "bone": "bone48", "attachment": "pytong" },
+	{ "name": "pytong44", "bone": "bone49", "attachment": "pytong" },
+	{ "name": "pytong39", "bone": "bone44", "attachment": "pytong" },
+	{ "name": "pytong21", "bone": "bone20", "attachment": "pytong" },
+	{ "name": "pytong40", "bone": "bone45", "attachment": "pytong" },
+	{ "name": "pytong22", "bone": "bone21", "attachment": "pytong" },
+	{ "name": "pytong41", "bone": "bone46", "attachment": "pytong" },
+	{ "name": "pytong24", "bone": "bone23", "attachment": "pytong" },
+	{ "name": "pytong25", "bone": "bone24", "attachment": "pytong" },
+	{ "name": "pytong23", "bone": "bone22", "attachment": "pytong" },
+	{ "name": "pytong50", "bone": "bone55", "attachment": "pytong" },
+	{ "name": "pytong51", "bone": "bone56", "attachment": "pytong" },
+	{ "name": "pytong42", "bone": "bone47", "attachment": "pytong" },
+	{ "name": "pytong3", "bone": "bone4", "attachment": "pytong" },
+	{ "name": "pytong6", "bone": "bone7", "attachment": "pytong" },
+	{ "name": "pytong8", "bone": "bone9", "attachment": "pytong1" },
+	{ "name": "pytong9", "bone": "bone10", "attachment": "pytong1" },
+	{ "name": "pytong1", "bone": "root" },
+	{ "name": "pytong11", "bone": "bone11", "attachment": "pytong2" },
+	{ "name": "pytong12", "bone": "bone12", "attachment": "pytong2" },
+	{ "name": "pytong10", "bone": "root" },
+	{ "name": "pytong14", "bone": "bone13", "attachment": "pytong3" },
+	{ "name": "pytong15", "bone": "bone14", "attachment": "pytong3" },
+	{ "name": "pytong13", "bone": "root" },
+	{ "name": "dixia2", "bone": "bone27", "attachment": "dixia" },
+	{ "name": "dixia3", "bone": "bone29", "attachment": "dixia" },
+	{ "name": "dixia4", "bone": "bone30", "attachment": "dixia" },
+	{ "name": "dixia", "bone": "root" }
+],
+"skins": {
+	"default": {
+		"beijing2": {
+			"beijing": { "x": 27.03, "y": 865.16, "width": 1688, "height": 1734 }
+		},
+		"dixia2": {
+			"dixia": { "x": 26.27, "y": 2.62, "rotation": -90, "width": 119, "height": 212 }
+		},
+		"dixia3": {
+			"dixia": { "x": 26.27, "y": 2.62, "rotation": -90, "width": 119, "height": 212 }
+		},
+		"dixia4": {
+			"dixia": { "x": 26.27, "y": 2.62, "rotation": -90, "width": 119, "height": 212 }
+		},
+		"pytong": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong11": {
+			"pytong2": { "x": 34.7, "y": 0.01, "rotation": -90, "width": 114, "height": 207 }
+		},
+		"pytong12": {
+			"pytong2": { "x": 34.7, "y": 0.01, "rotation": -90, "width": 114, "height": 207 }
+		},
+		"pytong14": {
+			"pytong3": { "x": 44.07, "y": -1.36, "rotation": -90, "width": 114, "height": 207 }
+		},
+		"pytong15": {
+			"pytong3": { "x": 44.07, "y": -1.36, "rotation": -90, "width": 114, "height": 207 }
+		},
+		"pytong16": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong17": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong18": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong19": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong2": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong20": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong21": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong22": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong23": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong24": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong25": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong26": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong27": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong28": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong29": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong3": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong30": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong31": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong32": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong33": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong34": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong35": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong36": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong37": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong38": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong39": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong4": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong40": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong41": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong42": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong43": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong44": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong45": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong46": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong47": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong48": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong49": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong5": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong50": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong51": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong52": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong53": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong54": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong6": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong7": {
+			"pytong": { "rotation": -90, "width": 114, "height": 196 }
+		},
+		"pytong8": {
+			"pytong1": { "x": 27.27, "y": -2.42, "rotation": -90, "width": 114, "height": 207 }
+		},
+		"pytong9": {
+			"pytong1": { "x": 27.27, "y": -2.42, "rotation": -90, "width": 114, "height": 207 }
+		}
+	}
+},
+"animations": {
+	"animation": {
+		"slots": {
+			"beijing2": {
+				"attachment": [
+					{ "time": 0, "name": "beijing" }
+				]
+			},
+			"dixia2": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "dixia" },
+					{ "time": 1.6667, "name": null },
+					{ "time": 3.6667, "name": "dixia" },
+					{ "time": 4, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "dixia" },
+					{ "time": 7, "name": "dixia" }
+				]
+			},
+			"dixia3": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "dixia" },
+					{ "time": 1.6667, "name": null },
+					{ "time": 3.8333, "name": "dixia" },
+					{ "time": 4.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": "dixia" },
+					{ "time": 6.2, "name": "dixia" },
+					{ "time": 7, "name": "dixia" }
+				]
+			},
+			"dixia4": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "dixia" },
+					{ "time": 1.8333, "name": null },
+					{ "time": 4, "name": "dixia" },
+					{ "time": 4.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": "dixia" },
+					{ "time": 6.0333, "name": "dixia" },
+					{ "time": 6.2, "name": "dixia" },
+					{ "time": 7, "name": "dixia" }
+				]
+			},
+			"pytong": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 2, "name": null },
+					{ "time": 2.5, "name": "pytong" },
+					{ "time": 2.8333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": "pytong" },
+					{ "time": 5.5333, "name": "pytong" },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong2": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1.1667, "name": "pytong" },
+					{ "time": 1.3333, "name": null },
+					{ "time": 3.5, "name": "pytong" },
+					{ "time": 3.8333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong3": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1.3333, "name": "pytong" },
+					{ "time": 1.5, "name": null },
+					{ "time": 3.3333, "name": "pytong" },
+					{ "time": 3.6667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong4": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1.8333, "name": null },
+					{ "time": 2.6667, "name": "pytong" },
+					{ "time": 3, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": "pytong" },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1.8333, "name": null },
+					{ "time": 2.8333, "name": "pytong" },
+					{ "time": 3.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1.5, "name": "pytong" },
+					{ "time": 1.6667, "name": null },
+					{ "time": 3.1667, "name": "pytong" },
+					{ "time": 3.5, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong7": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1.6667, "name": null },
+					{ "time": 3, "name": "pytong" },
+					{ "time": 3.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong8": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong1" },
+					{ "time": 2, "name": null },
+					{ "time": 4.5, "name": "pytong1" },
+					{ "time": 4.8333, "name": null },
+					{ "time": 5, "name": null },
+					{ "time": 5.2, "name": "pytong1" },
+					{ "time": 5.3667, "name": "pytong1" },
+					{ "time": 5.5333, "name": "pytong1" },
+					{ "time": 5.7, "name": "pytong1" },
+					{ "time": 5.8667, "name": "pytong1" },
+					{ "time": 6.0333, "name": "pytong1" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong9": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong1" },
+					{ "time": 1.1667, "name": null },
+					{ "time": 3.1667, "name": "pytong1" },
+					{ "time": 3.5, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": "pytong1" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong11": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong2" },
+					{ "time": 2, "name": null },
+					{ "time": 4.3333, "name": "pytong2" },
+					{ "time": 4.6667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": "pytong2" },
+					{ "time": 5.7, "name": "pytong2" },
+					{ "time": 5.8667, "name": "pytong2" },
+					{ "time": 6.0333, "name": "pytong2" },
+					{ "time": 6.2, "name": "pytong2" },
+					{ "time": 7, "name": "pytong2" }
+				]
+			},
+			"pytong12": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong2" },
+					{ "time": 1.3333, "name": null },
+					{ "time": 3.3333, "name": "pytong2" },
+					{ "time": 3.6667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong2" },
+					{ "time": 7, "name": "pytong2" }
+				]
+			},
+			"pytong14": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong3" },
+					{ "time": 1.8333, "name": null },
+					{ "time": 4.1667, "name": "pytong3" },
+					{ "time": 4.5, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": "pytong3" },
+					{ "time": 5.8667, "name": "pytong3" },
+					{ "time": 6.0333, "name": "pytong3" },
+					{ "time": 6.2, "name": "pytong3" },
+					{ "time": 7, "name": "pytong3" }
+				]
+			},
+			"pytong15": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong3" },
+					{ "time": 1.5, "name": null },
+					{ "time": 3.5, "name": "pytong3" },
+					{ "time": 3.8333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong16": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 2.6667, "name": "pytong" },
+					{ "time": 3, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong17": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 2.8333, "name": "pytong" },
+					{ "time": 3.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong18": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 3, "name": "pytong" },
+					{ "time": 3.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong19": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 3.1667, "name": "pytong" },
+					{ "time": 3.5, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong20": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 3.6667, "name": "pytong" },
+					{ "time": 4, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong21": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 3.8333, "name": "pytong" },
+					{ "time": 4.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong22": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 4, "name": "pytong" },
+					{ "time": 4.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong23": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": "pytong" },
+					{ "time": 1, "name": null },
+					{ "time": 4.1667, "name": "pytong" },
+					{ "time": 4.5, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong24": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.8333, "name": "pytong" },
+					{ "time": 4.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong25": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": "pytong" },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.6667, "name": "pytong" },
+					{ "time": 4, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong26": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3, "name": "pytong" },
+					{ "time": 3.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong27": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": "pytong" },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.1667, "name": "pytong" },
+					{ "time": 3.5, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": "pytong" },
+					{ "time": 7, "name": "pytong" }
+				]
+			},
+			"pytong28": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 2, "name": null },
+					{ "time": 2.3333, "name": "pytong" },
+					{ "time": 2.6667, "name": null },
+					{ "time": 5.2, "name": "pytong" },
+					{ "time": 5.3667, "name": "pytong" },
+					{ "time": 5.5333, "name": "pytong" },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong29": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.3333, "name": null },
+					{ "time": 3, "name": "pytong" },
+					{ "time": 3.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong30": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.5, "name": null },
+					{ "time": 2.8333, "name": "pytong" },
+					{ "time": 3.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong31": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"pytong32": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.6667, "name": null },
+					{ "time": 2.6667, "name": "pytong" },
+					{ "time": 3, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": "pytong" },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong33": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.8333, "name": null },
+					{ "time": 2.5, "name": "pytong" },
+					{ "time": 2.8333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": "pytong" },
+					{ "time": 5.5333, "name": "pytong" },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong34": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 2.8333, "name": "pytong" },
+					{ "time": 3.1667, "name": null }
+				]
+			},
+			"pytong35": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3, "name": "pytong" },
+					{ "time": 3.3333, "name": null }
+				]
+			},
+			"pytong36": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.1667, "name": "pytong" },
+					{ "time": 3.5, "name": null }
+				]
+			},
+			"pytong37": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": "pytong" },
+					{ "time": 0.5, "name": "pytong" },
+					{ "time": 0.6667, "name": null },
+					{ "time": 3.3333, "name": "pytong" },
+					{ "time": 3.6667, "name": null }
+				]
+			},
+			"pytong38": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.1667, "name": null },
+					{ "time": 1.3333, "name": null },
+					{ "time": 3.6667, "name": "pytong" },
+					{ "time": 4, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong39": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.3333, "name": null },
+					{ "time": 1.5, "name": null },
+					{ "time": 3.8333, "name": "pytong" },
+					{ "time": 4.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong40": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.5, "name": null },
+					{ "time": 4, "name": "pytong" },
+					{ "time": 4.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong41": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.6667, "name": null },
+					{ "time": 4.1667, "name": "pytong" },
+					{ "time": 4.5, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong42": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": null },
+					{ "time": 0.8333, "name": null },
+					{ "time": 1, "name": "pytong" },
+					{ "time": 1.8333, "name": null },
+					{ "time": 4.3333, "name": "pytong" },
+					{ "time": 4.6667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": "pytong" },
+					{ "time": 5.5333, "name": "pytong" },
+					{ "time": 5.7, "name": "pytong" },
+					{ "time": 5.8667, "name": "pytong" },
+					{ "time": 6.0333, "name": "pytong" },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong43": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.5, "name": "pytong" },
+					{ "time": 3.8333, "name": null }
+				]
+			},
+			"pytong44": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.3333, "name": "pytong" },
+					{ "time": 3.6667, "name": null }
+				]
+			},
+			"pytong45": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": "pytong" },
+					{ "time": 0.6667, "name": null },
+					{ "time": 3.5, "name": "pytong" },
+					{ "time": 3.8333, "name": null }
+				]
+			},
+			"pytong46": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.6667, "name": "pytong" },
+					{ "time": 4, "name": null }
+				]
+			},
+			"pytong47": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.3333, "name": "pytong" },
+					{ "time": 3.6667, "name": null }
+				]
+			},
+			"pytong48": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.5, "name": "pytong" },
+					{ "time": 3.8333, "name": null }
+				]
+			},
+			"pytong49": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.6667, "name": "pytong" },
+					{ "time": 4, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong50": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 4, "name": "pytong" },
+					{ "time": 4.3333, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong51": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.8333, "name": "pytong" },
+					{ "time": 4.1667, "name": null },
+					{ "time": 5.2, "name": null },
+					{ "time": 5.3667, "name": null },
+					{ "time": 5.5333, "name": null },
+					{ "time": 5.7, "name": null },
+					{ "time": 5.8667, "name": null },
+					{ "time": 6.0333, "name": null },
+					{ "time": 6.2, "name": null },
+					{ "time": 7, "name": null }
+				]
+			},
+			"pytong52": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": "pytong" },
+					{ "time": 0.5, "name": "pytong" },
+					{ "time": 0.6667, "name": null },
+					{ "time": 3.5, "name": "pytong" },
+					{ "time": 3.8333, "name": null }
+				]
+			},
+			"pytong53": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": null },
+					{ "time": 0.6667, "name": "pytong" },
+					{ "time": 0.8333, "name": null },
+					{ "time": 3.1667, "name": "pytong" },
+					{ "time": 3.5, "name": null }
+				]
+			},
+			"pytong54": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.5, "name": "pytong" },
+					{ "time": 0.6667, "name": null },
+					{ "time": 3.3333, "name": "pytong" },
+					{ "time": 3.6667, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"bone": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone2": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone3": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone4": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone5": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone6": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone7": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone8": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone15": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone16": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone17": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone18": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone19": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone20": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone21": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone22": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone23": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone24": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone25": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone26": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"root": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone9": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone10": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone11": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone12": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone13": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone14": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone27": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone29": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone30": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone28": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone31": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone32": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone33": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone34": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone36": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone37": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone38": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone39": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone40": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone41": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone43": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone44": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone45": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone46": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone47": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone42": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone48": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone49": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone50": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone51": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone52": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone53": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone54": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone55": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone56": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone57": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone58": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone59": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			},
+			"bone35": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 6.2, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 7, "x": 0, "y": 0 }
+				]
+			}
+		}
+	}
+}
+}

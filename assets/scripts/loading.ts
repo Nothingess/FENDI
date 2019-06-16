@@ -12,8 +12,25 @@ export class loading extends cc.Component {
     @property({tooltip:"加载的下一个场景"})
     nextScene:string = "01startScene";
 
+    private currPro:number  = 0;
+    private maxPro:number = 0;
+    private isComplete:boolean = false;
+
     start () {
         this.load();
+    }
+
+    update(dt):void{
+        if(this.isComplete && this.currPro >= 1){
+            cc.director.loadScene(this.nextScene);
+        }
+        if(this.currPro < this.maxPro){
+            this.currPro += dt * .5;
+
+            this.bar.fillRange = this.currPro;
+            this.mark.x = this.bar.node.width * this.bar.fillRange;
+            this.txt.string = `${(this.bar.fillRange * 100).toFixed(2)}%`;
+        }
     }
 
     private load():void{
@@ -21,14 +38,13 @@ export class loading extends cc.Component {
     }
 
     private onProgress(com:number, total:number, item:any):void{
-        this.bar.fillRange = com / total;
-        this.mark.x = this.bar.node.width * this.bar.fillRange;
-        this.txt.string = `${(this.bar.fillRange * 100).toFixed(2)}%`;
+        if((com / total) > this.maxPro)
+            this.maxPro = com / total;
     }
     private complete():void{
         cc.loader.loadResDir("prefabs/uiPanels", this.onProgress.bind(this), this.completeRes.bind(this));
     }
     private completeRes():void{
-        cc.director.loadScene(this.nextScene);
+        this.isComplete = true;
     }
 }

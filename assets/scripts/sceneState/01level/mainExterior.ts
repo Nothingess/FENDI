@@ -52,6 +52,7 @@ export class mainExterior{
 
         //this.zoom();
         EventManager.getInstance().addEventListener(EventType.zoomTrigger, this.onZoomTrigger.bind(this), "mainExterior");
+        AudioManager.getInstance().playBGM(AudioType.BGM_1);
     }
     private createRole():void{
         let self = this;

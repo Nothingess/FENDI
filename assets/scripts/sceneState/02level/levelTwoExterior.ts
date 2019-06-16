@@ -43,6 +43,8 @@ export class levelTwoExterior {
         this.heart = cc.find("Canvas/UILayer/uiElement/heart");
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
         this.heartLess = cc.find("Canvas/run_layer/player_layer/heart_less");
+
+        AudioManager.getInstance().playBGM(AudioType.BGM_2);
     }
 
     private createRole():void{
