@@ -13,6 +13,8 @@ let level_1:Array<string> = [
     "prefabs/bgModule/01level/01screen_g2",
     "prefabs/bgModule/01level/01screen_g3",
     "prefabs/bgModule/01level/01screen_g4",
+    "jsons/bgm_1",
+    "prefabs/obstacle/fountain"
 
 ]
 let level_2:Array<string> = [
@@ -144,11 +146,12 @@ export class loadPanel extends IUIBase {
         GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
 
         while(count < 3){
-            for(let i = 1; i < 5; i++){
+            for(let i = 1; i < 4; i++){
                 GameLoop.getInstance().buildNode.push(cc.instantiate(res[i]));
             }
             count++;
         }
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[4]));
         GameLoop.getInstance().buildNode.push(cc.instantiate(res[5]));
 
         count = 0;

@@ -209,7 +209,7 @@ export class mainExterior{
     public decelerate():void{
         let layer:cc.Node = cc.find("Canvas/run_layer");
         layer.children[3].getComponent(LayerRun).setSpeed();
-        layer.children[5].getComponent(LayerRun).setSpeed();
+        layer.children[6].getComponent(LayerRun).setSpeed();
     }
     /**设置运动速度的倍率 */
     public setMultiple(val:number):void{
