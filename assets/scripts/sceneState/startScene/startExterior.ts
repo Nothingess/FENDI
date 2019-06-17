@@ -58,7 +58,6 @@ export class startExterior {
     private logo:cc.Node = null;                    //logo
     private uiElement: cc.Node = null;
     private bgAction:cc.Node = null;                //背景动画节点
-    private isDestroyBgAction:boolean = false;      //是否销毁开始动画
 
     private init():void{
         this.initComponents();
@@ -152,7 +151,11 @@ export class startExterior {
 
         this.playBgAction();
         this.onBtnEvent();
-        AudioManager.getInstance().stopBgm();
+
+        let isMute:boolean = GameLoop.getInstance().isMuteAudio;
+        let setBtnSp:settingBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
+        this.musicBtn.getComponent(cc.Sprite).spriteFrame = isMute?setBtnSp.bgs[4]:setBtnSp.bgs[3];
+        AudioManager.getInstance().playBGM(AudioType.BGM_1);
     }
     /**初始化UI元素位置 */
     private initUIPos():void{
@@ -167,13 +170,14 @@ export class startExterior {
     public setSceneState(mStartState:startSceneState):void{
         this.mStartState = mStartState;
     }
-    public enterMainState():void{
+
+    public setMainState():void{
         this.mStartState.setMainState();
     }
-    public enterLevel_2():void{
+    public setLevel_2State():void{
         this.mStartState.setLevel_2State();
     }
-    public enterLevel_3():void{
+    public setLevel_3State():void{
         this.mStartState.setLevel_3State();
     }
     public update():void{
@@ -187,7 +191,9 @@ export class startExterior {
         this.desBtn.off("touchend", this.ondesBtn, this);
 
         this.leftBtn.off("touchend", this.onSelectLeft, this);
-        this.rightBtn.off("touchend", this.onSelectRight, this); 
+        this.rightBtn.off("touchend", this.onSelectRight, this);
+
+        startExterior.endInstance();
     }
 
     //#region 监听事件

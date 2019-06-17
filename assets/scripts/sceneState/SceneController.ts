@@ -12,6 +12,7 @@ export class SceneController {
      * @param isLoadScene 是否需要切换场景（默认需要）
      */
     public setState(sceneState:ISceneState, isLoadScene:boolean = true){
+        console.log(1111111);
         if(this.mSceneState != null){
             this.mSceneState.stateEnd();
         }

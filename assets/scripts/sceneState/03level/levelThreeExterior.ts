@@ -23,7 +23,6 @@ export class levelThreeExterior {
     private lvThreeState:level_3State = null;
     public uiMgr:UISystem = null;
     public pyCtrl:FlyCtrl = null;
-
     private init():void{
         this.initComponent();
     }
@@ -62,15 +61,27 @@ export class levelThreeExterior {
     public gotoStartState():void{
         this.lvThreeState.setStartState();
     }
+
+    public setMainState():void{
+        this.lvThreeState.setMainState();
+    }
+    public setLevel_2State():void{
+        this.lvThreeState.setLevel_2State();
+    }
+    public setLevel_3State():void{
+        this.lvThreeState.setLevel_3State();
+    }
+    
     public update():void{
         this.uiMgr.sysUpdate();
     }
     public end():void{
         this.uiMgr.sysRelease();
+        levelThreeExterior.endInstance();
     }
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
-        this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+        this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelThreeExterior.getInstance()]);
     }
 
     public stop():void{

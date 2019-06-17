@@ -49,9 +49,12 @@ export class loadPanel extends IUIBase {
     private txt:cc.Label = null;
     private loadScene:string = "";
 
+    private speed:number = .5;
     private currPro:number  = 0;
     private maxPro:number = 0;
     private isComplete:boolean = false;
+
+    private isAlreadyLoadScene:boolean = false;     //是否已经切换场景
 
     public initStrategy():void{
         this.mOpenStrategy = new strateC(this.skin);
@@ -64,19 +67,21 @@ export class loadPanel extends IUIBase {
 
     update(dt):void{
         if(this.isComplete && this.currPro >= 1){
+            if(this.isAlreadyLoadScene)return;
+            this.isAlreadyLoadScene = true;
             if(this.loadScene == "01level"){
-                startExterior.getInstance().enterMainState();
+                this.args[1].setMainState();
             }else if(this.loadScene == "02level"){
-                startExterior.getInstance().enterLevel_2();
+                this.args[1].setLevel_2State();
             }else if(this.loadScene == "03level"){
-                startExterior.getInstance().enterLevel_3();
+                this.args[1].setLevel_3State();
             }
             else if(this.loadScene == "01startScene"){
                 this.args[1].gotoStartState();
             }
         }
         if(this.currPro < this.maxPro){
-            this.currPro += dt * .5;
+            this.currPro += dt * this.speed;
 
             this.pro.fillRange = this.currPro;
             this.mark.x = this.pro.node.width * this.pro.fillRange;
@@ -92,6 +97,13 @@ export class loadPanel extends IUIBase {
         this.pro = cc.find("pro/bar", this.skin).getComponent(cc.Sprite);
         this.mark = cc.find("pro/bar/mark", this.skin);
         this.txt = this.mark.getComponentInChildren(cc.Label);
+
+        if(!!this.args){
+            if(this.args[2] != null){
+                this.speed = this.args[2];
+            }
+        }
+            
     }
 
     public onShowed():void{

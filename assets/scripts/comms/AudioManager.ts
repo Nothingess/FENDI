@@ -96,9 +96,13 @@ export class AudioManager {
     public stopBgm():void{
         cc.audioEngine.stopMusic();
     }
+    public pauseMusic():void{
+        if(cc.audioEngine.isMusicPlaying())
+            cc.audioEngine.pauseMusic();
+    }
     public resumeBGM()
     {
-        cc.audioEngine.stopMusic();
+/*         cc.audioEngine.stopMusic();
         let path = GlobalVar.ConstVal.AUDIO_DIR + this.bgm;
         //cc.audioEngine.play(cc.url.raw(path), loop?loop:false, volume?volume:1);
         cc.loader.loadRes(path, cc.AudioClip, function (err, clip) {
@@ -108,6 +112,9 @@ export class AudioManager {
                 return;
             }
 		    cc.audioEngine.playMusic(clip, true);
-		});
+        }); */
+        if(!cc.audioEngine.isMusicPlaying()){
+            cc.audioEngine.resumeMusic();
+        }
     }
 }

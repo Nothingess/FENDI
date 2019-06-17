@@ -1523,7 +1523,7 @@
       "__id__": 43
     },
     "_enabled": true,
-    "tag": 3,
+    "tag": 13,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1648,7 +1648,7 @@
       "__id__": 49
     },
     "_enabled": true,
-    "tag": 3,
+    "tag": 12,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": -30.6,

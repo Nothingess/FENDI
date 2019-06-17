@@ -16,22 +16,39 @@ export class trigger extends cc.Component {
     public b2: cc.Node = null;
 
     onCollisionEnter(other, self) {
-        if(other.tag === 10){//玩家
-            this.clearMask();
-        }else if(other.tag === 7){
-            if(GameLoop.getInstance().currIndex == 0){
-                mainExterior.getInstance().stop();
-                mainExterior.getInstance().pyCtrl.complete();
-            }
-            else if(GameLoop.getInstance().currIndex == 1){
-                levelTwoExterior.getInstance().stop();
-                levelTwoExterior.getInstance().pyCtrl.complete();
-            }
-            else if(GameLoop.getInstance().currIndex == 2){
-                levelThreeExterior.getInstance().stop();
-                levelThreeExterior.getInstance().pyCtrl.complete();
-            }
+        switch(other.tag){
+            case 7:
+                if(GameLoop.getInstance().currIndex == 0){
+                    mainExterior.getInstance().stop();
+                    mainExterior.getInstance().pyCtrl.complete();
+                }
+                else if(GameLoop.getInstance().currIndex == 1){
+                    levelTwoExterior.getInstance().stop();
+                    levelTwoExterior.getInstance().pyCtrl.complete();
+                }
+                else if(GameLoop.getInstance().currIndex == 2){
+                    levelThreeExterior.getInstance().stop();
+                    levelThreeExterior.getInstance().pyCtrl.complete();
+                }
+            break;
+            case 10:
+                this.clearMask();
+            break;
+            case 11:
+            case 12:
+            case 13:
+                if(GameLoop.getInstance().currIndex == 0){
+                    mainExterior.getInstance().triggerObs(other.node, other.tag);
+                }
+                else if(GameLoop.getInstance().currIndex == 1){
+                    levelTwoExterior.getInstance().triggerObs(other.node, other.tag);
+                }
+                else if(GameLoop.getInstance().currIndex == 2){
+
+                }
+            break;
         }
+
     }
 
     private clearMask():void{

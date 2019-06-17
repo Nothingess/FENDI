@@ -32,6 +32,7 @@ export class levelTwoExterior {
     private scoreLa:cc.Label = null;
     private heartLess:cc.Node = null;
 
+    private obsType:Array<number> = new Array<number>();
     private init():void{
         this.initComponent();
     }
@@ -53,14 +54,14 @@ export class levelTwoExterior {
         if(GameLoop.getInstance().isMan){
             cc.loader.loadRes("prefabs/manRole", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
-                cc.find("Canvas/run_layer/player_layer").addChild(node);
+                cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
                 self.pyCtrl = node.getComponent(playerCtrl);
                 self.pyCtrl.state = 1;
             })
         }else{
             cc.loader.loadRes("prefabs/womanRole", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
-                cc.find("Canvas/run_layer/player_layer").addChild(node);
+                cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
                 self.pyCtrl = node.getComponent(playerCtrl);
                 self.pyCtrl.state = 1;
             })
@@ -73,15 +74,27 @@ export class levelTwoExterior {
     public gotoStartState():void{
         this.lvTwoState.setStartState();
     }
+
+    public setMainState():void{
+        this.lvTwoState.setMainState();
+    }
+    public setLevel_2State():void{
+        this.lvTwoState.setLevel_2State();
+    }
+    public setLevel_3State():void{
+        this.lvTwoState.setLevel_3State();
+    }
+
     public update():void{
         this.uiMgr.sysUpdate();
     }
     public end():void{
         this.uiMgr.sysRelease();
+        levelTwoExterior.endInstance();
     }
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
-        this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+        this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelTwoExterior.getInstance()]);
         this.uploadScore();
     }
 
@@ -114,7 +127,7 @@ export class levelTwoExterior {
         }
         if(this.heartNum == 0){
             AudioManager.getInstance().playSound(AudioType.LOST);
-            this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+            this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelTwoExterior.getInstance()]);
             this.stop();
             this.pyCtrl.stop();
         }
@@ -132,6 +145,28 @@ export class levelTwoExterior {
                 cc.fadeOut(.5)
             )
         )
+    }
+
+    public triggerObs(node:cc.Node, tag:number):void{
+        if(this.obsType.indexOf(tag) >= 0)return;
+        this.obsType.push(tag);
+        if(tag > 11){
+            this.showObsTip(node, 1);
+        }else{
+            this.showObsTip(node, 0);
+        }
+    }
+    /**显示障碍物的提示
+     * ty: 障碍物的动作类型 0-下蹲 1-跳
+     */
+    public showObsTip(node:cc.Node, ty:number):void{
+        cc.loader.loadRes(`prefabs/other/${ty == 0?"dd":"jj"}`, cc.Prefab, (err, res)=>{
+            let child:cc.Node = cc.instantiate(res);
+            node.addChild(child);
+            child.setPosition(cc.v2(0, node.height * .5));
+            child.scale = 0;
+            child.runAction(cc.sequence(cc.delayTime(.5),cc.scaleTo(.3, 1).easing(cc.easeBackInOut())));
+        })
     }
 
     public uploadScore(K:string = "rank_2", V:string = `${this.score}`):void{

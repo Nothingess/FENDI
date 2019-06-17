@@ -5,6 +5,7 @@ import { mainExterior } from "./sceneState/01level/mainExterior";
 import { levelThreeExterior } from "./sceneState/03level/levelThreeExterior";
 import { loadPanel } from "./uiSystem/loadPanel";
 import { levelTwoExterior } from "./sceneState/02level/levelTwoExterior";
+import { AudioManager } from "./comms/AudioManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -62,6 +63,11 @@ export class GameLoop extends cc.Component {
 
     public onMusicBtn():boolean{
         this.isMuteAudio = !this.isMuteAudio;
+        if(this.isMuteAudio){
+            AudioManager.getInstance().pauseMusic();
+        }else{
+            AudioManager.getInstance().resumeBGM();
+        }
         return this.isMuteAudio;
     }
 
@@ -76,12 +82,12 @@ export class GameLoop extends cc.Component {
     }
     public gotoStartScene():void{
         if(this.currIndex == 0)
-            mainExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", mainExterior.getInstance()]);
+            mainExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", mainExterior.getInstance(), 1]);
         else if(this.currIndex == 1){
-            levelTwoExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelTwoExterior.getInstance()]);
+            levelTwoExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelTwoExterior.getInstance(), 1]);
         }
         else if(this.currIndex == 2)
-            levelThreeExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelThreeExterior.getInstance()]);
+            levelThreeExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelThreeExterior.getInstance(), 1]);
     }
 
     private DownLoadSubPack():void{

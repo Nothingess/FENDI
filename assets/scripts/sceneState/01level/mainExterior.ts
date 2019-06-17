@@ -37,6 +37,8 @@ export class mainExterior{
 
     private runLayer:cc.Node = null;              //摄像机
 
+    private obsType:Array<number> = new Array<number>();
+
     private init():void{
         this.initComponent();
     }
@@ -71,18 +73,30 @@ export class mainExterior{
             })
         }
     }
-    public setMainState(main:mainSceneState):void{
+    public setLevel_1State(main:mainSceneState):void{
         this.mainState = main;
     }
     public gotoStartState():void{
         this.mainState.setStartState();
     }
+
+    public setMainState():void{
+        this.mainState.setMainState();
+    }
+    public setLevel_2State():void{
+        this.mainState.setLevel_2State();
+    }
+    public setLevel_3State():void{
+        this.mainState.setLevel_3State();
+    }
+
     public update():void{
         this.uiMgr.sysUpdate();
     }
     public end():void{
         this.uiMgr.sysRelease();
         EventManager.getInstance().removeEventListenerByTag(EventType.zoomTrigger, "mainExterior");
+        mainExterior.endInstance();
     }
 
     //#region 监听事件
@@ -114,7 +128,7 @@ export class mainExterior{
         }
         if(this.heartNum == 0){
             AudioManager.getInstance().playSound(AudioType.LOST);
-            this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+            this.uiMgr.openPanel(accountsPanel, "accountsPanel", [mainExterior.getInstance()]);
             this.isGameOver = true;
             this.stop();
             this.pyCtrl.stop();
@@ -134,9 +148,32 @@ export class mainExterior{
             )
         )
     }
+
+    public triggerObs(node:cc.Node, tag:number):void{
+        if(this.obsType.indexOf(tag) >= 0)return;
+        this.obsType.push(tag);
+        if(tag > 11){
+            this.showObsTip(node, 1);
+        }else{
+            this.showObsTip(node, 0);
+        }
+    }
+    /**显示障碍物的提示
+     * ty: 障碍物的动作类型 0-下蹲 1-跳
+     */
+    public showObsTip(node:cc.Node, ty:number):void{
+        cc.loader.loadRes(`prefabs/other/${ty == 0?"dd":"jj"}`, cc.Prefab, (err, res)=>{
+            let child:cc.Node = cc.instantiate(res);
+            node.addChild(child);
+            child.setPosition(cc.v2(0, node.height * .5));
+            child.scale = 0;
+            child.runAction(cc.sequence(cc.delayTime(.5),cc.scaleTo(.3, 1).easing(cc.easeBackInOut())));
+        })
+    }
+
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
-        this.uiMgr.openPanel(accountsPanel, "accountsPanel");
+        this.uiMgr.openPanel(accountsPanel, "accountsPanel", [mainExterior.getInstance()]);
         this.uploadScore();
     }
     public zoomIn():void{
@@ -186,6 +223,7 @@ export class mainExterior{
             }
         })
     }
+    /**上传游戏分数 */
     public uploadScore(K:string = "rank_1", V:string = `${this.score}`):void{
         if(GameLoop.getInstance().platform == null)return;
         GameLoop.getInstance().platform.setUserCloudStorage(

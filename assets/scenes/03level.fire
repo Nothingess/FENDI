@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.4557278132762742,
-      "y": 0.4557278132762742,
+      "x": 0.7506666666666667,
+      "y": 0.7506666666666667,
       "z": 1
     },
     "_quat": {
@@ -82,9 +82,6 @@
     "_components": [
       {
         "__id__": 151
-      },
-      {
-        "__id__": 152
       }
     ],
     "_prefab": null,
@@ -5448,23 +5445,5 @@
     "_fitWidth": false,
     "_fitHeight": true,
     "_id": "a7pr2E83NG3qvy8kUY+WBE"
-  },
-  {
-    "__type__": "cc.AudioSource",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "_clip": {
-      "__uuid__": "1101c4a9-2a06-4366-a620-4e5e2be273a4"
-    },
-    "_volume": 1,
-    "_mute": false,
-    "_loop": true,
-    "playOnLoad": true,
-    "preload": false,
-    "_id": "0c4Sd0vE5HsKLdfdoCgaet"
   }
 ]

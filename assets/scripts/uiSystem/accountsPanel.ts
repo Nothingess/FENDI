@@ -2,6 +2,7 @@ import { IUIBase, PanelLayer } from "./IUIBase";
 import { strateC } from "./openAction/IOpenStrategy";
 import { GameLoop } from "../GameLoop";
 import { AudioType, AudioManager } from "../comms/AudioManager";
+import { loadPanel } from "./loadPanel";
 
 export class accountsPanel extends IUIBase {
 
@@ -57,6 +58,7 @@ export class accountsPanel extends IUIBase {
 
     private onBtnEvent():void{
         this.backBtn.on("touchend", this.onBackBtn, this);
+        this.continueBtn.on("touchend", this.onContinueBtn, this);
     }
 
 
@@ -91,11 +93,21 @@ export class accountsPanel extends IUIBase {
         GameLoop.getInstance().gotoStartScene();
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
+    private onContinueBtn():void{
+        if(GameLoop.getInstance().currIndex == 0){
+            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["01level", this.args[0], 1]);
+        }else if(GameLoop.getInstance().currIndex == 1){
+            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["02level", this.args[0], 1]);
+        }else{
+            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["03level", this.args[0], 1]);
+        }
+    }
     //#endregion
 
 
     onDestroy():void{
         this.backBtn.off("touchend", this.onBackBtn, this);
+        this.continueBtn.off("touchend", this.onContinueBtn, this);
     }
 
 }

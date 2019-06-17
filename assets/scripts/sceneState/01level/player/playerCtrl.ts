@@ -5,6 +5,7 @@ import { GameLoop } from "../../../GameLoop";
 import { levelThreeExterior } from "../../03level/levelThreeExterior";
 import { AudioManager, AudioType } from "../../../comms/AudioManager";
 import { levelTwoExterior } from "../../02level/levelTwoExterior";
+import { smoke } from "../../../other/smoke";
 
 const {ccclass, property} = cc._decorator;
 
@@ -36,7 +37,8 @@ export class playerCtrl extends cc.Component {
     private collCount:number = 0;                               //记录玩家碰撞其它collider的数量
     private obstacleCount:number = 0;                           //碰到的障碍物个数
     private rightStepNode:cc.Node = null;                       //右台阶
-    public spCtrl:ISpineCtrl = null;                           //spine动画控制器
+    public spCtrl:ISpineCtrl = null;                            //spine动画控制器
+    private smokeCtrl:smoke = null;                             //烟雾控制，起跳和下落时
 
     private isUpCol:boolean = false;            //在障碍物上边
     private isLeftCol:boolean = false;          //在障碍物左边
@@ -69,6 +71,7 @@ export class playerCtrl extends cc.Component {
         this.squatBtn = cc.find("Canvas/UILayer/uiElement/squat_btn");
         this.jumpBtn = cc.find("Canvas/UILayer/uiElement/jump_btn");
         this.cameraShake = cc.find("Canvas/Main Camera").getComponent(CameraShake);
+        this.smokeCtrl = cc.find("Canvas/run_layer/ground_layer/smoke").getComponent(smoke);
     }
 
     start():void{
@@ -84,8 +87,10 @@ export class playerCtrl extends cc.Component {
 
         if(this.state == 0)
             this.spCtrl.jump();
-        else if(this.state == 1)
+        else if(this.state == 1){
             this.spCtrl.motuo_run();
+            this.changeColSizeMotuo(1);
+        }
     }
 
     public changeState(playerState:PlayerState):void{
@@ -124,7 +129,7 @@ export class playerCtrl extends cc.Component {
             this.squatUpdate();
 
         if(this.isComplete){
-            this.node.x += dt * GameLoop.getInstance().currIndex == 0?3:3;
+            this.node.x += dt * GameLoop.getInstance().currIndex == 0?3:6;
         }
         else{
             if(this.isNeedCheck){
@@ -164,7 +169,7 @@ export class playerCtrl extends cc.Component {
         else if(this.state == 1)
             this.spCtrl.motuo_jump();
 
-        //console.log("jumpStart");
+        this.smokeCtrl.play(this.node.position);
     }
     private downStart():void{
         this.mPlayerState = PlayerState.down;
@@ -235,7 +240,9 @@ export class playerCtrl extends cc.Component {
                 if(this.mPlayerState != PlayerState.squat)
                     this.changeState(PlayerState.idle);
             break;
-            case 3://障碍物
+            case 11://障碍物
+            case 12:
+            case 13:
                 this.obstacleCount++;
                 if(this.isCollisionLeft(other, self)){
                     this.isUpCol = false;
@@ -311,7 +318,7 @@ export class playerCtrl extends cc.Component {
     }
     onCollisionExit(other, self) {
         this.collCount--;
-        if(other.tag == 3){
+        if(other.tag == 11 || other.tag == 12 || other.tag == 13){
             this.obstacleCount--;
             if(this.collCount == 0){
                 if(this.isUpCol && this.mPlayerState != PlayerState.jump){

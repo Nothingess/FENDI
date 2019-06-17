@@ -96,12 +96,12 @@ export class selectPanel extends IUIBase {
         AudioManager.getInstance().playSound(AudioType.CLICK);
         GameLoop.getInstance().currIndex = startExterior.getInstance().currIndex;
         if(GameLoop.getInstance().currIndex == 0)
-            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level"]);
+            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["01level", startExterior.getInstance()]);
         else if(GameLoop.getInstance().currIndex == 1){
-            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["02level"]);
+            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["02level", startExterior.getInstance()]);
         }
         else if(GameLoop.getInstance().currIndex == 2)
-            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["03level"]);
+            startExterior.getInstance().uiSys.openPanel(loadPanel, "loadPanel", ["03level", startExterior.getInstance()]);
     }
 
     onDestroy():void{

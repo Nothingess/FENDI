@@ -54,10 +54,14 @@
       }
     ],
     "_active": true,
-    "_level": 3,
-    "_components": [],
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 66
+      }
+    ],
     "_prefab": {
-      "__id__": 66
+      "__id__": 67
     },
     "_opacity": 255,
     "_color": {
@@ -812,7 +816,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "b24",
+    "_name": "room",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1226,7 +1230,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "b24 copy",
+    "_name": "room",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1640,7 +1644,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "b24 copy",
+    "_name": "room",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -2276,6 +2280,50 @@
     },
     "fileId": "e1LNNNgJBIWLvTXNr5tgQC",
     "sync": false
+  },
+  {
+    "__type__": "b7e6a40KOdBLZGcORjtx2YB",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "rooms": [
+      {
+        "__uuid__": "b44e34f6-d1f7-4d02-b5be-51474e51fba9"
+      },
+      {
+        "__uuid__": "467d05ad-a3c6-496e-ae07-ec4bb2af143f"
+      },
+      {
+        "__uuid__": "98511e5a-3e92-49ae-b82d-97235a45b7cd"
+      },
+      {
+        "__uuid__": "df5d9377-56bb-4f03-98dc-48beb4f4fe3c"
+      },
+      {
+        "__uuid__": "e479d1a6-7668-4bc7-a5d6-e49899b2ca82"
+      },
+      {
+        "__uuid__": "17565764-0076-4775-b89a-04bba60284da"
+      },
+      {
+        "__uuid__": "5d5211e6-cc43-4f62-9844-bc081f1f6e1d"
+      }
+    ],
+    "nodes": [
+      {
+        "__id__": 23
+      },
+      {
+        "__id__": 35
+      },
+      {
+        "__id__": 47
+      }
+    ],
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
