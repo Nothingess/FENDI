@@ -1,6 +1,8 @@
 export enum EventType{
     zoomTrigger = 1,
-    zoomIn
+    zoomIn,
+    onHide,
+    onShow
 }
 
 interface IEvent {

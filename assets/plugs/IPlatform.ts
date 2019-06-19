@@ -1,32 +1,39 @@
 export class IPlatform {
 
-    public liuhai:number = 0;           //设备刘海高度
-    
-    public init () : void {
+    public liuhai: number = 0;           //设备刘海高度
+
+    public init(): void {
 
     }
-    public setUserCloudStorage(KVData:Array<{key:string, value:string}>):void{}
+    public setUserCloudStorage(KVData: Array<{ key: string, value: string }>): void { }
     /**
      * 场景id: 1/2/3
      * 分数值
      */
-    public saveFile(sc:number, score:string):void{}
-    public shareAppMessage():void{}
-    public showToast(context:string, icon:number, isMask:boolean = true):void{}
-    public hideToast():void{}
-    public showLoading(context:string, isMask:boolean = true):void{}
-    public hideLoading():void{}
+    public saveFile(sc: number, score: string): void { }
+    public shareAppMessage(): void { }
+    public showToast(context: string, icon: number, isMask: boolean = true): void { }
+    public hideToast(): void { }
+    public showLoading(context: string, isMask: boolean = true): void { }
+    public hideLoading(): void { }
+    public showModal(tip:string, context:string, trueCall, falseCall):void{}
 
-    public postMessageToOpenDataContext(data:any):void{}
+    public postMessageToOpenDataContext(data: any): void { }
+    public requestNet(): void { }
+
+    public onShow(callback: (res) => void): void { }
+    public onHide(callback: (res) => void): void { }
+    public offShow(callback: (res) => void): void { }
+    public offHide(callback: (res) => void): void { }
 }
 
 export class WeChatPlatform extends IPlatform {
 
     private _canvas = null;
 
-    public init():void{
+    public init(): void {
         if (typeof wx === 'undefined') return;
- 
+
         let systemInfo = wx.getSystemInfoSync();
         this.liuhai = systemInfo.statusBarHeight;           //后面可存为全局数据信息
         let width = systemInfo.windowWidth;
@@ -47,56 +54,56 @@ export class WeChatPlatform extends IPlatform {
                 borderRadius: 4
             }
         });
- 
+
         button.onTap((res) => {
             let userInfo = res.userInfo;
             if (!userInfo) {
                 //this.tips.string = res.errMsg;
                 return;
             }
- 
-            cc.loader.load({url: userInfo.avatarUrl, type: 'png'}, (err, texture) => {
+
+            cc.loader.load({ url: userInfo.avatarUrl, type: 'png' }, (err, texture) => {
                 if (err) {
                     console.error(err);
                     return;
                 }
                 //this.avatar.spriteFrame = new cc.SpriteFrame(texture);
             });
- 
-/*             wx.getOpenDataContext().postMessage({
-                message: "User info get success."
-            }); */
- 
-/*             this.wxSubContextView.runAction(this._showAction);
-            this._isShow = true; */
- 
+
+            /*             wx.getOpenDataContext().postMessage({
+                            message: "User info get success."
+                        }); */
+
+            /*             this.wxSubContextView.runAction(this._showAction);
+                        this._isShow = true; */
+
             button.hide();
             button.destroy();
         });
     }
-    public setUserCloudStorage(KVData:Array<{key:string, value:string}>):void{
+    public setUserCloudStorage(KVData: Array<{ key: string, value: string }>): void {
         console.log("setUserCloudStorage")
-        this.postMessageToOpenDataContext({k:`${KVData[0].key}`, v:`${KVData[0].value}`})
-/*         wx.setUserCloudStorage({
-            KVDataList:KVData,
-            success:()=>{
-                console.log("上传数据成功！")
-            },
-            fail:()=>{
-                console.log("上传数据失败！")
-            },
-            complete:()=>{}
-        }) */
+        this.postMessageToOpenDataContext({ k: `${KVData[0].key}`, v: `${KVData[0].value}` })
+        /*         wx.setUserCloudStorage({
+                    KVDataList:KVData,
+                    success:()=>{
+                        console.log("上传数据成功！")
+                    },
+                    fail:()=>{
+                        console.log("上传数据失败！")
+                    },
+                    complete:()=>{}
+                }) */
     }
     // 加载资源----step1
-    public saveFile(sc:number, score:string):boolean{
+    public saveFile(sc: number, score: string): boolean {
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             this.showToast("海报生成中...", 1);
 
             const ths = this;
 
             // img: 图片保存对象; src: 图片资源路径
-            let url:string = `https://cdn.duligame.cn/minigame-fendi/imgs/scene_${sc}.png`;
+            let url: string = `https://cdn.duligame.cn/minigame-fendi/imgs/scene_${sc}.png`;
             let imgArr = [
                 { img: null, src: url },
             ]
@@ -130,62 +137,109 @@ export class WeChatPlatform extends IPlatform {
             return false;
         }
     }
-    public shareAppMessage():void{
+    public shareAppMessage(): void {
         console.log("shareAppMessage")
         wx.shareAppMessage({
-            title:"",
-            imageUrl:"https://cdn.duligame.cn/minigame-fendi/imgs/share.jpg"
+            title: "",
+            imageUrl: "https://cdn.duligame.cn/minigame-fendi/imgs/share.jpg"
         })
     }
-    public showToast(context:string, icon:number, isMask:boolean = true):void{
-        let iconStr:string = "";
-        iconStr = (icon == 0)?"success":(icon == 1)?"loading":"none";
+    public showToast(context: string, icon: number, isMask: boolean = true): void {
+        let iconStr: string = "";
+        iconStr = (icon == 0) ? "success" : (icon == 1) ? "loading" : "none";
         wx.showToast({
             title: context,
             icon: iconStr,
             duration: 2000,
-            mask:isMask
-          })
+            mask: isMask
+        })
     }
-    public hideToast():void{
+    public hideToast(): void {
         wx.hideToast();
     }
-    public showLoading(context:string, isMask:boolean = true):void{
+    public showLoading(context: string, isMask: boolean = true): void {
         wx.showLoading({
             title: context,
-            mask:isMask
-          })
-          
+            mask: isMask
+        })
+
     }
-    public hideLoading():void{
+    public hideLoading(): void {
         wx.hideLoading();
     }
-    /**向开放数据域传递消息 */
-    public postMessageToOpenDataContext(data:any):void{
-        wx.getOpenDataContext().postMessage(data);
-    }
-    public requestNet():void{
-        wx.request({
-            url: 'test.php', //仅为示例，并非真实的接口地址
-            data: {
-              x: '',
-              y: ''
-            },
-            header: {
-              'content-type': 'application/json' // 默认值
-            },
-            method:"",
-            
-            success:(res)=>{
-              console.log(res.data)
+    public showModal(tip:string, context:string, trueCall, falseCall):void{
+        wx.showModal({
+            title: tip,
+            content: context,
+            success (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                trueCall();
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+                falseCall();
+              }
             }
           })
     }
+    /**向开放数据域传递消息 */
+    public postMessageToOpenDataContext(data: any): void {
+        wx.getOpenDataContext().postMessage(data);
+    }
+    public requestNet(): void {
+        let self = this;
+        //console.log("==userLogins==")
+        wx.login({
+            success: function (res) {
+                if (res.code) {
+                    wx.request({
+                        url: 'https://wxfendi.duligame.cn/Login',
+                        data: {
+                            code: res.code,
+                        },
+                        success(res) {
+                            //Global.session = res.data.data
+                            self.postMessageToOpenDataContext({ k: "openid", v: res.data.data.openid })
+                            console.log(res.data)
+                        },
+                        fail() {
 
+                        }
+                    })
+                }
+            }
+        });
+        /*         wx.request({
+                    url: 'https://wxfendi.duligame.cn/Login',
+                    data: {
+                        code: '',
+                    },
+                    success(res) {
+                        let session = res.data
+                        console.log(res.data)
+                    },
+                    fail() {
+        
+                    }
+                }) */
+    }
+
+    public onShow(callback: (res) => void): void {
+        wx.onShow(callback);
+    }
+    public onHide(callback: (res) => void): void {
+        wx.onHide(callback);
+    }
+    public offShow(callback: (res) => void): void {
+        wx.offShow(callback)
+    }
+    public offHide(callback: (res) => void): void {
+        wx.offHide(callback);
+    }
     // 拼接海报----step2
     private drawImg(arr, score) {
         const ths = this;
-        
+
         try {
             let canvas = null;
             if (ths._canvas) {
@@ -260,9 +314,9 @@ export class WeChatPlatform extends IPlatform {
             filePath: path,
             success(res) {
                 self.showToast("海报已保存至相册", 0)
-/*                 setTimeout(function () {
-                    wx.hideToast();
-                  }, 2000) */
+                /*                 setTimeout(function () {
+                                    wx.hideToast();
+                                  }, 2000) */
                 console.log('保存成功');
             },
             fail(e) {
@@ -284,6 +338,6 @@ export class WeChatPlatform extends IPlatform {
     }
 }
 
-export class QQPlay extends IPlatform{
+export class QQPlay extends IPlatform {
 
 }

@@ -3,6 +3,7 @@ import { AudioManager, AudioType } from "../../comms/AudioManager";
 import { CameraShake } from "../../comms/CameraShake";
 import { levelThreeExterior } from "./levelThreeExterior";
 import { glod } from "../../other/glod";
+import { explosion } from "../../other/explosion";
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,6 +31,7 @@ export class FlyCtrl extends cc.Component {
     private isUp:boolean = false;
 
     private isComplete:boolean = false;
+    private explosionCtrl:explosion = null;                     //爆炸控制，碰撞到障碍物时触发
 
     onLoad () {
         let manager=cc.director.getCollisionManager();  // 获取碰撞检测类
@@ -41,6 +43,7 @@ export class FlyCtrl extends cc.Component {
         this.downBtn = cc.find("Canvas/UILayer/uiElement/down_btn");
         this.upBtn = cc.find("Canvas/UILayer/uiElement/up_btn");
         this.cameraShake = cc.find("Canvas/Main Camera").getComponent(CameraShake);
+        this.explosionCtrl = cc.find("Canvas/run_layer/ground_layer/explosion").getComponent(explosion);
         this.child = this.node.children[0];
 
         this.onBtnEvent();
@@ -142,6 +145,7 @@ export class FlyCtrl extends cc.Component {
                 break;
             case 15:
             case 16:
+                this.explosionCtrl.play(other.node.position);
                 levelThreeExterior.getInstance().minusHeart(this.node.position);
                 other.node.destroy();
                 this.cameraShake.shake();

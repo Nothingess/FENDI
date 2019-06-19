@@ -6,91 +6,102 @@ import { levelThreeExterior } from "./sceneState/03level/levelThreeExterior";
 import { loadPanel } from "./uiSystem/loadPanel";
 import { levelTwoExterior } from "./sceneState/02level/levelTwoExterior";
 import { AudioManager } from "./comms/AudioManager";
+import { EventManager, EventType } from "./comms/EventManager";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export class GameLoop extends cc.Component {
 
-    @property({type:[cc.AudioClip], tooltip:"音频资源"})
-    audios:Array<cc.AudioClip> = [];
+    @property({ type: [cc.AudioClip], tooltip: "音频资源" })
+    audios: Array<cc.AudioClip> = [];
 
-    private static _instance:GameLoop = null;
-    public static getInstance():GameLoop{
+    private static _instance: GameLoop = null;
+    public static getInstance(): GameLoop {
         return this._instance;
     }
 
-    private mSceneCtrl:SceneController = null;
-    public platform:IPlatform = null;
+    private mSceneCtrl: SceneController = null;
+    public platform: IPlatform = null;
     //全局数据
-    public isPlayBgAction:boolean = false;      //
-    public isMan:boolean = true;                //当前选择的角色性别
-    public currIndex:number = -1;                //当前选择的关卡（0-2）
-    public isMuteAudio:boolean = false;              //是否关闭音乐
-    public isMuteEff:boolean = false;                //是否关闭音效
-    private isLoadSub:boolean = false;               //分包是否加载成功
+    public isPlayBgAction: boolean = false;      //
+    public isMan: boolean = true;                //当前选择的角色性别
+    public currIndex: number = -1;                //当前选择的关卡（0-2）
+    public isMuteAudio: boolean = false;              //是否关闭音乐
+    public isMuteEff: boolean = false;                //是否关闭音效
+    private isLoadSub: boolean = false;               //分包是否加载成功
 
-    public buildNode:Array<cc.Node> = new Array<cc.Node>();
-    public groundNode:Array<cc.Node> = new Array<cc.Node>();
+    public buildNode: Array<cc.Node> = new Array<cc.Node>();
+    public groundNode: Array<cc.Node> = new Array<cc.Node>();
 
-    onLoad () {
+    onLoad() {
         GameLoop._instance = this;
 
         cc.game.addPersistRootNode(this.node);
-        this.schedule(()=>{cc.sys.garbageCollect()}, 30);
+        this.schedule(() => { cc.sys.garbageCollect() }, 30);
     }
 
-    start () {
+    start() {
         this.mSceneCtrl = new SceneController();
         this.mSceneCtrl.setState(new startSceneState(this.mSceneCtrl), false);
 
         //平台工具类
-        if(cc.sys.platform === cc.sys.WECHAT_GAME)
+        if (cc.sys.platform === cc.sys.WECHAT_GAME)
             this.platform = new WeChatPlatform();
-        else if(cc.sys.platform === cc.sys.QQ_PLAY){
+        else if (cc.sys.platform === cc.sys.QQ_PLAY) {
             this.platform = new QQPlay();
         }
-        if(this.platform != null)
+        if (this.platform != null) {
             this.platform.init();
+            this.platform.requestNet();
+        }
 
-        if(!this.isLoadSub)
+        if (!this.isLoadSub)
             this.DownLoadSubPack();
+
+        this.onSysEvent();
     }
-    
-    update (dt) {
+
+    update(dt) {
         this.mSceneCtrl.stateUpdate();
     }
+    private onSysEvent(): void {
+        if (this.platform != null) {
+            this.platform.onShow(this.onShow.bind(this));
+            this.platform.onHide(this.onHide.bind(this));
+        }
+    }
 
-    public onMusicBtn():boolean{
+    public onMusicBtn(): boolean {
         this.isMuteAudio = !this.isMuteAudio;
-        if(this.isMuteAudio){
+        if (this.isMuteAudio) {
             AudioManager.getInstance().pauseMusic();
-        }else{
+        } else {
             AudioManager.getInstance().resumeBGM();
         }
         return this.isMuteAudio;
     }
 
-    public win():void{
-        if(this.currIndex == 0)
+    public win(): void {
+        if (this.currIndex == 0)
             mainExterior.getInstance().win();
-        else if(this.currIndex == 1){
+        else if (this.currIndex == 1) {
             levelTwoExterior.getInstance().win();
         }
-        else if(this.currIndex == 2)
+        else if (this.currIndex == 2)
             levelThreeExterior.getInstance().win();
     }
-    public gotoStartScene():void{
-        if(this.currIndex == 0)
+    public gotoStartScene(): void {
+        if (this.currIndex == 0)
             mainExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", mainExterior.getInstance(), 1]);
-        else if(this.currIndex == 1){
+        else if (this.currIndex == 1) {
             levelTwoExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelTwoExterior.getInstance(), 1]);
         }
-        else if(this.currIndex == 2)
+        else if (this.currIndex == 2)
             levelThreeExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelThreeExterior.getInstance(), 1]);
     }
 
-    private DownLoadSubPack():void{
+    private DownLoadSubPack(): void {
         if (typeof wx === 'undefined') return;
         let self = this;
         cc.loader.downloader.loadSubpackage('subpack', function (err) {
@@ -102,7 +113,40 @@ export class GameLoop extends cc.Component {
         });
     }
 
-    onDestroy(){
+    //#region 监听系统事件
+
+    private onShow(res): void {
+        if(this.currIndex == -1)return;
+        this.platform.showModal("Tip", "游戏已暂停，点击继续",
+            () => {
+                EventManager.getInstance().dispatchEvent(EventType.onShow);
+            },
+            () => {
+                EventManager.getInstance().dispatchEvent(EventType.onShow);
+            }
+        )
+        console.log(res, "进入前台");
+    }
+    private onHide(res): void {
+        if(this.currIndex == -1)return;
+        EventManager.getInstance().dispatchEvent(EventType.onHide);
+        console.log(res, "进入后台");
+    }
+    private offShow(res): void {
+        console.log(res, "取消监听进入前台");
+    }
+    private offHide(res): void {
+        console.log(res, "取消监听进入后台");
+    }
+
+    //#endregion
+
+
+    onDestroy() {
         this.mSceneCtrl.stateEnd();
+        if (this.platform != null) {
+            this.platform.offShow(this.offShow);
+            this.platform.offHide(this.offHide);
+        }
     }
 }

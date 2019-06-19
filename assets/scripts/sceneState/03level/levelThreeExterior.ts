@@ -5,6 +5,7 @@ import { LayerRun } from "../01level/bgModule/LayerRun";
 import { accountsPanel } from "../../uiSystem/accountsPanel";
 import { AudioType, AudioManager } from "../../comms/AudioManager";
 import { FlyCtrl } from "./FlyCtrl";
+import { EventType, EventManager } from "../../comms/EventManager";
 
 export class levelThreeExterior {
 
@@ -32,6 +33,8 @@ export class levelThreeExterior {
     private scoreLa:cc.Label = null;
     private heartLess:cc.Node = null;
 
+    private isGamePause:boolean = false;
+
     private obsType:Array<number> = new Array<number>();
     private init():void{
         this.initComponent();
@@ -47,6 +50,9 @@ export class levelThreeExterior {
         this.heartLess = cc.find("Canvas/run_layer/player_layer/heart_less");
 
         AudioManager.getInstance().playBGM(AudioType.BGM_3);
+
+        EventManager.getInstance().addEventListener(EventType.onHide, this.onHide.bind(this), "levelThreeExterior");
+        EventManager.getInstance().addEventListener(EventType.onShow, this.onShow.bind(this), "levelThreeExterior");
     }
 
     private createRole():void{
@@ -66,6 +72,20 @@ export class levelThreeExterior {
             })
         }
     }
+
+    //#region 监听事件
+
+
+    private onHide():void{
+        this.isGamePause = true;
+        this.stop();
+    }
+    private onShow():void{
+        this.isGamePause = false;
+        this.continue();
+    }
+
+    //#endregion
 
     public setLevelThreeState(level3:level_3State):void{
         this.lvThreeState = level3;
@@ -88,6 +108,9 @@ export class levelThreeExterior {
         this.uiMgr.sysUpdate();
     }
     public end():void{
+
+        EventManager.getInstance().removeEventListenerByTag(EventType.onHide, "levelThreeExterior");
+        EventManager.getInstance().removeEventListenerByTag(EventType.onShow, "levelThreeExterior");
         this.uiMgr.sysRelease();
         levelThreeExterior.endInstance();
     }
@@ -107,7 +130,16 @@ export class levelThreeExterior {
             }
         })
     }
+    public continue():void{
+        let childs:Array<cc.Node> = cc.find("Canvas/run_layer").children;
 
+        childs.forEach(e => {
+            let layerrun:LayerRun = e.getComponent(LayerRun);
+            if(layerrun != null){
+                layerrun.stop = false;
+            }
+        })
+    } 
     public addScore(val:number):void{
         this.score += val;
         this.updateScore();

@@ -27,6 +27,7 @@ export class mainExterior{
     private heartNum:number = 3;
     private score:number = 0;
     private isGameOver:boolean = false;
+    private isGamePause:boolean = false;
 
     //UI Element
     private heart:cc.Node = null;
@@ -54,6 +55,8 @@ export class mainExterior{
 
         //this.zoom();
         EventManager.getInstance().addEventListener(EventType.zoomTrigger, this.onZoomTrigger.bind(this), "mainExterior");
+        EventManager.getInstance().addEventListener(EventType.onHide, this.onHide.bind(this), "mainExterior");
+        EventManager.getInstance().addEventListener(EventType.onShow, this.onShow.bind(this), "mainExterior");
         AudioManager.getInstance().playBGM(AudioType.BGM_1);
     }
     private createRole():void{
@@ -96,16 +99,27 @@ export class mainExterior{
     public end():void{
         this.uiMgr.sysRelease();
         EventManager.getInstance().removeEventListenerByTag(EventType.zoomTrigger, "mainExterior");
+        EventManager.getInstance().removeEventListenerByTag(EventType.onHide, "mainExterior");
+        EventManager.getInstance().removeEventListenerByTag(EventType.onShow, "mainExterior");
         mainExterior.endInstance();
     }
 
     //#region 监听事件
 
-    public onZoomTrigger(prams:any):void{//判断三次缩放场景
+    private onZoomTrigger(prams:any):void{//判断三次缩放场景
         this.zoomTimes++;
         if(this.zoomTimes > 2){
             this.zoomIn();
         }
+    }
+
+    private onHide():void{
+        this.isGamePause = true;
+        this.stop();
+    }
+    private onShow():void{
+        this.isGamePause = false;
+        this.continue();
     }
 
     //#endregion
@@ -207,6 +221,16 @@ export class mainExterior{
             }
         })
     }
+    public continue():void{
+        let childs:Array<cc.Node> = cc.find("Canvas/run_layer").children;
+
+        childs.forEach(e => {
+            let layerrun:LayerRun = e.getComponent(LayerRun);
+            if(layerrun != null){
+                layerrun.stop = false;
+            }
+        })
+    } 
     public decelerate():void{
         let layer:cc.Node = cc.find("Canvas/run_layer");
         layer.children[3].getComponent(LayerRun).setSpeed();

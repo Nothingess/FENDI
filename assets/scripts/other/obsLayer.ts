@@ -12,6 +12,8 @@ export class obsLayer extends cc.Component {
 
     @property([cc.Prefab])
     public pres:Array<cc.Prefab> = [];
+    @property([cc.Prefab])
+    public presGload:Array<cc.Prefab> = [];
 
     private times:Array<obs> = null;
 
