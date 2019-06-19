@@ -12,9 +12,11 @@ export class accountsPanel extends IUIBase {
     private socre:cc.Node = null;
     private title:cc.Sprite = null;
     private backBtn:cc.Node = null;
-    private continueBtn:cc.Node = null;
     private againBtn:cc.Node = null;
+    private posterBtn:cc.Node = null;
     private shareBtn:cc.Node = null;
+
+    private scoreLa:cc.Label = null;
 
     public initStrategy():void{
         this.mOpenStrategy = new strateC(this.skin);
@@ -35,9 +37,11 @@ export class accountsPanel extends IUIBase {
         this.socre = cc.find("right/score", this.skin);
         this.title = this.socre.children[0].getComponent(cc.Sprite);
         this.backBtn = cc.find("btn_back", this.skin);
-        this.continueBtn = cc.find("right/btn_continue", this.skin);
         this.againBtn = cc.find("right/btn_again", this.skin);
+        this.posterBtn = cc.find("right/btn_poster", this.skin);
         this.shareBtn = cc.find("right/btn_share", this.skin);
+        this.scoreLa = cc.find("scoreLa", this.socre).getComponent(cc.Label);
+        this.scoreLa.string = `${this.args[1]}`;
 
         cc.loader.loadRes(`imgs/lv${GameLoop.getInstance().currIndex + 1}`, cc.SpriteFrame, (err, res)=>{
             this.buildNode.getComponent(cc.Sprite).spriteFrame = res;
@@ -58,22 +62,24 @@ export class accountsPanel extends IUIBase {
 
     private onBtnEvent():void{
         this.backBtn.on("touchend", this.onBackBtn, this);
-        this.continueBtn.on("touchend", this.onContinueBtn, this);
+        this.againBtn.on("touchend", this.onAgainBtn, this);
+        this.posterBtn.on("touchend", this.onPosterBtn, this);
+        this.shareBtn.on("touchend", this.onShareBtn, this);
     }
 
 
     private showAction():void{
         this.content.y -= 100;
         this.backBtn.x += 100;
-        this.continueBtn.x -= 100;
-        this.againBtn.x += 100;
+        this.againBtn.x -= 100;
+        this.posterBtn.x += 100;
         this.shareBtn.y -= 100;
 
         this.backBtn.runAction(this.commAction(-100, 0));
         this.content.runAction(this.commAction(0, 100, .2));
         this.socre.runAction(cc.spawn(cc.scaleTo(.3, 1).easing(cc.easeBackOut()), cc.fadeIn(.2)));
-        this.continueBtn.runAction(this.commAction(100, 0, .4));
-        this.againBtn.runAction(this.commAction(-100, 0, .6));
+        this.againBtn.runAction(this.commAction(100, 0, .4));
+        this.posterBtn.runAction(this.commAction(-100, 0, .6));
         this.shareBtn.runAction(this.commAction(0, 100, .8));
         this.buildNode.runAction(cc.spawn(cc.scaleTo(.3, 1).easing(cc.easeBackOut()), cc.fadeIn(.2)));
     }
@@ -93,7 +99,7 @@ export class accountsPanel extends IUIBase {
         GameLoop.getInstance().gotoStartScene();
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
-    private onContinueBtn():void{
+    private onAgainBtn():void{
         if(GameLoop.getInstance().currIndex == 0){
             this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["01level", this.args[0], 1]);
         }else if(GameLoop.getInstance().currIndex == 1){
@@ -102,12 +108,23 @@ export class accountsPanel extends IUIBase {
             this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["03level", this.args[0], 1]);
         }
     }
+    private onShareBtn():void{
+        console.log("onShareBtn");
+        if(GameLoop.getInstance().platform != null)
+            GameLoop.getInstance().platform.shareAppMessage();
+    }
+    private onPosterBtn():void{
+        if(GameLoop.getInstance().platform != null)
+            GameLoop.getInstance().platform.saveFile(GameLoop.getInstance().currIndex + 1, this.scoreLa.string);
+    }
     //#endregion
 
 
     onDestroy():void{
         this.backBtn.off("touchend", this.onBackBtn, this);
-        this.continueBtn.off("touchend", this.onContinueBtn, this);
+        this.againBtn.off("touchend", this.onAgainBtn, this);
+        this.posterBtn.off("touchend", this.onPosterBtn, this);
+        this.shareBtn.off("touchend", this.onShareBtn, this);
     }
 
 }

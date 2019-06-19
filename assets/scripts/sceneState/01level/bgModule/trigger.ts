@@ -2,6 +2,7 @@ import { mainExterior } from "../mainExterior";
 import { levelThreeExterior } from "../../03level/levelThreeExterior";
 import { GameLoop } from "../../../GameLoop";
 import { levelTwoExterior } from "../../02level/levelTwoExterior";
+import { EventManager, EventType } from "../../../comms/EventManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -53,6 +54,7 @@ export class trigger extends cc.Component {
 
     private clearMask():void{
         if(this.mask == null)return;
+        EventManager.getInstance().dispatchEvent(EventType.zoomIn);
         this.mask.runAction(
             cc.sequence(
                 cc.delayTime(1),

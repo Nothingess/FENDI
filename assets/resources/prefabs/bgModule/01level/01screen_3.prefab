@@ -42,14 +42,17 @@
       }
     ],
     "_active": true,
-    "_level": 3,
+    "_level": 1,
     "_components": [
       {
         "__id__": 25
+      },
+      {
+        "__id__": 26
       }
     ],
     "_prefab": {
-      "__id__": 26
+      "__id__": 27
     },
     "_opacity": 255,
     "_color": {
@@ -191,7 +194,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "76UOoGIvdCjY5ml2aBQHeH",
     "sync": false
@@ -292,7 +295,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "57k2zwLYVO3JMxLfKQ6/Ko",
     "sync": false
@@ -393,7 +396,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "f88/+4BBlJ0okq5Uj4t0s0",
     "sync": false
@@ -494,7 +497,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "8cZh4cnoRCQLsqmu06FkvH",
     "sync": false
@@ -595,7 +598,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "ce3oJsd69PMrM9G/TSGnPM",
     "sync": false
@@ -696,7 +699,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "d8HqOYV+RLd4cO7OLpTGNw",
     "sync": false
@@ -797,7 +800,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "58AFVyywpPs7KMJLtDG/bb",
     "sync": false
@@ -866,7 +869,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "65RpsjFkpIBKsdA+o3mK+e",
     "sync": false
@@ -899,12 +902,22 @@
     "_id": ""
   },
   {
+    "__type__": "df305Ga339JUZC4G+X/7laB",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f53d2d95-5297-4c91-857f-401153d56496"
     },
     "fileId": "06XcGYZUVAgJ2YGB44wayg",
     "sync": false

@@ -6,6 +6,7 @@ import { levelThreeExterior } from "../../03level/levelThreeExterior";
 import { AudioManager, AudioType } from "../../../comms/AudioManager";
 import { levelTwoExterior } from "../../02level/levelTwoExterior";
 import { smoke } from "../../../other/smoke";
+import { glod } from "../../../other/glod";
 
 const {ccclass, property} = cc._decorator;
 
@@ -243,6 +244,7 @@ export class playerCtrl extends cc.Component {
             case 11://障碍物
             case 12:
             case 13:
+            case 14:
                 this.obstacleCount++;
                 if(this.isCollisionLeft(other, self)){
                     this.isUpCol = false;
@@ -271,10 +273,12 @@ export class playerCtrl extends cc.Component {
             case 6://金币
                 other.node.destroy();
 
+                let num:number = other.node.parent.getComponent(glod).index;
+
                 if(GameLoop.getInstance().currIndex == 0)
-                    mainExterior.getInstance().addScore(10);
+                    mainExterior.getInstance().addScore(num);
                 else if(GameLoop.getInstance().currIndex == 1)
-                    levelTwoExterior.getInstance().addScore(10);
+                    levelTwoExterior.getInstance().addScore(num);
 
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
@@ -283,6 +287,7 @@ export class playerCtrl extends cc.Component {
                 GameLoop.getInstance().win();
             break;
             case 8:
+                this.collCount--;
             break;
             case 9:
                 other.node.destroy();
@@ -317,8 +322,9 @@ export class playerCtrl extends cc.Component {
         }
     }
     onCollisionExit(other, self) {
-        this.collCount--;
-        if(other.tag == 11 || other.tag == 12 || other.tag == 13){
+        if(other.tag != 8)
+            this.collCount--;
+        if(other.tag == 11 || other.tag == 12 || other.tag == 13 || other.tag == 14){
             this.obstacleCount--;
             if(this.collCount == 0){
                 if(this.isUpCol && this.mPlayerState != PlayerState.jump){

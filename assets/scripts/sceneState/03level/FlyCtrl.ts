@@ -1,4 +1,8 @@
 import { GameLoop } from "../../GameLoop";
+import { AudioManager, AudioType } from "../../comms/AudioManager";
+import { CameraShake } from "../../comms/CameraShake";
+import { levelThreeExterior } from "./levelThreeExterior";
+import { glod } from "../../other/glod";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,6 +16,8 @@ export class FlyCtrl extends cc.Component {
     @property({type:cc.Float, tooltip:"旋转速度"})
     rotSpeed:number = 0;
 
+    private cameraShake:CameraShake = null;
+
     private maxBorder:number = 0;           //上边最大距离
     private dir:number = 0;                 //移动方向（-1， 0， 1）
 
@@ -23,7 +29,6 @@ export class FlyCtrl extends cc.Component {
     private isDown:boolean = false;
     private isUp:boolean = false;
 
-    private isOver:boolean = false;
     private isComplete:boolean = false;
 
     onLoad () {
@@ -35,6 +40,7 @@ export class FlyCtrl extends cc.Component {
         this.maxBorder = cc.view.getVisibleSize().height;
         this.downBtn = cc.find("Canvas/UILayer/uiElement/down_btn");
         this.upBtn = cc.find("Canvas/UILayer/uiElement/up_btn");
+        this.cameraShake = cc.find("Canvas/Main Camera").getComponent(CameraShake);
         this.child = this.node.children[0];
 
         this.onBtnEvent();
@@ -116,8 +122,31 @@ export class FlyCtrl extends cc.Component {
     //#endregion
 
     onCollisionEnter(other, self):void{
-        if(other.tag == 7){
-            GameLoop.getInstance().win();
+
+        switch(other.tag){
+            case 6://金币
+                other.node.destroy();
+                levelThreeExterior.getInstance().addScore(10);
+
+                AudioManager.getInstance().playSound(AudioType.GLOD);
+            break;
+            case 7:
+                GameLoop.getInstance().win();
+            break;
+            case 9:
+                other.node.destroy();
+
+                levelThreeExterior.getInstance().addScore(200);
+
+                AudioManager.getInstance().playSound(AudioType.GLOD);
+                break;
+            case 15:
+            case 16:
+                levelThreeExterior.getInstance().minusHeart(this.node.position);
+                other.node.destroy();
+                this.cameraShake.shake();
+                AudioManager.getInstance().playSound(GameLoop.getInstance().isMan?AudioType.OBSMAN:AudioType.OBSWOMAN);
+            break;
         }
     }
     onDestroy():void{

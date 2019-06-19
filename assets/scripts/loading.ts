@@ -16,12 +16,16 @@ export class loading extends cc.Component {
     private maxPro:number = 0;
     private isComplete:boolean = false;
 
+    private isAlreadyLoadScene:boolean = false;
+
     start () {
         this.load();
     }
 
     update(dt):void{
         if(this.isComplete && this.currPro >= 1){
+            if(this.isAlreadyLoadScene)return;
+            this.isAlreadyLoadScene = true;
             cc.director.loadScene(this.nextScene);
         }
         if(this.currPro < this.maxPro){

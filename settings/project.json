@@ -6,21 +6,21 @@
       true,
       null,
       true,
-      true
+      false
     ],
     [
       true,
       false,
       true,
       true,
-      true
+      false
     ],
     [
       false,
       true,
       false,
       null,
-      true
+      false
     ],
     [
       true,
@@ -30,9 +30,9 @@
       true
     ],
     [
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
       true,
       false
     ]
@@ -81,7 +81,7 @@
     "obstacle",
     "recover"
   ],
-  "last-module-event-record-time": 1560240686601,
+  "last-module-event-record-time": 1560849704896,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,

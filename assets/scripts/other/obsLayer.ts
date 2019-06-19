@@ -1,11 +1,8 @@
-interface obs{
+import { EventManager, EventType } from "../comms/EventManager";
+
+export interface obs{
     t:number,
     y:number
-}
-
-enum obsType{
-    One,
-    Two
 }
 
 const {ccclass, property} = cc._decorator;
@@ -15,8 +12,6 @@ export class obsLayer extends cc.Component {
 
     @property([cc.Prefab])
     public pres:Array<cc.Prefab> = [];
-    @property({type:cc.Enum(obsType)})
-    type:obsType = obsType.One;
 
     private times:Array<obs> = null;
 
@@ -25,10 +20,20 @@ export class obsLayer extends cc.Component {
 
     private interval:number = 1;
 
+    private wait:boolean = true;
+
     onLoad () {
-        cc.loader.loadRes(this.type == obsType.One?"jsons/bgm_1":"jsons/bgm_2", cc.JsonAsset, (err, res)=>{
+        cc.loader.loadRes("jsons/bgm_1", cc.JsonAsset, (err, res)=>{
             this.times = res.json.bgm1;
         })
+
+        EventManager.getInstance().addEventListener(EventType.zoomIn, this.onZoomIn.bind(this), "obsLayer");
+    }
+
+    private onZoomIn():void{
+        this.scheduleOnce(()=>{
+            this.wait = false;
+        }, 1.5)
     }
 
     start () {
@@ -41,20 +46,25 @@ export class obsLayer extends cc.Component {
         this.interval -= dt;
         if(this.interval > 0)return;
         this.interval = 1;
-        if(this.times[this.currIndex].t < 54){
-            let posX:number = 400 * this.times[this.currIndex].t + 350;
-            console.log(posX);
-            if(posX - (-this.node.x) < this.viewWidth * 1.3){//显示障碍物
-                this.createObs(cc.v2(posX, this.times[this.currIndex].y));
-                this.currIndex++;
-            }
-        }else{
 
+        let posX:number = 0;
+
+        if(this.times[this.currIndex].t < 54){
+            posX = 400 * this.times[this.currIndex].t + 350;
+        }else{
+            if(this.wait)return;
+            posX = 400 * 54 + ((this.times[this.currIndex].t - 54) * 200) + 350
+        }
+
+        if(posX - (-this.node.x) < this.viewWidth * 1.5){//显示障碍物
+            this.createObs(cc.v2(posX, this.times[this.currIndex].y));
+            this.currIndex++;
         }
     }
 
     private createObs(pos:cc.Vec2):void{
-        let node:cc.Node = cc.instantiate(this.pres[Math.floor(Math.random() * this.pres.length)]);
+        let index:number = this.times[this.currIndex].t > 54?2 + Math.floor(Math.random() * 2):Math.floor(Math.random() * this.pres.length);
+        let node:cc.Node = cc.instantiate(this.pres[index]);
         this.node.addChild(node);
         if(pos.y == 0){
             pos.y = 60;
@@ -63,7 +73,12 @@ export class obsLayer extends cc.Component {
         }else if(pos.y == 2){
             pos.y = 170;
         }
-        pos.y += node.height * .5;
+        if(this.times[this.currIndex].t > 54){
+            node.scale = .7;
+            pos.y += node.height * .5 * node.scale;
+        }else{
+            pos.y += node.height * .5;
+        }
         node.setPosition(pos);
     }
 }

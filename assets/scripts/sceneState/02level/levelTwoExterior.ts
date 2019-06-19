@@ -94,7 +94,7 @@ export class levelTwoExterior {
     }
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
-        this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelTwoExterior.getInstance()]);
+        this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelTwoExterior.getInstance(), this.score]);
         this.uploadScore();
     }
 
@@ -120,16 +120,17 @@ export class levelTwoExterior {
 
     public minusHeart(vec:cc.Vec2):void{
         this.heartNum--;
-/*         this.heartNum = 2; */
+        //this.heartNum = 2;
         this.floatHeartLess(vec);
         if(this.heartNum >= 0){
             this.heart.children[this.heartNum].color = cc.Color.GRAY;
         }
         if(this.heartNum == 0){
             AudioManager.getInstance().playSound(AudioType.LOST);
-            this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelTwoExterior.getInstance()]);
+            this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelTwoExterior.getInstance(), this.score]);
             this.stop();
             this.pyCtrl.stop();
+            this.uploadScore();
         }
     }
     /**飘动减血图标 */
@@ -171,6 +172,7 @@ export class levelTwoExterior {
 
     public uploadScore(K:string = "rank_2", V:string = `${this.score}`):void{
         if(GameLoop.getInstance().platform == null)return;
+        console.log("uploadScore")
         GameLoop.getInstance().platform.setUserCloudStorage(
             [{key:K, value:V}]
         )

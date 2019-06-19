@@ -29,7 +29,6 @@ export class startExterior {
 
     private upArea:cc.Node = null;
     private friendsBtn:cc.Node = null;                  //好友按钮
-    private setBtn:cc.Node = null;                      //设置按钮
     private musicBtn:cc.Node = null;                    //音乐
     private desBtn:cc.Node = null;                      //活动描述
 
@@ -134,7 +133,6 @@ export class startExterior {
 
         this.upArea = cc.find("up", this.uiElement);
         this.friendsBtn = cc.find("friends", this.upArea);
-        this.setBtn = cc.find("setting", this.upArea);
         this.musicBtn = cc.find("musicBtn", this.upArea);
         this.desBtn = cc.find("description", this.upArea);
 
@@ -186,7 +184,6 @@ export class startExterior {
     public end():void{
         this.startBtn.off("touchend", this.onstartBtn, this);
         this.friendsBtn.off("touchend", this.onfriendsBtn, this);
-        this.setBtn.off("touchend", this.onsetBtn, this);
         this.musicBtn.off("touchend", this.onMusicBtn, this);
         this.desBtn.off("touchend", this.ondesBtn, this);
 
@@ -201,7 +198,6 @@ export class startExterior {
     private onBtnEvent():void{
         this.startBtn.on("touchend", this.onstartBtn, this);
         this.friendsBtn.on("touchend", this.onfriendsBtn, this);
-        this.setBtn.on("touchend", this.onsetBtn, this);
         this.musicBtn.on("touchend", this.onMusicBtn, this);
         this.desBtn.on("touchend", this.ondesBtn, this);
 

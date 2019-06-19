@@ -48,7 +48,7 @@ export class AudioManager {
             }
 		    var audioID = cc.audioEngine.play(clip, loop?loop:false, volume?volume:1);
         }); */
-        cc.audioEngine.play(GameLoop.getInstance().audios[type], loop?loop:false, volume?volume:1);
+        cc.audioEngine.play(GameLoop.getInstance().audios[type], loop?loop:false, volume?volume:.5);
     }
 
     public stopAll()
@@ -91,7 +91,7 @@ export class AudioManager {
         
         if(GameLoop.getInstance().isMuteAudio)return;
         cc.audioEngine.stopMusic();
-        cc.audioEngine.playMusic(GameLoop.getInstance().audios[aty], true);
+        cc.audioEngine.playMusic(GameLoop.getInstance().audios[aty], false);
     }
     public stopBgm():void{
         cc.audioEngine.stopMusic();

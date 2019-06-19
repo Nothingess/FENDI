@@ -14,8 +14,9 @@ let level_1:Array<string> = [
     "prefabs/bgModule/01level/01screen_g3",
     "prefabs/bgModule/01level/01screen_g4",
     "jsons/bgm_1",
-    "prefabs/obstacle/fountain"
-
+    "prefabs/obstacle/fountain",
+    "prefabs/manRole",
+    "prefabs/womanRole"
 ]
 let level_2:Array<string> = [
     "prefabs/bgModule/02level/02screen_2",
@@ -31,6 +32,8 @@ let level_2:Array<string> = [
     "prefabs/bgModule/02level/02screen_g2",
     "prefabs/bgModule/02level/02screen_g3",
     "prefabs/bgModule/02level/02screen_g4",
+    "prefabs/manRole",
+    "prefabs/womanRole"
 ]
 let level_3:Array<string> = [
     "prefabs/bgModule/03level/screen_2",
@@ -39,6 +42,8 @@ let level_3:Array<string> = [
     "prefabs/bgModule/03level/screen_5",
     "prefabs/bgModule/03level/screen_6",
     "prefabs/bgModule/03level/screen_7",
+    "prefabs/manFly",
+    "prefabs/womanFly"
 ]
 
 const {ccclass, property} = cc._decorator;
@@ -170,19 +175,39 @@ export class loadPanel extends IUIBase {
     private loadLevel_2Complete(err, res):void{
         let count:number = 0;
         res.forEach(element => {
-            if(count < 10)
+            if(count < 9)
                 GameLoop.getInstance().buildNode.push(cc.instantiate(element));
-            else
-                GameLoop.getInstance().groundNode.push(cc.instantiate(element));
             count++;
         });
+        count = 0;
+        res.forEach(element => {
+            if(count < 9)
+                GameLoop.getInstance().buildNode.push(cc.instantiate(element));
+            count++;
+        });
+        count = 0;
+        res.forEach(element => {
+            if(count < 7)
+                GameLoop.getInstance().buildNode.push(cc.instantiate(element));
+            count++;
+        });
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[9]));
         this.isComplete = true;
-
     }
     private loadLevel_3Complete(err, res):void{
+        let count:number = 0;
         res.forEach(element => {
-            GameLoop.getInstance().buildNode.push(cc.instantiate(element));
+            if(count < 5)
+                GameLoop.getInstance().buildNode.push(cc.instantiate(element));
+            count++;
         });
+        count = 0;
+        res.forEach(element => {
+            if(count < 5)
+                GameLoop.getInstance().buildNode.push(cc.instantiate(element));
+            count++;
+        });
+        GameLoop.getInstance().buildNode.push(cc.instantiate(res[5]));
         this.isComplete = true;
 
     }

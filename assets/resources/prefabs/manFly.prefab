@@ -197,13 +197,13 @@
     "tag": 10,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 35.6,
+      "y": -21.3
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 260,
-      "height": 130
+      "width": 73.5,
+      "height": 43.1
     },
     "_id": ""
   },
@@ -217,7 +217,7 @@
     "_enabled": true,
     "moveSpeed": 200,
     "maxRot": 15,
-    "rotSpeed": 30,
+    "rotSpeed": 60,
     "_id": ""
   },
   {
