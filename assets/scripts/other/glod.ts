@@ -3,18 +3,25 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export class glod extends cc.Component {
 
+    public iii:number = 0;
     public index:number = 0;
 
     start():void{
-        let anims:Array<string> = ["jinbi", "tongbi", "yinbi"]
+        let anims:Array<string> = ["jinbi", "yinbi", "tongbi"]
         let ran:number = Math.random();
-        if(ran > .9)
+        if(ran > .9){
             this.index = 0;
-        else if(ran > .65)
+            this.iii = 0;
+        }
+        else if(ran > .65){
             this.index = 1;
-        else
+            this.iii = 1;
+        }
+        else{
             this.index = 2;
-        this.index = Math.floor(Math.random() * 3);
+            this.iii = 2;
+        }
+        //this.index = Math.floor(Math.random() * 3);
         this.node.children.forEach(e=>{
             let spine:sp.Skeleton = e.getComponent(sp.Skeleton);
             spine.setAnimation(0, anims[this.index], true);

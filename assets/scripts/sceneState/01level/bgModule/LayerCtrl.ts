@@ -46,7 +46,7 @@ export class LayerCtrl extends cc.Component {
 
     update (dt) {
         if(this.isComplete)return;
-        this.timer -= dt;
+        this.timer -= 0.0172;
         if(this.timer < 0){
             this.timer = this.interval;
             this.check();

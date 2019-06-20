@@ -72,6 +72,7 @@ export class FlyCtrl extends cc.Component {
         }
     }
     private rotate(dt):void{
+        dt = 0.0172;
         if(this.dir == 0){
             if(Math.abs(this.child.rotation) < 1){
                 this.child.rotation = 0;
@@ -129,7 +130,8 @@ export class FlyCtrl extends cc.Component {
         switch(other.tag){
             case 6://金币
                 other.node.destroy();
-                levelThreeExterior.getInstance().addScore(10);
+                let go:glod = other.node.parent.getComponent(glod);
+                levelThreeExterior.getInstance().addScore(10, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.iii);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
             break;
@@ -138,8 +140,7 @@ export class FlyCtrl extends cc.Component {
             break;
             case 9:
                 other.node.destroy();
-
-                levelThreeExterior.getInstance().addScore(200);
+                levelThreeExterior.getInstance().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;

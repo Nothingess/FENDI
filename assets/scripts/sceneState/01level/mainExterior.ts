@@ -40,6 +40,11 @@ export class mainExterior{
 
     private obsType:Array<number> = new Array<number>();
 
+    private scoreTipPool:cc.NodePool = null;
+    private preScoreTip:cc.Prefab = null;
+    private goldPool:cc.NodePool = null;
+    private preGold:cc.Prefab = null;
+
     private init():void{
         this.initComponent();
     }
@@ -52,6 +57,19 @@ export class mainExterior{
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
         this.heartLess = cc.find("Canvas/run_layer/player_layer/heart_less");
         this.runLayer = cc.find("Canvas/run_layer");
+
+        this.scoreTipPool = new cc.NodePool();
+        cc.loader.loadRes("prefabs/glods/scoreTip", cc.Prefab, (err, res)=>{
+            this.preScoreTip = res;
+            this.scoreTipPool.put(cc.instantiate(res));
+            this.scoreTipPool.put(cc.instantiate(res));
+        })
+        this.goldPool = new cc.NodePool();
+        cc.loader.loadRes("prefabs/glods/goldPre", cc.Prefab, (err, res)=>{
+            this.preGold = res;
+            this.goldPool.put(cc.instantiate(res));
+            this.goldPool.put(cc.instantiate(res));
+        })
 
         //this.zoom();
         EventManager.getInstance().addEventListener(EventType.zoomTrigger, this.onZoomTrigger.bind(this), "mainExterior");
@@ -125,14 +143,55 @@ export class mainExterior{
     //#endregion
 
     //#region gameManager
-    public addScore(val:number):void{
+    public addScore(val:number, pos:cc.Vec2, ty:number):void{
         this.score += val;
         this.updateScore();
+        this.showAddScore(val, pos);
+        this.getGlodAction(ty, pos);
     }
     private updateScore():void{
         this.scoreLa.string = `Score : ${this.score}`;
     }
+    private showAddScore(val:number, pos:cc.Vec2):void{
+        let node:cc.Node = null;
+        if(this.scoreTipPool.size() > 0)
+            node = this.scoreTipPool.get();
+        else
+            node = cc.instantiate(this.preScoreTip);
 
+        if(node.parent == null)
+            cc.director.getScene().addChild(node);
+        
+        node.getComponent(cc.Label).string = `+${val}`;
+        node.setPosition(pos);
+        node.runAction(cc.sequence(
+            cc.moveBy(.5, cc.v2(0, 100)),
+            cc.callFunc(()=>{
+                this.scoreTipPool.put(node);
+            })
+        ))
+    }
+    private getGlodAction(ty:number, pos:cc.Vec2):void{
+        if(ty > 2)return;
+        let node:cc.Node = null;
+        if(this.goldPool.size() > 0)
+            node = this.goldPool.get();
+        else
+            node = cc.instantiate(this.preGold);
+
+        if(node.parent == null)
+            cc.director.getScene().addChild(node);
+
+        let spine:sp.Skeleton = node.getComponent(sp.Skeleton);
+        spine.setAnimation(0, ty == 0?"jinbi":((ty == 1)?"yinbi":"tongbi"), true);
+        node.setPosition(pos);
+        node.runAction(cc.sequence(
+            cc.moveTo(.5, this.scoreLa.node.convertToWorldSpaceAR(cc.v2(0, 0))).easing(cc.easeIn(1)),
+            cc.callFunc(()=>{
+                this.goldPool.put(node);
+            })
+        ))
+    }
     public minusHeart(vec:cc.Vec2):void{
         this.heartNum--;
         //this.heartNum = 2;
@@ -142,7 +201,7 @@ export class mainExterior{
         }
         if(this.heartNum == 0){
             AudioManager.getInstance().playSound(AudioType.LOST);
-            this.uiMgr.openPanel(accountsPanel, "accountsPanel", [mainExterior.getInstance(), this.score]);
+            this.uiMgr.openPanel(accountsPanel, "accountsPanel", [mainExterior.getInstance(), this.score, this.heartNum == 0?false:true]);
             this.isGameOver = true;
             this.stop();
             this.pyCtrl.stop();
@@ -188,7 +247,7 @@ export class mainExterior{
 
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
-        this.uiMgr.openPanel(accountsPanel, "accountsPanel", [mainExterior.getInstance(), this.score]);
+        this.uiMgr.openPanel(accountsPanel, "accountsPanel", [mainExterior.getInstance(), this.score, this.heartNum == 0?false:true]);
         this.uploadScore();
     }
     public zoomIn():void{

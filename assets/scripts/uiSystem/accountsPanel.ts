@@ -53,6 +53,12 @@ export class accountsPanel extends IUIBase {
             this.content.getComponent(cc.Sprite).spriteFrame = res;
         })
 
+        if(!!this.args[2]){
+            cc.loader.loadRes("imgs/btn_continue", cc.SpriteFrame, (err, res)=>{
+                this.againBtn.getComponent(cc.Sprite).spriteFrame = res;
+            })
+        }
+
         this.onBtnEvent();
     }
     public onShowed():void{
@@ -100,13 +106,20 @@ export class accountsPanel extends IUIBase {
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onAgainBtn():void{
-        if(GameLoop.getInstance().currIndex == 0){
-            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["01level", this.args[0], 1]);
-        }else if(GameLoop.getInstance().currIndex == 1){
-            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["02level", this.args[0], 1]);
-        }else{
-            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["03level", this.args[0], 1]);
+        if(!this.args[2]){
+            if(GameLoop.getInstance().currIndex == 0){
+                this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["01level", this.args[0], 1]);
+            }else if(GameLoop.getInstance().currIndex == 1){
+                this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["02level", this.args[0], 1]);
+            }else{
+                this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["03level", this.args[0], 1]);
+            }
+            return;
         }
+
+        GameLoop.getInstance().currIndex = (GameLoop.getInstance().currIndex + 1) % 3;
+        this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", [`0${GameLoop.getInstance().currIndex + 1}level`, this.args[0]]);
+
     }
     private onShareBtn():void{
         console.log("onShareBtn");

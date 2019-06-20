@@ -1,13 +1,11 @@
 import { UISystem } from "../../systems/UISystem";
 import { startSceneState } from "../ISceneState";
 import { rankPanel } from "../../uiSystem/rankPanel";
-import { setPanel } from "../../uiSystem/setPanel";
-import { selectPanel } from "../../uiSystem/selectPanel";
-import { Loader } from "../../comms/LoaderManager";
 import { GameLoop } from "../../GameLoop";
 import { settingBtnSp } from "./settingBtnSp";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
 import { desPanel } from "../../uiSystem/desPanel";
+import { selectLevelPanel } from "../../uiSystem/selectLevelPanel";
 
 export class startExterior {
 
@@ -32,8 +30,8 @@ export class startExterior {
     private musicBtn:cc.Node = null;                    //音乐
     private desBtn:cc.Node = null;                      //活动描述
 
-    private leftBtn:cc.Node = null;                     //左边按钮
-    private rightBtn:cc.Node = null;                    //右边按钮
+/*     private leftBtn:cc.Node = null;                     //左边按钮
+    private rightBtn:cc.Node = null;                    //右边按钮 */
     private bg:cc.Sprite = null;                        //背景
     private bgNew:cc.Sprite = null;                     //新背景（副本）
 
@@ -41,8 +39,8 @@ export class startExterior {
 /*     private leftUp:cc.Vec2 = cc.v2(0, 0);
     private rightUp:cc.Vec2 = cc.v2(0, 0); */
     private up:cc.Vec2 = cc.v2(0, 0);
-    private left:cc.Vec2 = cc.v2(0, 0);
-    private right:cc.Vec2 = cc.v2(0, 0);
+/*     private left:cc.Vec2 = cc.v2(0, 0);
+    private right:cc.Vec2 = cc.v2(0, 0); */
     private center:cc.Vec2 = cc.v2(0, 0);
 
     private liuhai:number = 0;                          //刘海高度
@@ -60,16 +58,16 @@ export class startExterior {
 
     private init():void{
         this.initComponents();
-        this.autoView();
+        //this.autoView();
     }
     /**适配部分UI */
-    private autoView():void{
+/*     private autoView():void{
         if(GameLoop.getInstance().platform != null){
             if(GameLoop.getInstance().platform.liuhai > 20){//全面屏
                 this.leftBtn.runAction(cc.moveBy(0.2, cc.v2(80, 0)));
             }
         }
-    }
+    } */
 
     /**播放开场动画 */
     private playBgAction():void{
@@ -136,8 +134,8 @@ export class startExterior {
         this.musicBtn = cc.find("musicBtn", this.upArea);
         this.desBtn = cc.find("description", this.upArea);
 
-        this.leftBtn = cc.find("select_left", this.uiElement);
-        this.rightBtn = cc.find("select_right", this.uiElement);
+/*         this.leftBtn = cc.find("select_left", this.uiElement);
+        this.rightBtn = cc.find("select_right", this.uiElement); */
         this.bg = cc.find("Canvas/bg").getComponent(cc.Sprite);
         this.bgNew = cc.find("Canvas/bgNew").getComponent(cc.Sprite);
         this.setBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
@@ -160,8 +158,8 @@ export class startExterior {
 /*         this.leftUp = this.setBtn.position;
         this.rightUp = this.friendsBtn.position; */
         this.up = this.upArea.position;
-        this.left = this.leftBtn.position;
-        this.right = this.rightBtn.position;
+/*         this.left = this.leftBtn.position;
+        this.right = this.rightBtn.position; */
         this.center = this.startBtn.position;
     }
 
@@ -187,8 +185,8 @@ export class startExterior {
         this.musicBtn.off("touchend", this.onMusicBtn, this);
         this.desBtn.off("touchend", this.ondesBtn, this);
 
-        this.leftBtn.off("touchend", this.onSelectLeft, this);
-        this.rightBtn.off("touchend", this.onSelectRight, this);
+/*         this.leftBtn.off("touchend", this.onSelectLeft, this);
+        this.rightBtn.off("touchend", this.onSelectRight, this); */
 
         startExterior.endInstance();
     }
@@ -201,20 +199,17 @@ export class startExterior {
         this.musicBtn.on("touchend", this.onMusicBtn, this);
         this.desBtn.on("touchend", this.ondesBtn, this);
 
-        this.leftBtn.on("touchend", this.onSelectLeft, this);
-        this.rightBtn.on("touchend", this.onSelectRight, this);
+/*         this.leftBtn.on("touchend", this.onSelectLeft, this);
+        this.rightBtn.on("touchend", this.onSelectRight, this); */
     }
 
     private onstartBtn():void{
-        this.uiSys.openPanel(selectPanel, "selectPanel");
+        //this.uiSys.openPanel(selectPanel, "selectPanel");
+        this.uiSys.openPanel(selectLevelPanel, "selectLevelPanel");
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onfriendsBtn():void{
         this.uiSys.openPanel(rankPanel, "rankPanel");
-        AudioManager.getInstance().playSound(AudioType.CLICK);
-    }
-    private onsetBtn():void{
-        this.uiSys.openPanel(setPanel, "setPanel");
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private onMusicBtn():void{
@@ -270,8 +265,8 @@ export class startExterior {
 /*         this.setBtn.runAction(this.actionBack(-100, 100, dur));
         this.friendsBtn.runAction(this.actionBack(100, 100, dur)); */
         this.upArea.runAction(this.actionBack(0, 100, dur));
-        this.leftBtn.runAction(this.actionBack(-100, 0, dur));
-        this.rightBtn.runAction(this.actionBack(100, 0, dur));
+/*         this.leftBtn.runAction(this.actionBack(-100, 0, dur));
+        this.rightBtn.runAction(this.actionBack(100, 0, dur)); */
         this.startBtn.runAction(this.actionBack(0, -100, dur));
     }
     /**显示界面UI */
@@ -279,8 +274,8 @@ export class startExterior {
 /*         this.setBtn.runAction(this.actionTo(this.leftUp));
         this.friendsBtn.runAction(this.actionTo(this.rightUp)); */
         this.upArea.runAction(this.actionTo(this.up));
-        this.leftBtn.runAction(this.actionTo(this.left));
-        this.rightBtn.runAction(this.actionTo(this.right));
+/*         this.leftBtn.runAction(this.actionTo(this.left));
+        this.rightBtn.runAction(this.actionTo(this.right)); */
         this.startBtn.runAction(this.actionTo(this.center));
     }
 

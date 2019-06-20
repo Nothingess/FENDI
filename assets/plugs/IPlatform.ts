@@ -140,7 +140,7 @@ export class WeChatPlatform extends IPlatform {
     public shareAppMessage(): void {
         console.log("shareAppMessage")
         wx.shareAppMessage({
-            title: "",
+            title: "想与我一起探索“FENDI 罗马奇遇记” 吗?",
             imageUrl: "https://cdn.duligame.cn/minigame-fendi/imgs/share.jpg"
         })
     }

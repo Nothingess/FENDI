@@ -12,6 +12,7 @@ export class onCultureEvent extends cc.Component {
     obs:cc.Node = null;
 
     onLoad () {
+
         EventManager.getInstance().addEventListener(EventType.zoomIn, this.onZoomIn.bind(this), "onCultureEvent");
     }
 
@@ -25,6 +26,7 @@ export class onCultureEvent extends cc.Component {
     }
 
     onDestroy():void{
+
         EventManager.getInstance().removeEventListenerByTag(EventType.zoomIn, "onCultureEvent");
     }
 

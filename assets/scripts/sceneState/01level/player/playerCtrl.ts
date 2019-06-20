@@ -2,7 +2,6 @@ import { mainExterior } from "../mainExterior";
 import { ISpineCtrl } from "./ISpineCtrl";
 import { CameraShake } from "../../../comms/CameraShake";
 import { GameLoop } from "../../../GameLoop";
-import { levelThreeExterior } from "../../03level/levelThreeExterior";
 import { AudioManager, AudioType } from "../../../comms/AudioManager";
 import { levelTwoExterior } from "../../02level/levelTwoExterior";
 import { smoke } from "../../../other/smoke";
@@ -62,6 +61,8 @@ export class playerCtrl extends cc.Component {
 
 
     private isNeedCheck: boolean = false;                        //是否需要检测回复原来位置
+
+    private scorePos:cc.Vec2 = null;
     onLoad() {
         let manager = cc.director.getCollisionManager();  // 获取碰撞检测类
         manager.enabled = true;                         // 开启碰撞检测
@@ -78,6 +79,8 @@ export class playerCtrl extends cc.Component {
         this.cameraShake = cc.find("Canvas/Main Camera").getComponent(CameraShake);
         this.smokeCtrl = cc.find("Canvas/run_layer/ground_layer/smoke").getComponent(smoke);
         this.explosionCtrl = cc.find("Canvas/run_layer/ground_layer/explosion").getComponent(explosion);
+
+        this.scorePos = cc.find("Canvas/UILayer/uiElement/score").convertToWorldSpaceAR(cc.v2(0, 0));
     }
 
     start(): void {
@@ -126,7 +129,7 @@ export class playerCtrl extends cc.Component {
     update(dt): void {
 
         //this.moveBack(dt);
-
+        dt = 0.0172;
         if (this.mPlayerState == PlayerState.idle)
             this.idleUpdate();
         else if (this.mPlayerState == PlayerState.jump)
@@ -280,13 +283,13 @@ export class playerCtrl extends cc.Component {
                 break;
             case 6://金币
                 other.node.destroy();
-
-                let num: number = other.node.parent.getComponent(glod).index;
-
-                if (GameLoop.getInstance().currIndex == 0)
-                    mainExterior.getInstance().addScore(num);
-                else if (GameLoop.getInstance().currIndex == 1)
-                    levelTwoExterior.getInstance().addScore(num);
+                let go:glod = other.node.parent.getComponent(glod);
+                if (GameLoop.getInstance().currIndex == 0){
+                    mainExterior.getInstance().addScore(go.index, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.iii);
+                }
+                else if (GameLoop.getInstance().currIndex == 1){
+                    levelTwoExterior.getInstance().addScore(go.index, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.iii);
+                }
 
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
@@ -300,10 +303,12 @@ export class playerCtrl extends cc.Component {
             case 9:
                 other.node.destroy();
 
-                if (GameLoop.getInstance().currIndex == 0)
-                    mainExterior.getInstance().addScore(100);
-                else if (GameLoop.getInstance().currIndex == 1)
-                    levelTwoExterior.getInstance().addScore(100);
+                if (GameLoop.getInstance().currIndex == 0){
+                    mainExterior.getInstance().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
+                }
+                else if (GameLoop.getInstance().currIndex == 1){
+                    levelTwoExterior.getInstance().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
+                }
 
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);

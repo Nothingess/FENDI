@@ -43,6 +43,7 @@ export class obsLayer extends cc.Component {
     }
 
     update (dt) {
+        dt = 0.0172;
         if(this.times == null)return;
         if(this.currIndex > this.times.length - 1)return;
         this.interval -= dt;
@@ -82,5 +83,9 @@ export class obsLayer extends cc.Component {
             pos.y += node.height * .5;
         }
         node.setPosition(pos);
+    }
+
+    onDestroy():void{
+        EventManager.getInstance().removeEventListenerByTag(EventType.zoomIn, "obsLayer");
     }
 }
