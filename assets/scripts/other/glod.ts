@@ -1,4 +1,4 @@
-import { goldAction } from "./goldAction";
+import { IGoldAction } from "./IGoldAction";
 
 const {ccclass, property} = cc._decorator;
 
@@ -24,7 +24,9 @@ export class glod extends cc.Component {
         }
         //this.index = Math.floor(Math.random() * 3);
         this.node.children.forEach(e=>{
-            e.getComponent(goldAction).setGoldId(this.index);
+            let ac:IGoldAction = e.getComponent(IGoldAction);
+            if(ac)
+                ac.setGoldId(this.index);
         })
     }
 }

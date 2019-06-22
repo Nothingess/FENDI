@@ -8,6 +8,7 @@ import { smoke } from "../../../other/smoke";
 import { explosion } from "../../../other/explosion";
 import { EventManager, EventType } from "../../../comms/EventManager";
 import { goldAction } from "../../../other/goldAction";
+import { packAction } from "../../../other/packAction";
 
 const { ccclass, property } = cc._decorator;
 
@@ -264,7 +265,10 @@ export class playerCtrl extends cc.Component {
                         mainExterior.getInstance().minusHeart(this.node.position);
                     else if (GameLoop.getInstance().currIndex == 1)
                         levelTwoExterior.getInstance().minusHeart(this.node.position);
-                    other.node.destroy();
+
+                    //重新加入障碍物对象池
+                    EventManager.getInstance().dispatchEvent(EventType.addObsPool, other.node);
+                    //other.node.destroy();
                     this.cameraShake.shake();
                     this.explosionCtrl.play(other.node.position);
                     AudioManager.getInstance().playSound(GameLoop.getInstance().isMan ? AudioType.OBSMAN : AudioType.OBSWOMAN);
@@ -282,8 +286,8 @@ export class playerCtrl extends cc.Component {
             case 5:
                 break;
             case 6://金币
-                other.node.destroy();
                 let go:goldAction = other.node.getComponent(goldAction);
+                go.hide();
                 if (GameLoop.getInstance().currIndex == 0){
                     mainExterior.getInstance().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
                 }
@@ -301,13 +305,31 @@ export class playerCtrl extends cc.Component {
                 this.collCount--;
                 break;
             case 9:
-                other.node.destroy();
-
+                //other.node.destroy();
+                let pack:packAction = other.node.getComponent(packAction);
+                pack.hide();
                 if (GameLoop.getInstance().currIndex == 0){
                     mainExterior.getInstance().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
                 }
                 else if (GameLoop.getInstance().currIndex == 1){
                     levelTwoExterior.getInstance().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
+                }
+
+
+                AudioManager.getInstance().playSound(AudioType.GLOD);
+                break;
+            case 30:
+                cc.loader.loadRes("prefabs/other/jinbichufa", cc.Prefab, (err, res)=>{
+                    other.node.getComponent(sp.Skeleton).enabled = false;
+                    let node:cc.Node = cc.instantiate(res);
+                    other.node.addChild(node)
+                    node.setPosition(cc.v2(0, 0));
+                })
+                if (GameLoop.getInstance().currIndex == 0){
+                    mainExterior.getInstance().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
+                }
+                else if (GameLoop.getInstance().currIndex == 1){
+                    levelTwoExterior.getInstance().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
                 }
 
 

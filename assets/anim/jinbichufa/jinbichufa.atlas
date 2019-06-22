@@ -1,0 +1,83 @@
+
+jinbichufa.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FX_GuanMangg_00
+  rotate: false
+  xy: 2, 374
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+guangman_01
+  rotate: false
+  xy: 132, 374
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+guangman_02
+  rotate: false
+  xy: 2, 114
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+guangman_03
+  rotate: false
+  xy: 2, 244
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+hutou-01-0001
+  rotate: false
+  xy: 132, 244
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+hutou-01-0002
+  rotate: false
+  xy: 262, 374
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+hutou-01-0003
+  rotate: false
+  xy: 132, 114
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+hutou-01-0004
+  rotate: false
+  xy: 262, 244
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+hutou-01-0005
+  rotate: false
+  xy: 392, 374
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+hutou-01-0006
+  rotate: false
+  xy: 262, 114
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+jinbi
+  rotate: false
+  xy: 2, 2
+  size: 110, 110
+  orig: 110, 110
+  offset: 0, 0
+  index: -1

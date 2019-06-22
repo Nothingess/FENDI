@@ -6,6 +6,7 @@ import { settingBtnSp } from "./settingBtnSp";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
 import { desPanel } from "../../uiSystem/desPanel";
 import { selectLevelPanel } from "../../uiSystem/selectLevelPanel";
+import { changeRankPanel } from "../../uiSystem/changeRankPanel";
 
 export class startExterior {
 
@@ -29,6 +30,7 @@ export class startExterior {
     private friendsBtn: cc.Node = null;                  //好友按钮
     private musicBtn: cc.Node = null;                    //音乐
     private desBtn: cc.Node = null;                      //活动描述
+    private changeBtn:cc.Node = null;                    //争霸赛排行按钮
 
     private bg: cc.Sprite = null;                        //背景
     private bgNew: cc.Sprite = null;                     //新背景（副本）
@@ -73,15 +75,15 @@ export class startExterior {
             cc.callFunc(() => {
                 this.bgAction.children[1].runAction(cc.sequence(
                     cc.spawn(
-                        cc.fadeIn(2),
-                        cc.moveTo(2, cc.v2(0, 0))
+                        cc.fadeIn(1),
+                        cc.moveTo(1, cc.v2(0, 0))
                     ),
                     cc.callFunc(() => {
                         this.bgAction.children[0].runAction(
                             cc.sequence(
                                 cc.spawn(
-                                    cc.fadeIn(2),
-                                    cc.moveBy(2, cc.v2(0, 100))
+                                    cc.fadeIn(1),
+                                    cc.moveBy(1, cc.v2(0, 100))
                                 ),
                                 cc.callFunc(() => { this.onBgAction(); })
                             )
@@ -114,6 +116,7 @@ export class startExterior {
         this.friendsBtn = cc.find("friends", this.upArea);
         this.musicBtn = cc.find("musicBtn", this.upArea);
         this.desBtn = cc.find("description", this.upArea);
+        this.changeBtn = cc.find("changeBtn", this.upArea);
 
         this.bg = cc.find("Canvas/bg").getComponent(cc.Sprite);
         this.bgNew = cc.find("Canvas/bgNew").getComponent(cc.Sprite);
@@ -159,6 +162,7 @@ export class startExterior {
         this.friendsBtn.off("touchend", this.onfriendsBtn, this);
         this.musicBtn.off("touchend", this.onMusicBtn, this);
         this.desBtn.off("touchend", this.ondesBtn, this);
+        this.changeBtn.off("touchend", this.onChangebtn, this);
 
         startExterior.endInstance();
     }
@@ -170,6 +174,7 @@ export class startExterior {
         this.friendsBtn.on("touchend", this.onfriendsBtn, this);
         this.musicBtn.on("touchend", this.onMusicBtn, this);
         this.desBtn.on("touchend", this.ondesBtn, this);
+        this.changeBtn.on("touchend", this.onChangebtn, this);
     }
 
     private onstartBtn(): void {
@@ -188,6 +193,10 @@ export class startExterior {
     }
     private ondesBtn(): void {
         this.uiSys.openPanel(desPanel, "desPanel");
+        AudioManager.getInstance().playSound(AudioType.CLICK);
+    }
+    private onChangebtn():void{
+        this.uiSys.openPanel(changeRankPanel, "changeRankPanel");
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     //#endregion

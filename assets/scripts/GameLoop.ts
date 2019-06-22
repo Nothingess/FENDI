@@ -30,6 +30,7 @@ export class GameLoop extends cc.Component {
     public isMuteAudio: boolean = false;              //是否关闭音乐
     public isMuteEff: boolean = false;                //是否关闭音效
     private isLoadSub: boolean = false;               //分包是否加载成功
+    public userName:string = "";                      //用户名称
 
     public buildNode: Array<cc.Node> = new Array<cc.Node>();
     public groundNode: Array<cc.Node> = new Array<cc.Node>();

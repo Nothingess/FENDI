@@ -2,7 +2,12 @@ export enum EventType{
     zoomTrigger = 1,
     zoomIn,
     onHide,
-    onShow
+    onShow,
+    /**加入障碍物对象池 */
+    addObsPool,
+    /**加入金币对象池 */
+    addGoldPool,
+    gameOver
 }
 
 interface IEvent {
@@ -10,7 +15,7 @@ interface IEvent {
     priority: number, 
     class_id: string,
     callback: (data) => void
-} 
+}
 
 export class EventManager {
     private static singleInstance: EventManager = null;

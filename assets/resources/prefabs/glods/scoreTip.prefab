@@ -21,10 +21,13 @@
     "_components": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 3
+      "__id__": 4
     },
     "_opacity": 255,
     "_color": {
@@ -36,8 +39,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
-      "height": 40
+      "width": 77,
+      "height": 37
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -71,28 +74,61 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_useOriginalSize": false,
-    "_string": "+100",
-    "_N$string": "+100",
-    "_fontSize": 40,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 1,
-    "_N$cacheMode": 0,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "d8e9f7e4-2d24-4f65-9323-63e266f0363b"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "d6b52YOYgxF5JVpfpsGmi0F",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "spList": [
+      {
+        "__uuid__": "d8e9f7e4-2d24-4f65-9323-63e266f0363b"
+      },
+      {
+        "__uuid__": "1f85e258-7538-4637-9531-1fb408d3a484"
+      },
+      {
+        "__uuid__": "f8212243-3d36-4871-b01f-a922806de77b"
+      },
+      {
+        "__uuid__": "efc05ff4-7a02-445d-8eb5-0676d28edb52"
+      },
+      {
+        "__uuid__": "d6525198-2fef-42c0-9d39-126a7f1c4cc8"
+      }
+    ],
+    "sp": {
+      "__id__": 2
+    },
     "_id": ""
   },
   {
@@ -101,7 +137,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "326d1fd7-270f-48df-a8c1-a790aa2f993d"
     },
     "fileId": "83GVWOJ4FCJpyQZsln15he",
     "sync": false

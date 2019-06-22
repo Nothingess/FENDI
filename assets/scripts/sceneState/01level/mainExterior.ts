@@ -7,6 +7,7 @@ import { accountsPanel } from "../../uiSystem/accountsPanel";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
 import { EventManager, EventType } from "../../comms/EventManager";
 import { goldAction } from "../../other/goldAction";
+import { scoreTip } from "../../other/scoreTip";
 
 export class mainExterior{
     private constructor(){this.init();}
@@ -166,8 +167,7 @@ export class mainExterior{
 
         if(node.parent == null)
             cc.director.getScene().addChild(node);
-        
-        node.getComponent(cc.Label).string = `+${val}`;
+        node.getComponent(scoreTip).setSp(val);
         node.setPosition(pos);
         node.runAction(cc.sequence(
             cc.moveBy(.5, cc.v2(0, 100)),
@@ -212,6 +212,8 @@ export class mainExterior{
             this.pyCtrl.stop();
             this.uploadScore();
             this.offEventSys();
+
+            EventManager.getInstance().dispatchEvent(EventType.gameOver);
         }
     }
     /**飘动减血图标 */
@@ -247,12 +249,27 @@ export class mainExterior{
             node.addChild(child);
             child.setPosition(cc.v2(0, node.height * .5));
             child.scale = 0;
-            child.runAction(cc.sequence(cc.delayTime(.5),cc.scaleTo(.3, 1).easing(cc.easeBackInOut())));
+            child.runAction(cc.sequence(cc.delayTime(.5),cc.scaleTo(.3, 1).easing(cc.easeBackInOut()), 
+            cc.delayTime(2),
+            cc.scaleTo(.3, 0).easing(cc.easeBackInOut()),
+            cc.callFunc(()=>{
+                child.destroy();
+            })));
         })
         cc.loader.loadRes(`prefabs/other/${ty == 0?"guide_line_1":"guide_line_2"}`, cc.Prefab, (err, res)=>{
             let child:cc.Node = cc.instantiate(res);
             node.addChild(child);
             child.setPosition(cc.v2(0, 0));
+            child.runAction(
+                cc.sequence(
+                    cc.blink(.5, 3),
+                    cc.delayTime(2),
+                    cc.fadeOut(.5),
+                    cc.callFunc(()=>{
+                        child.destroy();
+                    })
+                )
+            )
         })
     }
 

@@ -7,6 +7,7 @@ import { AudioType, AudioManager } from "../../comms/AudioManager";
 import { FlyCtrl } from "./FlyCtrl";
 import { EventType, EventManager } from "../../comms/EventManager";
 import { goldAction } from "../../other/goldAction";
+import { scoreTip } from "../../other/scoreTip";
 
 export class levelThreeExterior {
 
@@ -178,7 +179,7 @@ export class levelThreeExterior {
         if (node.parent == null)
             cc.director.getScene().addChild(node);
 
-        node.getComponent(cc.Label).string = `+${val}`;
+        node.getComponent(scoreTip).setSp(val);
         node.setPosition(pos);
         node.runAction(cc.sequence(
             cc.moveBy(.5, cc.v2(0, 100)),

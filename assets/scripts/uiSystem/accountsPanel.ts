@@ -54,9 +54,16 @@ export class accountsPanel extends IUIBase {
         })
 
         if(!!this.args[2]){
-            cc.loader.loadRes("imgs/btn_continue", cc.SpriteFrame, (err, res)=>{
-                this.againBtn.getComponent(cc.Sprite).spriteFrame = res;
-            })
+            if(GameLoop.getInstance().currIndex == 2){
+                cc.loader.loadRes("imgs/btn_return", cc.SpriteFrame, (err, res)=>{
+                    this.againBtn.getComponent(cc.Sprite).spriteFrame = res;
+                })
+            }else{
+                cc.loader.loadRes("imgs/btn_continue", cc.SpriteFrame, (err, res)=>{
+                    this.againBtn.getComponent(cc.Sprite).spriteFrame = res;
+                })
+            }
+
         }
 
         this.onBtnEvent();
@@ -119,8 +126,13 @@ export class accountsPanel extends IUIBase {
             return;
         }
 
-        GameLoop.getInstance().currIndex = (GameLoop.getInstance().currIndex + 1) % 3;
-        this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", [`0${GameLoop.getInstance().currIndex + 1}level`, this.args[0]]);
+        if(GameLoop.getInstance().currIndex == 2){
+            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", this.args[0]]);
+        }else{
+            GameLoop.getInstance().currIndex = (GameLoop.getInstance().currIndex + 1) % 3;
+            this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", [`0${GameLoop.getInstance().currIndex + 1}level`, this.args[0]]);
+        }
+
 
     }
     private onShareBtn():void{

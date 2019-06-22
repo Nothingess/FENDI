@@ -34,6 +34,15 @@
       false,
       false,
       true,
+      false,
+      true
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      true,
       false
     ]
   ],
@@ -78,7 +87,8 @@
     "player",
     "ground",
     "obstacle",
-    "recover"
+    "recover",
+    "gold"
   ],
   "last-module-event-record-time": 1560849704896,
   "simulator-orientation": false,
@@ -87,6 +97,5 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }

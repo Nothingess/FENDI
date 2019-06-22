@@ -1,0 +1,108 @@
+{
+"skeleton": { "hash": "PHPDNMUWvsXXyOGaAH5eli4v4cw", "spine": "3.6.53", "width": 192, "height": 192, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_GuanMan00149_00", "parent": "root" },
+	{ "name": "FX_GuanMangg_00", "parent": "root", "rotation": 90 },
+	{ "name": "guangman_01", "parent": "root", "scaleX": 1.5, "scaleY": 1.5 },
+	{ "name": "jinbi", "parent": "root", "color": "fff600ff" }
+],
+"slots": [
+	{ "name": "jinbi", "bone": "jinbi", "color": "f2da3fff", "attachment": "jinbi", "blend": "additive" },
+	{ "name": "FX_GuanMan00149_00", "bone": "FX_GuanMan00149_00", "attachment": "hutou-01-0006", "blend": "additive" },
+	{ "name": "guangman_01", "bone": "guangman_01", "attachment": "guangman_03", "blend": "additive" },
+	{ "name": "FX_GuanMangg_00", "bone": "FX_GuanMangg_00", "attachment": "FX_GuanMangg_00" }
+],
+"skins": {
+	"default": {
+		"FX_GuanMan00149_00": {
+			"hutou-01-0001": { "width": 128, "height": 128 },
+			"hutou-01-0002": { "width": 128, "height": 128 },
+			"hutou-01-0003": { "width": 128, "height": 128 },
+			"hutou-01-0004": { "width": 128, "height": 128 },
+			"hutou-01-0005": { "width": 128, "height": 128 },
+			"hutou-01-0006": { "width": 128, "height": 128 }
+		},
+		"FX_GuanMangg_00": {
+			"FX_GuanMangg_00": { "width": 128, "height": 128 }
+		},
+		"guangman_01": {
+			"guangman_01": { "width": 128, "height": 128 },
+			"guangman_02": { "width": 128, "height": 128 },
+			"guangman_03": { "width": 128, "height": 128 }
+		},
+		"jinbi": {
+			"jinbi": { "width": 110, "height": 110 }
+		}
+	}
+},
+"animations": {
+	"jinbichufa": {
+		"slots": {
+			"FX_GuanMan00149_00": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" },
+					{ "time": 0.1667, "color": "f1ff05ff", "curve": "stepped" },
+					{ "time": 0.3667, "color": "f1ff05ff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "hutou-01-0001" },
+					{ "time": 0.0667, "name": "hutou-01-0002" },
+					{ "time": 0.1333, "name": "hutou-01-0003" },
+					{ "time": 0.2, "name": "hutou-01-0004" },
+					{ "time": 0.2667, "name": "hutou-01-0005" },
+					{ "time": 0.3333, "name": "hutou-01-0006" },
+					{ "time": 0.3667, "name": null }
+				]
+			},
+			"guangman_01": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" },
+					{ "time": 0.0667, "color": "ffd006ff" },
+					{ "time": 0.1333, "color": "ffcf0500" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "guangman_01" },
+					{ "time": 0.0333, "name": "guangman_02" },
+					{ "time": 0.0667, "name": "guangman_03" }
+				]
+			},
+			"jinbi": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" },
+					{ "time": 0.2333, "color": "ffffffc4" },
+					{ "time": 0.4, "color": "faeb6fff" },
+					{ "time": 0.5, "color": "ffc20000" }
+				]
+			}
+		},
+		"bones": {
+			"FX_GuanMan00149_00": {
+				"scale": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3667, "x": 2.5, "y": 2.5 }
+				]
+			},
+			"guangman_01": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.1, "x": 1.333, "y": 1.333 }
+				]
+			},
+			"jinbi": {
+				"scale": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3333, "x": 1.6, "y": 1.6 },
+					{ "time": 0.5, "x": 2, "y": 2 }
+				]
+			},
+			"FX_GuanMangg_00": {
+				"scale": [
+					{ "time": 0, "x": 2.5, "y": 5 },
+					{ "time": 0.1667, "x": 0, "y": 0 }
+				]
+			}
+		}
+	}
+}
+}

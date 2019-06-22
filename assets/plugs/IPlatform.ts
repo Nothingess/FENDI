@@ -1,6 +1,7 @@
 export class IPlatform {
 
     public liuhai: number = 0;           //设备刘海高度
+    public nickName:string = "";         //用户名称
 
     public init(): void {
 
@@ -16,10 +17,12 @@ export class IPlatform {
     public hideToast(): void { }
     public showLoading(context: string, isMask: boolean = true): void { }
     public hideLoading(): void { }
-    public showModal(tip:string, context:string, trueCall, falseCall):void{}
+    public showModal(tip: string, context: string, trueCall, falseCall): void { }
 
     public postMessageToOpenDataContext(data: any): void { }
     public requestNet(): void { }
+    public requestSetUnLock(): void { }
+    public requestGetUnLock(): void { }
 
     public onShow(callback: (res) => void): void { }
     public onHide(callback: (res) => void): void { }
@@ -55,13 +58,14 @@ export class WeChatPlatform extends IPlatform {
             }
         });
 
+        let self = this;
         button.onTap((res) => {
             let userInfo = res.userInfo;
             if (!userInfo) {
                 //this.tips.string = res.errMsg;
                 return;
             }
-
+            self.nickName = userInfo.nickName;
             cc.loader.load({ url: userInfo.avatarUrl, type: 'png' }, (err, texture) => {
                 if (err) {
                     console.error(err);
@@ -167,20 +171,20 @@ export class WeChatPlatform extends IPlatform {
     public hideLoading(): void {
         wx.hideLoading();
     }
-    public showModal(tip:string, context:string, trueCall, falseCall):void{
+    public showModal(tip: string, context: string, trueCall, falseCall): void {
         wx.showModal({
             title: tip,
             content: context,
-            success (res) {
-              if (res.confirm) {
-                console.log('用户点击确定')
-                trueCall();
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-                falseCall();
-              }
+            success(res) {
+                if (res.confirm) {
+                    console.log('用户点击确定')
+                    trueCall();
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
+                    falseCall();
+                }
             }
-          })
+        })
     }
     /**向开放数据域传递消息 */
     public postMessageToOpenDataContext(data: any): void {
@@ -188,7 +192,7 @@ export class WeChatPlatform extends IPlatform {
     }
     public requestNet(): void {
         let self = this;
-        //console.log("==userLogins==")
+        console.log("==userLogins==");
         wx.login({
             success: function (res) {
                 if (res.code) {
@@ -200,7 +204,7 @@ export class WeChatPlatform extends IPlatform {
                         success(res) {
                             //Global.session = res.data.data
                             self.postMessageToOpenDataContext({ k: "openid", v: res.data.data.openid })
-                            console.log(res.data)
+                            //console.log(res.data)
                         },
                         fail() {
 
@@ -209,21 +213,58 @@ export class WeChatPlatform extends IPlatform {
                 }
             }
         });
-        /*         wx.request({
-                    url: 'https://wxfendi.duligame.cn/Login',
-                    data: {
-                        code: '',
-                    },
-                    success(res) {
-                        let session = res.data
-                        console.log(res.data)
-                    },
-                    fail() {
-        
-                    }
-                }) */
     }
-
+    public requestSetUnLock(): void {
+        let self = this;
+        console.log("==userSetUnLock==");
+        wx.login({
+            success: (res) => {
+                if (res.code) {
+                    wx.request({
+                        url: 'https://wxfendi.duligame.cn/SetUnLock',
+                        data: {
+                            session: '', //使用Login返回的session
+                            value: 0,
+                        },
+                        success(res) {
+                            let resp = res.data
+                            if (resp.err != 0) {
+                                //session过期 重新登录后调用
+                            }
+                        },
+                        fail() {
+                        }
+                    })
+                }
+            }
+        })
+    }
+    public requestGetUnLock(): void {
+        let self = this;
+        console.log("==userGetUnLock==");
+        wx.login({
+            success: (res) => {
+                if (res.code) {
+                    wx.request({
+                        url: 'https://wxfendi.duligame.cn/GetUnLock',
+                        data: {
+                            session: '', //使用Login返回的session
+                        },
+                        success(res) {
+                            let resp = res.data
+                            if (resp.err != 0) {
+                                //session过期 重新登录后调用
+                            } else {
+                                let value = resp.data //解锁等级
+                            }
+                        },
+                        fail() {
+                        }
+                    })
+                }
+            }
+        })
+    }
     public onShow(callback: (res) => void): void {
         wx.onShow(callback);
     }
@@ -252,12 +293,16 @@ export class WeChatPlatform extends IPlatform {
 
             canvas.width = arr[0].img.width; // 设置画布宽（第一张图默认背景图）或者自己设置
             canvas.height = arr[0].img.height; // 设置画布高（第一张图默认背景图）或者自己设置
-            context.font = '70px 微软雅黑'; //设置字体
+            context.font = '90px 微软雅黑'; //设置字体
             context.fillStyle = '#c67861'; //设置字体的颜色
             context.textAlign = "center";
             context.drawImage(arr[0].img, 0, 0, arr[0].img.width, arr[0].img.height); // 绘制图片上去  （所绘制图片资源,x,y,width,height）
-            context.fillText(score, canvas.width * .5, 425, canvas.width);// 绘制文字上去  （文字,x,y,width）
+            context.fillText(score, canvas.width * .5, 480, canvas.width);// 绘制文字上去  （文字,x,y,width）
 
+            context.font = '50px 微软雅黑'; //设置字体
+            context.fillStyle = '#3b3a3a'; //设置字体的颜色
+            context.textAlign = "center";
+            context.fillText(ths.nickName, canvas.width * .5, 380, canvas.width);// 绘制文字上去  （文字,x,y,width）
             this.canvasToImg(canvas);
         } catch (e) {
             console.log('drawImg error:', e);

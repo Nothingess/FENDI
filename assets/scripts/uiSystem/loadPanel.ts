@@ -184,12 +184,12 @@ export class loadPanel extends IUIBase {
                 GameLoop.getInstance().buildNode.push(cc.instantiate(element));
             count++;
         });
-        count = 0;
+/*         count = 0;
         res.forEach(element => {
-            if(count < 7)
+            if(count < 3)
                 GameLoop.getInstance().buildNode.push(cc.instantiate(element));
             count++;
-        });
+        }); */
         GameLoop.getInstance().buildNode.push(cc.instantiate(res[9]));
         this.isComplete = true;
     }

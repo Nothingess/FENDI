@@ -6,6 +6,11 @@ import { GameLoop } from "../GameLoop";
 
 export class rankPanel extends IUIBase {
 
+    private lv1:cc.Node = null;
+    private lv2:cc.Node = null;
+    private lv3:cc.Node = null;
+    private currSelect:cc.Node = null;
+
     private closeBtn: cc.Node = null;
     private wxSubContextView: cc.WXSubContextView = null;
 
@@ -21,23 +26,56 @@ export class rankPanel extends IUIBase {
     public onShowed(): void {
         this.initComponent();
     }
-    /*     public open():void{
-            super.open();
-            this.initComponent();
-        } */
     public initComponent(): void {
+        this.lv1 = cc.find("context/lv1", this.skin);
+        this.lv2 = cc.find("context/lv2", this.skin);
+        this.lv3 = cc.find("context/lv3", this.skin);
+
         this.closeBtn = cc.find("close_btn", this.skin);
         this.wxSubContextView = cc.find("context", this.skin).getComponent(cc.WXSubContextView);
         this.closeBtn.on("touchend", this.onCloseBtn, this);
+        this.lv1.on("touchend", this.onLv1, this);
+        this.lv2.on("touchend", this.onLv2, this);
+        this.lv3.on("touchend", this.onLv3, this);
+        this.currSelect = this.lv1;
 
-        if (typeof wx === 'undefined') return;
-        this.wxSubContextView.enabled = true;
-        //刷新排行榜
-        GameLoop.getInstance().platform.postMessageToOpenDataContext({ k: "update" });
+        if (GameLoop.getInstance().platform != null){
+            this.wxSubContextView.enabled = true;
+            GameLoop.getInstance().platform.postMessageToOpenDataContext({ k: "update" });
+        }
+
     }
     private onCloseBtn(): void {
         startExterior.getInstance().uiSys.closePanel(this.getSkinName());
         AudioManager.getInstance().playSound(AudioType.CLICK);
+    }
+    private onLv1():void{
+        if(this.lv1 == this.currSelect)return;
+        this.onSelect(this.lv1);
+        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:"s_1"});
+    }
+    private onLv2():void{
+        if(this.lv2 == this.currSelect)return;
+        this.onSelect(this.lv2);
+        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:"s_2"});
+    }
+    private onLv3():void{
+        if(this.lv3 == this.currSelect)return;
+        this.onSelect(this.lv3);
+        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:"s_3"});
+    }
+
+    private onSelect(node:cc.Node):void{
+        let oldSp:cc.Sprite = this.currSelect.getComponent(cc.Sprite);
+        let newSp:cc.Sprite = node.getComponent(cc.Sprite);
+        let oldSf:cc.SpriteFrame = oldSp.spriteFrame;
+        oldSp.spriteFrame = newSp.spriteFrame;
+        newSp.spriteFrame = oldSf;
+
+        node.children[0].color = cc.Color.WHITE;
+        this.currSelect.children[0].color = new cc.Color(83, 110, 95);
+
+        this.currSelect = node;
     }
 
     onDestroy(): void {

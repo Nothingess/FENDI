@@ -1,18 +1,15 @@
+import { IGoldAction } from "./IGoldAction";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export class goldAction extends cc.Component {
+export class goldAction extends IGoldAction {
 
     @property({type:[cc.SpriteFrame]})
     goldSpList:Array<cc.SpriteFrame> = [];
 
     public goldId:number = 0;
     public score:number = 0;
-
-    start () {
-        this.action();
-    }
 
     public setGoldId(val:number):void{
         this.node.getComponent(cc.Sprite).spriteFrame = this.goldSpList[val];
@@ -26,7 +23,7 @@ export class goldAction extends cc.Component {
             this.score = 10;
     }
 
-    private action():void{
+    public action():void{
         this.node.runAction(
             cc.repeatForever(
                 cc.sequence(
@@ -36,6 +33,4 @@ export class goldAction extends cc.Component {
             )
         )
     }
-
-    // update (dt) {}
 }
