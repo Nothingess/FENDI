@@ -46,9 +46,12 @@ export class loading extends cc.Component {
             this.maxPro = com / total;
     }
     private complete():void{
-        cc.loader.loadResDir("prefabs/uiPanels", this.onProgress.bind(this), this.completeRes.bind(this));
+        cc.loader.loadResDir("prefabs/uiPanels", this.onProgress.bind(this), this.completePres.bind(this));
     }
-    private completeRes():void{
+    private completePres():void{
+        cc.loader.loadResDir("imgs", this.onProgress.bind(this), this.completeImgs.bind(this));
+    }
+    private completeImgs():void{
         this.isComplete = true;
     }
 }

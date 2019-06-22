@@ -1,0 +1,131 @@
+{
+"skeleton": { "hash": "Po2OvN5oqoWBpbUfsBq7ENbJ0lU", "spine": "3.6.53", "width": 174.42, "height": 174.42, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "FX_GuanMan00149_00", "parent": "root", "scaleX": 1.163, "scaleY": 1.163 },
+	{ "name": "jinbi", "parent": "root", "scaleX": 0.652, "scaleY": 0.652 },
+	{ "name": "jinbi2", "parent": "root", "scaleX": 0.65, "scaleY": 0.65, "color": "ff0000ff" },
+	{ "name": "saoguang_01", "parent": "root", "scaleX": 1.058, "scaleY": 1.058 },
+	{ "name": "star_00", "parent": "root", "scaleX": -0.77, "scaleY": 0.77 }
+],
+"slots": [
+	{ "name": "FX_GuanMan00149_00", "bone": "FX_GuanMan00149_00", "color": "fcff6943", "attachment": "FX_GuanMan00149_00" },
+	{ "name": "jinbi2", "bone": "jinbi2", "attachment": "jinbi", "blend": "additive" },
+	{ "name": "jinbi", "bone": "jinbi", "attachment": "jinbi" },
+	{ "name": "saoguang_01", "bone": "saoguang_01", "color": "ffffff35", "attachment": "saoguang_03", "blend": "additive" },
+	{ "name": "star_00", "bone": "star_00", "color": "ffffffc8", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"FX_GuanMan00149_00": {
+			"FX_GuanMan00149_00": { "width": 150, "height": 150 }
+		},
+		"jinbi": {
+			"jinbi": { "width": 110, "height": 110 }
+		},
+		"jinbi2": {
+			"jinbi": { "width": 110, "height": 110 }
+		},
+		"saoguang_01": {
+			"saoguang_01": { "width": 80, "height": 80 },
+			"saoguang_02": { "width": 80, "height": 80 },
+			"saoguang_03": { "width": 80, "height": 80 },
+			"saoguang_04": { "width": 80, "height": 80 },
+			"saoguang_05": { "width": 80, "height": 80 }
+		},
+		"star_00": {
+			"star_00": { "width": 128, "height": 128 },
+			"star_01": { "width": 128, "height": 128 },
+			"star_02": { "width": 128, "height": 128 },
+			"star_03": { "width": 128, "height": 128 },
+			"star_04": { "width": 128, "height": 128 },
+			"star_05": { "width": 128, "height": 128 },
+			"star_06": { "width": 128, "height": 128 },
+			"star_07": { "width": 128, "height": 128 },
+			"star_08": { "width": 128, "height": 128 },
+			"star_09": { "width": 128, "height": 128 }
+		}
+	}
+},
+"animations": {
+	"jinbi_animation": {
+		"slots": {
+			"jinbi2": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.5, "color": "ffffff56" },
+					{ "time": 1, "color": "ffffff00" }
+				]
+			},
+			"saoguang_01": {
+				"attachment": [
+					{ "time": 0, "name": "saoguang_01" },
+					{ "time": 0.0667, "name": "saoguang_02" },
+					{ "time": 0.1333, "name": "saoguang_03" },
+					{ "time": 0.2, "name": "saoguang_04" },
+					{ "time": 0.2667, "name": "saoguang_05" },
+					{ "time": 0.3333, "name": null }
+				]
+			},
+			"star_00": {
+				"color": [
+					{ "time": 0, "color": "ffffffd3" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "star_00" },
+					{ "time": 0.0667, "name": "star_01" },
+					{ "time": 0.1333, "name": "star_02" },
+					{ "time": 0.2, "name": "star_03" },
+					{ "time": 0.2667, "name": "star_04" },
+					{ "time": 0.3333, "name": "star_05" },
+					{ "time": 0.4, "name": "star_06" },
+					{ "time": 0.4667, "name": "star_07" },
+					{ "time": 0.5333, "name": "star_08" },
+					{ "time": 0.6, "name": "star_09" },
+					{ "time": 0.6667, "name": "star_00" },
+					{ "time": 0.7333, "name": "star_01" },
+					{ "time": 0.8, "name": "star_02" },
+					{ "time": 0.8667, "name": "star_03" },
+					{ "time": 0.9333, "name": "star_04" },
+					{ "time": 1, "name": "star_05" },
+					{ "time": 1.0667, "name": "star_06" },
+					{ "time": 1.1333, "name": "star_07" },
+					{ "time": 1.2, "name": "star_08" },
+					{ "time": 1.2667, "name": "star_09" },
+					{ "time": 1.3333, "name": "star_00" },
+					{ "time": 1.4, "name": "star_01" },
+					{ "time": 1.4667, "name": "star_02" },
+					{ "time": 1.5333, "name": "star_03" },
+					{ "time": 1.6, "name": "star_04" },
+					{ "time": 1.6667, "name": "star_05" },
+					{ "time": 1.7333, "name": "star_06" },
+					{ "time": 1.8, "name": "star_07" },
+					{ "time": 1.8667, "name": "star_08" },
+					{ "time": 1.9333, "name": "star_09" },
+					{ "time": 2, "name": "star_00" }
+				]
+			}
+		},
+		"bones": {
+			"FX_GuanMan00149_00": {
+				"scale": [
+					{ "time": 0, "x": 0.86, "y": 0.86 },
+					{ "time": 1, "x": 1.29, "y": 1.29 },
+					{ "time": 2, "x": 0.86, "y": 0.86 }
+				]
+			},
+			"jinbi2": {
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 1, "x": 1.308, "y": 1.308 }
+				]
+			}
+		}
+	}
+}
+}

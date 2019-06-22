@@ -216,8 +216,8 @@
     },
     "_enabled": true,
     "moveSpeed": 200,
-    "maxRot": 15,
-    "rotSpeed": 60,
+    "maxRot": 20,
+    "rotSpeed": 80,
     "_id": ""
   },
   {

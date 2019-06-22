@@ -60,6 +60,8 @@ export class accountsPanel extends IUIBase {
         }
 
         this.onBtnEvent();
+
+        AudioManager.getInstance().playBGM(AudioType.BGM_CAT);
     }
     public onShowed():void{
         super.onShowed();

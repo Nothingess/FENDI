@@ -12,22 +12,25 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "gold copy",
+    "_name": "originGold",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 5,
+    "_level": 1,
     "_components": [
       {
         "__id__": 2
       },
       {
         "__id__": 3
+      },
+      {
+        "__id__": 4
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 5
     },
     "_opacity": 255,
     "_color": {
@@ -49,8 +52,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 2272,
-      "y": 115,
+      "x": 521,
+      "y": 267,
       "z": 0
     },
     "_scale": {
@@ -102,6 +105,27 @@
     "_id": ""
   },
   {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
+    "_id": ""
+  },
+  {
     "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
@@ -128,9 +152,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "b2584bb9-d0ea-4457-b9f7-6f2f3ac7ee6b"
     },
-    "fileId": "f2oVNS4WRDC58vKipi+oor",
+    "fileId": "0fnerrFXxHKoa+0rldiMb2",
     "sync": false
   }
 ]

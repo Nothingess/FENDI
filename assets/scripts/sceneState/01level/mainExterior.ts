@@ -6,6 +6,7 @@ import { GameLoop } from "../../GameLoop";
 import { accountsPanel } from "../../uiSystem/accountsPanel";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
 import { EventManager, EventType } from "../../comms/EventManager";
+import { goldAction } from "../../other/goldAction";
 
 export class mainExterior{
     private constructor(){this.init();}
@@ -115,13 +116,17 @@ export class mainExterior{
         this.uiMgr.sysUpdate();
     }
     public end():void{
+        this.goldPool.clear();
+        this.scoreTipPool.clear();
         this.uiMgr.sysRelease();
         EventManager.getInstance().removeEventListenerByTag(EventType.zoomTrigger, "mainExterior");
-        EventManager.getInstance().removeEventListenerByTag(EventType.onHide, "mainExterior");
-        EventManager.getInstance().removeEventListenerByTag(EventType.onShow, "mainExterior");
         mainExterior.endInstance();
     }
-
+    /**取消监听前后台事件 */
+    private offEventSys():void{
+        EventManager.getInstance().removeEventListenerByTag(EventType.onHide, "mainExterior");
+        EventManager.getInstance().removeEventListenerByTag(EventType.onShow, "mainExterior");
+    }
     //#region 监听事件
 
     private onZoomTrigger(prams:any):void{//判断三次缩放场景
@@ -182,8 +187,8 @@ export class mainExterior{
         if(node.parent == null)
             cc.director.getScene().addChild(node);
 
-        let spine:sp.Skeleton = node.getComponent(sp.Skeleton);
-        spine.setAnimation(0, ty == 0?"jinbi":((ty == 1)?"yinbi":"tongbi"), true);
+        let action:goldAction = node.getComponent(goldAction);
+        action.setGoldId(ty);
         node.setPosition(pos);
         node.runAction(cc.sequence(
             cc.moveTo(.5, this.scoreLa.node.convertToWorldSpaceAR(cc.v2(0, 0))).easing(cc.easeIn(1)),
@@ -206,6 +211,7 @@ export class mainExterior{
             this.stop();
             this.pyCtrl.stop();
             this.uploadScore();
+            this.offEventSys();
         }
     }
     /**飘动减血图标 */
@@ -243,12 +249,19 @@ export class mainExterior{
             child.scale = 0;
             child.runAction(cc.sequence(cc.delayTime(.5),cc.scaleTo(.3, 1).easing(cc.easeBackInOut())));
         })
+        cc.loader.loadRes(`prefabs/other/${ty == 0?"guide_line_1":"guide_line_2"}`, cc.Prefab, (err, res)=>{
+            let child:cc.Node = cc.instantiate(res);
+            node.addChild(child);
+            child.setPosition(cc.v2(0, 0));
+        })
     }
 
     public win():void{
         AudioManager.getInstance().playSound(AudioType.WIN);
         this.uiMgr.openPanel(accountsPanel, "accountsPanel", [mainExterior.getInstance(), this.score, this.heartNum == 0?false:true]);
         this.uploadScore();
+
+        this.offEventSys();
     }
     public zoomIn():void{
         cc.find("Canvas/run_layer").runAction(cc.scaleBy(3, .4, .4))

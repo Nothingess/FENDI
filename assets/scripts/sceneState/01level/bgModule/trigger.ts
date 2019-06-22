@@ -38,6 +38,7 @@ export class trigger extends cc.Component {
             case 11:
             case 12:
             case 13:
+            case 14:
                 if(GameLoop.getInstance().currIndex == 0){
                     mainExterior.getInstance().triggerObs(other.node, other.tag);
                 }

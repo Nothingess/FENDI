@@ -2,8 +2,8 @@ import { GameLoop } from "../../GameLoop";
 import { AudioManager, AudioType } from "../../comms/AudioManager";
 import { CameraShake } from "../../comms/CameraShake";
 import { levelThreeExterior } from "./levelThreeExterior";
-import { glod } from "../../other/glod";
 import { explosion } from "../../other/explosion";
+import { goldAction } from "../../other/goldAction";
 
 const {ccclass, property} = cc._decorator;
 
@@ -130,8 +130,8 @@ export class FlyCtrl extends cc.Component {
         switch(other.tag){
             case 6://金币
                 other.node.destroy();
-                let go:glod = other.node.parent.getComponent(glod);
-                levelThreeExterior.getInstance().addScore(10, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.iii);
+                let go:goldAction = other.node.getComponent(goldAction);
+                levelThreeExterior.getInstance().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
             break;

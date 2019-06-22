@@ -1,0 +1,125 @@
+
+jinbi.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FX_GuanMan00149_00
+  rotate: false
+  xy: 2, 344
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+jinbi
+  rotate: false
+  xy: 262, 254
+  size: 110, 110
+  orig: 110, 110
+  offset: 0, 0
+  index: -1
+saoguang_01
+  rotate: false
+  xy: 2, 2
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+saoguang_02
+  rotate: false
+  xy: 934, 414
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+saoguang_03
+  rotate: false
+  xy: 84, 2
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+saoguang_04
+  rotate: false
+  xy: 262, 172
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+saoguang_05
+  rotate: false
+  xy: 374, 284
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+star_00
+  rotate: false
+  xy: 2, 214
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_01
+  rotate: false
+  xy: 154, 366
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_02
+  rotate: false
+  xy: 2, 84
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_03
+  rotate: false
+  xy: 284, 366
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_04
+  rotate: false
+  xy: 414, 366
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_05
+  rotate: false
+  xy: 544, 366
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_06
+  rotate: false
+  xy: 674, 366
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_07
+  rotate: false
+  xy: 804, 366
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_08
+  rotate: false
+  xy: 132, 214
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+star_09
+  rotate: false
+  xy: 132, 84
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

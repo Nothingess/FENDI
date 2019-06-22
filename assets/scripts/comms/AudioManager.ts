@@ -16,7 +16,8 @@ export enum AudioType{
     WIN,
     BGM_1,
     BGM_2,
-    BGM_3
+    BGM_3,
+    BGM_CAT
 }
 
 export class AudioManager {
@@ -64,6 +65,7 @@ export class AudioManager {
     public resumeAll()
     {
         cc.audioEngine.resumeAll();
+        this.playSound(AudioType.CLICK, false, 0);
     }
 
     public playBGM(aty:AudioType)
@@ -91,7 +93,7 @@ export class AudioManager {
         
         if(GameLoop.getInstance().isMuteAudio)return;
         cc.audioEngine.stopMusic();
-        cc.audioEngine.playMusic(GameLoop.getInstance().audios[aty], false);
+        cc.audioEngine.playMusic(GameLoop.getInstance().audios[aty], true);
     }
     public stopBgm():void{
         cc.audioEngine.stopMusic();

@@ -41,7 +41,7 @@ export class obsLayerTwo extends cc.Component {
 
         let posX:number = 400 * this.times[this.currIndex].t + 600;
 
-        if(posX - (-this.node.x) < this.viewWidth * 1.5){//显示障碍物
+        if(posX - (-this.node.x) < this.viewWidth * 1.7){//显示障碍物
             this.createObs(cc.v2(posX, this.times[this.currIndex].y));
             this.currIndex++;
         }

@@ -21,10 +21,13 @@
     "_components": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 3
+      "__id__": 4
     },
     "_opacity": 255,
     "_color": {
@@ -36,7 +39,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -71,39 +74,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_enabled": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -112,7 +128,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "ff1de10e-31f6-4318-91e5-fe27f04c4d57"
     },
     "fileId": "b4CL+4pGxIK5T1Z8PdbNTC",
     "sync": false

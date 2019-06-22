@@ -83,6 +83,7 @@ export class selectLevelPanel extends IUIBase {
         this.enterBtn.on("touchend", this.onEnterBtn, this);
 
         for(let i = 0; i < this.itemList.length; i++){
+            if(i == 3)break;
             this.itemList[i].on("touchend", ()=>{
                 if(this.currIndex == i)return;
                 this.onSelectLevel(i);
@@ -107,8 +108,8 @@ export class selectLevelPanel extends IUIBase {
     }
     private onSelectLevel(num:number):void{
         AudioManager.getInstance().playSound(AudioType.CLICK);
-        this.itemList[this.currIndex].getChildByName("mask").active = true;
-        this.itemList[num].getChildByName("mask").active = false;
+        this.itemList[this.currIndex].getChildByName("mask").runAction(cc.fadeIn(.3));
+        this.itemList[num].getChildByName("mask").runAction(cc.fadeOut(.3));
     }
 
     //#endregion

@@ -117,7 +117,8 @@ export class GameLoop extends cc.Component {
     //#region 监听系统事件
 
     private onShow(res): void {
-        if(this.currIndex == -1)return;
+        AudioManager.getInstance().resumeAll();
+        if (this.currIndex == -1) return;
         this.platform.showModal("Tip", "游戏已暂停，点击继续",
             () => {
                 EventManager.getInstance().dispatchEvent(EventType.onShow);
@@ -129,7 +130,8 @@ export class GameLoop extends cc.Component {
         console.log(res, "进入前台");
     }
     private onHide(res): void {
-        if(this.currIndex == -1)return;
+        AudioManager.getInstance().pauseAll();
+        if (this.currIndex == -1) return;
         EventManager.getInstance().dispatchEvent(EventType.onHide);
         console.log(res, "进入后台");
     }

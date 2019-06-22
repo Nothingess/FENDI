@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod",
+    "_name": "guide_line_2",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -21,13 +21,10 @@
     "_components": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 3
     },
     "_opacity": 255,
     "_color": {
@@ -39,18 +36,18 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
-      "height": 56
+      "width": 692,
+      "height": 173
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0.5
+      "y": 0
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 557,
-      "y": 342,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -74,60 +71,31 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "3d3a0405-615e-4f9b-aa36-57b4738de6b8"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.BoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "tag": 6,
-    "_offset": {
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 53,
-      "height": 56
-    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -136,9 +104,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "4cd0bd61-2e3f-4f71-97cb-a6333993e956"
+      "__id__": 0
     },
-    "fileId": "026VqL881JlLZA3XZMzih6",
+    "fileId": "7b0RbZ7UxCaLxLVH40An51",
     "sync": false
   }
 ]

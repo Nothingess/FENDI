@@ -20,48 +20,45 @@
         "__id__": 2
       },
       {
-        "__id__": 6
+        "__id__": 7
       },
       {
-        "__id__": 10
+        "__id__": 12
       },
       {
-        "__id__": 14
-      },
-      {
-        "__id__": 18
+        "__id__": 17
       },
       {
         "__id__": 22
       },
       {
-        "__id__": 26
+        "__id__": 27
       },
       {
-        "__id__": 30
+        "__id__": 32
       },
       {
-        "__id__": 34
-      },
-      {
-        "__id__": 38
+        "__id__": 37
       },
       {
         "__id__": 42
       },
       {
-        "__id__": 46
+        "__id__": 47
+      },
+      {
+        "__id__": 52
       }
     ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 50
+        "__id__": 56
       }
     ],
     "_prefab": {
-      "__id__": 51
+      "__id__": 57
     },
     "_opacity": 255,
     "_color": {
@@ -109,7 +106,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod",
+    "_name": "originGold",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -123,10 +120,13 @@
       },
       {
         "__id__": 4
+      },
+      {
+        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 6
     },
     "_opacity": 255,
     "_color": {
@@ -138,7 +138,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -148,8 +148,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 80,
-      "y": 83,
+      "x": -0.5,
+      "y": 52.1,
       "z": 0
     },
     "_scale": {
@@ -173,39 +173,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 2
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -220,11 +233,11 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -235,14 +248,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "9aoqtFFV5MyJ90Ei5aYg72",
+    "fileId": "fb+WCjzVBJjJv9hsbZRXru",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -251,148 +264,18 @@
     "_active": true,
     "_level": 2,
     "_components": [
-      {
-        "__id__": 7
-      },
       {
         "__id__": 8
-      }
-    ],
-    "_prefab": {
-      "__id__": 9
-    },
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 53,
-      "height": 56
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": -80,
-      "y": 83,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "groupIndex": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "sp.Skeleton",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 6
-    },
-    "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
-    },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.BoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 6
-    },
-    "_enabled": true,
-    "tag": 6,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 10
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 53,
-      "height": 56
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "f0ybEE7VJNrqJfAVFBF267",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "glod copy",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_level": 2,
-    "_components": [
-      {
-        "__id__": 11
       },
       {
-        "__id__": 12
+        "__id__": 9
+      },
+      {
+        "__id__": 10
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 11
     },
     "_opacity": 255,
     "_color": {
@@ -404,7 +287,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -414,8 +297,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 130,
-      "y": 141,
+      "x": 79.6,
+      "y": 93.9,
       "z": 0
     },
     "_scale": {
@@ -439,39 +322,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 10
+      "__id__": 7
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 7
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -479,18 +375,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 10
+      "__id__": 7
     },
     "_enabled": true,
     "tag": 6,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -501,14 +397,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "b7oNYl9FNEx5Ob0lfLXPJ6",
+    "fileId": "31IqVAsAVLhpH21As8X/o8",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -517,15 +413,18 @@
     "_active": true,
     "_level": 2,
     "_components": [
+      {
+        "__id__": 13
+      },
+      {
+        "__id__": 14
+      },
       {
         "__id__": 15
-      },
-      {
-        "__id__": 16
       }
     ],
     "_prefab": {
-      "__id__": 17
+      "__id__": 16
     },
     "_opacity": 255,
     "_color": {
@@ -537,7 +436,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -547,8 +446,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 165,
-      "y": 216,
+      "x": -80.1,
+      "y": 93.9,
       "z": 0
     },
     "_scale": {
@@ -572,39 +471,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 14
+      "__id__": 12
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -612,18 +524,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 14
+      "__id__": 12
     },
     "_enabled": true,
     "tag": 6,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -634,14 +546,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "0ew9UM6oRMZ7eppX/LK48k",
+    "fileId": "b0qUFb+ZlDMLA+zaUoRqQJ",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -650,6 +562,9 @@
     "_active": true,
     "_level": 2,
     "_components": [
+      {
+        "__id__": 18
+      },
       {
         "__id__": 19
       },
@@ -670,7 +585,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -680,8 +595,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 110,
-      "y": 296,
+      "x": -130.6,
+      "y": 152.7,
       "z": 0
     },
     "_scale": {
@@ -705,39 +620,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 18
+      "__id__": 17
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 17
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -745,18 +673,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 18
+      "__id__": 17
     },
     "_enabled": true,
     "tag": 6,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -767,14 +695,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "34Sv8q/zFM+rFKT1PbSGWp",
+    "fileId": "8ay9uTA51MhbVZKCK4yEiZ",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -788,10 +716,13 @@
       },
       {
         "__id__": 24
+      },
+      {
+        "__id__": 25
       }
     ],
     "_prefab": {
-      "__id__": 25
+      "__id__": 26
     },
     "_opacity": 255,
     "_color": {
@@ -803,7 +734,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -813,8 +744,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -130,
-      "y": 141,
+      "x": -165.9,
+      "y": 227.1,
       "z": 0
     },
     "_scale": {
@@ -838,39 +769,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 22
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 22
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -885,11 +829,11 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -900,14 +844,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "72fOenSLdKs4VtfRSbqgAb",
+    "fileId": "fctBLNNMRF9IjaVUzDmjxV",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -916,148 +860,18 @@
     "_active": true,
     "_level": 2,
     "_components": [
-      {
-        "__id__": 27
-      },
       {
         "__id__": 28
-      }
-    ],
-    "_prefab": {
-      "__id__": 29
-    },
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 53,
-      "height": 56
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": -165,
-      "y": 216,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "groupIndex": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "sp.Skeleton",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 26
-    },
-    "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
-    },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.BoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 26
-    },
-    "_enabled": true,
-    "tag": 6,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 10
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 53,
-      "height": 56
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "e4CBO9ptRNjYEK7/M9ss2O",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "glod copy",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_level": 2,
-    "_components": [
-      {
-        "__id__": 31
       },
       {
-        "__id__": 32
+        "__id__": 29
+      },
+      {
+        "__id__": 30
       }
     ],
     "_prefab": {
-      "__id__": 33
+      "__id__": 31
     },
     "_opacity": 255,
     "_color": {
@@ -1069,7 +883,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -1079,8 +893,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -110,
-      "y": 296,
+      "x": -110.6,
+      "y": 306.8,
       "z": 0
     },
     "_scale": {
@@ -1104,39 +918,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 27
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 27
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -1144,18 +971,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 27
     },
     "_enabled": true,
     "tag": 6,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -1166,14 +993,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "cbagrVf9BMI55awr+v/tI5",
+    "fileId": "0f5fkaKV9G7rKBZbTN9cA5",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1182,15 +1009,18 @@
     "_active": true,
     "_level": 2,
     "_components": [
+      {
+        "__id__": 33
+      },
+      {
+        "__id__": 34
+      },
       {
         "__id__": 35
-      },
-      {
-        "__id__": 36
       }
     ],
     "_prefab": {
-      "__id__": 37
+      "__id__": 36
     },
     "_opacity": 255,
     "_color": {
@@ -1202,7 +1032,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -1212,8 +1042,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 278,
+      "x": -0.5,
+      "y": 289.8,
       "z": 0
     },
     "_scale": {
@@ -1237,39 +1067,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 34
+      "__id__": 32
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 32
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -1277,18 +1120,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 34
+      "__id__": 32
     },
     "_enabled": true,
     "tag": 6,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -1299,14 +1142,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "b3sR7Z345HeKMKAreoU3Mu",
+    "fileId": "24GvjW0R5CHKT+GgJ3m6Lm",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1315,6 +1158,9 @@
     "_active": true,
     "_level": 2,
     "_components": [
+      {
+        "__id__": 38
+      },
       {
         "__id__": 39
       },
@@ -1335,7 +1181,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -1345,8 +1191,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 41,
+      "x": 110.1,
+      "y": 307.2,
       "z": 0
     },
     "_scale": {
@@ -1370,39 +1216,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 38
+      "__id__": 37
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 37
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -1410,18 +1269,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 38
+      "__id__": 37
     },
     "_enabled": true,
     "tag": 6,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -1432,14 +1291,14 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "32GrGxeiFIbIFDqYQ6gMqN",
+    "fileId": "0bsl1gjQxP+opBpTIrm5Tm",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "glod copy",
+    "_name": "originGold copy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1453,10 +1312,13 @@
       },
       {
         "__id__": 44
+      },
+      {
+        "__id__": 45
       }
     ],
     "_prefab": {
-      "__id__": 45
+      "__id__": 46
     },
     "_opacity": 255,
     "_color": {
@@ -1468,7 +1330,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_anchorPoint": {
@@ -1478,8 +1340,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 41,
+      "x": 164.9,
+      "y": 226.7,
       "z": 0
     },
     "_scale": {
@@ -1503,39 +1365,52 @@
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 42
     },
     "_enabled": true,
-    "paused": false,
-    "defaultSkin": "",
-    "defaultAnimation": "jinbi",
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 0.5,
-    "_accTime": 0,
-    "_playCount": 0,
-    "_frameCache": null,
-    "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "jinbi",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "680b9f0b-b500-464b-bf08-d3fbaecd803b"
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
     },
-    "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
-    "_N$debugBones": false,
-    "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 42
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
     "_id": ""
   },
   {
@@ -1550,11 +1425,11 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 10
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 53,
+      "width": 52,
       "height": 56
     },
     "_id": ""
@@ -1565,9 +1440,158 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
-    "fileId": "40UXu/AKZOSq0JYL0odg8s",
+    "fileId": "94MG9xYaJBbIGNu3evNLJz",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "originGold copy",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 48
+      },
+      {
+        "__id__": 49
+      },
+      {
+        "__id__": 50
+      }
+    ],
+    "_prefab": {
+      "__id__": 51
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 52,
+      "height": 56
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 129.6,
+      "y": 151.8,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 47
+    },
+    "_enabled": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_state": 0,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "0a7220aw2tFbIZbcnwMCBNK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 47
+    },
+    "_enabled": true,
+    "goldSpList": [
+      {
+        "__uuid__": "fe313ad8-4420-4dc7-a465-c4b0877c58b6"
+      },
+      {
+        "__uuid__": "e42b948b-14d6-4e31-a645-fb5af1d3873d"
+      },
+      {
+        "__uuid__": "a1dc4f8c-8467-4d75-afad-3975c2a1d0fc"
+      }
+    ],
+    "_id": ""
+  },
+  {
+    "__type__": "cc.BoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 47
+    },
+    "_enabled": true,
+    "tag": 6,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 52,
+      "height": 56
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
+    },
+    "fileId": "a8eR5s8b9IUp/wQVLDvLGP",
     "sync": false
   },
   {
@@ -1582,14 +1606,14 @@
     "_level": 2,
     "_components": [
       {
-        "__id__": 47
+        "__id__": 53
       },
       {
-        "__id__": 48
+        "__id__": 54
       }
     ],
     "_prefab": {
-      "__id__": 49
+      "__id__": 55
     },
     "_opacity": 255,
     "_color": {
@@ -1640,7 +1664,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 46
+      "__id__": 52
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -1668,7 +1692,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 46
+      "__id__": 52
     },
     "_enabled": true,
     "tag": 9,
@@ -1690,7 +1714,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
     "fileId": "827sLtikpM6b0Ctp+9sfLL",
     "sync": false
@@ -1711,7 +1735,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db217616-9573-4a83-aff4-388e9f81e63f"
     },
     "fileId": "e7n/GAe2RLDJnPN6oUYnRS",
     "sync": false

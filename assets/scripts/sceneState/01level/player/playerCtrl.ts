@@ -5,9 +5,9 @@ import { GameLoop } from "../../../GameLoop";
 import { AudioManager, AudioType } from "../../../comms/AudioManager";
 import { levelTwoExterior } from "../../02level/levelTwoExterior";
 import { smoke } from "../../../other/smoke";
-import { glod } from "../../../other/glod";
 import { explosion } from "../../../other/explosion";
 import { EventManager, EventType } from "../../../comms/EventManager";
+import { goldAction } from "../../../other/goldAction";
 
 const { ccclass, property } = cc._decorator;
 
@@ -283,12 +283,12 @@ export class playerCtrl extends cc.Component {
                 break;
             case 6://金币
                 other.node.destroy();
-                let go:glod = other.node.parent.getComponent(glod);
+                let go:goldAction = other.node.getComponent(goldAction);
                 if (GameLoop.getInstance().currIndex == 0){
-                    mainExterior.getInstance().addScore(go.index, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.iii);
+                    mainExterior.getInstance().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
                 }
                 else if (GameLoop.getInstance().currIndex == 1){
-                    levelTwoExterior.getInstance().addScore(go.index, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.iii);
+                    levelTwoExterior.getInstance().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
                 }
 
 
@@ -512,10 +512,12 @@ export class playerCtrl extends cc.Component {
         this.spCtrl.stop();
     }
     public pasue():void{
+        if(this.isOver)return;
         this.isGamePause = true;
         this.spCtrl.stop();
     }
     public continue():void{
+        if(this.isOver)return;
         this.isGamePause = false;
         this.spCtrl.continue();
     }

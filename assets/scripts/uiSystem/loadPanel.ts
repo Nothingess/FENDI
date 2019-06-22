@@ -1,5 +1,4 @@
 import { IUIBase, PanelLayer } from "../uiSystem/IUIBase";
-import { startExterior } from "../sceneState/startScene/startExterior";
 import { strateC } from "../uiSystem/openAction/IOpenStrategy";
 import { GameLoop } from "../GameLoop";
 
