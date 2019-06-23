@@ -319,8 +319,8 @@ export class playerCtrl extends cc.Component {
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
             case 30:
-                cc.loader.loadRes("prefabs/other/jinbichufa", cc.Prefab, (err, res)=>{
                     other.node.getComponent(sp.Skeleton).enabled = false;
+                cc.loader.loadRes("prefabs/other/jinbichufa", cc.Prefab, (err, res)=>{
                     let node:cc.Node = cc.instantiate(res);
                     other.node.addChild(node)
                     node.setPosition(cc.v2(0, 0));

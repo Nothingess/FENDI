@@ -27,12 +27,13 @@ let level_2:Array<string> = [
     "prefabs/bgModule/02level/02screen_8",
     "prefabs/bgModule/02level/02screen_9",
     "prefabs/bgModule/02level/02screen_10",
-    "prefabs/bgModule/02level/02screen_11",
+    "prefabs/bgModule/02level/02screen_11",/* 
     "prefabs/bgModule/02level/02screen_g2",
     "prefabs/bgModule/02level/02screen_g3",
-    "prefabs/bgModule/02level/02screen_g4",
+    "prefabs/bgModule/02level/02screen_g4", */
     "prefabs/manRole",
-    "prefabs/womanRole"
+    "prefabs/womanRole",
+    "prefabs/other/jinbichufa"
 ]
 let level_3:Array<string> = [
     "prefabs/bgModule/03level/screen_2",
