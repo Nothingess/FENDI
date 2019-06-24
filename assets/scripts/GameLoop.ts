@@ -35,6 +35,8 @@ export class GameLoop extends cc.Component {
     public buildNode: Array<cc.Node> = new Array<cc.Node>();
     public groundNode: Array<cc.Node> = new Array<cc.Node>();
 
+    public resUrl:Array<string> = null;               //当家加载的资源路径列表
+
     onLoad() {
         GameLoop._instance = this;
 
@@ -62,6 +64,7 @@ export class GameLoop extends cc.Component {
             this.DownLoadSubPack();
 
         this.onSysEvent();
+        this.resUrl = new Array<string>();
     }
 
     update(dt) {

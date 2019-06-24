@@ -14,6 +14,9 @@ export class rankPanel extends IUIBase {
     private closeBtn: cc.Node = null;
     private wxSubContextView: cc.WXSubContextView = null;
 
+    private switchTimer:number = 1;
+    private isChanging:boolean = false;
+
     public initStrategy(): void {
         this.mOpenStrategy = new strateA(this.skin);
     }
@@ -51,21 +54,25 @@ export class rankPanel extends IUIBase {
     }
     private onLv1():void{
         if(this.lv1 == this.currSelect)return;
-        this.onSelect(this.lv1);
-        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:"s_1"});
+        this.onSelect(this.lv1, "s_1");
     }
     private onLv2():void{
         if(this.lv2 == this.currSelect)return;
-        this.onSelect(this.lv2);
-        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:"s_2"});
+        this.onSelect(this.lv2, "s_2");
     }
     private onLv3():void{
         if(this.lv3 == this.currSelect)return;
-        this.onSelect(this.lv3);
-        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:"s_3"});
+        this.onSelect(this.lv3, "s_3");
+
     }
 
-    private onSelect(node:cc.Node):void{
+    private onSelect(node:cc.Node, key:string):void{
+        if(this.isChanging)return;
+        this.isChanging = true;
+        this.scheduleOnce(()=>{
+            this.isChanging = false;
+        }, this.switchTimer)
+
         let oldSp:cc.Sprite = this.currSelect.getComponent(cc.Sprite);
         let newSp:cc.Sprite = node.getComponent(cc.Sprite);
         let oldSf:cc.SpriteFrame = oldSp.spriteFrame;
@@ -76,6 +83,8 @@ export class rankPanel extends IUIBase {
         this.currSelect.children[0].color = new cc.Color(83, 110, 95);
 
         this.currSelect = node;
+
+        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:key});
     }
 
     onDestroy(): void {

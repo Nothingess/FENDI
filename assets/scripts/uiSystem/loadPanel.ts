@@ -119,6 +119,18 @@ export class loadPanel extends IUIBase {
 
     private load(name:string):void{
         this.loadScene = name;
+        this.releaseOldRes();
+        let newPath:Array<string> = null;
+        if(this.loadScene == "01level"){
+            newPath = level_1;
+        }else if(this.loadScene == "02level"){
+            newPath = level_2;
+        }else if(this.loadScene == "03level"){
+            newPath = level_3;
+        }
+
+        GameLoop.getInstance().resUrl = newPath;
+
         cc.director.preloadScene(name, this.onProgress.bind(this), this.complete.bind(this));
     }
 
@@ -212,4 +224,10 @@ export class loadPanel extends IUIBase {
 
     }
 
+
+    private releaseOldRes():void{
+        if(GameLoop.getInstance().resUrl != null){
+            cc.loader.release(GameLoop.getInstance().resUrl);
+        }
+    }
 }

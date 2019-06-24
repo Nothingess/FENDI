@@ -1,7 +1,7 @@
 export class IPlatform {
 
     public liuhai: number = 0;           //设备刘海高度
-    public nickName:string = "";         //用户名称
+    public nickName: string = "";         //用户名称
 
     public init(): void {
 
@@ -21,9 +21,8 @@ export class IPlatform {
 
     public postMessageToOpenDataContext(data: any): void { }
     public requestNet(): void { }
-    public requestSetUnLock(): void { }
-    public requestGetUnLock(): void { }
-
+    public uploadScoreToServ(val: number): void { }
+    public getScoreFromServ(): void { }
     public onShow(callback: (res) => void): void { }
     public onHide(callback: (res) => void): void { }
     public offShow(callback: (res) => void): void { }
@@ -33,9 +32,34 @@ export class IPlatform {
 export class WeChatPlatform extends IPlatform {
 
     private _canvas = null;
+    private updateManager = null;;
 
     public init(): void {
         if (typeof wx === 'undefined') return;
+        this.updateManager = wx.getUpdateManager();
+        this.updateManager.onCheckForUpdate(function (res) {
+            // 请求完新版本信息的回调
+            console.log(res.hasUpdate)
+        })
+
+        this.updateManager.onUpdateReady(function () {
+            wx.showModal({
+                title: '更新提示',
+                content: '新版本已经准备好，是否重启应用？',
+                success: function (res) {
+                    if (res.confirm) {
+                        // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                        this.updateManager.applyUpdate()
+                    }
+                }
+            })
+        })
+
+        this.updateManager.onUpdateFailed(function () {
+            // 新版本下载失败
+            console.log("新版本下载失败！")
+        })
+
 
         let systemInfo = wx.getSystemInfoSync();
         this.liuhai = systemInfo.statusBarHeight;           //后面可存为全局数据信息
@@ -107,7 +131,7 @@ export class WeChatPlatform extends IPlatform {
             const ths = this;
 
             // img: 图片保存对象; src: 图片资源路径
-            let url: string = `https://cdn.duligame.cn/minigame-fendi/imgs/scene_${sc}.png`;
+            let url: string = `https://wx.duligame.cn/fendi/imgs/scene_${sc}.png`;
             let imgArr = [
                 { img: null, src: url },
             ]
@@ -145,7 +169,7 @@ export class WeChatPlatform extends IPlatform {
         console.log("shareAppMessage")
         wx.shareAppMessage({
             title: "想与我一起探索“FENDI 罗马奇遇记” 吗?",
-            imageUrl: "https://cdn.duligame.cn/minigame-fendi/imgs/share.jpg"
+            imageUrl: "https://wx.duligame.cn/fendi/imgs/share.jpg"
         })
     }
     public showToast(context: string, icon: number, isMask: boolean = true): void {
@@ -204,7 +228,7 @@ export class WeChatPlatform extends IPlatform {
                         success(res) {
                             //Global.session = res.data.data
                             self.postMessageToOpenDataContext({ k: "openid", v: res.data.data.openid })
-                            //console.log(res.data)
+                            console.log(res.data)
                         },
                         fail() {
 
@@ -214,56 +238,11 @@ export class WeChatPlatform extends IPlatform {
             }
         });
     }
-    public requestSetUnLock(): void {
-        let self = this;
-        console.log("==userSetUnLock==");
-        wx.login({
-            success: (res) => {
-                if (res.code) {
-                    wx.request({
-                        url: 'https://wxfendi.duligame.cn/SetUnLock',
-                        data: {
-                            session: '', //使用Login返回的session
-                            value: 0,
-                        },
-                        success(res) {
-                            let resp = res.data
-                            if (resp.err != 0) {
-                                //session过期 重新登录后调用
-                            }
-                        },
-                        fail() {
-                        }
-                    })
-                }
-            }
-        })
+    public uploadScoreToServ(val: number): void {
+
     }
-    public requestGetUnLock(): void {
-        let self = this;
-        console.log("==userGetUnLock==");
-        wx.login({
-            success: (res) => {
-                if (res.code) {
-                    wx.request({
-                        url: 'https://wxfendi.duligame.cn/GetUnLock',
-                        data: {
-                            session: '', //使用Login返回的session
-                        },
-                        success(res) {
-                            let resp = res.data
-                            if (resp.err != 0) {
-                                //session过期 重新登录后调用
-                            } else {
-                                let value = resp.data //解锁等级
-                            }
-                        },
-                        fail() {
-                        }
-                    })
-                }
-            }
-        })
+    public getScoreFromServ(): void {
+
     }
     public onShow(callback: (res) => void): void {
         wx.onShow(callback);
