@@ -58,7 +58,7 @@ export class startExterior {
         if (GameLoop.getInstance().isPlayBgAction) {
             this.bgAction.destroy();
             this.logo.runAction(cc.spawn(cc.moveTo(.2, cc.v2(0, 255)), cc.fadeIn(.2)));
-            this.bg.spriteFrame = this.setBtnSp.bgs[this.currIndex];
+            this.bg.spriteFrame = this.setBtnSp.bgs[2];
 
             this.uiElement.active = true;
             this.hideUI(false);
@@ -132,7 +132,7 @@ export class startExterior {
 
         let isMute: boolean = GameLoop.getInstance().isMuteAudio;
         let setBtnSp: settingBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
-        this.musicBtn.getComponent(cc.Sprite).spriteFrame = isMute ? setBtnSp.bgs[4] : setBtnSp.bgs[3];
+        this.musicBtn.getComponent(cc.Sprite).spriteFrame = isMute ? setBtnSp.bgs[1] : setBtnSp.bgs[0];
         AudioManager.getInstance().playBGM(AudioType.BGM_1);
     }
     /**初始化UI元素位置 */
@@ -188,7 +188,7 @@ export class startExterior {
     private onMusicBtn(): void {
         let isMute: boolean = GameLoop.getInstance().onMusicBtn();
         let setBtnSp: settingBtnSp = cc.find("Canvas").getComponent(settingBtnSp);
-        this.musicBtn.getComponent(cc.Sprite).spriteFrame = isMute ? setBtnSp.bgs[4] : setBtnSp.bgs[3];
+        this.musicBtn.getComponent(cc.Sprite).spriteFrame = isMute ? setBtnSp.bgs[1] : setBtnSp.bgs[0];
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
     private ondesBtn(): void {

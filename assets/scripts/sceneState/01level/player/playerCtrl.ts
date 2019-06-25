@@ -38,16 +38,10 @@ export class playerCtrl extends cc.Component {
     private collider: cc.BoxCollider = null;                     //玩家自身的碰撞
 
     private collCount: number = 0;                               //记录玩家碰撞其它collider的数量
-    private obstacleCount: number = 0;                           //碰到的障碍物个数
     private rightStepNode: cc.Node = null;                       //右台阶
     public spCtrl: ISpineCtrl = null;                            //spine动画控制器
     private smokeCtrl: smoke = null;                             //烟雾控制，起跳和下落时
     private explosionCtrl: explosion = null;                     //爆炸控制，碰撞到障碍物时触发
-
-    private isUpCol: boolean = false;            //在障碍物上边
-    private isLeftCol: boolean = false;          //在障碍物左边
-    private isSquating: boolean = false;         //下蹲过程中，比如：在障碍物下面下蹲时，不受玩家输入控制
-
 
     private squatBtn: cc.Node = null;                            //按钮
     private jumpBtn: cc.Node = null;
@@ -57,13 +51,15 @@ export class playerCtrl extends cc.Component {
     private isSquat: boolean = false;
     private isOver: boolean = false;
 
+    private isUpCol:boolean = false;
+    private isLeft:boolean = false;
+
     private isComplete: boolean = false;
     private isGamePause: boolean = false;
 
 
     private isNeedCheck: boolean = false;                        //是否需要检测回复原来位置
 
-    private scorePos:cc.Vec2 = null;
     onLoad() {
         let manager = cc.director.getCollisionManager();  // 获取碰撞检测类
         manager.enabled = true;                         // 开启碰撞检测
@@ -81,7 +77,6 @@ export class playerCtrl extends cc.Component {
         this.smokeCtrl = cc.find("Canvas/run_layer/ground_layer/smoke").getComponent(smoke);
         this.explosionCtrl = cc.find("Canvas/run_layer/ground_layer/explosion").getComponent(explosion);
 
-        this.scorePos = cc.find("Canvas/UILayer/uiElement/score").convertToWorldSpaceAR(cc.v2(0, 0));
     }
 
     start(): void {
@@ -106,8 +101,6 @@ export class playerCtrl extends cc.Component {
     }
 
     public changeState(playerState: PlayerState): void {
-        //squating 锁定状态切换，等待完全通过下面通道（障碍物下方通道）再切换
-        if (this.mPlayerState == PlayerState.squat && this.isSquating) return;
 
         if (playerState == PlayerState.idle)
             this.idleStart();
@@ -256,11 +249,9 @@ export class playerCtrl extends cc.Component {
             case 12:
             case 13:
             case 14:
-                this.obstacleCount++;
                 if (this.isCollisionLeft(other, self)) {
+                    this.isLeft = true;
                     this.isUpCol = false;
-                    this.isLeftCol = true;
-                    //this.node.x = other.world.aabb.x -= this.node.width * .5;
                     if (GameLoop.getInstance().currIndex == 0)
                         mainExterior.getInstance().minusHeart(this.node.position);
                     else if (GameLoop.getInstance().currIndex == 1)
@@ -273,25 +264,35 @@ export class playerCtrl extends cc.Component {
                     this.explosionCtrl.play(other.node.position);
                     AudioManager.getInstance().playSound(GameLoop.getInstance().isMan ? AudioType.OBSMAN : AudioType.OBSWOMAN);
                 } else if (this.isCollisionUp(other, self)) {
+                    this.isLeft = false;
                     this.isUpCol = true;
-                    this.isLeftCol = false;
-
-                    //this.node.y = other.world.aabb.yMax + this.node.height * .5;
                     this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 - .1;
                     this.changeState(PlayerState.idle);
                 } else if (this.isCollisionBottom(other, self)) {
-                    this.changeState(PlayerState.down);
+                    //this.changeState(PlayerState.down);
+                    if (GameLoop.getInstance().currIndex == 0)
+                        mainExterior.getInstance().minusHeart(this.node.position);
+                    else if (GameLoop.getInstance().currIndex == 1)
+                        levelTwoExterior.getInstance().minusHeart(this.node.position);
+
+                    //重新加入障碍物对象池
+                    EventManager.getInstance().dispatchEvent(EventType.addObsPool, other.node);
+                    //other.node.destroy();
+                    this.cameraShake.shake();
+                    this.explosionCtrl.play(other.node.position);
+                    AudioManager.getInstance().playSound(GameLoop.getInstance().isMan ? AudioType.OBSMAN : AudioType.OBSWOMAN);
                 }
                 break;
             case 5:
                 break;
             case 6://金币
-                let go:goldAction = other.node.getComponent(goldAction);
+                this.collCount--;
+                let go: goldAction = other.node.getComponent(goldAction);
                 go.hide();
-                if (GameLoop.getInstance().currIndex == 0){
+                if (GameLoop.getInstance().currIndex == 0) {
                     mainExterior.getInstance().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
                 }
-                else if (GameLoop.getInstance().currIndex == 1){
+                else if (GameLoop.getInstance().currIndex == 1) {
                     levelTwoExterior.getInstance().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
                 }
 
@@ -305,13 +306,14 @@ export class playerCtrl extends cc.Component {
                 this.collCount--;
                 break;
             case 9:
+                this.collCount--;
                 //other.node.destroy();
-                let pack:packAction = other.node.getComponent(packAction);
+                let pack: packAction = other.node.getComponent(packAction);
                 pack.hide();
-                if (GameLoop.getInstance().currIndex == 0){
+                if (GameLoop.getInstance().currIndex == 0) {
                     mainExterior.getInstance().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
                 }
-                else if (GameLoop.getInstance().currIndex == 1){
+                else if (GameLoop.getInstance().currIndex == 1) {
                     levelTwoExterior.getInstance().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
                 }
 
@@ -319,16 +321,16 @@ export class playerCtrl extends cc.Component {
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
             case 30:
-                    other.node.getComponent(sp.Skeleton).enabled = false;
-                cc.loader.loadRes("prefabs/other/jinbichufa", cc.Prefab, (err, res)=>{
-                    let node:cc.Node = cc.instantiate(res);
+                other.node.getComponent(sp.Skeleton).enabled = false;
+                cc.loader.loadRes("prefabs/other/jinbichufa", cc.Prefab, (err, res) => {
+                    let node: cc.Node = cc.instantiate(res);
                     other.node.addChild(node)
                     node.setPosition(cc.v2(0, 0));
                 })
-                if (GameLoop.getInstance().currIndex == 0){
+                if (GameLoop.getInstance().currIndex == 0) {
                     mainExterior.getInstance().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
                 }
-                else if (GameLoop.getInstance().currIndex == 1){
+                else if (GameLoop.getInstance().currIndex == 1) {
                     levelTwoExterior.getInstance().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
                 }
 
@@ -345,37 +347,18 @@ export class playerCtrl extends cc.Component {
         if (other.tag == 1) {//左台阶
             this.node.y += this.ComputeUpSpeed(other.node);
         }
-
-        /*         if(other.tag == 3){//障碍物
-                    if(this.isLeftCol){
-                        this.node.x = other.world.aabb.x -= this.node.width * .5;
-                    }
-                } */
-
-        if (other.tag == 4) {
-            this.isSquating = true;
-        }
     }
     onCollisionExit(other, self) {
-        if (other.tag != 8)
+        if (other.tag != 8 && other.tag != 6 && other.tag != 9)
             this.collCount--;
-        if (other.tag == 11 || other.tag == 12 || other.tag == 13 || other.tag == 14) {
-            this.obstacleCount--;
-            if (this.collCount == 0) {
-                if (this.isUpCol && this.mPlayerState != PlayerState.jump) {
-                    //判断是哪个方向离开的 TODO
-                    if (other.world.aabb.xMax < self.world.aabb.xMin)
-                        this.changeState(PlayerState.down);
+        if (this.collCount == 0) {
+            if (this.isUpCol && this.mPlayerState != PlayerState.jump) {
+                //判断是哪个方向离开的 TODO
+                if (other.world.aabb.xMax < self.world.aabb.xMin)
+                    this.changeState(PlayerState.down);
 
-                }
-
-                this.isUpCol = false;
-                this.isLeftCol = false;
+                this.isUpCol = this.isLeft = false;
             }
-        }
-        if (other.tag == 4) {
-            this.isSquating = false;
-            this.changeState(PlayerState.idle);
         }
     }
 
@@ -533,13 +516,13 @@ export class playerCtrl extends cc.Component {
         this.isOver = true;
         this.spCtrl.stop();
     }
-    public pasue():void{
-        if(this.isOver)return;
+    public pasue(): void {
+        if (this.isOver) return;
         this.isGamePause = true;
         this.spCtrl.stop();
     }
-    public continue():void{
-        if(this.isOver)return;
+    public continue(): void {
+        if (this.isOver) return;
         this.isGamePause = false;
         this.spCtrl.continue();
     }

@@ -2,6 +2,8 @@ export class IPlatform {
 
     public liuhai: number = 0;           //设备刘海高度
     public nickName: string = "";         //用户名称
+    public avtarUrl: string = "";
+    public avtarTex:cc.Texture2D = null;
 
     public init(): void {
 
@@ -21,27 +23,31 @@ export class IPlatform {
 
     public postMessageToOpenDataContext(data: any): void { }
     public requestNet(): void { }
+    public getUnionid(): void { }
+    public updateScore(sc: number, lv: number): void { }
+    public getRank(call:Function): void { }
     public uploadScoreToServ(val: number): void { }
     public getScoreFromServ(): void { }
     public onShow(callback: (res) => void): void { }
     public onHide(callback: (res) => void): void { }
     public offShow(callback: (res) => void): void { }
     public offHide(callback: (res) => void): void { }
+    public showShareMenu(): void { }
 }
 
 export class WeChatPlatform extends IPlatform {
 
     private _canvas = null;
-    private updateManager = null;;
+    private updateManager = null;
+    private session_key = null;
 
     public init(): void {
         if (typeof wx === 'undefined') return;
         this.updateManager = wx.getUpdateManager();
         this.updateManager.onCheckForUpdate(function (res) {
             // 请求完新版本信息的回调
-            console.log(res.hasUpdate)
+            console.log(`检查是否有新的版本：${res.hasUpdate}`)
         })
-
         this.updateManager.onUpdateReady(function () {
             wx.showModal({
                 title: '更新提示',
@@ -54,12 +60,15 @@ export class WeChatPlatform extends IPlatform {
                 }
             })
         })
-
         this.updateManager.onUpdateFailed(function () {
             // 新版本下载失败
             console.log("新版本下载失败！")
         })
 
+        //setInterval(()=>{wx.triggerGC();}, 10000)               //每30秒加快触发一次没存回收
+        this.showShareMenu();
+        this.requestNet();
+        this.getUnionid();
 
         let systemInfo = wx.getSystemInfoSync();
         this.liuhai = systemInfo.statusBarHeight;           //后面可存为全局数据信息
@@ -90,11 +99,13 @@ export class WeChatPlatform extends IPlatform {
                 return;
             }
             self.nickName = userInfo.nickName;
+            self.avtarUrl = userInfo.avatarUrl;
             cc.loader.load({ url: userInfo.avatarUrl, type: 'png' }, (err, texture) => {
                 if (err) {
                     console.error(err);
                     return;
                 }
+                self.avtarTex = texture;
                 //this.avatar.spriteFrame = new cc.SpriteFrame(texture);
             });
 
@@ -214,7 +225,7 @@ export class WeChatPlatform extends IPlatform {
     public postMessageToOpenDataContext(data: any): void {
         wx.getOpenDataContext().postMessage(data);
     }
-    public requestNet(): void {
+    public requestNet(call?:Function): void {
         let self = this;
         console.log("==userLogins==");
         wx.login({
@@ -227,16 +238,235 @@ export class WeChatPlatform extends IPlatform {
                         },
                         success(res) {
                             //Global.session = res.data.data
+                            self.session_key = res.data.data.session_key;
                             self.postMessageToOpenDataContext({ k: "openid", v: res.data.data.openid })
+                            if(!!call)
+                                call();
                             console.log(res.data)
                         },
                         fail() {
-
+                            self.requestNet(call);
                         }
                     })
                 }
             }
         });
+    }
+    //#region 登陆流程
+    //#endregion
+    public getUnionid(): void {
+        let self = this;
+        let LoginError = function () {
+            console.log('LoginError')
+        }
+        let LoginSuccess = function () {
+            console.log('LoginSuccess')
+        }
+        let LoginFail = function () {
+            console.log('LoginFail');
+        }
+        let BindUserInfo = function (encryptedData, iv, session_key) {
+            wx.request({
+                url: 'https://wxfendi.duligame.cn/BindUserInfo',
+                data: {
+                    encryptedData: encryptedData,
+                    iv: iv,
+                    session_key: session_key,
+                },
+                success: function (res) {
+                    console.log(res)
+                    LoginSuccess()
+                },
+                fail: function () {
+                    console.log("BindUserInfo", "fail")
+                    LoginFail()
+                },
+            })
+        }
+
+        let getUserInfo = function () {
+            wx.getUserInfo({
+                withCredentials: true,
+                lang: "zh_CN",
+                success: function (res) {
+                    console.log("wx.getUserInfo", "success", res)
+                    BindUserInfo(res.encryptedData, res.iv, session_key)
+                },
+                fail: function () {
+                    console.log("wx.getUserInfo", "fail")
+                    LoginFail()
+                },
+            })
+        }
+
+        let noUnionId = function () {
+            wx.getSetting({
+                success: function (res) {
+                    console.log(res.authSetting)
+                    if (!res.authSetting['scope.userInfo']) {
+                        wx.authorize({
+                            scope: 'scope.userInfo',
+                            success: function () {
+                                getUserInfo()
+                            },
+                            fail: function () {
+                                console.log("wx.authorize", "fail")
+                                LoginFail()
+                            }
+                        })
+                    } else {
+                        getUserInfo()
+                    }
+                },
+                fail: function () {
+                    console.log("wx.getSetting", "fail")
+                    LoginFail()
+                }
+            })
+        }
+
+        let login = function () {
+            console.log("login")
+            wx.login({
+                success: function (res) {
+                    console.log("res.code", res.code)
+                    if (res.code) {
+                        //发起网络请求
+                        wx.request({
+                            url: 'https://wxfendi.duligame.cn/Login',
+                            data: {
+                                code: res.code
+                            },
+                            success: function (res) {
+                                console.log(res)
+                                session_key = res.data.data.session_key
+                                self.session_key = session_key;
+                                wx.setStorageSync("session_key", session_key)
+                                if (res.data.data.unionid == "") {
+                                    noUnionId()
+                                } else {
+                                    LoginSuccess()
+                                }
+                            },
+                            fail: function () {
+                                console.log("wx.request", "Login", "fail")
+                                LoginFail()
+                            }
+                        })
+                    }
+                },
+                fail: function () {
+                    console.log("wx.login", "fail")
+                    LoginError()
+                }
+            })
+        }
+        let session_key = wx.getStorageSync("session_key")
+        console.log("getStorageSync", "session_key", session_key, session_key != "")
+        if (session_key != "") {
+            wx.checkSession({
+                success() {
+                    //session_key 未过期，并且在本生命周期一直有效
+                    self.session_key = session_key;
+                    console.log("wx.checkSession", "success")
+                    LoginSuccess()
+                },
+                fail() {
+                    console.log("wx.checkSession", "fail")
+                    // session_key 已经失效，需要重新执行登录流程
+                    login()
+                }
+            })
+        } else {
+            login()
+        }
+    }
+    public updateScore(sc: number, lv: number): void {
+        let self = this;
+        if(this.session_key == null){
+            //this.requestNet(this.getRank);
+            self.getUnionid();
+            return;
+        }
+        wx.checkSession({
+            success() {
+                //session_key 未过期，并且在本生命周期一直有效
+                wx.request({
+                    url: 'https://wxfendi.duligame.cn/UpdateScore',
+                    data: {
+                        session: self.session_key,
+                        score: sc, //得分
+                        level: lv, //关卡 可选值 0,1,2,3
+                        name: self.nickName,
+                        avatar: self.avtarUrl
+                    },
+                    success: function (res) {
+                        console.log("UpdateScore", "success", res)
+                        if (res.data.err) {
+                            //login()
+                        }
+                    },
+                    fail: function () {
+                        console.log("UpdateScore", "fail")
+                    },
+                })
+            },
+            fail() {
+                console.log("wx.checkSession", "fail")
+                // session_key 已经失效，需要重新执行登录流程
+                self.getUnionid();
+            }
+        })
+
+
+    }
+    public getRank(call:Function): void {
+        let self = this;
+        if(this.session_key == null){
+            //this.requestNet(this.getRank);
+            self.getUnionid();
+            return;
+        }
+        wx.checkSession({
+            success() {
+                //session_key 未过期，并且在本生命周期一直有效
+                wx.request({
+                    url: 'https://wxfendi.duligame.cn/GetRank',
+                    data: {
+                        session: self.session_key,
+                    },
+                    success: function (res) {
+                        console.log("GetRank", "success", res)
+                        if(!!call)
+                            call(res.data.data.myRank, res.data.data.rankList)
+                    },
+                    fail: function () {
+                        console.log("BindUserInfo", "fail")
+                    },
+                })
+            },
+            fail() {
+                console.log("wx.checkSession", "fail")
+                // session_key 已经失效，需要重新执行登录流程
+                //login()
+                self.getUnionid();
+            }
+        })
+/*         wx.request({
+            url: 'https://wxfendi.duligame.cn/GetRank',
+            data: {
+                session: self.session_key,
+            },
+            success: function (res) {
+                console.log("GetRank", "success", res)
+                if(!!call)
+                    call(res.data.data.myRank, res.data.data.rankList)
+            },
+            fail: function () {
+                console.log("BindUserInfo", "fail")
+            },
+        }) */
+
     }
     public uploadScoreToServ(val: number): void {
 
@@ -255,6 +485,16 @@ export class WeChatPlatform extends IPlatform {
     }
     public offHide(callback: (res) => void): void {
         wx.offHide(callback);
+    }
+    public showShareMenu(): void {
+        wx.showShareMenu();
+        wx.onShareAppMessage(() => {
+            return {
+                title: '想与我一起探索“FENDI 罗马奇遇记” 吗?',
+                imageUrl: 'https://wx.duligame.cn/fendi/imgs/share.jpg' // 图片 URL
+            }
+        })
+
     }
     // 拼接海报----step2
     private drawImg(arr, score) {

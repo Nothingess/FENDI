@@ -15,6 +15,7 @@ export class LayerRun extends cc.Component {
 
     public stop:boolean = false;
     private loops:Array<cc.Node> = null;
+    private checkInterval:number = 3;
 
     start():void{
         this.loops = new Array<cc.Node>();
@@ -23,11 +24,16 @@ export class LayerRun extends cc.Component {
 
     update(dt):void{
         if(this.stop) return;
-        this.node.x -= this.moveSpeed * 0.0172;
-        
+        dt = 0.0172;
+        this.node.x -= this.moveSpeed * dt;
 
         if(this.layer === LayerType.loop){
-            this.check();
+            this.checkInterval -= dt;
+            if(this.checkInterval < 0){
+                this.check();
+                this.checkInterval = 3;
+            }
+
         }
     }
 

@@ -57,6 +57,7 @@ export class mainExterior{
         this.createRole();
         this.heart = cc.find("Canvas/UILayer/uiElement/heart");
         this.scoreLa = cc.find("Canvas/UILayer/uiElement/score").getComponent(cc.Label);
+        
         this.heartLess = cc.find("Canvas/run_layer/player_layer/heart_less");
         this.runLayer = cc.find("Canvas/run_layer");
 
@@ -341,6 +342,7 @@ export class mainExterior{
     /**上传游戏分数 */
     public uploadScore(K:string = "rank_1", V:string = `${this.score}`):void{
         if(GameLoop.getInstance().platform == null)return;
+        GameLoop.getInstance().platform.updateScore(this.score, 0);
         console.log("uploadScore")
         GameLoop.getInstance().platform.setUserCloudStorage(
             [{key:K, value:V}]

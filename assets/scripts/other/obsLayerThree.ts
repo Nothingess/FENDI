@@ -18,7 +18,7 @@ export class obsLayerThree extends cc.Component {
     private currIndex:number = 1;
     private viewWidth:number = 0;
 
-    private interval:number = 1;
+    private interval:number = 1.3;
 
     onLoad () {
         cc.loader.loadRes("jsons/bgm_2", cc.JsonAsset, (err, res)=>{
@@ -31,12 +31,12 @@ export class obsLayerThree extends cc.Component {
     }
 
     update (dt) {
-        dt = 0.0172
+        dt = 0.0172;
         if(this.times == null)return;
         if(this.currIndex > this.times.length - 1)return;
         this.interval -= dt;
         if(this.interval > 0)return;
-        this.interval = 1;
+        this.interval = 1.3;
 
 
         let posX:number = 400 * this.times[this.currIndex].t + 600;

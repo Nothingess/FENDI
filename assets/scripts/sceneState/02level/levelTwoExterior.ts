@@ -292,6 +292,7 @@ export class levelTwoExterior {
 
     public uploadScore(K: string = "rank_2", V: string = `${this.score}`): void {
         if (GameLoop.getInstance().platform == null) return;
+        GameLoop.getInstance().platform.updateScore(this.score, 1);
         console.log("uploadScore")
         GameLoop.getInstance().platform.setUserCloudStorage(
             [{ key: K, value: V }]

@@ -41,7 +41,7 @@ export class GameLoop extends cc.Component {
         GameLoop._instance = this;
 
         cc.game.addPersistRootNode(this.node);
-        this.schedule(() => { cc.sys.garbageCollect() }, 30);
+        //this.schedule(() => { cc.sys.garbageCollect() }, 30);
         cc.game.setFrameRate(58);
     }
 
@@ -57,7 +57,6 @@ export class GameLoop extends cc.Component {
         }
         if (this.platform != null) {
             this.platform.init();
-            this.platform.requestNet();
         }
 
         if (!this.isLoadSub)

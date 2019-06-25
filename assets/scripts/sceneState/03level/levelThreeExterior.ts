@@ -220,6 +220,7 @@ export class levelThreeExterior {
             AudioManager.getInstance().playSound(AudioType.LOST);
             this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelThreeExterior.getInstance(), this.score, this.heartNum == 0 ? false : true]);
             this.stop();
+            this.pyCtrl.isOver = true;
             this.uploadScore();
         }
     }
@@ -240,6 +241,7 @@ export class levelThreeExterior {
 
     public uploadScore(K: string = "rank_3", V: string = `${this.score}`): void {
         if (GameLoop.getInstance().platform == null) return;
+        GameLoop.getInstance().platform.updateScore(this.score, 2);
         console.log("uploadScore")
         GameLoop.getInstance().platform.setUserCloudStorage(
             [{ key: K, value: V }]
