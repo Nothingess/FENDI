@@ -43,6 +43,7 @@ export class WeChatPlatform extends IPlatform {
 
     public init(): void {
         if (typeof wx === 'undefined') return;
+        let self = this;
         this.updateManager = wx.getUpdateManager();
         this.updateManager.onCheckForUpdate(function (res) {
             // 请求完新版本信息的回调
@@ -55,7 +56,7 @@ export class WeChatPlatform extends IPlatform {
                 success: function (res) {
                     if (res.confirm) {
                         // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                        this.updateManager.applyUpdate()
+                        self.updateManager.applyUpdate()
                     }
                 }
             })
@@ -91,7 +92,6 @@ export class WeChatPlatform extends IPlatform {
             }
         });
 
-        let self = this;
         button.onTap((res) => {
             let userInfo = res.userInfo;
             if (!userInfo) {
@@ -408,6 +408,7 @@ export class WeChatPlatform extends IPlatform {
                     },
                     fail: function () {
                         console.log("UpdateScore", "fail")
+                        this.updateScore(sc, lv);
                     },
                 })
             },

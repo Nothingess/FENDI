@@ -158,7 +158,10 @@ export class loadPanel extends IUIBase {
             this.maxPro = com / total;
     }
     private loadResComplete(err, res):void{
-
+        if(err){
+            console.log("loadPanel res fail", err);
+            return;
+        }
         let count:number = 0;
         GameLoop.getInstance().buildNode.push(cc.instantiate(res[0]));
 
@@ -185,6 +188,10 @@ export class loadPanel extends IUIBase {
 
     }
     private loadLevel_2Complete(err, res):void{
+        if(err){
+            console.log("loadPanel res fail", err);
+            return;
+        }
         let count:number = 0;
         res.forEach(element => {
             if(count < 9)
@@ -207,6 +214,10 @@ export class loadPanel extends IUIBase {
         this.isComplete = true;
     }
     private loadLevel_3Complete(err, res):void{
+        if(err){
+            console.log("loadPanel res fail", err);
+            return;
+        }
         let count:number = 0;
         res.forEach(element => {
             if(count < 5)

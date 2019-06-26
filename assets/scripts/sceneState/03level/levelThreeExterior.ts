@@ -77,19 +77,29 @@ export class levelThreeExterior {
     private createRole(): void {
         let self = this;
         let node: cc.Node = null;
-        if (GameLoop.getInstance().isMan) {
-            cc.loader.loadRes("prefabs/manFly", cc.Prefab, (err, res) => {
-                node = cc.instantiate(res);
-                cc.find("Canvas/run_layer/player_layer").addChild(node);
-                self.pyCtrl = node.getComponent(FlyCtrl);
-            })
-        } else {
+        let isMan:boolean = GameLoop.getInstance().isMan;
+        let playerLayer:cc.Node = cc.find("Canvas/run_layer/player_layer");
+/*         if (GameLoop.getInstance().isMan) { */
+        cc.loader.loadRes(`prefabs/${isMan?"manFly":"womanFly"}`, cc.Prefab, (err, res) => {
+            if(err){
+                console.log("levelThreeExterior load role fail", err);
+                return;
+            }
+            node = cc.instantiate(res);
+            if(playerLayer == null){
+                console.log("levelThreeExterior cc.find:playerLayer fail");
+                return;
+            }
+            playerLayer.addChild(node);
+            self.pyCtrl = node.getComponent(FlyCtrl);
+        })
+/*         } else {
             cc.loader.loadRes("prefabs/womanFly", cc.Prefab, (err, res) => {
                 node = cc.instantiate(res);
                 cc.find("Canvas/run_layer/player_layer").addChild(node);
                 self.pyCtrl = node.getComponent(FlyCtrl);
             })
-        }
+        } */
     }
 
     //#region 监听事件

@@ -83,19 +83,29 @@ export class mainExterior{
     private createRole():void{
         let self = this;
         let node:cc.Node = null;
-        if(GameLoop.getInstance().isMan){
-            cc.loader.loadRes("prefabs/manRole", cc.Prefab, (err, res)=>{
-                node = cc.instantiate(res);
-                cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
-                self.pyCtrl = node.getComponent(playerCtrl);
-            })
-        }else{
+        let isMan:boolean = GameLoop.getInstance().isMan;
+/*         if(GameLoop.getInstance().isMan){ */
+        let playerLayer:cc.Node = cc.find("Canvas/run_layer/player_layer");
+        cc.loader.loadRes(`prefabs/${isMan?"manRole":"womanRole"}`, cc.Prefab, (err, res)=>{
+            if(err){
+                console.log("mainExterior load role fail", err);
+                return;
+            }
+            node = cc.instantiate(res);
+            if(playerLayer == null){
+                console.log("mainExterior cc.find:playerLayer fail");
+                return;
+            }
+            playerLayer.insertChild(node, 0);
+            self.pyCtrl = node.getComponent(playerCtrl);
+        })
+/*         }else{
             cc.loader.loadRes("prefabs/womanRole", cc.Prefab, (err, res)=>{
                 node = cc.instantiate(res);
                 cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
                 self.pyCtrl = node.getComponent(playerCtrl);
             })
-        }
+        } */
     }
     public setLevel_1State(main:mainSceneState):void{
         this.mainState = main;
@@ -246,6 +256,10 @@ export class mainExterior{
      */
     public showObsTip(node:cc.Node, ty:number):void{
         cc.loader.loadRes(`prefabs/other/${ty == 0?"dd":"jj"}`, cc.Prefab, (err, res)=>{
+            if(err){
+                console.log("mainExterior load dd or jj fail", err);
+                return;
+            }
             let child:cc.Node = cc.instantiate(res);
             node.addChild(child);
             child.setPosition(cc.v2(0, node.height * .5));
@@ -258,6 +272,10 @@ export class mainExterior{
             })));
         })
         cc.loader.loadRes(`prefabs/other/${ty == 0?"guide_line_1":"guide_line_2"}`, cc.Prefab, (err, res)=>{
+            if(err){
+                console.log("mainExterior load guide_line_1 or guide_line_2 fail", err);
+                return;
+            }
             let child:cc.Node = cc.instantiate(res);
             node.addChild(child);
             child.setPosition(cc.v2(0, 0));

@@ -21,8 +21,13 @@ export class obsLayerThree extends cc.Component {
     private interval:number = 1.3;
 
     onLoad () {
+        let self = this;
         cc.loader.loadRes("jsons/bgm_2", cc.JsonAsset, (err, res)=>{
-            this.times = (this.lvType == LevelType.two)?res.json.bgm2:res.json.bgm3;
+            if(err){
+                console.log("obsLayerThree load json bgm_2 fail", err);
+                return;
+            }
+            self.times = (self.lvType == LevelType.two)?res.json.bgm2:res.json.bgm3;
         })
     }
 

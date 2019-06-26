@@ -34,8 +34,13 @@ export class obsLayer extends cc.Component {
     private isClear:boolean = false;
     private isGameOver:boolean = false;
     onLoad() {
+        let self = this;
         cc.loader.loadRes("jsons/bgm_1", cc.JsonAsset, (err, res) => {
-            this.times = res.json.bgm1;
+            if(err){
+                console.log("obsLayer load json bgm_1 fail", err);
+                return;
+            }
+            self.times = res.json.bgm1;
         })
 
         EventManager.getInstance().addEventListener(EventType.zoomIn, this.onZoomIn.bind(this), "obsLayer");

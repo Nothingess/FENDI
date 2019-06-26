@@ -39,7 +39,7 @@
   "title": "FENDI",
   "webOrientation": "landscape",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "https://singapore.duligame.cn/fendi/WeChat",
+    "REMOTE_SERVER_ROOT": "https://singapore.duligame.cn/fendi/Test_1",
     "appid": "wx4b0dc8d75a0857b7",
     "orientation": "landscapeRight",
     "separate_engine": false,

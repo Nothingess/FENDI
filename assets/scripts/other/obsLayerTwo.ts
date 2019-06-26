@@ -22,8 +22,13 @@ export class obsLayerTwo extends cc.Component {
     private interval:number = 1;
     private isGameOver:boolean = false;
     onLoad () {
+        let self = this;
         cc.loader.loadRes("jsons/bgm_2", cc.JsonAsset, (err, res)=>{
-            this.times = res.json.bgm2;
+            if(err){
+                console.log("obsLayerTwo load json bgm_2 fail", err);
+                return;
+            }
+            self.times = res.json.bgm2;
         })
 
         EventManager.getInstance().addEventListener(EventType.addObsPool, this.onObsPool.bind(this), "obsLayerTwo");

@@ -45,6 +45,8 @@ export class playerCtrl extends cc.Component {
 
     private squatBtn: cc.Node = null;                            //按钮
     private jumpBtn: cc.Node = null;
+    private onSquatBtn:boolean = false;                          //按下下蹲键
+    private onJumpBtn:boolean = false;                           //按下跳跃键
 
     private cameraShake: CameraShake = null;
 
@@ -89,6 +91,8 @@ export class playerCtrl extends cc.Component {
         this.squatBtn.on("touchend", this.getSquatKeyUp, this);
         this.squatBtn.on("touchcancel", this.getSquatKeyUp, this);
         this.jumpBtn.on("touchstart", this.getJumpKeyDown, this);
+        this.jumpBtn.on("touchend", this.getJumpKeyUp, this);
+        this.jumpBtn.on("touchcancel", this.getJumpKeyUp, this);
         EventManager.getInstance().addEventListener(EventType.onHide, this.onHide.bind(this), "playerCtrl");
         EventManager.getInstance().addEventListener(EventType.onShow, this.onShow.bind(this), "playerCtrl");
 
@@ -203,6 +207,15 @@ export class playerCtrl extends cc.Component {
                     this.node.y -= this.ComputeUpSpeed(this.rightStepNode);
             }
         }
+
+        if(this.onJumpBtn){
+            //if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
+            this.changeState(PlayerState.jump);
+        }
+        else if(this.onSquatBtn){
+            //if (this.mPlayerState == PlayerState.idle)
+            this.changeState(PlayerState.squat);
+        }
     }
     private jumpUpdate(dt): void {
         this.node.y += this.currJumpSpeed * dt;
@@ -221,6 +234,12 @@ export class playerCtrl extends cc.Component {
                 if (this.rightStepNode.isValid)
                     this.node.y -= this.ComputeUpSpeed(this.rightStepNode);
             }
+        }
+        if(this.onJumpBtn){
+            //if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
+            this.changeState(PlayerState.jump);
+        }else if(!this.onSquatBtn){
+            this.changeState(PlayerState.idle);
         }
     }
 
@@ -323,6 +342,10 @@ export class playerCtrl extends cc.Component {
             case 30:
                 other.node.getComponent(sp.Skeleton).enabled = false;
                 cc.loader.loadRes("prefabs/other/jinbichufa", cc.Prefab, (err, res) => {
+                    if(err){
+                        console.log("playerCtrl load jinbichufa fail", err);
+                        return;
+                    }
                     let node: cc.Node = cc.instantiate(res);
                     other.node.addChild(node)
                     node.setPosition(cc.v2(0, 0));
@@ -464,24 +487,34 @@ export class playerCtrl extends cc.Component {
         this.offSquat();
     }
     private getJumpKeyDown(): void {
-        this.offSquat();
+        //this.offSquat();
         this.onJump();
+    }
+    private getJumpKeyUp():void{
+        this.offJump();
     }
 
     private onJump(): void {
         if (this.isOver || this.isGamePause) return;
-        if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
-            this.changeState(PlayerState.jump);
+        this.onJumpBtn = true;
+/*         if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
+            this.changeState(PlayerState.jump); */
     }
     private onSquat(): void {
         if (this.isOver || this.isGamePause) return;
-        if (this.mPlayerState == PlayerState.idle)
-            this.changeState(PlayerState.squat);
+        this.onSquatBtn = true;
+/*         if (this.mPlayerState == PlayerState.idle)
+            this.changeState(PlayerState.squat); */
+    }
+    private offJump():void{
+        if (this.isOver || this.isGamePause) return;
+        this.onJumpBtn = false;
     }
     private offSquat(): void {
         if (this.isOver || this.isGamePause) return;
-        if (this.mPlayerState == PlayerState.squat)
-            this.changeState(PlayerState.idle);
+        this.onSquatBtn = false;
+/*         if (this.mPlayerState == PlayerState.squat)
+            this.changeState(PlayerState.idle); */
     }
     /**游戏完成 */
     public complete(): void {

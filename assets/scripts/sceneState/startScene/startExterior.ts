@@ -206,7 +206,7 @@ export class startExterior {
 
         let dur: number = isAction ? .2 : 0.001;
 
-        this.upArea.runAction(this.actionBack(0, 100, dur));
+        this.upArea.runAction(this.actionBack(0, 300, dur));
         this.startBtn.runAction(this.actionBack(0, -100, dur, call));
     }
     /**显示界面UI */
