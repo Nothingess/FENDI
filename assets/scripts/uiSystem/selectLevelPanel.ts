@@ -16,7 +16,7 @@ export class selectLevelPanel extends IUIBase {
     private enterBtn: cc.Node = null;
     private contextView: cc.Node = null;
     private contextViewLayOut:cc.Layout = null;
-    //private title: cc.Node = null;
+    private title: cc.Node = null;
 
     private itemList: Array<cc.Node> = null;
 
@@ -39,7 +39,7 @@ export class selectLevelPanel extends IUIBase {
         this.enterBtn = cc.find("btn_enter", this.skin);
         this.contextView = cc.find("contextView", this.skin);
         this.contextViewLayOut = this.contextView.getComponent(cc.Layout);
-        //this.title = cc.find("title", this.skin);
+        this.title = cc.find("txt_tip", this.skin);
 
         this.itemList = this.contextView.children;
 
@@ -59,7 +59,7 @@ export class selectLevelPanel extends IUIBase {
         }
         this.schedule(this.timer, 0.016);
         this.contextView.runAction(this.action(.3, cc.v2(0, -20)));
-        //this.title.runAction(this.action(.3, cc.v2(0, 180)));
+        this.title.runAction(this.action(.3, cc.v2(0, 240)));
         this.backBtn.runAction(this.action(.3, cc.v2(-560, 300)));
         this.enterBtn.runAction(this.action(.3, cc.v2(0, -240)));
     }

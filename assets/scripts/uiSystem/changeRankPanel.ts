@@ -23,6 +23,8 @@ export class changeRankPanel extends IUIBase {
     private myRankItem:rankItem = null;
     private load:cc.Node = null;
 
+    private isCanNext:boolean = true;                       //是否能翻页
+
     public initStrategy(): void {
         this.mOpenStrategy = new strateA(this.skin);
     }
@@ -93,12 +95,24 @@ export class changeRankPanel extends IUIBase {
         })
     }
     private nextPage():void{
+        if(!this.isCanNext)return;
+        this.isCanNext = false;
+        this.scheduleOnce(()=>{
+            this.isCanNext = true;
+        }, 0.5)
+
         let start:number = (this.pageIndex+1) * 5;
         if(this.rankList.length - 1 < start)return;
         this.pageIndex++;
         this.setRank();
     }
     private lastPage():void{
+        if(!this.isCanNext)return;
+        this.isCanNext = false;
+        this.scheduleOnce(()=>{
+            this.isCanNext = true;
+        }, 0.5)
+
         if(this.pageIndex == 0)return;
         this.pageIndex--;
         this.setRank();
