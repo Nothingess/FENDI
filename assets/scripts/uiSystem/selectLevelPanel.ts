@@ -83,7 +83,7 @@ export class selectLevelPanel extends IUIBase {
         this.enterBtn.on("touchend", this.onEnterBtn, this);
 
         for(let i = 0; i < this.itemList.length; i++){
-            if(i == 3)break;
+            //if(i == 3)break;
             this.itemList[i].on("touchend", ()=>{
                 if(this.currIndex == i)return;
                 this.onSelectLevel(i);

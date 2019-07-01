@@ -13,6 +13,7 @@ export class destroyCheck extends cc.Component {
         dt = 0.0172;
         this.checkInterval -= dt;
         if(this.checkInterval < 0){
+            this.checkInterval = 3;
             if(this.node.children.length == 0){
                 this.node.destroy();
                 return;
@@ -29,7 +30,6 @@ export class destroyCheck extends cc.Component {
                     }
                 }
             })
-            this.checkInterval = 3;
         }
     }
 }

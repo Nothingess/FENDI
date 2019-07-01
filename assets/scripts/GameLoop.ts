@@ -7,6 +7,7 @@ import { loadPanel } from "./uiSystem/loadPanel";
 import { levelTwoExterior } from "./sceneState/02level/levelTwoExterior";
 import { AudioManager } from "./comms/AudioManager";
 import { EventManager, EventType } from "./comms/EventManager";
+import { levelFourExterior } from "./sceneState/04level/levelFourExterior";
 
 const { ccclass, property } = cc._decorator;
 
@@ -94,6 +95,8 @@ export class GameLoop extends cc.Component {
         }
         else if (this.currIndex == 2)
             levelThreeExterior.getInstance().win();
+        else if(this.currIndex == 3)
+            levelFourExterior.getInstance().win();
     }
     public gotoStartScene(): void {
         if (this.currIndex == 0)
@@ -103,6 +106,8 @@ export class GameLoop extends cc.Component {
         }
         else if (this.currIndex == 2)
             levelThreeExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelThreeExterior.getInstance(), 1]);
+        else if(this.currIndex == 3)
+            levelFourExterior.getInstance().uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", levelFourExterior.getInstance(), 1])
     }
 
     private DownLoadSubPack(): void {

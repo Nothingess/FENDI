@@ -3,6 +3,7 @@ import { levelThreeExterior } from "../../03level/levelThreeExterior";
 import { GameLoop } from "../../../GameLoop";
 import { levelTwoExterior } from "../../02level/levelTwoExterior";
 import { EventManager, EventType } from "../../../comms/EventManager";
+import { levelFourExterior } from "../../04level/levelFourExterior";
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,6 +31,9 @@ export class trigger extends cc.Component {
                 else if(GameLoop.getInstance().currIndex == 2){
                     levelThreeExterior.getInstance().stop();
                     levelThreeExterior.getInstance().pyCtrl.complete();
+                }else if(GameLoop.getInstance().currIndex == 3){
+                    levelFourExterior.getInstance().stop();
+                    levelFourExterior.getInstance().pyCtrl.complete();
                 }
             break;
             case 10:

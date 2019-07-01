@@ -17,7 +17,8 @@ export enum AudioType{
     BGM_1,
     BGM_2,
     BGM_3,
-    BGM_CAT
+    BGM_CAT,
+    BGM_4
 }
 
 export class AudioManager {

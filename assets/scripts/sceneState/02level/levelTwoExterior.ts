@@ -76,16 +76,16 @@ export class levelTwoExterior {
     private createRole(): void {
         let self = this;
         let node: cc.Node = null;
-        let isMan:boolean = GameLoop.getInstance().isMan;
-        let playerLayer:cc.Node = cc.find("Canvas/run_layer/player_layer");
-/*         if (GameLoop.getInstance().isMan) { */
-        cc.loader.loadRes(`prefabs/${isMan?"manRole":"womanRole"}`, cc.Prefab, (err, res) => {
-            if(err){
+        let isMan: boolean = GameLoop.getInstance().isMan;
+        let playerLayer: cc.Node = cc.find("Canvas/run_layer/player_layer");
+        /*         if (GameLoop.getInstance().isMan) { */
+        cc.loader.loadRes(`prefabs/${isMan ? "manRole" : "womanRole"}`, cc.Prefab, (err, res) => {
+            if (err) {
                 console.log("levelTwoExterior load role fail", err);
                 return;
             }
             node = cc.instantiate(res);
-            if(playerLayer == null){
+            if (playerLayer == null) {
                 console.log("levelTwoExterior cc.find:playerLayer fail");
                 return;
             }
@@ -93,14 +93,14 @@ export class levelTwoExterior {
             self.pyCtrl = node.getComponent(playerCtrl);
             self.pyCtrl.state = 1;
         })
-/*         } else {
-            cc.loader.loadRes("prefabs/womanRole", cc.Prefab, (err, res) => {
-                node = cc.instantiate(res);
-                cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
-                self.pyCtrl = node.getComponent(playerCtrl);
-                self.pyCtrl.state = 1;
-            })
-        } */
+        /*         } else {
+                    cc.loader.loadRes("prefabs/womanRole", cc.Prefab, (err, res) => {
+                        node = cc.instantiate(res);
+                        cc.find("Canvas/run_layer/player_layer").insertChild(node, 0);
+                        self.pyCtrl = node.getComponent(playerCtrl);
+                        self.pyCtrl.state = 1;
+                    })
+                } */
     }
 
     //#region 监听事件
@@ -133,7 +133,9 @@ export class levelTwoExterior {
     public setLevel_3State(): void {
         this.lvTwoState.setLevel_3State();
     }
-
+    public setLevel_4State(): void {
+        this.lvTwoState.setLevel_4State();
+    }
     public update(): void {
         this.uiMgr.sysUpdate();
     }
@@ -272,7 +274,7 @@ export class levelTwoExterior {
      */
     public showObsTip(node: cc.Node, ty: number): void {
         cc.loader.loadRes(`prefabs/other/${ty == 0 ? "dd" : "jj"}`, cc.Prefab, (err, res) => {
-            if(err){
+            if (err) {
                 console.log("levelTwoExterior load dd or jj fail", err);
                 return;
             }
@@ -288,7 +290,7 @@ export class levelTwoExterior {
                 })));
         })
         cc.loader.loadRes(`prefabs/other/${ty == 0 ? "guide_line_1" : "guide_line_2"}`, cc.Prefab, (err, res) => {
-            if(err){
+            if (err) {
                 console.log("levelTwoExterior load guide_line_1 or guide_line_2 fail", err);
                 return;
             }

@@ -30,7 +30,7 @@ export class startExterior {
     private friendsBtn: cc.Node = null;                  //好友按钮
     private musicBtn: cc.Node = null;                    //音乐
     private desBtn: cc.Node = null;                      //活动描述
-    private changeBtn:cc.Node = null;                    //争霸赛排行按钮
+    private changeBtn: cc.Node = null;                    //争霸赛排行按钮
 
     private bg: cc.Sprite = null;                        //背景
     private bgNew: cc.Sprite = null;                     //新背景（副本）
@@ -96,7 +96,7 @@ export class startExterior {
 
     private onBgAction(): void {
         this.uiElement.active = true;
-        this.hideUI(false, ()=>{
+        this.hideUI(false, () => {
             this.uiElement.opacity = 255;
             this.showUI();
             GameLoop.getInstance().isPlayBgAction = true;
@@ -154,6 +154,9 @@ export class startExterior {
     public setLevel_3State(): void {
         this.mStartState.setLevel_3State();
     }
+    public setLevel_4State(): void {
+        this.mStartState.setLevel_4State();
+    }
     public update(): void {
 
     }
@@ -195,7 +198,7 @@ export class startExterior {
         this.uiSys.openPanel(desPanel, "desPanel");
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }
-    private onChangebtn():void{
+    private onChangebtn(): void {
         this.uiSys.openPanel(changeRankPanel, "changeRankPanel");
         AudioManager.getInstance().playSound(AudioType.CLICK);
     }

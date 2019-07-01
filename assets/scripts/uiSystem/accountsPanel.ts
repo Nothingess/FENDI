@@ -54,7 +54,7 @@ export class accountsPanel extends IUIBase {
         })
 
         if(!!this.args[2]){
-            if(GameLoop.getInstance().currIndex == 2){
+            if(GameLoop.getInstance().currIndex == 3){
                 cc.loader.loadRes("imgs/btn_return", cc.SpriteFrame, (err, res)=>{
                     this.againBtn.getComponent(cc.Sprite).spriteFrame = res;
                 })
@@ -120,16 +120,18 @@ export class accountsPanel extends IUIBase {
                 this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["01level", this.args[0], 1]);
             }else if(GameLoop.getInstance().currIndex == 1){
                 this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["02level", this.args[0], 1]);
-            }else{
+            }else if(GameLoop.getInstance().currIndex == 2){
                 this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["03level", this.args[0], 1]);
+            }else{
+                this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["04level", this.args[0], 1]);
             }
             return;
         }
 
-        if(GameLoop.getInstance().currIndex == 2){
+        if(GameLoop.getInstance().currIndex == 3){
             this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", ["01startScene", this.args[0]]);
         }else{
-            GameLoop.getInstance().currIndex = (GameLoop.getInstance().currIndex + 1) % 3;
+            GameLoop.getInstance().currIndex = (GameLoop.getInstance().currIndex + 1) % 4;
             this.args[0].uiMgr.openPanel(loadPanel, "loadPanel", [`0${GameLoop.getInstance().currIndex + 1}level`, this.args[0]]);
         }
 

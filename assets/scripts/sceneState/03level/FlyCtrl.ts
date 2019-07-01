@@ -4,6 +4,7 @@ import { CameraShake } from "../../comms/CameraShake";
 import { levelThreeExterior } from "./levelThreeExterior";
 import { explosion } from "../../other/explosion";
 import { goldAction } from "../../other/goldAction";
+import { levelFourExterior } from "../04level/levelFourExterior";
 
 const { ccclass, property } = cc._decorator;
 
@@ -63,6 +64,7 @@ export class FlyCtrl extends cc.Component {
     }
 
     private move(dt): void {
+        if (this.isComplete) return;
         this.node.y -= this.moveSpeed * (Math.abs(this.child.rotation) / this.maxRot) * (this.child.rotation > 0 ? 1 : -1) * dt;
 
 
@@ -74,6 +76,7 @@ export class FlyCtrl extends cc.Component {
         }
     }
     private rotate(dt): void {
+        if (this.isComplete) return;
         if (this.dir == 0) {
             if (Math.abs(this.child.rotation) < 1) {
                 this.child.rotation = 0;
@@ -132,7 +135,7 @@ export class FlyCtrl extends cc.Component {
             case 6://金币
                 other.node.destroy();
                 let go: goldAction = other.node.getComponent(goldAction);
-                levelThreeExterior.getInstance().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
+                this.getExterior().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
@@ -141,20 +144,28 @@ export class FlyCtrl extends cc.Component {
                 break;
             case 9:
                 other.node.destroy();
-                levelThreeExterior.getInstance().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
+                this.getExterior().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
             case 15:
             case 16:
                 this.explosionCtrl.play(other.node.position);
-                levelThreeExterior.getInstance().minusHeart(this.node.position);
+                this.getExterior().minusHeart(this.node.position);
                 other.node.destroy();
                 this.cameraShake.shake();
                 AudioManager.getInstance().playSound(GameLoop.getInstance().isMan ? AudioType.OBSMAN : AudioType.OBSWOMAN);
                 break;
         }
     }
+
+    private getExterior(): any {
+        if (GameLoop.getInstance().currIndex == 2) {
+            return levelThreeExterior.getInstance();
+        } else if (GameLoop.getInstance().currIndex == 3)
+            return levelFourExterior.getInstance();
+    }
+
     onDestroy(): void {
         this.downBtn.off("touchstart", this.getDownBtnDown, this);
         this.downBtn.off("touchend", this.getDownBtnUp, this);
