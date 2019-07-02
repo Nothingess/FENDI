@@ -127,7 +127,7 @@ export class playerCtrl extends cc.Component {
     update(dt): void {
 
         //this.moveBack(dt);
-        dt = 0.0172;
+        dt = 0.0167;
         if (this.mPlayerState == PlayerState.idle)
             this.idleUpdate();
         else if (this.mPlayerState == PlayerState.jump)

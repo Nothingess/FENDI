@@ -5,6 +5,7 @@ import { levelThreeExterior } from "./levelThreeExterior";
 import { explosion } from "../../other/explosion";
 import { goldAction } from "../../other/goldAction";
 import { levelFourExterior } from "../04level/levelFourExterior";
+import { packAction } from "../../other/packAction";
 
 const { ccclass, property } = cc._decorator;
 
@@ -37,7 +38,7 @@ export class FlyCtrl extends cc.Component {
 
     onLoad() {
         let manager = cc.director.getCollisionManager();  // 获取碰撞检测类
-        manager.enabled = true;                         // 开启碰撞检测
+        manager.enabled = true;                           // 开启碰撞检测
     }
 
     start() {
@@ -52,7 +53,7 @@ export class FlyCtrl extends cc.Component {
     }
 
     update(dt) {
-        dt = 0.0172;
+        dt = 0.0167;
         this.dir = (this.isUp ? 1 : 0) + (this.isDown ? -1 : 0);
 
         this.rotate(dt);
@@ -64,19 +65,19 @@ export class FlyCtrl extends cc.Component {
     }
 
     private move(dt): void {
-        if (this.isComplete) return;
+        if (this.isOver) return;
         this.node.y -= this.moveSpeed * (Math.abs(this.child.rotation) / this.maxRot) * (this.child.rotation > 0 ? 1 : -1) * dt;
 
 
         if (this.node.y < this.maxBorder * .2) {
             this.node.y = this.maxBorder * .2;
         }
-        if (this.node.y > this.maxBorder * .8) {
-            this.node.y = this.maxBorder * .8;
+        if (this.node.y > this.maxBorder * .9) {
+            this.node.y = this.maxBorder * .9;
         }
     }
     private rotate(dt): void {
-        if (this.isComplete) return;
+        if (this.isOver) return;
         if (this.dir == 0) {
             if (Math.abs(this.child.rotation) < 1) {
                 this.child.rotation = 0;
@@ -133,8 +134,14 @@ export class FlyCtrl extends cc.Component {
         if (this.isOver) return;
         switch (other.tag) {
             case 6://金币
-                other.node.destroy();
                 let go: goldAction = other.node.getComponent(goldAction);
+
+                if(GameLoop.getInstance().currIndex == 2){
+                    other.node.destroy();
+                }else if(GameLoop.getInstance().currIndex == 3){
+                    go.hide();
+                }
+
                 this.getExterior().addScore(go.score, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), go.goldId);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
@@ -143,16 +150,36 @@ export class FlyCtrl extends cc.Component {
                 GameLoop.getInstance().win();
                 break;
             case 9:
-                other.node.destroy();
-                this.getExterior().addScore(200, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
+
+                if(GameLoop.getInstance().currIndex == 2){
+                    other.node.destroy();
+                }else if(GameLoop.getInstance().currIndex == 3){
+                    let pack: packAction = other.node.getComponent(packAction);
+                    pack.hide();
+                }
+                //other.node.destroy();
+                this.getExterior().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
             case 15:
             case 16:
-                this.explosionCtrl.play(other.node.position);
-                this.getExterior().minusHeart(this.node.position);
-                other.node.destroy();
+                let pos:cc.Vec2 = cc.v2();
+                if(GameLoop.getInstance().currIndex == 2){
+                    pos = other.node.position;
+
+/*                     this.explosionCtrl.play(other.node.position);
+                    this.getExterior().minusHeart(this.node.position); */
+                    other.node.destroy();
+                }else if(GameLoop.getInstance().currIndex == 3){
+                    pos = other.node.parent.position.clone().add(other.node.position);
+
+/*                     this.explosionCtrl.play(other.node.position);
+                    this.getExterior().minusHeart(this.node.position); */
+                    other.node.active = false;
+                }
+                this.explosionCtrl.play(pos);
+                this.getExterior().minusHeart(pos);
                 this.cameraShake.shake();
                 AudioManager.getInstance().playSound(GameLoop.getInstance().isMan ? AudioType.OBSMAN : AudioType.OBSWOMAN);
                 break;

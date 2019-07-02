@@ -43,6 +43,8 @@ export class WeChatPlatform extends IPlatform {
 
     public init(): void {
         if (typeof wx === 'undefined') return;
+        wx.setPreferredFramesPerSecond(60);
+        setInterval(()=>{wx.triggerGC();}, 10000)               //每30秒加快触发一次没存回收
         let self = this;
         this.updateManager = wx.getUpdateManager();
         this.updateManager.onCheckForUpdate(function (res) {
@@ -66,7 +68,6 @@ export class WeChatPlatform extends IPlatform {
             console.log("新版本下载失败！")
         })
 
-        //setInterval(()=>{wx.triggerGC();}, 10000)               //每30秒加快触发一次没存回收
         this.showShareMenu();
         this.requestNet();
         this.getUnionid();

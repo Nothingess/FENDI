@@ -2,61 +2,6 @@ import { IUIBase, PanelLayer } from "../uiSystem/IUIBase";
 import { strateC } from "../uiSystem/openAction/IOpenStrategy";
 import { GameLoop } from "../GameLoop";
 
-let level_1: Array<string> = [
-    "prefabs/bgModule/01level/01screen_2",
-    "prefabs/bgModule/01level/01screen_3",
-    "prefabs/bgModule/01level/01screen_4",
-    "prefabs/bgModule/01level/01screen_5",
-    "prefabs/bgModule/01level/01screen_6",
-    "prefabs/bgModule/01level/01screen_7",
-    "prefabs/bgModule/01level/01screen_g2",
-    "prefabs/bgModule/01level/01screen_g3",
-    "prefabs/bgModule/01level/01screen_g4",
-    "jsons/bgm_1",
-    "prefabs/obstacle/fountain",
-    "prefabs/manRole",
-    "prefabs/womanRole"
-]
-let level_2: Array<string> = [
-    "prefabs/bgModule/02level/02screen_2",
-    "prefabs/bgModule/02level/02screen_3",
-    "prefabs/bgModule/02level/02screen_4",
-    "prefabs/bgModule/02level/02screen_5",
-    "prefabs/bgModule/02level/02screen_6",
-    "prefabs/bgModule/02level/02screen_7",
-    "prefabs/bgModule/02level/02screen_8",
-    "prefabs/bgModule/02level/02screen_9",
-    "prefabs/bgModule/02level/02screen_10",
-    "prefabs/bgModule/02level/02screen_11",/* 
-    "prefabs/bgModule/02level/02screen_g2",
-    "prefabs/bgModule/02level/02screen_g3",
-    "prefabs/bgModule/02level/02screen_g4", */
-    "prefabs/manRole",
-    "prefabs/womanRole",
-    "prefabs/other/jinbichufa"
-]
-let level_3: Array<string> = [
-    "prefabs/bgModule/03level/screen_2",
-    "prefabs/bgModule/03level/screen_3",
-    "prefabs/bgModule/03level/screen_4",
-    "prefabs/bgModule/03level/screen_5",
-    "prefabs/bgModule/03level/screen_6",
-    "prefabs/bgModule/03level/screen_7",
-    "prefabs/manFly",
-    "prefabs/womanFly"
-]
-let level_4: Array<string> = [
-    "prefabs/bgModule/04level/04screen_2",
-    "prefabs/bgModule/04level/04screen_3",
-    "prefabs/bgModule/04level/04screen_4",
-    "prefabs/bgModule/04level/04screen_5",
-    "prefabs/bgModule/04level/04screen_6",
-    "prefabs/bgModule/04level/04screen_7",
-    "prefabs/bgModule/04level/04screen_8",
-    "prefabs/bgModule/04level/04screen_9",
-    "prefabs/bgModule/04level/04screen_10",
-]
-
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -73,6 +18,11 @@ export class loadPanel extends IUIBase {
     private isComplete: boolean = false;
 
     private isAlreadyLoadScene: boolean = false;     //是否已经切换场景
+
+    private level_1:Array<string> = new Array<string>();
+    private level_2:Array<string> = new Array<string>();
+    private level_3:Array<string> = new Array<string>();
+    private level_4:Array<string> = new Array<string>();
 
     public initStrategy(): void {
         this.mOpenStrategy = new strateC(this.skin);
@@ -115,6 +65,59 @@ export class loadPanel extends IUIBase {
         this.initComponent();
     }
     public initComponent(): void {
+        this.level_1 = [
+            "prefabs/bgModule/01level/01screen_2",
+            "prefabs/bgModule/01level/01screen_3",
+            "prefabs/bgModule/01level/01screen_4",
+            "prefabs/bgModule/01level/01screen_5",
+            "prefabs/bgModule/01level/01screen_6",
+            "prefabs/bgModule/01level/01screen_7",
+            "prefabs/bgModule/01level/01screen_g2",
+            "prefabs/bgModule/01level/01screen_g3",
+            "prefabs/bgModule/01level/01screen_g4",
+            "jsons/bgm_1",
+            "prefabs/obstacle/fountain",
+            "prefabs/manRole",
+            "prefabs/womanRole"
+        ]
+        this.level_2 = [
+            "prefabs/bgModule/02level/02screen_2",
+            "prefabs/bgModule/02level/02screen_3",
+            "prefabs/bgModule/02level/02screen_4",
+            "prefabs/bgModule/02level/02screen_5",
+            "prefabs/bgModule/02level/02screen_6",
+            "prefabs/bgModule/02level/02screen_7",
+            "prefabs/bgModule/02level/02screen_8",
+            "prefabs/bgModule/02level/02screen_9",
+            "prefabs/bgModule/02level/02screen_10",
+            "prefabs/bgModule/02level/02screen_11",
+            "prefabs/manRole",
+            "prefabs/womanRole",
+            "prefabs/other/jinbichufa"
+        ]
+        this.level_3 = [
+            "prefabs/bgModule/03level/screen_2",
+            "prefabs/bgModule/03level/screen_3",
+            "prefabs/bgModule/03level/screen_4",
+            "prefabs/bgModule/03level/screen_5",
+            "prefabs/bgModule/03level/screen_6",
+            "prefabs/bgModule/03level/screen_7",
+            "prefabs/manFly",
+            "prefabs/womanFly"
+        ]
+        this.level_4 = [
+            "prefabs/bgModule/04level/04screen_2",
+            "prefabs/bgModule/04level/04screen_3",
+            "prefabs/bgModule/04level/04screen_4",
+            "prefabs/bgModule/04level/04screen_5",
+            "prefabs/bgModule/04level/04screen_6",
+            "prefabs/bgModule/04level/04screen_7",
+            "prefabs/bgModule/04level/04screen_8",
+            "prefabs/bgModule/04level/04screen_9",
+            "prefabs/bgModule/04level/04screen_10",
+        ]
+
+
         this.pro = cc.find("pro/bar", this.skin).getComponent(cc.Sprite);
         this.mark = cc.find("pro/bar/mark", this.skin);
         this.txt = this.mark.getComponentInChildren(cc.Label);
@@ -136,11 +139,11 @@ export class loadPanel extends IUIBase {
         this.releaseOldRes();
         let newPath: Array<string> = null;
         if (this.loadScene == "01level") {
-            newPath = level_1;
+            newPath = this.level_1;
         } else if (this.loadScene == "02level") {
-            newPath = level_2;
+            newPath = this.level_2;
         } else if (this.loadScene == "03level") {
-            newPath = level_3;
+            newPath = this.level_3;
         }
 
         GameLoop.getInstance().resUrl = newPath;
@@ -154,14 +157,14 @@ export class loadPanel extends IUIBase {
     }
     private complete(): void {
         if (this.loadScene == "01level") {
-            cc.loader.loadResArray(level_1, this.loadResProgress.bind(this), this.loadResComplete.bind(this));
+            cc.loader.loadResArray(this.level_1, this.loadResProgress.bind(this), this.loadResComplete.bind(this));
         } else if (this.loadScene == "02level") {
-            cc.loader.loadResArray(level_2, this.loadResProgress.bind(this), this.loadLevel_2Complete.bind(this));
+            cc.loader.loadResArray(this.level_2, this.loadResProgress.bind(this), this.loadLevel_2Complete.bind(this));
         } else if (this.loadScene == "03level") {
-            cc.loader.loadResArray(level_3, this.loadResProgress.bind(this), this.loadLevel_3Complete.bind(this));
+            cc.loader.loadResArray(this.level_3, this.loadResProgress.bind(this), this.loadLevel_3Complete.bind(this));
         }
         else if (this.loadScene == "04level") {
-            cc.loader.loadResArray(level_4, this.loadResProgress.bind(this), this.loadLevel_4Complete.bind(this));
+            cc.loader.loadResArray(this.level_4, this.loadResProgress.bind(this), this.loadLevel_4Complete.bind(this));
         }
         else if (this.loadScene == "01startScene") {
             GameLoop.getInstance().buildNode = [];

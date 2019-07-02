@@ -86,7 +86,7 @@ export class obsLayer extends cc.Component {
     }
 
     update(dt) {
-        dt = 0.0172;
+        dt = 0.0167;
         if (this.times == null) return;
         if (this.currIndex > this.times.length - 1) return;
         this.interval -= dt;

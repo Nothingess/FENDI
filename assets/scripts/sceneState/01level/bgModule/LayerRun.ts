@@ -24,7 +24,7 @@ export class LayerRun extends cc.Component {
 
     update(dt):void{
         if(this.stop) return;
-        dt = 0.0172;
+        dt = 0.0167;
         this.node.x -= this.moveSpeed * dt;
 
         if(this.layer === LayerType.loop){
@@ -33,7 +33,6 @@ export class LayerRun extends cc.Component {
                 this.check();
                 this.checkInterval = 3;
             }
-
         }
     }
 

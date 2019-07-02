@@ -1,4 +1,5 @@
 import { EventManager, EventType } from "../comms/EventManager";
+import { GameLoop } from "../GameLoop";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,7 +19,10 @@ export class recover extends cc.Component {
                 EventManager.getInstance().dispatchEvent(EventType.addGoldPool, other.node);
                 break;
             default:
-                other.node.destroy();
+                if(GameLoop.getInstance().currIndex == 3){
+                    EventManager.getInstance().dispatchEvent(EventType.addObsPool, other.node);
+                }else
+                    other.node.destroy();
                 break
         }
 

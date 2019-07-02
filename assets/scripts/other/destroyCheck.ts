@@ -10,7 +10,7 @@ export class destroyCheck extends cc.Component {
     private checkInterval:number = 3;
 
     update (dt) {
-        dt = 0.0172;
+        dt = 0.0167;
         this.checkInterval -= dt;
         if(this.checkInterval < 0){
             this.checkInterval = 3;

@@ -253,11 +253,11 @@ export class levelFourExterior {
         )
     }
 
-    public uploadScore(K: string = "rank_3", V: string = `${this.score}`): void {
+    public uploadScore(K: string = "rank_4", V: string = `${this.score}`): void {
         if (GameLoop.getInstance().platform == null) return;
         GameLoop.getInstance().platform.updateScore(this.score, 3);
         console.log("uploadScore")
-        if (GameLoop.getInstance().currIndex == 3) return;
+        //if (GameLoop.getInstance().currIndex == 3) return;
         GameLoop.getInstance().platform.setUserCloudStorage(
             [{ key: K, value: V }]
         )
