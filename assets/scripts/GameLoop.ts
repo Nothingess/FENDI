@@ -32,6 +32,7 @@ export class GameLoop extends cc.Component {
     public isMuteEff: boolean = false;                //是否关闭音效
     private isLoadSub: boolean = false;               //分包是否加载成功
     public userName:string = "";                      //用户名称
+    public isUnLock:boolean = false;                  //是否解锁神秘关卡
 
     public buildNode: Array<cc.Node> = new Array<cc.Node>();
     public groundNode: Array<cc.Node> = new Array<cc.Node>();
@@ -58,6 +59,7 @@ export class GameLoop extends cc.Component {
         }
         if (this.platform != null) {
             this.platform.init();
+            this.isUnLock = this.platform.isUnLock();
         }
 
         if (!this.isLoadSub)
@@ -65,6 +67,13 @@ export class GameLoop extends cc.Component {
 
         this.onSysEvent();
         this.resUrl = new Array<string>();
+    }
+
+    public unLock():void{
+        this.isUnLock = true;
+        if(this.platform != null){
+            this.platform.setUnLock();
+        }
     }
 
     update(dt) {

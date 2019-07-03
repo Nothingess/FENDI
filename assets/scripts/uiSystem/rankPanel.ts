@@ -9,6 +9,7 @@ export class rankPanel extends IUIBase {
     private lv1:cc.Node = null;
     private lv2:cc.Node = null;
     private lv3:cc.Node = null;
+    private lv4:cc.Node = null;
     private currSelect:cc.Node = null;
 
     private closeBtn: cc.Node = null;
@@ -33,6 +34,8 @@ export class rankPanel extends IUIBase {
         this.lv1 = cc.find("context/lv1", this.skin);
         this.lv2 = cc.find("context/lv2", this.skin);
         this.lv3 = cc.find("context/lv3", this.skin);
+        this.lv4 = cc.find("context/lv4", this.skin);
+
 
         this.closeBtn = cc.find("close_btn", this.skin);
         this.wxSubContextView = cc.find("context", this.skin).getComponent(cc.WXSubContextView);
@@ -40,6 +43,7 @@ export class rankPanel extends IUIBase {
         this.lv1.on("touchend", this.onLv1, this);
         this.lv2.on("touchend", this.onLv2, this);
         this.lv3.on("touchend", this.onLv3, this);
+        this.lv4.on("touchend", this.onLv4, this);
         this.currSelect = this.lv1;
 
         if (GameLoop.getInstance().platform != null){
@@ -63,7 +67,10 @@ export class rankPanel extends IUIBase {
     private onLv3():void{
         if(this.lv3 == this.currSelect)return;
         this.onSelect(this.lv3, "s_3");
-
+    }
+    private onLv4():void{
+        if(this.lv4 == this.currSelect)return;
+        this.onSelect(this.lv4, "s_4");
     }
 
     private onSelect(node:cc.Node, key:string):void{
@@ -83,8 +90,8 @@ export class rankPanel extends IUIBase {
         this.currSelect.children[0].color = new cc.Color(83, 110, 95);
 
         this.currSelect = node;
-
-        GameLoop.getInstance().platform.postMessageToOpenDataContext({k:key});
+        if (GameLoop.getInstance().platform != null)
+            GameLoop.getInstance().platform.postMessageToOpenDataContext({k:key});
     }
 
     onDestroy(): void {

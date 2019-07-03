@@ -22,7 +22,6 @@ export class sperture extends cc.Component {
     }
 
     public play():void{
-        console.log("touchstart")
         let node:cc.Node = null;
         if(this.pool.size() > 0){
             node = this.pool.get();

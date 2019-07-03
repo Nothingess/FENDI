@@ -18,7 +18,8 @@ export enum AudioType{
     BGM_2,
     BGM_3,
     BGM_CAT,
-    BGM_4
+    BGM_4,
+    UNLOCK
 }
 
 export class AudioManager {

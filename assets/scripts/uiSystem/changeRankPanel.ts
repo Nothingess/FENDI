@@ -134,6 +134,8 @@ export class changeRankPanel extends IUIBase {
     }
 
     onDestroy(): void {
+        if(GameLoop.getInstance().platform != null)
+            GameLoop.getInstance().platform.isNeedLoadRank = false;
         this.closeBtn.off("touchend", this.onCloseBtn, this);
         this.leftBtn.off("touchend", this.onLeftBtn, this);
         this.rightBtn.off("touchend", this.onRightBtn, this);

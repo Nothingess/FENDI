@@ -115,6 +115,8 @@ export class loadPanel extends IUIBase {
             "prefabs/bgModule/04level/04screen_8",
             "prefabs/bgModule/04level/04screen_9",
             "prefabs/bgModule/04level/04screen_10",
+            "prefabs/manFly",
+            "prefabs/womanFly"
         ]
 
 

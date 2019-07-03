@@ -3,7 +3,9 @@ export class IPlatform {
     public liuhai: number = 0;           //设备刘海高度
     public nickName: string = "";         //用户名称
     public avtarUrl: string = "";
-    public avtarTex:cc.Texture2D = null;
+    public avtarTex: cc.Texture2D = null;
+
+    public isNeedLoadRank: boolean = false;
 
     public init(): void {
 
@@ -25,7 +27,7 @@ export class IPlatform {
     public requestNet(): void { }
     public getUnionid(): void { }
     public updateScore(sc: number, lv: number): void { }
-    public getRank(call:Function): void { }
+    public getRank(call: Function): void { }
     public uploadScoreToServ(val: number): void { }
     public getScoreFromServ(): void { }
     public onShow(callback: (res) => void): void { }
@@ -33,6 +35,10 @@ export class IPlatform {
     public offShow(callback: (res) => void): void { }
     public offHide(callback: (res) => void): void { }
     public showShareMenu(): void { }
+    /**获取解锁信息 */
+    public isUnLock(): boolean { return false; }
+    /**设置解锁成功 */
+    public setUnLock(): void { }
 }
 
 export class WeChatPlatform extends IPlatform {
@@ -44,7 +50,7 @@ export class WeChatPlatform extends IPlatform {
     public init(): void {
         if (typeof wx === 'undefined') return;
         wx.setPreferredFramesPerSecond(60);
-        setInterval(()=>{wx.triggerGC();}, 10000)               //每30秒加快触发一次没存回收
+        setInterval(() => { wx.triggerGC(); }, 10000)               //每30秒加快触发一次没存回收
         let self = this;
         this.updateManager = wx.getUpdateManager();
         this.updateManager.onCheckForUpdate(function (res) {
@@ -143,7 +149,7 @@ export class WeChatPlatform extends IPlatform {
             const ths = this;
 
             // img: 图片保存对象; src: 图片资源路径
-            let url: string = `https://wx.duligame.cn/fendi/imgs/scene_${sc}.png`;
+            let url: string = `https://singapore.duligame.cn/fendi/imgs/scene_${sc}.png`;
             let imgArr = [
                 { img: null, src: url },
             ]
@@ -226,7 +232,7 @@ export class WeChatPlatform extends IPlatform {
     public postMessageToOpenDataContext(data: any): void {
         wx.getOpenDataContext().postMessage(data);
     }
-    public requestNet(call?:Function): void {
+    public requestNet(call?: Function): void {
         let self = this;
         console.log("==userLogins==");
         wx.login({
@@ -241,7 +247,7 @@ export class WeChatPlatform extends IPlatform {
                             //Global.session = res.data.data
                             self.session_key = res.data.data.session_key;
                             self.postMessageToOpenDataContext({ k: "openid", v: res.data.data.openid })
-                            if(!!call)
+                            if (!!call)
                                 call();
                             console.log(res.data)
                         },
@@ -384,7 +390,7 @@ export class WeChatPlatform extends IPlatform {
     }
     public updateScore(sc: number, lv: number): void {
         let self = this;
-        if(this.session_key == null){
+        if (this.session_key == null) {
             //this.requestNet(this.getRank);
             self.getUnionid();
             return;
@@ -422,9 +428,10 @@ export class WeChatPlatform extends IPlatform {
 
 
     }
-    public getRank(call:Function): void {
+    public getRank(call: Function): void {
         let self = this;
-        if(this.session_key == null){
+        this.isNeedLoadRank = true;
+        if (this.session_key == null) {
             //this.requestNet(this.getRank);
             self.getUnionid();
             return;
@@ -439,8 +446,13 @@ export class WeChatPlatform extends IPlatform {
                     },
                     success: function (res) {
                         console.log("GetRank", "success", res)
-                        if(!!call)
+                        if(!self.isNeedLoadRank){
+                            call = null;
+                        }
+                        if (!!call){
                             call(res.data.data.myRank, res.data.data.rankList)
+                        }   
+
                     },
                     fail: function () {
                         console.log("BindUserInfo", "fail")
@@ -454,20 +466,20 @@ export class WeChatPlatform extends IPlatform {
                 self.getUnionid();
             }
         })
-/*         wx.request({
-            url: 'https://wxfendi.duligame.cn/GetRank',
-            data: {
-                session: self.session_key,
-            },
-            success: function (res) {
-                console.log("GetRank", "success", res)
-                if(!!call)
-                    call(res.data.data.myRank, res.data.data.rankList)
-            },
-            fail: function () {
-                console.log("BindUserInfo", "fail")
-            },
-        }) */
+        /*         wx.request({
+                    url: 'https://wxfendi.duligame.cn/GetRank',
+                    data: {
+                        session: self.session_key,
+                    },
+                    success: function (res) {
+                        console.log("GetRank", "success", res)
+                        if(!!call)
+                            call(res.data.data.myRank, res.data.data.rankList)
+                    },
+                    fail: function () {
+                        console.log("BindUserInfo", "fail")
+                    },
+                }) */
 
     }
     public uploadScoreToServ(val: number): void {
@@ -497,6 +509,29 @@ export class WeChatPlatform extends IPlatform {
             }
         })
 
+    }
+    public isUnLock(): boolean {
+        try {
+            let value = wx.getStorageSync('isUnLock')
+            console.log(`获取解锁信息：${value}`);
+            if (value) {
+                // Do something with return value
+                console.log(`获取到解锁信息为：${value}`);
+                return true;
+            }
+        } catch (e) {
+            // Do something when catch error
+            console.log("获取解锁信息失败！");
+        }
+        return false;
+    }
+    public setUnLock(): void {
+        try {
+            wx.setStorageSync('isUnLock', true);
+            console.log("设置解锁信息成功！");
+        } catch (e) {
+            console.log("解锁失败！");
+        }
     }
     // 拼接海报----step2
     private drawImg(arr, score) {

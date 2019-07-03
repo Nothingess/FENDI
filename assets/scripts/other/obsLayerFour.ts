@@ -159,7 +159,7 @@ export class obsLayerFour extends cc.Component {
                 pos.y = 250;
                 break;
             case 2:
-                pos.y = 400;
+                pos.y = 320;
                 break;
         }
 
