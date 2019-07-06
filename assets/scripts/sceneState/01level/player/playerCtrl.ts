@@ -45,16 +45,16 @@ export class playerCtrl extends cc.Component {
 
     private squatBtn: cc.Node = null;                            //按钮
     private jumpBtn: cc.Node = null;
-    private onSquatBtn:boolean = false;                          //按下下蹲键
-    private onJumpBtn:boolean = false;                           //按下跳跃键
+    private onSquatBtn: boolean = false;                          //按下下蹲键
+    private onJumpBtn: boolean = false;                           //按下跳跃键
 
     private cameraShake: CameraShake = null;
 
     private isSquat: boolean = false;
     private isOver: boolean = false;
 
-    private isUpCol:boolean = false;
-    private isLeft:boolean = false;
+    private isUpCol: boolean = false;
+    private isLeft: boolean = false;
 
     private isComplete: boolean = false;
     private isGamePause: boolean = false;
@@ -208,11 +208,11 @@ export class playerCtrl extends cc.Component {
             }
         }
 
-        if(this.onJumpBtn){
+        if (this.onJumpBtn) {
             //if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
             this.changeState(PlayerState.jump);
         }
-        else if(this.onSquatBtn){
+        else if (this.onSquatBtn) {
             //if (this.mPlayerState == PlayerState.idle)
             this.changeState(PlayerState.squat);
         }
@@ -235,10 +235,9 @@ export class playerCtrl extends cc.Component {
                     this.node.y -= this.ComputeUpSpeed(this.rightStepNode);
             }
         }
-        if(this.onJumpBtn){
-            //if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
+        if (this.onJumpBtn) {
             this.changeState(PlayerState.jump);
-        }else if(!this.onSquatBtn){
+        } else if (!this.onSquatBtn) {
             this.changeState(PlayerState.idle);
         }
     }
@@ -248,6 +247,7 @@ export class playerCtrl extends cc.Component {
     //#region 碰撞检测
 
     onCollisionEnter(other, self) {
+        if (this.isOver) return;
         this.collCount++;
 
         //待优化
@@ -255,7 +255,6 @@ export class playerCtrl extends cc.Component {
             case 0://ground
                 if (this.mPlayerState != PlayerState.idle && this.mPlayerState != PlayerState.squat) {
                     this.changeState(PlayerState.idle);
-                    //this.node.y = other.world.aabb.yMax + this.node.height * .5 - 0.5;
                     this.node.y = other.node.y + other.node.height * other.node.scaleY * .5 - .1;
                 }
                 break;
@@ -278,7 +277,6 @@ export class playerCtrl extends cc.Component {
 
                     //重新加入障碍物对象池
                     EventManager.getInstance().dispatchEvent(EventType.addObsPool, other.node);
-                    //other.node.destroy();
                     this.cameraShake.shake();
                     this.explosionCtrl.play(other.node.position);
                     AudioManager.getInstance().playSound(GameLoop.getInstance().isMan ? AudioType.OBSMAN : AudioType.OBSWOMAN);
@@ -318,13 +316,13 @@ export class playerCtrl extends cc.Component {
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
-            case 7:
+            case 7://结束检测
                 GameLoop.getInstance().win();
                 break;
             case 8:
                 this.collCount--;
                 break;
-            case 9:
+            case 9://包包
                 this.collCount--;
                 //other.node.destroy();
                 let pack: packAction = other.node.getComponent(packAction);
@@ -339,10 +337,10 @@ export class playerCtrl extends cc.Component {
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
-            case 30:
+            case 30://金币池大金币
                 other.node.getComponent(sp.Skeleton).enabled = false;
                 cc.loader.loadRes("prefabs/other/jinbichufa", cc.Prefab, (err, res) => {
-                    if(err){
+                    if (err) {
                         console.log("playerCtrl load jinbichufa fail", err);
                         return;
                     }
@@ -490,31 +488,31 @@ export class playerCtrl extends cc.Component {
         //this.offSquat();
         this.onJump();
     }
-    private getJumpKeyUp():void{
+    private getJumpKeyUp(): void {
         this.offJump();
     }
 
     private onJump(): void {
         if (this.isOver || this.isGamePause) return;
         this.onJumpBtn = true;
-/*         if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
-            this.changeState(PlayerState.jump); */
+        /*         if (this.mPlayerState == PlayerState.idle || this.mPlayerState == PlayerState.squat)
+                    this.changeState(PlayerState.jump); */
     }
     private onSquat(): void {
         if (this.isOver || this.isGamePause) return;
         this.onSquatBtn = true;
-/*         if (this.mPlayerState == PlayerState.idle)
-            this.changeState(PlayerState.squat); */
+        /*         if (this.mPlayerState == PlayerState.idle)
+                    this.changeState(PlayerState.squat); */
     }
-    private offJump():void{
+    private offJump(): void {
         if (this.isOver || this.isGamePause) return;
         this.onJumpBtn = false;
     }
     private offSquat(): void {
         if (this.isOver || this.isGamePause) return;
         this.onSquatBtn = false;
-/*         if (this.mPlayerState == PlayerState.squat)
-            this.changeState(PlayerState.idle); */
+        /*         if (this.mPlayerState == PlayerState.squat)
+                    this.changeState(PlayerState.idle); */
     }
     /**游戏完成 */
     public complete(): void {

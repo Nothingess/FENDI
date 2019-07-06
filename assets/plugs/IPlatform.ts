@@ -415,7 +415,7 @@ export class WeChatPlatform extends IPlatform {
                     },
                     fail: function () {
                         console.log("UpdateScore", "fail")
-                        this.updateScore(sc, lv);
+                        self.updateScore(sc, lv);
                     },
                 })
             },

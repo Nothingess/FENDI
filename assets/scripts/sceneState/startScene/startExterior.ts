@@ -32,6 +32,8 @@ export class startExterior {
     private desBtn: cc.Node = null;                      //活动描述
     private changeBtn: cc.Node = null;                    //争霸赛排行按钮
 
+    //private reset:cc.Node = null;
+
     private bg: cc.Sprite = null;                        //背景
     private bgNew: cc.Sprite = null;                     //新背景（副本）
 
@@ -117,6 +119,11 @@ export class startExterior {
         this.musicBtn = cc.find("musicBtn", this.upArea);
         this.desBtn = cc.find("description", this.upArea);
         this.changeBtn = cc.find("changeBtn", this.upArea);
+
+/*         this.reset = cc.find("reset", this.upArea);
+        this.reset.on("touchend", ()=>{
+            GameLoop.getInstance().isUnLock = false;
+        }, this) */
 
         this.bg = cc.find("Canvas/bg").getComponent(cc.Sprite);
         this.bgNew = cc.find("Canvas/bgNew").getComponent(cc.Sprite);

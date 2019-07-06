@@ -156,6 +156,7 @@ export class levelTwoExterior {
         this.uploadScore();
 
         this.offEventSys();
+        EventManager.getInstance().dispatchEvent(EventType.gameOver);
     }
 
     public stop(): void {

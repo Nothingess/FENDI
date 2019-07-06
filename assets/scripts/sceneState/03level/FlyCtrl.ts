@@ -146,10 +146,10 @@ export class FlyCtrl extends cc.Component {
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
-            case 7:
+            case 7://检测结束
                 GameLoop.getInstance().win();
                 break;
-            case 9:
+            case 9://包包
 
                 if(GameLoop.getInstance().currIndex == 2){
                     other.node.destroy();
@@ -157,31 +157,32 @@ export class FlyCtrl extends cc.Component {
                     let pack: packAction = other.node.getComponent(packAction);
                     pack.hide();
                 }
-                //other.node.destroy();
                 this.getExterior().addScore(100, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
 
                 AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
             case 15:
-            case 16:
+            case 16://障碍物
                 let pos:cc.Vec2 = cc.v2();
                 if(GameLoop.getInstance().currIndex == 2){
                     pos = other.node.position;
 
-/*                     this.explosionCtrl.play(other.node.position);
-                    this.getExterior().minusHeart(this.node.position); */
                     other.node.destroy();
                 }else if(GameLoop.getInstance().currIndex == 3){
                     pos = other.node.parent.position.clone().add(other.node.position);
 
-/*                     this.explosionCtrl.play(other.node.position);
-                    this.getExterior().minusHeart(this.node.position); */
                     other.node.active = false;
                 }
                 this.explosionCtrl.play(pos);
                 this.getExterior().minusHeart(pos);
                 this.cameraShake.shake();
                 AudioManager.getInstance().playSound(GameLoop.getInstance().isMan ? AudioType.OBSMAN : AudioType.OBSWOMAN);
+                break;
+            case 60://彩蛋包
+                other.node.destroy();
+                this.getExterior().addScore(1000, other.node.convertToWorldSpaceAR(cc.v2(0, 0)), 3);
+
+                AudioManager.getInstance().playSound(AudioType.GLOD);
                 break;
         }
     }

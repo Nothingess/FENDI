@@ -145,6 +145,7 @@ export class levelFourExterior {
         AudioManager.getInstance().playSound(AudioType.WIN);
         this.uiMgr.openPanel(accountsPanel, "accountsPanel", [levelFourExterior.getInstance(), this.score, this.heartNum == 0 ? false : true]);
         this.uploadScore();
+        EventManager.getInstance().dispatchEvent(EventType.gameOver);
     }
     public zoomIn(): void {
         cc.find("Canvas/run_layer").runAction(cc.sequence(
@@ -236,6 +237,7 @@ export class levelFourExterior {
             this.stop();
             this.pyCtrl.isOver = true;
             this.uploadScore();
+            EventManager.getInstance().dispatchEvent(EventType.gameOver);
         }
     }
     /**飘动减血图标 */

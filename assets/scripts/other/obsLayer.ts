@@ -86,6 +86,7 @@ export class obsLayer extends cc.Component {
     }
 
     update(dt) {
+        if (this.isGameOver) return;
         dt = 0.0167;
         if (this.times == null) return;
         if (this.currIndex > this.times.length - 1) return;
@@ -181,9 +182,6 @@ export class obsLayer extends cc.Component {
     }
 
     onDestroy(): void {
-        this.obsPool.clear();
-        this.goldPool.clear();
-
         EventManager.getInstance().removeEventListenerByTag(EventType.zoomIn, "obsLayer");
         EventManager.getInstance().removeEventListenerByTag(EventType.addObsPool, "obsLayer");
         EventManager.getInstance().removeEventListenerByTag(EventType.addGoldPool, "obsLayer");

@@ -27,6 +27,9 @@ export class scoreTip extends cc.Component {
             case 200:
                 this.sp.spriteFrame = this.spList[4];
                 break;
+            case 1000:
+                this.sp.spriteFrame = this.spList[5];
+                break;
         }
 
     }

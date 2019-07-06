@@ -109,11 +109,13 @@ export class selectLevelPanel extends IUIBase {
     }
 
     private onMystic(): void {
+        let self = this;
 
         /*         this.itemCopy.opacity = 255;
                 this.itemCopy.scale = .7; */
         if (this.isAlreadyLock) return;
         this.isAlreadyLock = true;
+        this.itemCopy.off("touchend", this.onMystic, this);
         AudioManager.getInstance().playSound(AudioType.UNLOCK);
 
         this.itemCopy.stopAllActions();
@@ -122,29 +124,40 @@ export class selectLevelPanel extends IUIBase {
         let rotate: cc.ActionInterval = cc.sequence(
             cc.scaleTo(.08, 0, .7),
             cc.callFunc(() => {
-                this.itemCopy.getChildByName("frame").opacity = 255;
+                self.itemCopy.getChildByName("frame").opacity = 255;
             }),
             cc.scaleTo(.08, .7, .7),
             cc.scaleTo(.08, 0, .7),
             cc.callFunc(() => {
-                this.itemCopy.getChildByName("frame").opacity = 0;
+                self.itemCopy.getChildByName("frame").opacity = 0;
             }),
             cc.scaleTo(.08, .7, .7),
         )
-
+        let float:cc.Node = cc.find("float", this.skin);
         this.itemCopy.runAction(cc.sequence(
             rotate.clone(),
             rotate.clone(),
             rotate.clone(),
             cc.callFunc(() => {
-                this.lock();
+                self.lock();
             }),
             cc.spawn(
-                cc.scaleTo(.3, 1),
+                cc.scaleTo(.3, 1.5),
                 cc.fadeOut(.3)
             ),
             cc.callFunc(() => {
-                this.itemCopy.destroy();
+                self.itemCopy.destroy();
+                float.active = true;
+                float.runAction(cc.sequence(
+                    cc.fadeIn(.5),
+                    cc.delayTime(2),
+                    cc.fadeOut(.5),
+                    cc.callFunc(()=>{
+                        self.currIndex = 3;
+                        self.onEnterBtnNew();
+                        float.destroy();
+                    })
+                ))
             })
         ))
     }
@@ -164,7 +177,7 @@ export class selectLevelPanel extends IUIBase {
             //this.selectAction();
         }, this)
         //GameLoop.getInstance().isUnLock = true;
-        this.isAlreadyLock = false;
+        //this.isAlreadyLock = false;
         GameLoop.getInstance().unLock();
     }
     private action(dur: number, pos: cc.Vec2): cc.FiniteTimeAction {
@@ -206,8 +219,14 @@ export class selectLevelPanel extends IUIBase {
     //#region 注册事件
 
     private onBackBtn(): void {
-        startExterior.getInstance().uiSys.closePanel(this.getSkinName());
         AudioManager.getInstance().playSound(AudioType.CLICK);
+        if(this.isAlreadyLock)return;
+        startExterior.getInstance().uiSys.closePanel(this.getSkinName());
+    }
+    private onEnterBtnNew():void{
+        startExterior.getInstance().currIndex = this.currIndex;
+        startExterior.getInstance().uiSys.openPanel(selectPanel, "selectPanel");
+        startExterior.getInstance().uiSys.closePanel(this.getSkinName());
     }
     private onEnterBtn(): void {
         AudioManager.getInstance().playSound(AudioType.CLICK);

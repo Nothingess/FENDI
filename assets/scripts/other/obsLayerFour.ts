@@ -13,6 +13,8 @@ export class obsLayerFour extends cc.Component {
     @property([cc.Prefab])
     public goldPres: Array<cc.Prefab> = [];
     private times: Array<obs> = null;
+    @property({ type: cc.Prefab, tooltip: "彩蛋包" })
+    pack: cc.Prefab = null;
 
     public obsPool: NodePool = null;
     public goldPool: NodePool = null;
@@ -36,17 +38,17 @@ export class obsLayerFour extends cc.Component {
         })
 
         EventManager.getInstance().addEventListener(EventType.zoomTrigger, this.onZoomTrigger.bind(this), "obsLayerFour");
-        EventManager.getInstance().addEventListener(EventType.addObsPool, this.onObsPool.bind(this), "obsLayerTwo");
-        EventManager.getInstance().addEventListener(EventType.addGoldPool, this.onGoldPool.bind(this), "obsLayerTwo");
-        EventManager.getInstance().addEventListener(EventType.gameOver, this.gameOver.bind(this), "obsLayerTwo");
+        EventManager.getInstance().addEventListener(EventType.addObsPool, this.onObsPool.bind(this), "obsLayerFour");
+        EventManager.getInstance().addEventListener(EventType.addGoldPool, this.onGoldPool.bind(this), "obsLayerFour");
+        EventManager.getInstance().addEventListener(EventType.gameOver, this.gameOver.bind(this), "obsLayerFour");
     }
 
     private onZoomTrigger(): void {
         this.createMore = true;
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 2; i++) {
             let posX: number = 400 * this.times[this.currIndex].t + 600;
-/*             this.createObs(cc.v2(posX, this.times[this.currIndex].y))
-            this.currIndex++; */
+            /*             this.createObs(cc.v2(posX, this.times[this.currIndex].y))
+                        this.currIndex++; */
 
             if (this.times[this.currIndex].type == 0)
                 this.createObs(cc.v2(posX, this.times[this.currIndex].y));
@@ -85,6 +87,7 @@ export class obsLayerFour extends cc.Component {
         });
     }
     update(dt) {
+        if (this.isGameOver) return;
         dt = 0.0167;
         if (this.times == null) return;
         if (this.currIndex > this.times.length - 1) return;
@@ -99,8 +102,11 @@ export class obsLayerFour extends cc.Component {
         if (posX - (-this.node.x) < this.viewWidth * 1.7) {
             if (this.times[this.currIndex].type == 0)
                 this.createObs(cc.v2(posX, this.times[this.currIndex].y));
-            else
+            else if (this.times[this.currIndex].type == 1)
                 this.createGold(cc.v2(posX, this.times[this.currIndex].y));
+            else {//生成彩蛋包
+                this.createPack(cc.v2(posX, 0));
+            }
             this.currIndex++;
         }
     }
@@ -114,27 +120,12 @@ export class obsLayerFour extends cc.Component {
             node = this.obsPool.getRand();
             let obsG: obsGroup = node.getComponent(obsGroup);
             obsG.init();
-            obsG.rand();
+            if (pos.y == 0)
+                obsG.rand();
         }
         this.node.addChild(node);
         pos.y = 375;
         node.setPosition(pos);
-
-
-        /*         let index: number = Math.floor(Math.random() * this.pres.length);
-                let node: cc.Node = cc.instantiate(this.pres[index]);
-                this.node.addChild(node);
-        
-                if (pos.y == 0) {
-                    pos.y = 150;
-                } else if (pos.y == 1) {
-                    pos.y = 480;
-                } else {
-                    pos.y = 300;
-                }
-        
-                pos.y += node.height * .5;
-                node.setPosition(pos); */
     }
     private createGold(pos: cc.Vec2): void {
         let node: cc.Node = null;
@@ -165,12 +156,16 @@ export class obsLayerFour extends cc.Component {
 
         node.setPosition(pos);
     }
+    private createPack(pos: cc.Vec2): void {
+        let node: cc.Node = cc.instantiate(this.pack);
+        this.node.addChild(node);
+        pos.y = 400;
+        node.setPosition(pos);
+    }
     onDestroy(): void {
-        this.obsPool = null;
-        this.goldPool = null;
         EventManager.getInstance().removeEventListenerByTag(EventType.zoomTrigger, "obsLayerFour");
-        EventManager.getInstance().removeEventListenerByTag(EventType.addObsPool, "obsLayerTwo");
-        EventManager.getInstance().removeEventListenerByTag(EventType.addGoldPool, "obsLayerTwo");
-        EventManager.getInstance().removeEventListenerByTag(EventType.gameOver, "obsLayerTwo");
+        EventManager.getInstance().removeEventListenerByTag(EventType.addObsPool, "obsLayerFour");
+        EventManager.getInstance().removeEventListenerByTag(EventType.addGoldPool, "obsLayerFour");
+        EventManager.getInstance().removeEventListenerByTag(EventType.gameOver, "obsLayerFour");
     }
 }

@@ -17,12 +17,12 @@ export class obsGroup extends cc.Component {
 
     public rand(): void {
         let random: number = Math.random();
-        if (random > .95) return;
+        if (random > .9) return;
         else if (random > .5) {
             //this.node.children[0].y -= 100;
             this.node.children[1].y -= 100;
             this.node.children[2].y -= 100;
-        } else if (random > .05) {
+        } else if (random > .1) {
             //this.node.children[1].y -= 100;
             this.node.children[2].y -= 100;
         } else {

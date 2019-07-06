@@ -301,6 +301,7 @@ export class mainExterior {
         this.uploadScore();
 
         this.offEventSys();
+        EventManager.getInstance().dispatchEvent(EventType.gameOver);
     }
     public zoomIn(): void {
         cc.find("Canvas/run_layer").runAction(cc.scaleBy(3, .4, .4))
